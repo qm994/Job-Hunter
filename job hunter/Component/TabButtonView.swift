@@ -11,15 +11,13 @@ struct TabButtonView: View {
     var imageName: String
     @Binding var selectedTab: String
     
-    
-    
     var body: some View {
         Button {
             selectedTab = imageName
         } label: {
             Image(systemName: imageName)
-                .foregroundColor(selectedTab == imageName ? .green : .white)
-                .font(Font.title2.bold())
+                .foregroundColor(selectedTab == imageName ? .green : .gray)
+                .font(Font.title2.weight(.bold))
         }
         .onAppear {
             print(selectedTab)
@@ -27,6 +25,9 @@ struct TabButtonView: View {
         }
     }
 }
+
+
+
 
 struct TabButtonView_Previews: PreviewProvider {
     @State static var selectedTab = "house.fill"  // Provide a default value
