@@ -11,6 +11,15 @@
 		EB46799D2AC0DBF00026ACC3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46799C2AC0DBF00026ACC3 /* ContentView.swift */; };
 		EB46799F2AC0DBF20026ACC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB46799E2AC0DBF20026ACC3 /* Assets.xcassets */; };
 		EB4679A22AC0DBF20026ACC3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB4679A12AC0DBF20026ACC3 /* Preview Assets.xcassets */; };
+		EB4679AD2AC0DF0C0026ACC3 /* BottomNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679AC2AC0DF0C0026ACC3 /* BottomNavigationView.swift */; };
+		EB4679AF2AC0E2EE0026ACC3 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679AE2AC0E2EE0026ACC3 /* HomeScreenView.swift */; };
+		EB4679E02AC1EAC90026ACC3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679DF2AC1EAC90026ACC3 /* CardView.swift */; };
+		EB4679E22AC1F1920026ACC3 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E12AC1F1920026ACC3 /* Data.swift */; };
+		EB4679E42AC1F2E00026ACC3 /* InterviewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E32AC1F2E00026ACC3 /* InterviewDetail.swift */; };
+		EB4679E62AC9F63E0026ACC3 /* AddInterviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E52AC9F63E0026ACC3 /* AddInterviewView.swift */; };
+		EB4679E82ACCB5AF0026ACC3 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E72ACCB5AF0026ACC3 /* CustomTabView.swift */; };
+		EB4679EA2ACCBDFC0026ACC3 /* TabButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E92ACCBDFC0026ACC3 /* TabButtonView.swift */; };
+		EB4679EE2ACCBE680026ACC3 /* ProfileScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679ED2ACCBE680026ACC3 /* ProfileScreenView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +28,15 @@
 		EB46799C2AC0DBF00026ACC3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EB46799E2AC0DBF20026ACC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB4679A12AC0DBF20026ACC3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EB4679AC2AC0DF0C0026ACC3 /* BottomNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavigationView.swift; sourceTree = "<group>"; };
+		EB4679AE2AC0E2EE0026ACC3 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
+		EB4679DF2AC1EAC90026ACC3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		EB4679E12AC1F1920026ACC3 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		EB4679E32AC1F2E00026ACC3 /* InterviewDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewDetail.swift; sourceTree = "<group>"; };
+		EB4679E52AC9F63E0026ACC3 /* AddInterviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInterviewView.swift; sourceTree = "<group>"; };
+		EB4679E72ACCB5AF0026ACC3 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
+		EB4679E92ACCBDFC0026ACC3 /* TabButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabButtonView.swift; sourceTree = "<group>"; };
+		EB4679ED2ACCBE680026ACC3 /* ProfileScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +70,10 @@
 			isa = PBXGroup;
 			children = (
 				EB46799A2AC0DBF00026ACC3 /* job_hunterApp.swift */,
-				EB46799C2AC0DBF00026ACC3 /* ContentView.swift */,
+				EB4679AA2AC0DCF00026ACC3 /* Screens */,
 				EB46799E2AC0DBF20026ACC3 /* Assets.xcassets */,
+				EB4679DE2AC1EAA80026ACC3 /* Component */,
+				EB4679AB2AC0DD1D0026ACC3 /* Utility */,
 				EB4679A02AC0DBF20026ACC3 /* Preview Content */,
 			);
 			path = "job hunter";
@@ -65,6 +85,37 @@
 				EB4679A12AC0DBF20026ACC3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		EB4679AA2AC0DCF00026ACC3 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				EB46799C2AC0DBF00026ACC3 /* ContentView.swift */,
+				EB4679AC2AC0DF0C0026ACC3 /* BottomNavigationView.swift */,
+				EB4679AE2AC0E2EE0026ACC3 /* HomeScreenView.swift */,
+				EB4679E52AC9F63E0026ACC3 /* AddInterviewView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		EB4679AB2AC0DD1D0026ACC3 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				EB4679E12AC1F1920026ACC3 /* Data.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		EB4679DE2AC1EAA80026ACC3 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				EB4679DF2AC1EAC90026ACC3 /* CardView.swift */,
+				EB4679E32AC1F2E00026ACC3 /* InterviewDetail.swift */,
+				EB4679E72ACCB5AF0026ACC3 /* CustomTabView.swift */,
+				EB4679ED2ACCBE680026ACC3 /* ProfileScreenView.swift */,
+				EB4679E92ACCBDFC0026ACC3 /* TabButtonView.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +188,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB4679EE2ACCBE680026ACC3 /* ProfileScreenView.swift in Sources */,
 				EB46799D2AC0DBF00026ACC3 /* ContentView.swift in Sources */,
+				EB4679E22AC1F1920026ACC3 /* Data.swift in Sources */,
+				EB4679EA2ACCBDFC0026ACC3 /* TabButtonView.swift in Sources */,
+				EB4679E62AC9F63E0026ACC3 /* AddInterviewView.swift in Sources */,
 				EB46799B2AC0DBF00026ACC3 /* job_hunterApp.swift in Sources */,
+				EB4679AD2AC0DF0C0026ACC3 /* BottomNavigationView.swift in Sources */,
+				EB4679E42AC1F2E00026ACC3 /* InterviewDetail.swift in Sources */,
+				EB4679E82ACCB5AF0026ACC3 /* CustomTabView.swift in Sources */,
+				EB4679AF2AC0E2EE0026ACC3 /* HomeScreenView.swift in Sources */,
+				EB4679E02AC1EAC90026ACC3 /* CardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,8 +333,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,8 +362,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
