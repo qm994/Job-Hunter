@@ -51,6 +51,7 @@ class InterviewSharedData: ObservableObject {
          */
         self.pastRounds.$rounds.sink {[weak self] newPastRounds in
             // Remove old roundName subscriptions
+        
             
             /*
              Instead of removing all Cancellable objects, you might want to keep track of the ones related to roundName separately and only remove those when needed.
@@ -60,15 +61,16 @@ class InterviewSharedData: ObservableObject {
             // Subscribe to roundName changes for each RoundData object
             for round in newPastRounds {
                 round.$roundName.sink {[weak self] newRound in
-                    self?.updateFutureRounds()
+                    self?.updateFutureRounds(with: newPastRounds)
                 }.store(in: &self!.roundNameCancellables)
             }
         }.store(in: &cancellables)
         
     }
     
-    private func updateFutureRounds() {
-        let existingRoundNames = pastRounds.rounds.map { $0.roundName }
+    private func updateFutureRounds(with newPastRounds: [RoundData]) {
+        let existingRoundNames = newPastRounds.map { $0.roundName }
+        print("updateFutureRounds existingRoundNames: \(existingRoundNames)")
         futureRounds.rounds = allRounds.filter { !existingRoundNames.contains($0) }
     }
     
@@ -80,7 +82,8 @@ class InterviewSharedData: ObservableObject {
 
 class FutureRoundsModel: ObservableObject {
     @Published var rounds: [String] = AllRounds
-    @Published var selectedRounds: [RoundData] = []
+    @Published var selectedRounds: [ExtendedRoundData] = []
+    //@Published var roundsTest: [ExtendedRoundData] = []
 }
 
 class PastRoundsModel:ObservableObject {
@@ -96,6 +99,10 @@ class RoundData: ObservableObject, CustomStringConvertible {
     var description: String {
            return "Round Name: \(roundName), roundTime: \(roundTime), id is: \(id)"
        }
+}
+
+class ExtendedRoundData: RoundData {
+    @Published var isChecked: Bool = false
 }
 
 

@@ -43,26 +43,12 @@ struct AddPendingScreen: View {
     }
 }
 
-struct DebugView: View {
-    let message: String
-
-    init(_ message: String) {
-        self.message = message
-        print("DebugView initialized with message: \(message)")
-    }
-
-    var body: some View {
-        EmptyView()
-    }
-}
-
 struct PastRounds: View {
     @ObservedObject var sharedData: InterviewSharedData
     
     @State private var index = 0
     
     var body: some View {
-        DebugView("PastRounds redraw!!!!")
         Section("PAST ROUNDS") {
             HStack(alignment: .bottom) {
                 Text("Past Rounds")
@@ -104,23 +90,23 @@ struct FutureRounds: View {
     @ObservedObject var sharedData: InterviewSharedData
     @State private var checkedStates: [String: Bool] = [:]
    
-    var availableRounds: [String] {
-        let existingRoundNames = sharedData.pastRounds.rounds.map { $0.roundName }
-        
-        return sharedData.futureRounds.rounds.filter { !existingRoundNames.contains($0) && !$0.isEmpty }
+    var futureRounds: [ExtendedRoundData] {
+        return sharedData.futureRounds.rounds.map { roundName in
+            let round = ExtendedRoundData()
+            round.roundName = roundName
+            return round
+        }
     }
-    
+
     var body: some View {
         Section("Future Rounds") {
-            ForEach(availableRounds, id: \.self) { roundName in
-                HStack {
-                    CheckboxView(isChecked: $checkedStates[roundName])
-                    Text(roundName)
-                    if checkedStates[roundName] == true {
-                        // Show DatePicker here
-//                        DatePicker("", selection: $rowData.roundTime, displayedComponents: [.date])
-                    }
+            ForEach(futureRounds, id: \.id) { round in
+                HStack(alignment: .center) {
+                    CheckboxView(roundName: round.roundName, isChecked: $checkedStates[round.roundName])
+                    DynamicRow(rowData: round, sharedData: sharedData)
                 }
+                .frame(height:40)
+               
             }
         }
         .onAppear {
@@ -130,6 +116,8 @@ struct FutureRounds: View {
 }
 
 struct CheckboxView: View {
+    
+    var roundName: String
     
     @Binding var isChecked: Bool?
     var body: some View {
