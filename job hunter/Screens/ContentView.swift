@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var router = ViewRouter()
     var body: some View {
-        BottomNavigationView()
+        CustomTabView(router: router)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(router: ViewRouter())
     }
 }

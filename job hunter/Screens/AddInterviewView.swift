@@ -7,6 +7,44 @@
 
 import SwiftUI
 
+struct SharedAddFields: View {
+    @ObservedObject var sharedData: InterviewSharedData
+    
+    let types = ["Engineer", "Designer", "Product Manager"]
+    let titles = [
+        "Junior", "Mid-level", "Senior", "Staff/Principal"
+    ]
+    
+    var body: some View {
+        Section {
+            VStack {
+                LabeledContent("Company") {
+                    TextField("company name", text: $sharedData.companyName)
+                        .autocapitalization(.none)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                }
+                
+                Picker("Job types", selection: $sharedData.jobCategory) {
+                    ForEach(types, id: \.self) { item in
+                        Text(item).tag(item)
+                    }
+                }
+                .pickerStyle(MenuPickerStyle())
+                
+                Picker("Title", selection: $sharedData.jobTitle) {
+                    ForEach(titles, id: \.self) { item in
+                        Text(item).tag(item)
+                    }
+                }
+                .pickerStyle(MenuPickerStyle())
+                
+                DatePicker("Start Date", selection: $sharedData.startDate, displayedComponents: [.date])
+            }
+        }
+    }
+}
+
+
 // TODO: WE SHOULD STORE EACH INTERVIEW'S ALL PAST ROUNDS NAME AND ITS RESULT SO WE CAN SHOW A PROGRESS BAR FOR CUSTOMERS
 
 struct AddInterviewView: View {

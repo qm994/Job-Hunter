@@ -11,7 +11,6 @@
 		EB46799D2AC0DBF00026ACC3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46799C2AC0DBF00026ACC3 /* ContentView.swift */; };
 		EB46799F2AC0DBF20026ACC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB46799E2AC0DBF20026ACC3 /* Assets.xcassets */; };
 		EB4679A22AC0DBF20026ACC3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB4679A12AC0DBF20026ACC3 /* Preview Assets.xcassets */; };
-		EB4679AD2AC0DF0C0026ACC3 /* BottomNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679AC2AC0DF0C0026ACC3 /* BottomNavigationView.swift */; };
 		EB4679AF2AC0E2EE0026ACC3 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679AE2AC0E2EE0026ACC3 /* HomeScreenView.swift */; };
 		EB4679E02AC1EAC90026ACC3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679DF2AC1EAC90026ACC3 /* CardView.swift */; };
 		EB4679E22AC1F1920026ACC3 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E12AC1F1920026ACC3 /* Data.swift */; };
@@ -20,6 +19,15 @@
 		EB4679E82ACCB5AF0026ACC3 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E72ACCB5AF0026ACC3 /* CustomTabView.swift */; };
 		EB4679EA2ACCBDFC0026ACC3 /* TabButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E92ACCBDFC0026ACC3 /* TabButtonView.swift */; };
 		EB4679EE2ACCBE680026ACC3 /* ProfileScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679ED2ACCBE680026ACC3 /* ProfileScreenView.swift */; };
+		EB4679F22ACE2D5F0026ACC3 /* BottomTabViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679F12ACE2D5F0026ACC3 /* BottomTabViewRouter.swift */; };
+		EB4679F42ACE590A0026ACC3 /* PopUpMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679F32ACE590A0026ACC3 /* PopUpMenu.swift */; };
+		EB4679F72ACE610B0026ACC3 /* TabMenuIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679F62ACE610B0026ACC3 /* TabMenuIcon.swift */; };
+		EB4679FA2ACF1E7E0026ACC3 /* AddPendingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679F92ACF1E7E0026ACC3 /* AddPendingScreen.swift */; };
+		EB4679FC2ACF1E930026ACC3 /* AddSucceedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679FB2ACF1E930026ACC3 /* AddSucceedScreen.swift */; };
+		EB4679FE2ACF1EA20026ACC3 /* AddRejectedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679FD2ACF1EA20026ACC3 /* AddRejectedScreen.swift */; };
+		EB467A002ACF2F6E0026ACC3 /* AddComingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679FF2ACF2F6E0026ACC3 /* AddComingScreen.swift */; };
+		EB467A022ACF424A0026ACC3 /* AddInterviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB467A012ACF424A0026ACC3 /* AddInterviewModel.swift */; };
+		EB5F209E2AD1BBCD0096C9A3 /* DynamicRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F209D2AD1BBCD0096C9A3 /* DynamicRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +36,6 @@
 		EB46799C2AC0DBF00026ACC3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EB46799E2AC0DBF20026ACC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB4679A12AC0DBF20026ACC3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		EB4679AC2AC0DF0C0026ACC3 /* BottomNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavigationView.swift; sourceTree = "<group>"; };
 		EB4679AE2AC0E2EE0026ACC3 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		EB4679DF2AC1EAC90026ACC3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		EB4679E12AC1F1920026ACC3 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -37,6 +44,15 @@
 		EB4679E72ACCB5AF0026ACC3 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		EB4679E92ACCBDFC0026ACC3 /* TabButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabButtonView.swift; sourceTree = "<group>"; };
 		EB4679ED2ACCBE680026ACC3 /* ProfileScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenView.swift; sourceTree = "<group>"; };
+		EB4679F12ACE2D5F0026ACC3 /* BottomTabViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabViewRouter.swift; sourceTree = "<group>"; };
+		EB4679F32ACE590A0026ACC3 /* PopUpMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpMenu.swift; sourceTree = "<group>"; };
+		EB4679F62ACE610B0026ACC3 /* TabMenuIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabMenuIcon.swift; sourceTree = "<group>"; };
+		EB4679F92ACF1E7E0026ACC3 /* AddPendingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPendingScreen.swift; sourceTree = "<group>"; };
+		EB4679FB2ACF1E930026ACC3 /* AddSucceedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSucceedScreen.swift; sourceTree = "<group>"; };
+		EB4679FD2ACF1EA20026ACC3 /* AddRejectedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRejectedScreen.swift; sourceTree = "<group>"; };
+		EB4679FF2ACF2F6E0026ACC3 /* AddComingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddComingScreen.swift; sourceTree = "<group>"; };
+		EB467A012ACF424A0026ACC3 /* AddInterviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInterviewModel.swift; sourceTree = "<group>"; };
+		EB5F209D2AD1BBCD0096C9A3 /* DynamicRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				EB46799A2AC0DBF00026ACC3 /* job_hunterApp.swift */,
+				EB4679F02ACE2D310026ACC3 /* Models */,
 				EB4679AA2AC0DCF00026ACC3 /* Screens */,
 				EB46799E2AC0DBF20026ACC3 /* Assets.xcassets */,
 				EB4679DE2AC1EAA80026ACC3 /* Component */,
@@ -90,8 +107,9 @@
 		EB4679AA2AC0DCF00026ACC3 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				EB4679F82ACF1E640026ACC3 /* AddScreens */,
 				EB46799C2AC0DBF00026ACC3 /* ContentView.swift */,
-				EB4679AC2AC0DF0C0026ACC3 /* BottomNavigationView.swift */,
+				EB4679ED2ACCBE680026ACC3 /* ProfileScreenView.swift */,
 				EB4679AE2AC0E2EE0026ACC3 /* HomeScreenView.swift */,
 				EB4679E52AC9F63E0026ACC3 /* AddInterviewView.swift */,
 			);
@@ -109,13 +127,51 @@
 		EB4679DE2AC1EAA80026ACC3 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				EB4679F52ACE60320026ACC3 /* BottomTab */,
 				EB4679DF2AC1EAC90026ACC3 /* CardView.swift */,
 				EB4679E32AC1F2E00026ACC3 /* InterviewDetail.swift */,
-				EB4679E72ACCB5AF0026ACC3 /* CustomTabView.swift */,
-				EB4679ED2ACCBE680026ACC3 /* ProfileScreenView.swift */,
-				EB4679E92ACCBDFC0026ACC3 /* TabButtonView.swift */,
+				EB4679F32ACE590A0026ACC3 /* PopUpMenu.swift */,
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		EB4679F02ACE2D310026ACC3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EB4679F12ACE2D5F0026ACC3 /* BottomTabViewRouter.swift */,
+				EB467A012ACF424A0026ACC3 /* AddInterviewModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EB4679F52ACE60320026ACC3 /* BottomTab */ = {
+			isa = PBXGroup;
+			children = (
+				EB4679E72ACCB5AF0026ACC3 /* CustomTabView.swift */,
+				EB4679E92ACCBDFC0026ACC3 /* TabButtonView.swift */,
+				EB4679F62ACE610B0026ACC3 /* TabMenuIcon.swift */,
+			);
+			path = BottomTab;
+			sourceTree = "<group>";
+		};
+		EB4679F82ACF1E640026ACC3 /* AddScreens */ = {
+			isa = PBXGroup;
+			children = (
+				EB5F209C2AD1BBA30096C9A3 /* PendingScreen */,
+				EB4679FF2ACF2F6E0026ACC3 /* AddComingScreen.swift */,
+				EB4679FB2ACF1E930026ACC3 /* AddSucceedScreen.swift */,
+				EB4679FD2ACF1EA20026ACC3 /* AddRejectedScreen.swift */,
+			);
+			path = AddScreens;
+			sourceTree = "<group>";
+		};
+		EB5F209C2AD1BBA30096C9A3 /* PendingScreen */ = {
+			isa = PBXGroup;
+			children = (
+				EB4679F92ACF1E7E0026ACC3 /* AddPendingScreen.swift */,
+				EB5F209D2AD1BBCD0096C9A3 /* DynamicRow.swift */,
+			);
+			path = PendingScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,17 +244,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB4679F22ACE2D5F0026ACC3 /* BottomTabViewRouter.swift in Sources */,
+				EB467A022ACF424A0026ACC3 /* AddInterviewModel.swift in Sources */,
+				EB5F209E2AD1BBCD0096C9A3 /* DynamicRow.swift in Sources */,
+				EB4679FE2ACF1EA20026ACC3 /* AddRejectedScreen.swift in Sources */,
 				EB4679EE2ACCBE680026ACC3 /* ProfileScreenView.swift in Sources */,
 				EB46799D2AC0DBF00026ACC3 /* ContentView.swift in Sources */,
 				EB4679E22AC1F1920026ACC3 /* Data.swift in Sources */,
 				EB4679EA2ACCBDFC0026ACC3 /* TabButtonView.swift in Sources */,
+				EB4679FA2ACF1E7E0026ACC3 /* AddPendingScreen.swift in Sources */,
 				EB4679E62AC9F63E0026ACC3 /* AddInterviewView.swift in Sources */,
 				EB46799B2AC0DBF00026ACC3 /* job_hunterApp.swift in Sources */,
-				EB4679AD2AC0DF0C0026ACC3 /* BottomNavigationView.swift in Sources */,
 				EB4679E42AC1F2E00026ACC3 /* InterviewDetail.swift in Sources */,
 				EB4679E82ACCB5AF0026ACC3 /* CustomTabView.swift in Sources */,
 				EB4679AF2AC0E2EE0026ACC3 /* HomeScreenView.swift in Sources */,
+				EB4679F72ACE610B0026ACC3 /* TabMenuIcon.swift in Sources */,
+				EB4679FC2ACF1E930026ACC3 /* AddSucceedScreen.swift in Sources */,
 				EB4679E02AC1EAC90026ACC3 /* CardView.swift in Sources */,
+				EB4679F42ACE590A0026ACC3 /* PopUpMenu.swift in Sources */,
+				EB467A002ACF2F6E0026ACC3 /* AddComingScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +399,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -364,6 +429,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
