@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class ViewRouter: ObservableObject {
+class AddScreenViewRouterManager: ObservableObject {
     @Published var currentScreen: AddScreenViewModel?
     @Published var isSheetPresented: Bool = false
     var view: some View { return currentScreen?.addScreenView }

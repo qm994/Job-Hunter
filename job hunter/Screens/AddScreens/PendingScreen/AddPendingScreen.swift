@@ -12,6 +12,11 @@ import SwiftUI
 struct AddPendingScreen: View {
     @StateObject var sharedData: InterviewSharedData = InterviewSharedData()
     
+    @State private var isFutureEnabled: Bool = false
+    
+    @EnvironmentObject var routerManager: AddScreenViewRouterManager
+
+    
     var body: some View {
         NavigationView {
             List {
@@ -24,15 +29,25 @@ struct AddPendingScreen: View {
                 // MARK: Next round
                 //TODO: EACH ROUND HAS A CHECKBOX. iF ITS CHECKED, THEN SHOW THE DATE PICKET AFTER
                 
-
-                FutureRounds(sharedData: sharedData)
+                Toggle("Add Future Interview", isOn: $isFutureEnabled)
                 
+                if isFutureEnabled {
+                    Text("No Duplicates Allowed Between Past and Future Rounds")
+                        .font(.footnote)
+                        .frame(width: .infinity)
+                        .multilineTextAlignment(.leading)
+                    FutureRounds(sharedData: sharedData)
+                }
+
             } //LIST ENDS
             .listStyle(SidebarListStyle())
             .navigationBarTitle("Pending Interview", displayMode: .inline)
             .navigationBarItems(
                 leading:Button("Cancel") {
-                    print("close sheet!")
+                    print("lol")
+                    print(routerManager.isSheetPresented)
+                    routerManager.isSheetPresented = false
+                    //addScreenRouteManager.isSheetPresented = false
                 },
                 trailing: Button("Add") {
                     print("add the item!")
@@ -134,17 +149,9 @@ struct CheckboxView: View {
     }
 }
 
-//struct ContentView: View {
-//    @State private var isChecked = false
-//
-//    var body: some View {
-//        CheckboxView(isChecked: $isChecked)
-//    }
-//}
-
 
 struct AddPendingScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AddPendingScreen()
+        AddPendingScreen().environmentObject(AddScreenViewRouterManager())
     }
 }

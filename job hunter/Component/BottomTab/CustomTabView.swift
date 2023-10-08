@@ -13,7 +13,7 @@ let images = ["house.fill", "plus.circle.fill", "person.crop.circle"]
 struct CustomTabView: View {
     @State private var selectedTab = "house.fill"
     @State private var showMenu: Bool = false
-    @ObservedObject var router: ViewRouter
+    @ObservedObject var router: AddScreenViewRouterManager
     
     var body: some View {
         
@@ -52,7 +52,7 @@ struct CustomTabView: View {
             }// Zstack ends
             
             if (showMenu) {
-                PopUpMenu(router: router)
+                PopUpMenu(router: router, showMenu: $showMenu)
                     .padding(.vertical, UIScreen.main.bounds.height / 8 + 40)
             }
         }
@@ -70,7 +70,9 @@ struct CustomTabView: View {
 }
 
 struct CustomTabView_Previews: PreviewProvider {
+   
     static var previews: some View {
-        CustomTabView(router: ViewRouter())
+        CustomTabView(router: AddScreenViewRouterManager())
+            .environmentObject(AddScreenViewRouterManager())
     }
 }

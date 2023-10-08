@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var router = ViewRouter()
+    @ObservedObject var router = AddScreenViewRouterManager()
     var body: some View {
         CustomTabView(router: router)
+            .environmentObject(router)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(router: ViewRouter())
+        ContentView(router: AddScreenViewRouterManager())
+            .environmentObject(AddScreenViewRouterManager())
     }
 }

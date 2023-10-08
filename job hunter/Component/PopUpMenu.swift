@@ -11,7 +11,8 @@ import SwiftUI
 
 struct PopUpMenu: View {
     
-    @ObservedObject var router: ViewRouter
+    @ObservedObject var router: AddScreenViewRouterManager
+    @Binding var showMenu: Bool
     
     let AddMenuItemNames = [
         "Add Pending": "questionmark.circle.fill",
@@ -29,7 +30,7 @@ struct PopUpMenu: View {
             HStack(alignment: .bottom, spacing: 10) {
                 Spacer()
                 ForEach(AddScreenViewModel.allCases, id: \.self) { view in
-                    MenuItem(currentScreen: view, router: router)
+                    MenuItem(currentScreen: view, router: router, showMenu: $showMenu)
                         .frame(maxWidth: .infinity)
                 }
                 Spacer()
@@ -43,13 +44,15 @@ struct PopUpMenu: View {
 struct MenuItem: View {
    
     var currentScreen: AddScreenViewModel
-    @ObservedObject var router: ViewRouter
+    @ObservedObject var router: AddScreenViewRouterManager
+    @Binding var showMenu: Bool
     
     var body: some View {
         VStack(alignment: .center, spacing: 5) {
             Button {
                 router.currentScreen = currentScreen
                 router.isSheetPresented = true
+                showMenu.toggle()
             } label: {
                 ZStack() {
                     Circle()
@@ -75,7 +78,8 @@ struct MenuItem: View {
 
 
 struct PopUpMenu_Previews: PreviewProvider {
+    
     static var previews: some View {
-        PopUpMenu(router: ViewRouter())
+        PopUpMenu(router: AddScreenViewRouterManager(), showMenu: .constant(false))
     }
 }
