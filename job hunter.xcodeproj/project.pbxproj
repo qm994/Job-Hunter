@@ -12,7 +12,6 @@
 		EB46799F2AC0DBF20026ACC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB46799E2AC0DBF20026ACC3 /* Assets.xcassets */; };
 		EB4679A22AC0DBF20026ACC3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB4679A12AC0DBF20026ACC3 /* Preview Assets.xcassets */; };
 		EB4679AF2AC0E2EE0026ACC3 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679AE2AC0E2EE0026ACC3 /* HomeScreenView.swift */; };
-		EB4679E02AC1EAC90026ACC3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679DF2AC1EAC90026ACC3 /* CardView.swift */; };
 		EB4679E22AC1F1920026ACC3 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E12AC1F1920026ACC3 /* Data.swift */; };
 		EB4679E42AC1F2E00026ACC3 /* InterviewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E32AC1F2E00026ACC3 /* InterviewDetail.swift */; };
 		EB4679E62AC9F63E0026ACC3 /* AddInterviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E52AC9F63E0026ACC3 /* AddInterviewView.swift */; };
@@ -29,6 +28,13 @@
 		EB467A022ACF424A0026ACC3 /* AddInterviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB467A012ACF424A0026ACC3 /* AddInterviewModel.swift */; };
 		EB5F209E2AD1BBCD0096C9A3 /* DynamicRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F209D2AD1BBCD0096C9A3 /* DynamicRow.swift */; };
 		EB5F20A02AD1D7450096C9A3 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F209F2AD1D7450096C9A3 /* DebugView.swift */; };
+		EB5F20A22AD262720096C9A3 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F20A12AD262720096C9A3 /* BlurView.swift */; };
+		EB5F20A42AD33D0E0096C9A3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F20A32AD33D0E0096C9A3 /* Theme.swift */; };
+		EB5F20A62AD33F200096C9A3 /* InterviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F20A52AD33F200096C9A3 /* InterviewModel.swift */; };
+		EB5F20A82AD346F10096C9A3 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F20A72AD346F10096C9A3 /* SampleData.swift */; };
+		EB5F20AA2AD348940096C9A3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F20A92AD348940096C9A3 /* CardView.swift */; };
+		EB5F20AC2AD34D430096C9A3 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F20AB2AD34D430096C9A3 /* Utilities.swift */; };
+		EBD35D3D2AD5F1F20076BE33 /* VisaSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD35D3C2AD5F1F20076BE33 /* VisaSectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +44,6 @@
 		EB46799E2AC0DBF20026ACC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB4679A12AC0DBF20026ACC3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EB4679AE2AC0E2EE0026ACC3 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
-		EB4679DF2AC1EAC90026ACC3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		EB4679E12AC1F1920026ACC3 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		EB4679E32AC1F2E00026ACC3 /* InterviewDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewDetail.swift; sourceTree = "<group>"; };
 		EB4679E52AC9F63E0026ACC3 /* AddInterviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInterviewView.swift; sourceTree = "<group>"; };
@@ -55,6 +60,13 @@
 		EB467A012ACF424A0026ACC3 /* AddInterviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInterviewModel.swift; sourceTree = "<group>"; };
 		EB5F209D2AD1BBCD0096C9A3 /* DynamicRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicRow.swift; sourceTree = "<group>"; };
 		EB5F209F2AD1D7450096C9A3 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
+		EB5F20A12AD262720096C9A3 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		EB5F20A32AD33D0E0096C9A3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		EB5F20A52AD33F200096C9A3 /* InterviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewModel.swift; sourceTree = "<group>"; };
+		EB5F20A72AD346F10096C9A3 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		EB5F20A92AD348940096C9A3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		EB5F20AB2AD34D430096C9A3 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		EBD35D3C2AD5F1F20076BE33 /* VisaSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisaSectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +135,8 @@
 			children = (
 				EB4679E12AC1F1920026ACC3 /* Data.swift */,
 				EB5F209F2AD1D7450096C9A3 /* DebugView.swift */,
+				EB5F20A72AD346F10096C9A3 /* SampleData.swift */,
+				EB5F20AB2AD34D430096C9A3 /* Utilities.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -130,10 +144,11 @@
 		EB4679DE2AC1EAA80026ACC3 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				EBD35D3B2AD5F1B80076BE33 /* CardView */,
 				EB4679F52ACE60320026ACC3 /* BottomTab */,
-				EB4679DF2AC1EAC90026ACC3 /* CardView.swift */,
 				EB4679E32AC1F2E00026ACC3 /* InterviewDetail.swift */,
 				EB4679F32ACE590A0026ACC3 /* PopUpMenu.swift */,
+				EB5F20A12AD262720096C9A3 /* BlurView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -143,6 +158,8 @@
 			children = (
 				EB4679F12ACE2D5F0026ACC3 /* BottomTabViewRouter.swift */,
 				EB467A012ACF424A0026ACC3 /* AddInterviewModel.swift */,
+				EB5F20A32AD33D0E0096C9A3 /* Theme.swift */,
+				EB5F20A52AD33F200096C9A3 /* InterviewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -175,6 +192,15 @@
 				EB5F209D2AD1BBCD0096C9A3 /* DynamicRow.swift */,
 			);
 			path = PendingScreen;
+			sourceTree = "<group>";
+		};
+		EBD35D3B2AD5F1B80076BE33 /* CardView */ = {
+			isa = PBXGroup;
+			children = (
+				EB5F20A92AD348940096C9A3 /* CardView.swift */,
+				EBD35D3C2AD5F1F20076BE33 /* VisaSectionView.swift */,
+			);
+			path = CardView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,13 +273,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB5F20A82AD346F10096C9A3 /* SampleData.swift in Sources */,
 				EB4679F22ACE2D5F0026ACC3 /* BottomTabViewRouter.swift in Sources */,
 				EB467A022ACF424A0026ACC3 /* AddInterviewModel.swift in Sources */,
 				EB5F209E2AD1BBCD0096C9A3 /* DynamicRow.swift in Sources */,
 				EB4679FE2ACF1EA20026ACC3 /* AddRejectedScreen.swift in Sources */,
 				EB4679EE2ACCBE680026ACC3 /* ProfileScreenView.swift in Sources */,
 				EB46799D2AC0DBF00026ACC3 /* ContentView.swift in Sources */,
+				EB5F20A42AD33D0E0096C9A3 /* Theme.swift in Sources */,
 				EB4679E22AC1F1920026ACC3 /* Data.swift in Sources */,
+				EBD35D3D2AD5F1F20076BE33 /* VisaSectionView.swift in Sources */,
 				EB4679EA2ACCBDFC0026ACC3 /* TabButtonView.swift in Sources */,
 				EB4679FA2ACF1E7E0026ACC3 /* AddPendingScreen.swift in Sources */,
 				EB4679E62AC9F63E0026ACC3 /* AddInterviewView.swift in Sources */,
@@ -263,9 +292,12 @@
 				EB4679AF2AC0E2EE0026ACC3 /* HomeScreenView.swift in Sources */,
 				EB4679F72ACE610B0026ACC3 /* TabMenuIcon.swift in Sources */,
 				EB4679FC2ACF1E930026ACC3 /* AddSucceedScreen.swift in Sources */,
+				EB5F20A62AD33F200096C9A3 /* InterviewModel.swift in Sources */,
 				EB5F20A02AD1D7450096C9A3 /* DebugView.swift in Sources */,
-				EB4679E02AC1EAC90026ACC3 /* CardView.swift in Sources */,
+				EB5F20A22AD262720096C9A3 /* BlurView.swift in Sources */,
 				EB4679F42ACE590A0026ACC3 /* PopUpMenu.swift in Sources */,
+				EB5F20AA2AD348940096C9A3 /* CardView.swift in Sources */,
+				EB5F20AC2AD34D430096C9A3 /* Utilities.swift in Sources */,
 				EB467A002ACF2F6E0026ACC3 /* AddComingScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,11 +7,18 @@
 
 import SwiftUI
 
+
 struct HomeScreenView: View {
     
-    
     var body: some View {
-        Text("home")
+        NavigationStack {
+            ScrollView {
+                ForEach(Interview.sampleData, id: \.self.id) { interview in
+                    CardView(interview: interview)
+                }
+            }
+            
+        }
     }
 }
 

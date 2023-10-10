@@ -18,7 +18,7 @@ struct AddPendingScreen: View {
 
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                
                 SharedAddFields(sharedData: sharedData)

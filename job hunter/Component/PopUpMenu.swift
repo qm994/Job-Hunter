@@ -35,8 +35,33 @@ struct PopUpMenu: View {
                 }
                 Spacer()
             }
+            .frame(height: 100)
+            .background(
+                VStack {
+                    Spacer()
+                    Triangle() // Custom shape for the pointer
+                        .fill(Color(.systemBackground)) // Fill the triangle with the same color as the background
+                        .frame(width: 20, height: 20)
+                        .rotationEffect(.degrees(180))
+                }
+            )
+            .background(BlurView(style: .systemThinMaterial))
+            .cornerRadius(20)
+            .padding(20)
+            
         }
         .transition(.slide)
+    }
+}
+
+struct Triangle: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.midX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+        path.closeSubpath()
+        return path
     }
 }
 

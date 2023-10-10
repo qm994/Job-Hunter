@@ -48,16 +48,14 @@ struct Outcome {
     let date: Date
 }
 
-struct Salary {
-    let base: Double
-    let benefits: [String]
-    let otherCompensation: String?
-}
+
 
 struct Decision {
     let status: String // Accepted, Declined, etc.
     let reason: String?
 }
+
+
 
 struct Platform {
     let platformName: String // Zoom, Teams, etc.
@@ -69,12 +67,6 @@ struct Document {
     let name: String
     let date: Date
     let link: URL?
-}
-
-struct Company {
-    let name: String
-    let website: URL
-    let logo: String
 }
 
 //struct Attachment {
