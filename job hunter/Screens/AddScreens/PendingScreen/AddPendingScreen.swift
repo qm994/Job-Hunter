@@ -15,13 +15,20 @@ struct AddPendingScreen: View {
     @State private var isFutureEnabled: Bool = false
     
     @EnvironmentObject var routerManager: AddScreenViewRouterManager
+    
+    @State private var companyName = ""
+    @State private var jobTitle = ""
+    @State private var startDate: Date = Date()
 
     
     var body: some View {
         NavigationStack {
             List {
                
-                SharedAddFields(sharedData: sharedData)
+                SharedAddFields(companyName: $companyName, jobTitle: $jobTitle, startDate: $startDate)
+                
+                //TODO: ADD THE JOB METADATA EX: pay expect, remote, relocation
+                
 
                 // MARK: Past rounds
                 PastRounds(sharedData: sharedData)

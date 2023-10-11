@@ -14,7 +14,7 @@
 		EB4679AF2AC0E2EE0026ACC3 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679AE2AC0E2EE0026ACC3 /* HomeScreenView.swift */; };
 		EB4679E22AC1F1920026ACC3 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E12AC1F1920026ACC3 /* Data.swift */; };
 		EB4679E42AC1F2E00026ACC3 /* InterviewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E32AC1F2E00026ACC3 /* InterviewDetail.swift */; };
-		EB4679E62AC9F63E0026ACC3 /* AddInterviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E52AC9F63E0026ACC3 /* AddInterviewView.swift */; };
+		EB4679E62AC9F63E0026ACC3 /* SharedAddFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E52AC9F63E0026ACC3 /* SharedAddFields.swift */; };
 		EB4679E82ACCB5AF0026ACC3 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E72ACCB5AF0026ACC3 /* CustomTabView.swift */; };
 		EB4679EA2ACCBDFC0026ACC3 /* TabButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E92ACCBDFC0026ACC3 /* TabButtonView.swift */; };
 		EB4679EE2ACCBE680026ACC3 /* ProfileScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679ED2ACCBE680026ACC3 /* ProfileScreenView.swift */; };
@@ -35,6 +35,7 @@
 		EB5F20AA2AD348940096C9A3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F20A92AD348940096C9A3 /* CardView.swift */; };
 		EB5F20AC2AD34D430096C9A3 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F20AB2AD34D430096C9A3 /* Utilities.swift */; };
 		EBD35D3D2AD5F1F20076BE33 /* VisaSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD35D3C2AD5F1F20076BE33 /* VisaSectionView.swift */; };
+		EBD35D3F2AD64EC00076BE33 /* CardFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD35D3E2AD64EBF0076BE33 /* CardFooterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +47,7 @@
 		EB4679AE2AC0E2EE0026ACC3 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		EB4679E12AC1F1920026ACC3 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		EB4679E32AC1F2E00026ACC3 /* InterviewDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewDetail.swift; sourceTree = "<group>"; };
-		EB4679E52AC9F63E0026ACC3 /* AddInterviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInterviewView.swift; sourceTree = "<group>"; };
+		EB4679E52AC9F63E0026ACC3 /* SharedAddFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedAddFields.swift; sourceTree = "<group>"; };
 		EB4679E72ACCB5AF0026ACC3 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		EB4679E92ACCBDFC0026ACC3 /* TabButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabButtonView.swift; sourceTree = "<group>"; };
 		EB4679ED2ACCBE680026ACC3 /* ProfileScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenView.swift; sourceTree = "<group>"; };
@@ -67,6 +68,7 @@
 		EB5F20A92AD348940096C9A3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		EB5F20AB2AD34D430096C9A3 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		EBD35D3C2AD5F1F20076BE33 /* VisaSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisaSectionView.swift; sourceTree = "<group>"; };
+		EBD35D3E2AD64EBF0076BE33 /* CardFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFooterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,7 +127,6 @@
 				EB46799C2AC0DBF00026ACC3 /* ContentView.swift */,
 				EB4679ED2ACCBE680026ACC3 /* ProfileScreenView.swift */,
 				EB4679AE2AC0E2EE0026ACC3 /* HomeScreenView.swift */,
-				EB4679E52AC9F63E0026ACC3 /* AddInterviewView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -177,6 +178,7 @@
 		EB4679F82ACF1E640026ACC3 /* AddScreens */ = {
 			isa = PBXGroup;
 			children = (
+				EB4679E52AC9F63E0026ACC3 /* SharedAddFields.swift */,
 				EB5F209C2AD1BBA30096C9A3 /* PendingScreen */,
 				EB4679FF2ACF2F6E0026ACC3 /* AddComingScreen.swift */,
 				EB4679FB2ACF1E930026ACC3 /* AddSucceedScreen.swift */,
@@ -199,6 +201,7 @@
 			children = (
 				EB5F20A92AD348940096C9A3 /* CardView.swift */,
 				EBD35D3C2AD5F1F20076BE33 /* VisaSectionView.swift */,
+				EBD35D3E2AD64EBF0076BE33 /* CardFooterView.swift */,
 			);
 			path = CardView;
 			sourceTree = "<group>";
@@ -285,12 +288,13 @@
 				EBD35D3D2AD5F1F20076BE33 /* VisaSectionView.swift in Sources */,
 				EB4679EA2ACCBDFC0026ACC3 /* TabButtonView.swift in Sources */,
 				EB4679FA2ACF1E7E0026ACC3 /* AddPendingScreen.swift in Sources */,
-				EB4679E62AC9F63E0026ACC3 /* AddInterviewView.swift in Sources */,
+				EB4679E62AC9F63E0026ACC3 /* SharedAddFields.swift in Sources */,
 				EB46799B2AC0DBF00026ACC3 /* job_hunterApp.swift in Sources */,
 				EB4679E42AC1F2E00026ACC3 /* InterviewDetail.swift in Sources */,
 				EB4679E82ACCB5AF0026ACC3 /* CustomTabView.swift in Sources */,
 				EB4679AF2AC0E2EE0026ACC3 /* HomeScreenView.swift in Sources */,
 				EB4679F72ACE610B0026ACC3 /* TabMenuIcon.swift in Sources */,
+				EBD35D3F2AD64EC00076BE33 /* CardFooterView.swift in Sources */,
 				EB4679FC2ACF1E930026ACC3 /* AddSucceedScreen.swift in Sources */,
 				EB5F20A62AD33F200096C9A3 /* InterviewModel.swift in Sources */,
 				EB5F20A02AD1D7450096C9A3 /* DebugView.swift in Sources */,

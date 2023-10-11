@@ -16,8 +16,7 @@ struct Round {
 
 class InterviewSharedData: ObservableObject {
     @Published var companyName = ""
-    @Published var jobCategory = "Engineer"
-    @Published var jobTitle = "Junior"
+    @Published var jobTitle = ""
     @Published var startDate: Date = Date()
     var objectWillChange = ObservableObjectPublisher() // from Combine
     

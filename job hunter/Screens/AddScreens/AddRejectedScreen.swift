@@ -9,20 +9,9 @@ import SwiftUI
 
 struct AddRejectedScreen: View {
     var body: some View {
-        NavigationView {
-            AddInterviewView()
-                .navigationBarTitle("Rejected Interview", displayMode: .inline)
-                .navigationBarItems(
-                    leading:Button("Cancel") {
-                        print("close sheet!")
-                    },
-                    trailing: Button("Add") {
-                        print("add the item!")
-                    }
-                )
-        }
-        .edgesIgnoringSafeArea(.top)
+        Text("Rejected screen")
     }
+        
 }
 
 struct AddRejectedScreen_Previews: PreviewProvider {

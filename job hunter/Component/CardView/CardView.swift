@@ -9,18 +9,10 @@ import SwiftUI
 
 struct CardView: View {
     let interview: Interview
-    
-    var totalExpected: String {
-        let base = Double(interview.job.expectedSalary?.baseRange  ?? "0")
-        let other = Double(interview.job.expectedSalary?.otherCompensation  ?? "0")
-        let total = base! + other!
-        return total == 0 ? "unknow" : String(total)
-    }
     var body: some View {
         VStack(spacing: 20) {
             //MARK: FIRST ROW
             HStack(alignment: .top) {
-                
                 VStack(alignment: .leading, spacing: 10) {
                     Text(interview.job.company.name)
                         .font(.headline)
@@ -49,83 +41,12 @@ struct CardView: View {
                     .foregroundColor(interview.status.textColor)
                     .font(.headline)
                     
-                    VStack(alignment: .leading) {
-                        // pay
-                        HStack(spacing: 5) {  // You can adjust the spacing value as per your need
-                            HStack {
-                                Image(systemName: "dollarsign.circle")
-                                Text("Base expect range:")
-                            }
-
-                            Text(interview.job.expectedSalary?.baseRange  ?? "0")
-                        }
-                        .foregroundColor(Color("usDollarGreen"))
-                        .font(.caption)
-                        
-                        // other comp
-                        HStack(spacing: 5) {  // You can adjust the spacing value as per your need
-                            HStack {
-                                Image(systemName: "dollarsign.circle")
-                                Text("Other comp range:")
-                            }
-
-                            Text(interview.job.expectedSalary?.otherCompensation  ?? "unknow")
-                        }
-                        .foregroundColor(Color("usDollarGreen"))
-                        .font(.caption)
-                        
-                        //TODO: SHOW THE Increase/Decrease percent compare with user's current TC
-                        // total expec
-                        HStack(spacing: 5) {  // You can adjust the spacing value as per your need
-                            HStack {
-                                Image(systemName: "dollarsign.circle")
-                                Text("Total expect:")
-                            }
-
-                            Text(totalExpected)
-                        }
-                        .foregroundColor(Color("usDollarGreen"))
-                        .font(.caption)
-                        
-                    }
+                    CardSalarySection(interview: interview)
+                    
                 } // First row 2nd VStack end
             } //FIRST ROW ENDS
             
-            //MARK: SECOND ROW
-            HStack(alignment: .center, spacing: 10) {
-                HStack {
-                    Text("Visa Sponsor")
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(.green)
-                }
-                
-                
-                HStack {
-                    Text("Relocation Required")
-                    Image(systemName: "xmark.circle.fill")
-                        .foregroundColor(.red)
-                }
-                Spacer()
-                
-                Button {
-                    print("Action should open a menu to (1) delete the card (2) go to edit form")
-                } label: {
-                    
-                    ZStack {
-                        Rectangle()
-                            .fill(Color.gray)  // Add some color to see the rectangle
-                            .frame(width: 20, height: 20)
-                            .cornerRadius(8)   // Optional: Add some corner radius for better aesthetics
-                        
-                        Image(systemName: "ellipsis.rectangle")
-                            .scaledToFit()
-                            .frame(height: 20)  // Control the image size
-                            .foregroundColor(.black)
-                    }
-                    .contentShape(Rectangle())
-                }
-            }
-            .font(.footnote)
+            CardFooterView()
             
             
         }// Root VSTACK ENDS
@@ -133,6 +54,59 @@ struct CardView: View {
         .background(BlurView(style: .systemThickMaterialDark))
         .cornerRadius(15)
         .shadow(color: Color.white.opacity(0.2), radius: 10, x: 0, y: 10)
+    }
+}
+
+struct CardSalarySection: View {
+    var interview: Interview
+    
+    var totalExpected: String {
+        let base = Double(interview.job.expectedSalary?.baseRange  ?? "0")
+        let other = Double(interview.job.expectedSalary?.otherCompensation  ?? "0")
+        let total = base! + other!
+        return total == 0 ? "unknow" : String(total)
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            // pay
+            HStack(spacing: 5) {  // You can adjust the spacing value as per your need
+                HStack {
+                    Image(systemName: "dollarsign.circle")
+                    Text("Base expect range:")
+                }
+
+                Text(interview.job.expectedSalary?.baseRange  ?? "0")
+            }
+            .foregroundColor(Color("usDollarGreen"))
+            .font(.caption)
+            
+            // other comp
+            HStack(spacing: 5) {  // You can adjust the spacing value as per your need
+                HStack {
+                    Image(systemName: "dollarsign.circle")
+                    Text("Other comp range:")
+                }
+
+                Text(interview.job.expectedSalary?.otherCompensation  ?? "unknow")
+            }
+            .foregroundColor(Color("usDollarGreen"))
+            .font(.caption)
+            
+            //TODO: SHOW THE Increase/Decrease percent compare with user's current TC
+            // total expec
+            HStack(spacing: 5) {  // You can adjust the spacing value as per your need
+                HStack {
+                    Image(systemName: "dollarsign.circle")
+                    Text("Total expect:")
+                }
+
+                Text(totalExpected)
+            }
+            .foregroundColor(Color("usDollarGreen"))
+            .font(.caption)
+            
+        }
     }
 }
 

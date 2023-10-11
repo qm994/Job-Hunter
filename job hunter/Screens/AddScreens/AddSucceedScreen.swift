@@ -9,19 +9,7 @@ import SwiftUI
 
 struct AddSucceedScreen: View {
     var body: some View {
-        NavigationView {
-            AddInterviewView()
-                .navigationBarTitle("Succeed Interview", displayMode: .inline)
-                .navigationBarItems(
-                    leading:Button("Cancel") {
-                        print("close sheet!")
-                    },
-                    trailing: Button("Add") {
-                        print("add the item!")
-                    }
-                )
-        }
-        .edgesIgnoringSafeArea(.top)
+        Text("Succeed Screen")
     }
 }
 
