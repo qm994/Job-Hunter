@@ -15,11 +15,22 @@ struct Round {
 }
 
 class InterviewSharedData: ObservableObject {
+    
+    
     @Published var companyName = ""
     @Published var jobTitle = ""
     @Published var startDate: Date = Date()
-    var objectWillChange = ObservableObjectPublisher() // from Combine
     
+    @Published var locationPreference: String = ""
+    @Published var relocationRequired: String = ""
+    @Published var addExpectedSalary: Bool = false 
+    
+    @Published var base: String = ""
+    @Published var equity: String = ""
+    @Published var bonus: String = ""
+    @Published var signon: String = ""
+    
+   
     
     /*
      When add one past round, always use the top one as the newly add one
@@ -36,6 +47,7 @@ class InterviewSharedData: ObservableObject {
     
     // sink return a cancellable instance which has to be stored so keep the observable updates alive
     init() {
+        
         self.pastRounds.objectWillChange.sink { [weak self] _ in
             self?.objectWillChange.send()
         }.store(in: &cancellables)

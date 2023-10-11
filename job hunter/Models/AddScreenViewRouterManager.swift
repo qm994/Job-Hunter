@@ -1,10 +1,11 @@
 //
-//  BottomTabViewRouter.swift
+//  AddScreenViewRouterManager.swift
 //  job hunter
 //
-//  Created by Qingyuan Ma on 10/4/23.
+//  Created by Qingyuan Ma on 10/11/23.
 //
 
+import Foundation
 import SwiftUI
 
 class AddScreenViewRouterManager: ObservableObject {
@@ -15,28 +16,26 @@ class AddScreenViewRouterManager: ObservableObject {
 
 
 enum AddScreenViewModel: Int, CaseIterable {
-    case addUpComing
+    //case addUpComing
     case addPending
     case addSucceed
     case addRejected
     
     var imageName: String {
         switch self {
-        case .addUpComing:
-            return "infinity.circle.fill"
+//        case .addUpComing:
+//            return "infinity.circle.fill"
         case .addPending:
-           return "questionmark.circle.fill"
+           return "hourglass.circle"
         case .addSucceed:
-            return "checkmark.circle.fill"
+            return "hand.thumbsup.circle"
         case .addRejected:
-            return "xmark.circle.fill"
+            return "xmark.circle"
         }
     }
     
     var textLabel: String {
         switch self {
-        case .addUpComing:
-            return "Add Coming"
         case .addPending:
            return "Add Pending"
         case .addSucceed:
@@ -46,10 +45,21 @@ enum AddScreenViewModel: Int, CaseIterable {
         }
     }
     
+    var fillColor: Color {
+        switch self {
+        case .addPending:
+            return Color.yellow
+        case .addSucceed:
+            return Color.green
+        case .addRejected:
+            return Color.red
+        }
+    }
+    
     var addScreenView: some View {
         switch self {
-        case .addUpComing:
-            return AnyView(AddPendingScreen())
+//        case .addUpComing:
+//            return AnyView(AddPendingScreen())
         case .addPending:
            return AnyView(AddPendingScreen())
         case .addSucceed:
@@ -61,16 +71,3 @@ enum AddScreenViewModel: Int, CaseIterable {
     
     }
 }
-
-struct AddScreenViewModel_Previews: PreviewProvider {
-    static var previews: some View {
-        ForEach(AddScreenViewModel.allCases, id: \.self) {
-            tab in
-            Button {} label: {
-                Image(systemName: tab.imageName)
-            }
-            
-        }
-    }
-}
-

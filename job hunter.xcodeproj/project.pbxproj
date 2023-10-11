@@ -14,17 +14,15 @@
 		EB4679AF2AC0E2EE0026ACC3 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679AE2AC0E2EE0026ACC3 /* HomeScreenView.swift */; };
 		EB4679E22AC1F1920026ACC3 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E12AC1F1920026ACC3 /* Data.swift */; };
 		EB4679E42AC1F2E00026ACC3 /* InterviewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E32AC1F2E00026ACC3 /* InterviewDetail.swift */; };
-		EB4679E62AC9F63E0026ACC3 /* SharedAddFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E52AC9F63E0026ACC3 /* SharedAddFields.swift */; };
+		EB4679E62AC9F63E0026ACC3 /* BasicFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E52AC9F63E0026ACC3 /* BasicFields.swift */; };
 		EB4679E82ACCB5AF0026ACC3 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E72ACCB5AF0026ACC3 /* CustomTabView.swift */; };
 		EB4679EA2ACCBDFC0026ACC3 /* TabButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E92ACCBDFC0026ACC3 /* TabButtonView.swift */; };
 		EB4679EE2ACCBE680026ACC3 /* ProfileScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679ED2ACCBE680026ACC3 /* ProfileScreenView.swift */; };
-		EB4679F22ACE2D5F0026ACC3 /* BottomTabViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679F12ACE2D5F0026ACC3 /* BottomTabViewRouter.swift */; };
 		EB4679F42ACE590A0026ACC3 /* PopUpMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679F32ACE590A0026ACC3 /* PopUpMenu.swift */; };
 		EB4679F72ACE610B0026ACC3 /* TabMenuIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679F62ACE610B0026ACC3 /* TabMenuIcon.swift */; };
 		EB4679FA2ACF1E7E0026ACC3 /* AddPendingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679F92ACF1E7E0026ACC3 /* AddPendingScreen.swift */; };
 		EB4679FC2ACF1E930026ACC3 /* AddSucceedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679FB2ACF1E930026ACC3 /* AddSucceedScreen.swift */; };
 		EB4679FE2ACF1EA20026ACC3 /* AddRejectedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679FD2ACF1EA20026ACC3 /* AddRejectedScreen.swift */; };
-		EB467A002ACF2F6E0026ACC3 /* AddComingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679FF2ACF2F6E0026ACC3 /* AddComingScreen.swift */; };
 		EB467A022ACF424A0026ACC3 /* AddInterviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB467A012ACF424A0026ACC3 /* AddInterviewModel.swift */; };
 		EB5F209E2AD1BBCD0096C9A3 /* DynamicRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F209D2AD1BBCD0096C9A3 /* DynamicRow.swift */; };
 		EB5F20A02AD1D7450096C9A3 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F209F2AD1D7450096C9A3 /* DebugView.swift */; };
@@ -36,6 +34,10 @@
 		EB5F20AC2AD34D430096C9A3 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F20AB2AD34D430096C9A3 /* Utilities.swift */; };
 		EBD35D3D2AD5F1F20076BE33 /* VisaSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD35D3C2AD5F1F20076BE33 /* VisaSectionView.swift */; };
 		EBD35D3F2AD64EC00076BE33 /* CardFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD35D3E2AD64EBF0076BE33 /* CardFooterView.swift */; };
+		EBD35D412AD6FDD00076BE33 /* PostionDetailSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD35D402AD6FDD00076BE33 /* PostionDetailSection.swift */; };
+		EBD35D432AD71BAE0076BE33 /* NumericInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD35D422AD71BAE0076BE33 /* NumericInput.swift */; };
+		EBD35D452AD747070076BE33 /* AddScreenViewRouterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD35D442AD747070076BE33 /* AddScreenViewRouterManager.swift */; };
+		EBD35D472AD7583D0076BE33 /* CoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD35D462AD7583D0076BE33 /* CoreModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,17 +49,15 @@
 		EB4679AE2AC0E2EE0026ACC3 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		EB4679E12AC1F1920026ACC3 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		EB4679E32AC1F2E00026ACC3 /* InterviewDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewDetail.swift; sourceTree = "<group>"; };
-		EB4679E52AC9F63E0026ACC3 /* SharedAddFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedAddFields.swift; sourceTree = "<group>"; };
+		EB4679E52AC9F63E0026ACC3 /* BasicFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicFields.swift; sourceTree = "<group>"; };
 		EB4679E72ACCB5AF0026ACC3 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		EB4679E92ACCBDFC0026ACC3 /* TabButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabButtonView.swift; sourceTree = "<group>"; };
 		EB4679ED2ACCBE680026ACC3 /* ProfileScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenView.swift; sourceTree = "<group>"; };
-		EB4679F12ACE2D5F0026ACC3 /* BottomTabViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabViewRouter.swift; sourceTree = "<group>"; };
 		EB4679F32ACE590A0026ACC3 /* PopUpMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpMenu.swift; sourceTree = "<group>"; };
 		EB4679F62ACE610B0026ACC3 /* TabMenuIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabMenuIcon.swift; sourceTree = "<group>"; };
 		EB4679F92ACF1E7E0026ACC3 /* AddPendingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPendingScreen.swift; sourceTree = "<group>"; };
 		EB4679FB2ACF1E930026ACC3 /* AddSucceedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSucceedScreen.swift; sourceTree = "<group>"; };
 		EB4679FD2ACF1EA20026ACC3 /* AddRejectedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRejectedScreen.swift; sourceTree = "<group>"; };
-		EB4679FF2ACF2F6E0026ACC3 /* AddComingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddComingScreen.swift; sourceTree = "<group>"; };
 		EB467A012ACF424A0026ACC3 /* AddInterviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInterviewModel.swift; sourceTree = "<group>"; };
 		EB5F209D2AD1BBCD0096C9A3 /* DynamicRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicRow.swift; sourceTree = "<group>"; };
 		EB5F209F2AD1D7450096C9A3 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
@@ -69,6 +69,10 @@
 		EB5F20AB2AD34D430096C9A3 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		EBD35D3C2AD5F1F20076BE33 /* VisaSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisaSectionView.swift; sourceTree = "<group>"; };
 		EBD35D3E2AD64EBF0076BE33 /* CardFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFooterView.swift; sourceTree = "<group>"; };
+		EBD35D402AD6FDD00076BE33 /* PostionDetailSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostionDetailSection.swift; sourceTree = "<group>"; };
+		EBD35D422AD71BAE0076BE33 /* NumericInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericInput.swift; sourceTree = "<group>"; };
+		EBD35D442AD747070076BE33 /* AddScreenViewRouterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScreenViewRouterManager.swift; sourceTree = "<group>"; };
+		EBD35D462AD7583D0076BE33 /* CoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,8 +127,8 @@
 		EB4679AA2AC0DCF00026ACC3 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				EB4679F82ACF1E640026ACC3 /* AddScreens */,
 				EB46799C2AC0DBF00026ACC3 /* ContentView.swift */,
+				EB4679F82ACF1E640026ACC3 /* AddScreens */,
 				EB4679ED2ACCBE680026ACC3 /* ProfileScreenView.swift */,
 				EB4679AE2AC0E2EE0026ACC3 /* HomeScreenView.swift */,
 			);
@@ -150,6 +154,7 @@
 				EB4679E32AC1F2E00026ACC3 /* InterviewDetail.swift */,
 				EB4679F32ACE590A0026ACC3 /* PopUpMenu.swift */,
 				EB5F20A12AD262720096C9A3 /* BlurView.swift */,
+				EBD35D422AD71BAE0076BE33 /* NumericInput.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -157,7 +162,8 @@
 		EB4679F02ACE2D310026ACC3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EB4679F12ACE2D5F0026ACC3 /* BottomTabViewRouter.swift */,
+				EBD35D462AD7583D0076BE33 /* CoreModel.swift */,
+				EBD35D442AD747070076BE33 /* AddScreenViewRouterManager.swift */,
 				EB467A012ACF424A0026ACC3 /* AddInterviewModel.swift */,
 				EB5F20A32AD33D0E0096C9A3 /* Theme.swift */,
 				EB5F20A52AD33F200096C9A3 /* InterviewModel.swift */,
@@ -178,9 +184,8 @@
 		EB4679F82ACF1E640026ACC3 /* AddScreens */ = {
 			isa = PBXGroup;
 			children = (
-				EB4679E52AC9F63E0026ACC3 /* SharedAddFields.swift */,
+				EB4679E52AC9F63E0026ACC3 /* BasicFields.swift */,
 				EB5F209C2AD1BBA30096C9A3 /* PendingScreen */,
-				EB4679FF2ACF2F6E0026ACC3 /* AddComingScreen.swift */,
 				EB4679FB2ACF1E930026ACC3 /* AddSucceedScreen.swift */,
 				EB4679FD2ACF1EA20026ACC3 /* AddRejectedScreen.swift */,
 			);
@@ -192,6 +197,7 @@
 			children = (
 				EB4679F92ACF1E7E0026ACC3 /* AddPendingScreen.swift */,
 				EB5F209D2AD1BBCD0096C9A3 /* DynamicRow.swift */,
+				EBD35D402AD6FDD00076BE33 /* PostionDetailSection.swift */,
 			);
 			path = PendingScreen;
 			sourceTree = "<group>";
@@ -277,19 +283,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB5F20A82AD346F10096C9A3 /* SampleData.swift in Sources */,
-				EB4679F22ACE2D5F0026ACC3 /* BottomTabViewRouter.swift in Sources */,
 				EB467A022ACF424A0026ACC3 /* AddInterviewModel.swift in Sources */,
+				EBD35D432AD71BAE0076BE33 /* NumericInput.swift in Sources */,
 				EB5F209E2AD1BBCD0096C9A3 /* DynamicRow.swift in Sources */,
 				EB4679FE2ACF1EA20026ACC3 /* AddRejectedScreen.swift in Sources */,
 				EB4679EE2ACCBE680026ACC3 /* ProfileScreenView.swift in Sources */,
 				EB46799D2AC0DBF00026ACC3 /* ContentView.swift in Sources */,
 				EB5F20A42AD33D0E0096C9A3 /* Theme.swift in Sources */,
 				EB4679E22AC1F1920026ACC3 /* Data.swift in Sources */,
+				EBD35D412AD6FDD00076BE33 /* PostionDetailSection.swift in Sources */,
+				EBD35D472AD7583D0076BE33 /* CoreModel.swift in Sources */,
 				EBD35D3D2AD5F1F20076BE33 /* VisaSectionView.swift in Sources */,
 				EB4679EA2ACCBDFC0026ACC3 /* TabButtonView.swift in Sources */,
 				EB4679FA2ACF1E7E0026ACC3 /* AddPendingScreen.swift in Sources */,
-				EB4679E62AC9F63E0026ACC3 /* SharedAddFields.swift in Sources */,
+				EB4679E62AC9F63E0026ACC3 /* BasicFields.swift in Sources */,
 				EB46799B2AC0DBF00026ACC3 /* job_hunterApp.swift in Sources */,
+				EBD35D452AD747070076BE33 /* AddScreenViewRouterManager.swift in Sources */,
 				EB4679E42AC1F2E00026ACC3 /* InterviewDetail.swift in Sources */,
 				EB4679E82ACCB5AF0026ACC3 /* CustomTabView.swift in Sources */,
 				EB4679AF2AC0E2EE0026ACC3 /* HomeScreenView.swift in Sources */,
@@ -302,7 +311,6 @@
 				EB4679F42ACE590A0026ACC3 /* PopUpMenu.swift in Sources */,
 				EB5F20AA2AD348940096C9A3 /* CardView.swift in Sources */,
 				EB5F20AC2AD34D430096C9A3 /* Utilities.swift in Sources */,
-				EB467A002ACF2F6E0026ACC3 /* AddComingScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

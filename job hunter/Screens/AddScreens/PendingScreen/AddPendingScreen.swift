@@ -15,27 +15,20 @@ struct AddPendingScreen: View {
     @State private var isFutureEnabled: Bool = false
     
     @EnvironmentObject var routerManager: AddScreenViewRouterManager
-    
-    @State private var companyName = ""
-    @State private var jobTitle = ""
-    @State private var startDate: Date = Date()
 
     
     var body: some View {
+        DebugView("routerManager.isSheetPresented: \(routerManager.isSheetPresented)")
         NavigationStack {
             List {
-               
-                SharedAddFields(companyName: $companyName, jobTitle: $jobTitle, startDate: $startDate)
+                BasicFields(sharedData: sharedData)
+                PostionDetailSection(sharedData: sharedData)
                 
-                //TODO: ADD THE JOB METADATA EX: pay expect, remote, relocation
-                
-
                 // MARK: Past rounds
                 PastRounds(sharedData: sharedData)
                 
                 // MARK: Next round
-                //TODO: EACH ROUND HAS A CHECKBOX. iF ITS CHECKED, THEN SHOW THE DATE PICKET AFTER
-                
+            
                 Toggle("Add Future Interview", isOn: $isFutureEnabled)
                 
                 if isFutureEnabled {
@@ -51,8 +44,7 @@ struct AddPendingScreen: View {
             .navigationBarTitle("Pending Interview", displayMode: .inline)
             .navigationBarItems(
                 leading:Button("Cancel") {
-                    print("lol")
-                    print(routerManager.isSheetPresented)
+                    
                     routerManager.isSheetPresented = false
                     //addScreenRouteManager.isSheetPresented = false
                 },

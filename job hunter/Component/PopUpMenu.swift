@@ -11,8 +11,7 @@ import SwiftUI
 
 struct PopUpMenu: View {
     
-    @ObservedObject var router: AddScreenViewRouterManager
-    @Binding var showMenu: Bool
+    @EnvironmentObject var router: AddScreenViewRouterManager
     
     let AddMenuItemNames = [
         "Add Pending": "questionmark.circle.fill",
@@ -28,23 +27,14 @@ struct PopUpMenu: View {
         VStack {
             Spacer()
             HStack(alignment: .bottom, spacing: 10) {
-                Spacer()
+               
                 ForEach(AddScreenViewModel.allCases, id: \.self) { view in
-                    MenuItem(currentScreen: view, router: router, showMenu: $showMenu)
+                    MenuItem(currentScreen: view)
                         .frame(maxWidth: .infinity)
                 }
-                Spacer()
+                
             }
             .frame(height: 100)
-            .background(
-                VStack {
-                    Spacer()
-                    Triangle() // Custom shape for the pointer
-                        .fill(Color(.systemBackground)) // Fill the triangle with the same color as the background
-                        .frame(width: 20, height: 20)
-                        .rotationEffect(.degrees(180))
-                }
-            )
             .background(BlurView(style: .systemThinMaterial))
             .cornerRadius(20)
             .padding(20)
@@ -54,42 +44,32 @@ struct PopUpMenu: View {
     }
 }
 
-struct Triangle: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        path.move(to: CGPoint(x: rect.midX, y: rect.minY))
-        path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
-        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
-        path.closeSubpath()
-        return path
-    }
-}
-
-
 struct MenuItem: View {
    
     var currentScreen: AddScreenViewModel
-    @ObservedObject var router: AddScreenViewRouterManager
-    @Binding var showMenu: Bool
+    @EnvironmentObject var router: AddScreenViewRouterManager
+    @EnvironmentObject var coreModel: CoreModel
+    
     
     var body: some View {
         VStack(alignment: .center, spacing: 5) {
             Button {
                 router.currentScreen = currentScreen
                 router.isSheetPresented = true
-                showMenu.toggle()
+                coreModel.showAddPopMenu.toggle()
             } label: {
-                ZStack() {
+                ZStack {
                     Circle()
-                        .foregroundColor(Color(.white))
                         .frame(width: 40, height: 40)
                         .shadow(radius: 4)
+                        .foregroundColor(currentScreen.fillColor)
                     Image(systemName: currentScreen.imageName)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(Color(.systemCyan))
+                        .frame(width: 50, height: 40)
+                        .foregroundColor(Color(.white))
                 }
+                
             }
             
             Text(currentScreen.textLabel)
@@ -97,6 +77,7 @@ struct MenuItem: View {
                 .multilineTextAlignment(.center)
     
         }
+        
     }
 }
 
@@ -105,6 +86,7 @@ struct MenuItem: View {
 struct PopUpMenu_Previews: PreviewProvider {
     
     static var previews: some View {
-        PopUpMenu(router: AddScreenViewRouterManager(), showMenu: .constant(false))
+        PopUpMenu()
+            .environmentObject(AddScreenViewRouterManager())
     }
 }

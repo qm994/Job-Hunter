@@ -12,8 +12,10 @@ let images = ["house.fill", "plus.circle.fill", "person.crop.circle"]
 
 struct CustomTabView: View {
     @State private var selectedTab = "house.fill"
-    @State private var showMenu: Bool = false
-    @ObservedObject var router: AddScreenViewRouterManager
+    
+    
+    @EnvironmentObject var router: AddScreenViewRouterManager
+    @EnvironmentObject var coreModel: CoreModel
     
     var body: some View {
         
@@ -36,10 +38,10 @@ struct CustomTabView: View {
                 HStack {
                     TabButtonView(imageName: "house.fill", selectedTab: $selectedTab)
                     Spacer()
-                    TabMenuIcon(showMenu: $showMenu)
+                    TabMenuIcon()
                         .onTapGesture {
-                            withAnimation {
-                                showMenu.toggle()
+                            withAnimation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 0.5)) {
+                                coreModel.showAddPopMenu.toggle()
                             }
                         }
                     Spacer()
@@ -51,8 +53,8 @@ struct CustomTabView: View {
                 .background(Color(.systemGray5))
             }// Zstack ends
             
-            if (showMenu) {
-                PopUpMenu(router: router, showMenu: $showMenu)
+            if (coreModel.showAddPopMenu) {
+                PopUpMenu()
                     .padding(.vertical, UIScreen.main.bounds.height / 8 + 40)
             }
         }
@@ -72,7 +74,8 @@ struct CustomTabView: View {
 struct CustomTabView_Previews: PreviewProvider {
    
     static var previews: some View {
-        CustomTabView(router: AddScreenViewRouterManager())
+        CustomTabView()
             .environmentObject(AddScreenViewRouterManager())
+            .environmentObject(CoreModel())
     }
 }
