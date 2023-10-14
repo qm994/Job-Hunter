@@ -11,10 +11,9 @@ import SwiftUI
 
 struct AddPendingScreen: View {
     @StateObject var sharedData: InterviewSharedData = InterviewSharedData()
+    @EnvironmentObject var routerManager: AddScreenViewRouterManager
     
     @State private var isFutureEnabled: Bool = false
-    
-    @EnvironmentObject var routerManager: AddScreenViewRouterManager
 
     
     var body: some View {

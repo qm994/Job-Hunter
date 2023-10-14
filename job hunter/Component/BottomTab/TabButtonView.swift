@@ -11,8 +11,11 @@ struct TabButtonView: View {
     var imageName: String
     @Binding var selectedTab: String
     
+    @EnvironmentObject var coreModel: CoreModel
+    
     var body: some View {
         Button {
+            coreModel.showAddPopMenu = false
             selectedTab = imageName
         } label: {
             Image(systemName: imageName)
@@ -31,8 +34,9 @@ struct TabButtonView: View {
 
 struct TabButtonView_Previews: PreviewProvider {
     @State static var selectedTab = "house.fill"  // Provide a default value
-        
-        static var previews: some View {
-            TabButtonView(imageName: "house.fill", selectedTab: $selectedTab)  // Pass the required parameters
-        }
+    
+    static var previews: some View {
+        TabButtonView(imageName: "house.fill", selectedTab: $selectedTab)
+            .environmentObject(CoreModel())
+    }
 }

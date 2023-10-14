@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-let images = ["house.fill", "plus.circle.fill", "person.crop.circle"]
-
-
 struct CustomTabView: View {
     @State private var selectedTab = "house.fill"
     
