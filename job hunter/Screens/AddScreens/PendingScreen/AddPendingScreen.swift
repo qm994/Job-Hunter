@@ -18,7 +18,14 @@ struct AddPendingScreen: View {
     
     var body: some View {
         DebugView("routerManager.isSheetPresented: \(routerManager.isSheetPresented)")
+        
         NavigationStack {
+//            ZStack {
+//                VisualEffectView(effect: UIBlurEffect(style: .regular))
+//                BasicFields(sharedData: sharedData)
+//            }
+    
+            //BasicFields(sharedData: sharedData)
             List {
                 BasicFields(sharedData: sharedData)
                 PostionDetailSection(sharedData: sharedData)

@@ -24,6 +24,10 @@
 		EB4679FC2ACF1E930026ACC3 /* AddSucceedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679FB2ACF1E930026ACC3 /* AddSucceedScreen.swift */; };
 		EB4679FE2ACF1EA20026ACC3 /* AddRejectedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679FD2ACF1EA20026ACC3 /* AddRejectedScreen.swift */; };
 		EB467A022ACF424A0026ACC3 /* AddInterviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB467A012ACF424A0026ACC3 /* AddInterviewModel.swift */; };
+		EB5322C02ADC62CC00004E9C /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5322BF2ADC62CC00004E9C /* VisualEffectView.swift */; };
+		EB5322C22ADC646100004E9C /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5322C12ADC646100004E9C /* AsyncImageView.swift */; };
+		EB5322C42ADC76EA00004E9C /* ClearbitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5322C32ADC76EA00004E9C /* ClearbitViewModel.swift */; };
+		EB5322C62ADC772300004E9C /* CustomizedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5322C52ADC772300004E9C /* CustomizedTextField.swift */; };
 		EB5F209E2AD1BBCD0096C9A3 /* DynamicRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F209D2AD1BBCD0096C9A3 /* DynamicRow.swift */; };
 		EB5F20A02AD1D7450096C9A3 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F209F2AD1D7450096C9A3 /* DebugView.swift */; };
 		EB5F20A22AD262720096C9A3 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F20A12AD262720096C9A3 /* BlurView.swift */; };
@@ -64,6 +68,10 @@
 		EB4679FB2ACF1E930026ACC3 /* AddSucceedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSucceedScreen.swift; sourceTree = "<group>"; };
 		EB4679FD2ACF1EA20026ACC3 /* AddRejectedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRejectedScreen.swift; sourceTree = "<group>"; };
 		EB467A012ACF424A0026ACC3 /* AddInterviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInterviewModel.swift; sourceTree = "<group>"; };
+		EB5322BF2ADC62CC00004E9C /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
+		EB5322C12ADC646100004E9C /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
+		EB5322C32ADC76EA00004E9C /* ClearbitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearbitViewModel.swift; sourceTree = "<group>"; };
+		EB5322C52ADC772300004E9C /* CustomizedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizedTextField.swift; sourceTree = "<group>"; };
 		EB5F209D2AD1BBCD0096C9A3 /* DynamicRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicRow.swift; sourceTree = "<group>"; };
 		EB5F209F2AD1D7450096C9A3 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		EB5F20A12AD262720096C9A3 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
@@ -167,6 +175,9 @@
 				EB4679F32ACE590A0026ACC3 /* PopUpMenu.swift */,
 				EB5F20A12AD262720096C9A3 /* BlurView.swift */,
 				EBD35D422AD71BAE0076BE33 /* NumericInput.swift */,
+				EB5322BF2ADC62CC00004E9C /* VisualEffectView.swift */,
+				EB5322C12ADC646100004E9C /* AsyncImageView.swift */,
+				EB5322C52ADC772300004E9C /* CustomizedTextField.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -179,6 +190,7 @@
 				EB467A012ACF424A0026ACC3 /* AddInterviewModel.swift */,
 				EB5F20A32AD33D0E0096C9A3 /* Theme.swift */,
 				EB5F20A52AD33F200096C9A3 /* InterviewModel.swift */,
+				EB5322C32ADC76EA00004E9C /* ClearbitViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -321,6 +333,7 @@
 				EB4679EA2ACCBDFC0026ACC3 /* TabButtonView.swift in Sources */,
 				EB4679FA2ACF1E7E0026ACC3 /* AddPendingScreen.swift in Sources */,
 				EB4679E62AC9F63E0026ACC3 /* BasicFields.swift in Sources */,
+				EB5322C42ADC76EA00004E9C /* ClearbitViewModel.swift in Sources */,
 				EBED85A52ADAF90A00F25636 /* DropdownMenu.swift in Sources */,
 				EB46799B2AC0DBF00026ACC3 /* job_hunterApp.swift in Sources */,
 				EBD35D492AD9BF440076BE33 /* DownloadImagesAsync.swift in Sources */,
@@ -328,6 +341,7 @@
 				EBD35D452AD747070076BE33 /* AddScreenViewRouterManager.swift in Sources */,
 				EB4679E42AC1F2E00026ACC3 /* InterviewDetail.swift in Sources */,
 				EBED85A92ADB0BF200F25636 /* DropdownMenuOptionRow.swift in Sources */,
+				EB5322C22ADC646100004E9C /* AsyncImageView.swift in Sources */,
 				EB4679E82ACCB5AF0026ACC3 /* CustomTabView.swift in Sources */,
 				EB4679AF2AC0E2EE0026ACC3 /* HomeScreenView.swift in Sources */,
 				EB4679F72ACE610B0026ACC3 /* TabMenuIcon.swift in Sources */,
@@ -335,7 +349,9 @@
 				EB4679FC2ACF1E930026ACC3 /* AddSucceedScreen.swift in Sources */,
 				EB5F20A62AD33F200096C9A3 /* InterviewModel.swift in Sources */,
 				EB5F20A02AD1D7450096C9A3 /* DebugView.swift in Sources */,
+				EB5322C02ADC62CC00004E9C /* VisualEffectView.swift in Sources */,
 				EB5F20A22AD262720096C9A3 /* BlurView.swift in Sources */,
+				EB5322C62ADC772300004E9C /* CustomizedTextField.swift in Sources */,
 				EB4679F42ACE590A0026ACC3 /* PopUpMenu.swift in Sources */,
 				EB5F20AA2AD348940096C9A3 /* CardView.swift in Sources */,
 				EB5F20AC2AD34D430096C9A3 /* Utilities.swift in Sources */,
@@ -476,6 +492,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -506,6 +523,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
