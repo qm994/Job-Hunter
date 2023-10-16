@@ -15,6 +15,7 @@ struct CompanyData: Decodable {
     let logo: String
 }
 
+
 class ClearbitViewDataManager {
     
     func decodeData(_ data: Data) -> [CompanyData]? {

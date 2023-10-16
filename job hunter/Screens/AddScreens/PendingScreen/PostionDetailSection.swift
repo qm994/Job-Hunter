@@ -15,7 +15,6 @@ struct PostionDetailSection: View {
     
     var body: some View {
         Section("Position Metadata") {
-            DebugView("PostionDetailSection redraw")
             VStack(spacing: 20) {
                 // location preference
                 VStack(alignment: .leading) {
@@ -57,7 +56,6 @@ struct PostionDetailSection: View {
 struct SalarySection: View {
     @ObservedObject var sharedData: InterviewSharedData
     var body: some View {
-        DebugView("sharedData.equity value: \(sharedData.equity)")
         NumericInput(label: "Base pay / Year", titleKey: "annually base pay", input: $sharedData.base)
         NumericInput(label: "Equity / 4 Yrs", titleKey: "4 years stocks/options", input: $sharedData.equity)
         NumericInput(label: "Signon Bonus", titleKey: "total signon cash", input: $sharedData.signon)

@@ -15,8 +15,6 @@ struct BasicFields: View {
     
     @StateObject var model = ClearbitViewModel()
     
-    @State private var showDropdown = false
-    
     let debouncer = Debouncer(delay: 1)
     
     var body: some View {

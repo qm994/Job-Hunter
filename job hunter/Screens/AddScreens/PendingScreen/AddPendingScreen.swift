@@ -16,9 +16,7 @@ struct AddPendingScreen: View {
     @State private var isFutureEnabled: Bool = false
 
     
-    var body: some View {
-        DebugView("routerManager.isSheetPresented: \(routerManager.isSheetPresented)")
-        
+    var body: some View {        
         NavigationStack {
 //            ZStack {
 //                VisualEffectView(effect: UIBlurEffect(style: .regular))
@@ -50,11 +48,10 @@ struct AddPendingScreen: View {
             .navigationBarTitle("Pending Interview", displayMode: .inline)
             .navigationBarItems(
                 leading:Button("Cancel") {
-                    
                     routerManager.isSheetPresented = false
-                    //addScreenRouteManager.isSheetPresented = false
                 },
                 trailing: Button("Add") {
+                    //TODO: Get sharedData's values and send to server once add
                     print("add the item!")
                 }
             )

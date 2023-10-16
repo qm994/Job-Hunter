@@ -14,10 +14,12 @@ struct Round {
     let roundDate: Date = Date()
 }
 
+
 class InterviewSharedData: ObservableObject {
     
     
-    @Published var companyName = ""
+    @Published var company: Company
+    
     @Published var jobTitle = ""
     @Published var startDate: Date = Date()
     
@@ -47,8 +49,10 @@ class InterviewSharedData: ObservableObject {
     
     // sink return a cancellable instance which has to be stored so keep the observable updates alive
     init() {
+        self.company = Company(name: "")
         
         self.pastRounds.objectWillChange.sink { [weak self] _ in
+            //self.company = Company(name: "")
             self?.objectWillChange.send()
         }.store(in: &cancellables)
 

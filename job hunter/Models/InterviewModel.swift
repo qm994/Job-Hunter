@@ -29,9 +29,9 @@ struct Job {
 }
 
 struct Company {
-    let name: String
-    let website: URL?
-    let logo: String?
+    var name: String
+    var website: URL?
+    var logo: String?
 }
 
 enum VisaType: String {

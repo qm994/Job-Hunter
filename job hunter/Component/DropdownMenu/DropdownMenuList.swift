@@ -10,13 +10,10 @@ import SwiftUI
 struct DropdownMenuList: View {
     
     let options: [DropdownMenuCompanyOption]
+    @ObservedObject var sharedData: InterviewSharedData
     
-    
-    //let onLoadDataWhenChange: (_ query: String) -> Void
-    
-    /// An action called when user select an action.
-    let onSelectedAction: (_ option: DropdownMenuCompanyOption) -> Void
-
+    @Binding var isOptionsPresented: Bool
+    @Binding var optionSelected: Bool
     
     var body: some View {
         ZStack {
@@ -29,7 +26,9 @@ struct DropdownMenuList: View {
                     ForEach(options, id: \.id) { option in
                         DropdownMenuOptionRow(
                             option: option,
-                            onSelectedAction: onSelectedAction
+                            sharedData: sharedData,
+                            isOptionsPresented: $isOptionsPresented,
+                            optionSelected: $optionSelected
                         )
                     }
                 }
@@ -49,9 +48,14 @@ struct DropdownMenuList: View {
 }
 
 struct DropdownMenuList_Previews: PreviewProvider {
+    @State static var isOptionsPresented: Bool = false
+    @State static var optionSelected: Bool = false
     static var previews: some View {
-        DropdownMenuList(options: DropdownMenuCompanyOption.allOptions) { option in
-            return
-        }
+        DropdownMenuList(
+            options: DropdownMenuCompanyOption.allOptions,
+            sharedData: InterviewSharedData(),
+            isOptionsPresented: $isOptionsPresented,
+            optionSelected: $optionSelected
+        )
     }
 }
