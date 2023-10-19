@@ -31,8 +31,12 @@ struct DefaultTextField: View {
         HStack {
             if isSecure {
                 SecureField(placeholder, text: $text)
+                    .autocapitalization(.none)
+                    
             } else {
                 TextField(placeholder, text: $text)
+                    .autocapitalization(.none)
+                    .keyboardType(self.forField == "email" ? .emailAddress : .default)
             }
             if forField == "password" {
                 Button(action: {
@@ -57,7 +61,7 @@ struct DefaultTextField: View {
     struct Wrapper: View {
         @State var text = "asxaxaxa"
         var body: some View {
-            DefaultTextField(forField: "password", placeholder: "password", text: $text)
+            DefaultTextField(forField: "email", placeholder: "email", text: $text)
         }
     }
     return Wrapper()

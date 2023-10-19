@@ -4,9 +4,9 @@
 //
 //  Created by Qingyuan Ma on 10/17/23.
 //
-
-import Foundation
 import FirebaseAuth
+import Foundation
+
 
 struct AuthUserResultModel {
     let uid: String
@@ -21,6 +21,8 @@ struct AuthUserResultModel {
 
 final class AuthenticationManager {
     static var sharedAuth = AuthenticationManager()
+    var showAuthMainScreen: Bool = false
+    
     
     private init() {
         
@@ -34,6 +36,7 @@ final class AuthenticationManager {
     }
     
     
+    @discardableResult
     func createUserWithEmailAndPass(email: String, password: String) async throws -> AuthUserResultModel {
         let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
         return AuthUserResultModel(user: authResult.user)
@@ -41,6 +44,7 @@ final class AuthenticationManager {
     
     
     func signInWithEmailAndPass(email: String, password: String) async throws -> AuthDataResult {
+        print("called")
         return try await Auth.auth().signIn(withEmail: email, password: password)
     }
     

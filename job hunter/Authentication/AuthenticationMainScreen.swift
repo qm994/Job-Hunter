@@ -8,10 +8,19 @@
 import SwiftUI
 import UIKit
 
+//
+class AuthenticationModel: ObservableObject {
+    @Published var showAuthMainScreen: Bool = false
+}
+
+
 struct AuthenticationMainScreen: View {
     
     @State private var email: String = ""
     @State private var password: String = ""
+    
+    
+    @EnvironmentObject var authModel: AuthenticationModel
     
     let screenWidth = UIScreen.main.bounds.width
     
@@ -28,10 +37,14 @@ struct AuthenticationMainScreen: View {
                     Button {
                         Task {
                             do {
+                                
                                 let result = try await AuthenticationManager.sharedAuth.signInWithEmailAndPass(
                                     email: self.email,
                                     password: self.password
                                 )
+                                
+                                authModel.showAuthMainScreen = false
+                                print("sign in succeed with user: \(result.user)")
                                 
                             } catch {
                                 print("sign in failed with error: \(error)")

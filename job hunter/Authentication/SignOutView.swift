@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct SignOutView: View {
+    
+    @EnvironmentObject var authModel: AuthenticationModel
     var body: some View {
         Button {
             do {
                 try AuthenticationManager.sharedAuth.signOutUser()
+                authModel.showAuthMainScreen = true
+                
             } catch {
                 print("sign out error: \(error)")
             }

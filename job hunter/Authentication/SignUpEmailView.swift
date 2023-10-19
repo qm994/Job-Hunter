@@ -12,20 +12,16 @@ class SignUpViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     
-    func signUp() async {
+    func signUp() async throws {
         
         guard !email.isEmpty, !password.isEmpty else {
             print("emial or password cannot be empty")
             return
         }
-        do {
-            let result = try await AuthenticationManager.sharedAuth.createUserWithEmailAndPass(
-                email: email, password: password
-            )
-            print(result)
-        } catch {
-            print("error is \(error)")
-        }
+        
+        try await AuthenticationManager.sharedAuth.createUserWithEmailAndPass(
+            email: email, password: password
+        )
     }
 
 }
@@ -50,7 +46,11 @@ struct SignUpEmailView: View {
             
             Button {
                 Task {
-                    await model.signUp()
+                    do {
+                        try await model.signUp()
+                    } catch {
+                        print("sign up failed: \(error)")
+                    }
                 }
             } label: {
                 Text("Sign Up")
@@ -62,7 +62,7 @@ struct SignUpEmailView: View {
                     .cornerRadius(20)
             }
         }
-        .navigationTitle("Sign Up With Email & Password")
+        .navigationTitle("Sign Up")
     }
 }
 
@@ -71,7 +71,9 @@ struct SignUpEmailView: View {
     struct WrapperView: View {
         
         var body: some View {
-            SignUpEmailView()
+            NavigationStack {
+                SignUpEmailView()
+            }
         }
     }
     
