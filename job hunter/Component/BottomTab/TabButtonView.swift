@@ -23,8 +23,7 @@ struct TabButtonView: View {
                 .font(Font.title2.weight(.bold))
         }
         .onAppear {
-            print(selectedTab)
-            print(imageName)
+            
         }
     }
 }

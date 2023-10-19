@@ -10,4 +10,5 @@ import Foundation
 
 class CoreModel: ObservableObject {
     @Published var showAddPopMenu: Bool = false
+    //@Published var showAuthView: Bool = false
 }
