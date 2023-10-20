@@ -8,12 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var router = AddScreenViewRouterManager()
-    @ObservedObject var coreModel = CoreModel()
+    @StateObject var router = AddScreenViewRouterManager()
+    @StateObject var coreModel = CoreModel()    
+    @StateObject var authModel = AuthenticationModel()
+    
     var body: some View {
-        CustomTabView()
+        MainScreenView()
+            .environmentObject(authModel)
             .environmentObject(router)
             .environmentObject(coreModel)
+            /// check if user authenticated, otherwise show the auth screen
+            .onAppear {
+                let authUser = try? AuthenticationManager.sharedAuth.getAuthenticatedUser()
+                
+                authModel.showAuthMainScreen = authUser == nil ? true : false
+            }
+            .fullScreenCover(isPresented: $authModel.showAuthMainScreen) {
+                AuthenticationMainScreen()
+                    .environmentObject(authModel)
+            }
     }
 }
 

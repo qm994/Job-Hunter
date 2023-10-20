@@ -17,28 +17,34 @@ struct CustomizedTextField: View {
     
     @Binding var fieldValue: String
     
+    var isVerticalDivider: Bool = false
+    
     
     var body: some View {
         HStack {
             //MARK: LABEL + DIVIDER
             HStack {
-                Spacer()
                 Text(label)
                     .fontWeight(.bold)
                     .foregroundColor(.blue)
                 
-                Rectangle()
-                    .frame(width: 1, height: 20, alignment: .center)  // Creates a thin vertical line
-                    .foregroundColor(.gray)
-                Spacer()
+                if isVerticalDivider {
+                    Rectangle()
+                        .frame(width: 1, height: 20, alignment: .center)  // Creates a thin vertical line
+                        .foregroundColor(.gray)
+                }
+               
+                //Spacer()
             }
             .frame(width: screenWidth * 0.35)
             
+            Spacer()
+            
             TextField(fieldPlaceHolder, text: $fieldValue)
-                .autocapitalization(.words)
-                .lineLimit(2)
+                .autocapitalization(.none)
                 .fontWeight(.medium)
                 .frame(maxWidth: .infinity)
+                .frame(height: 50)
             
         }
         .frame(height: 50)

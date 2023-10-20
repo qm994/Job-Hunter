@@ -30,7 +30,6 @@ struct TabMenuIcon: View {
 }
 
 struct TabMenuIcon_Previews: PreviewProvider {
-    @State static var showMenu = false
     static var previews: some View {
         TabMenuIcon()
             .environmentObject(CoreModel())

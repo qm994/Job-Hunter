@@ -18,12 +18,6 @@ struct AddPendingScreen: View {
     
     var body: some View {        
         NavigationStack {
-//            ZStack {
-//                VisualEffectView(effect: UIBlurEffect(style: .regular))
-//                BasicFields(sharedData: sharedData)
-//            }
-    
-            //BasicFields(sharedData: sharedData)
             List {
                 BasicFields(sharedData: sharedData)
                 PostionDetailSection(sharedData: sharedData)
