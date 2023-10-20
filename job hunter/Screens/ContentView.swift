@@ -9,10 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var router = AddScreenViewRouterManager()
-    @StateObject var coreModel = CoreModel()
-
-    //@State private var showAuthView: Bool = false
-    
+    @StateObject var coreModel = CoreModel()    
     @StateObject var authModel = AuthenticationModel()
     
     var body: some View {

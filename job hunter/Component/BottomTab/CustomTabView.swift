@@ -8,9 +8,6 @@
 import SwiftUI
 
 struct CustomTabView: View {
-    @State private var selectedTab = "house.fill"
-    
-    
     @EnvironmentObject var router: AddScreenViewRouterManager
     @EnvironmentObject var coreModel: CoreModel
     
@@ -20,34 +17,21 @@ struct CustomTabView: View {
             ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
              
                 //MARK: TABVIEW
-                TabView(selection: $selectedTab) {
+                TabView(selection: $coreModel.selectedTab) {
                     HomeScreenView()
-                        .tag("house.fill")
+                        .tag(BottomNavigationModel.home)
 
                     ProfileScreenView()
-                        .tag("person.crop.circle")
+                        .tag(BottomNavigationModel.profile)
 
                 } //TabView ends
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+                .tabViewStyle(
+                    PageTabViewStyle(indexDisplayMode: .always))
                 .ignoresSafeArea(.all, edges: .bottom)
                 
-                //MARK: TabView bottom tab buttons
-                HStack {
-                    TabButtonView(imageName: "house.fill", selectedTab: $selectedTab)
-                    Spacer()
-                    TabMenuIcon()
-                        .onTapGesture {
-                            withAnimation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 0.5)) {
-                                coreModel.showAddPopMenu.toggle()
-                            }
-                        }
-                    Spacer()
-                    TabButtonView(imageName: "person.crop.circle", selectedTab: $selectedTab)
-                }// Bottom buttons Ends
-                .frame(height: UIScreen.main.bounds.height / 8)
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal, 40)
-                .background(Color(.systemGray5))
+                //MARK: Bottom Navigation
+                BottomNavigationView()
+                    
             }// Zstack ends
             
             if (coreModel.showAddPopMenu) {
@@ -72,6 +56,7 @@ struct CustomTabView_Previews: PreviewProvider {
    
     static var previews: some View {
         CustomTabView()
+            .environmentObject(AuthenticationModel())
             .environmentObject(AddScreenViewRouterManager())
             .environmentObject(CoreModel())
     }
