@@ -13,10 +13,11 @@ struct ContentView: View {
     @StateObject var authModel = AuthenticationModel()
     
     var body: some View {
-        CustomTabView()
+        MainScreenView()
             .environmentObject(authModel)
             .environmentObject(router)
             .environmentObject(coreModel)
+            /// check if user authenticated, otherwise show the auth screen
             .onAppear {
                 let authUser = try? AuthenticationManager.sharedAuth.getAuthenticatedUser()
                 

@@ -16,5 +16,6 @@ struct ProfileScreenView: View {
 struct ProfileScreenView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileScreenView()
+            .environmentObject(AuthenticationModel())
     }
 }

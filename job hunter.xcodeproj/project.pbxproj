@@ -63,6 +63,7 @@
 		EB5F20A82AD346F10096C9A3 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F20A72AD346F10096C9A3 /* SampleData.swift */; };
 		EB5F20AA2AD348940096C9A3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F20A92AD348940096C9A3 /* CardView.swift */; };
 		EB5F20AC2AD34D430096C9A3 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F20AB2AD34D430096C9A3 /* Utilities.swift */; };
+		EBA751892AE2F593008247CD /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA751882AE2F593008247CD /* ResetPasswordView.swift */; };
 		EBB11A782ADF6CA3002AAFDE /* SignUpEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB11A772ADF6CA3002AAFDE /* SignUpEmailView.swift */; };
 		EBB11A7A2ADF6E6E002AAFDE /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB11A792ADF6E6E002AAFDE /* AuthenticationManager.swift */; };
 		EBB11A7C2AE08495002AAFDE /* AuthenticationMainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB11A7B2AE08495002AAFDE /* AuthenticationMainScreen.swift */; };
@@ -113,6 +114,7 @@
 		EB5F20A72AD346F10096C9A3 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		EB5F20A92AD348940096C9A3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		EB5F20AB2AD34D430096C9A3 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		EBA751882AE2F593008247CD /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		EBB11A772ADF6CA3002AAFDE /* SignUpEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailView.swift; sourceTree = "<group>"; };
 		EBB11A792ADF6E6E002AAFDE /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		EBB11A7B2AE08495002AAFDE /* AuthenticationMainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationMainScreen.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 				EBB11A772ADF6CA3002AAFDE /* SignUpEmailView.swift */,
 				EBB11A7D2AE0D8D5002AAFDE /* SignOutView.swift */,
 				EBB11A792ADF6E6E002AAFDE /* AuthenticationManager.swift */,
+				EBA751882AE2F593008247CD /* ResetPasswordView.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				EB5F209E2AD1BBCD0096C9A3 /* DynamicRow.swift in Sources */,
 				EB4679FE2ACF1EA20026ACC3 /* AddRejectedScreen.swift in Sources */,
 				EB4679EE2ACCBE680026ACC3 /* ProfileScreenView.swift in Sources */,
+				EBA751892AE2F593008247CD /* ResetPasswordView.swift in Sources */,
 				EB46799D2AC0DBF00026ACC3 /* ContentView.swift in Sources */,
 				EBB11A812AE0D9B7002AAFDE /* DefaultTextField.swift in Sources */,
 				EBB11A7E2AE0D8D5002AAFDE /* SignOutView.swift in Sources */,

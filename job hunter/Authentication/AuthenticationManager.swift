@@ -24,9 +24,7 @@ final class AuthenticationManager {
     var showAuthMainScreen: Bool = false
     
     
-    private init() {
-        
-    }
+    private init() {}
     
     func getAuthenticatedUser() throws -> AuthUserResultModel {
         guard let user = Auth.auth().currentUser else {
@@ -42,7 +40,7 @@ final class AuthenticationManager {
         return AuthUserResultModel(user: authResult.user)
     }
     
-    
+    @discardableResult
     func signInWithEmailAndPass(email: String, password: String) async throws -> AuthDataResult {
         print("called")
         return try await Auth.auth().signIn(withEmail: email, password: password)
@@ -50,6 +48,10 @@ final class AuthenticationManager {
     
     func signOutUser() throws  {
         try Auth.auth().signOut()
+    }
+    
+    func resetPassWithEmail(email: String) async throws {
+        return try await Auth.auth().sendPasswordReset(withEmail: email)
     }
     
     

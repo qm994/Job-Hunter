@@ -13,7 +13,6 @@ class SignUpViewModel: ObservableObject {
     @Published var password: String = ""
     
     func signUp() async throws {
-        
         guard !email.isEmpty, !password.isEmpty else {
             print("emial or password cannot be empty")
             return
@@ -23,12 +22,15 @@ class SignUpViewModel: ObservableObject {
             email: email, password: password
         )
     }
-
 }
 
 struct SignUpEmailView: View {
     @StateObject var model = SignUpViewModel()
+    @State private var showAlert: Bool = false
+    @State private var errorMessage: String?
+    
     var body: some View {
+        DebugView("redraw!!!")
         VStack {
             CustomizedTextField(
                 label: "Email *", 
@@ -44,22 +46,25 @@ struct SignUpEmailView: View {
                 isVerticalDivider: false
             )
             
-            Button {
+            AuthButton(label: "Sign Up") {
                 Task {
                     do {
                         try await model.signUp()
                     } catch {
-                        print("sign up failed: \(error)")
+                        showAlert = true
+                        errorMessage = error.localizedDescription
                     }
                 }
-            } label: {
-                Text("Sign Up")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .frame(height: 55)
-                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
-                    .background(.blue)
-                    .cornerRadius(20)
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Error"),
+                    message: Text(errorMessage ?? "Unknown error"),
+                    dismissButton: .default(Text("OK")) {
+                        model.email = ""
+                        model.password = ""
+                    }
+                )
             }
         }
         .navigationTitle("Sign Up")

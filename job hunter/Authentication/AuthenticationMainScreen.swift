@@ -34,41 +34,54 @@ struct AuthenticationMainScreen: View {
                 VStack {
                     DefaultTextField(forField: "email", placeholder: "Email", text: $email)
                     DefaultTextField(forField: "password", placeholder: "Password", text: $password)
-                    Button {
+                    
+                    AuthButton(label: "Login") {
                         Task {
                             do {
-                                
-                                let result = try await AuthenticationManager.sharedAuth.signInWithEmailAndPass(
+                                try await AuthenticationManager.sharedAuth.signInWithEmailAndPass(
                                     email: self.email,
                                     password: self.password
                                 )
                                 
                                 authModel.showAuthMainScreen = false
-                                print("sign in succeed with user: \(result.user)")
+                                
                                 
                             } catch {
                                 print("sign in failed with error: \(error)")
                             }
                         }
-                    } label: {
-                        Text("Login")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .frame(height: 55)
-                            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
-                            .background(.blue)
-                            .cornerRadius(20)
                     }
                 }
-                
-                NavigationLink("No Account? Sign up here") {
-                    SignUpEmailView()
+                VStack(spacing: 10) {
+                    NavigationLink("No Account? Sign up here") {
+                        SignUpEmailView()
+                    }
+                    NavigationLink("Forgot Password?") {
+                        ResetPasswordView()
+                    }
                 }
-                
             }
         }
     }
 }
+
+struct AuthButton: View {
+    var label: String
+    var action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Text(label)
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.blue)
+                .cornerRadius(20)
+        }
+    }
+}
+
 
 #Preview {
     AuthenticationMainScreen()

@@ -28,15 +28,6 @@ enum BottomNavigationModel: Int, CaseIterable {
                 return "Profile"
         }
     }
-    
-    var view: some View {
-        switch self {
-            case .home:
-                return AnyView(HomeScreenView())
-            case .profile:
-                return AnyView(ProfileScreenView())
-        }
-    }
 }
 
 

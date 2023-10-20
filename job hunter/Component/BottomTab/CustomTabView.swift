@@ -1,13 +1,6 @@
-//
-//  CustomTabView.swift
-//  job hunter
-//
-//  Created by Qingyuan Ma on 10/3/23.
-//
-
 import SwiftUI
 
-struct CustomTabView: View {
+struct MainScreenView: View {
     @EnvironmentObject var router: AddScreenViewRouterManager
     @EnvironmentObject var coreModel: CoreModel
     
@@ -39,7 +32,7 @@ struct CustomTabView: View {
                     .padding(.vertical, UIScreen.main.bounds.height / 8 + 40)
             }
         }
-        //MARK: SHOW THE ADDING SHEET
+        //MARK: ADDING SHEET
         .sheet(isPresented: $router.isSheetPresented) {
             if router.currentScreen != nil {
                 router.view
@@ -55,7 +48,7 @@ struct CustomTabView: View {
 struct CustomTabView_Previews: PreviewProvider {
    
     static var previews: some View {
-        CustomTabView()
+        MainScreenView()
             .environmentObject(AuthenticationModel())
             .environmentObject(AddScreenViewRouterManager())
             .environmentObject(CoreModel())
