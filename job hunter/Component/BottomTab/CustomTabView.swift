@@ -14,9 +14,11 @@ struct MainScreenView: View {
                     HomeScreenView()
                         .tag(BottomNavigationModel.home)
 
-                    ProfileScreenView()
-                        .tag(BottomNavigationModel.profile)
-
+                    NavigationStack {
+                        ProfileScreenView()
+                    }
+                    .tag(BottomNavigationModel.profile)
+                   
                 } //TabView ends
                 .tabViewStyle(
                     PageTabViewStyle(indexDisplayMode: .always))

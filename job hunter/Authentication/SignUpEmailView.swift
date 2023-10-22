@@ -12,28 +12,44 @@ class SignUpViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     
+    private var authModel: AuthenticationModel
+    
+    init(authModel: AuthenticationModel) {
+        self.authModel = authModel
+    }
+    
     func signUp() async throws {
         guard !email.isEmpty, !password.isEmpty else {
             print("emial or password cannot be empty")
             return
         }
         
-        try await AuthenticationManager.sharedAuth.createUserWithEmailAndPass(
+        try await authModel.createUserWithEmailAndProfile(
             email: email, password: password
         )
     }
 }
 
 struct SignUpEmailView: View {
-    @StateObject var model = SignUpViewModel()
+    @StateObject private var authModel: AuthenticationModel
+    @StateObject private var model: SignUpViewModel
     @State private var showAlert: Bool = false
     @State private var errorMessage: String?
     
+    // Initialize SignUpViewModel with AuthenticationModel so we can use AuthenticationModel's method in SignUpViewModel
+    
+    init() {
+        let authModel = AuthenticationModel()
+        self._authModel = StateObject(wrappedValue: authModel)
+        self._model = StateObject(wrappedValue: SignUpViewModel(authModel: authModel))
+    }
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     var body: some View {
-        DebugView("redraw!!!")
         VStack {
             CustomizedTextField(
-                label: "Email *", 
+                label: "Email *",
                 fieldPlaceHolder: "Type Email...",
                 fieldValue: $model.email,
                 isVerticalDivider: false
@@ -50,6 +66,7 @@ struct SignUpEmailView: View {
                 Task {
                     do {
                         try await model.signUp()
+                        presentationMode.wrappedValue.dismiss()
                     } catch {
                         showAlert = true
                         errorMessage = error.localizedDescription
