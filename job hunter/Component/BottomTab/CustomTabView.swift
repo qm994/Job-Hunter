@@ -22,11 +22,21 @@ struct CustomTabView: View {
                 //MARK: TABVIEW
                 TabView(selection: $selectedTab) {
                     HomeScreenView()
+<<<<<<< Updated upstream
                         .tag("house.fill")
 
                     ProfileScreenView()
                         .tag("person.crop.circle")
 
+=======
+                        .tag(BottomNavigationModel.home)
+                    
+                    NavigationStack {
+                        ProfileScreenView()
+                    }
+                    .tag(BottomNavigationModel.profile)
+                
+>>>>>>> Stashed changes
                 } //TabView ends
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                 .ignoresSafeArea(.all, edges: .bottom)
