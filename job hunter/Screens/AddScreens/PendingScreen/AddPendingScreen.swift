@@ -7,11 +7,20 @@
 
 import SwiftUI
 
-
+class SalarySectionModel: ObservableObject {
+    @Published var base: Double = .zero
+    @Published var equity: Double = .zero
+    @Published var signon: Double = .zero
+    @Published var bonus: Double = .zero // percent?
+}
 
 struct AddPendingScreen: View {
-    @StateObject var sharedData: InterviewSharedData = InterviewSharedData()
+    @StateObject var sharedData: AddInterviewModel = AddInterviewModel()
+    
+    @StateObject var salaryModel: SalarySectionModel = SalarySectionModel()
+    
     @EnvironmentObject var routerManager: AddScreenViewRouterManager
+    @EnvironmentObject var authModel: AuthenticationModel
     
     @State private var isFutureEnabled: Bool = false
 
@@ -20,7 +29,11 @@ struct AddPendingScreen: View {
         NavigationStack {
             List {
                 BasicFields(sharedData: sharedData)
-                PostionDetailSection(sharedData: sharedData)
+                
+                PostionDetailSection(
+                    sharedData: sharedData,
+                    salaryModel: salaryModel
+                )
                 
                 // MARK: Past rounds
                 PastRounds(sharedData: sharedData)
@@ -44,10 +57,27 @@ struct AddPendingScreen: View {
                 leading:Button("Cancel") {
                     routerManager.isSheetPresented = false
                 },
-                trailing: Button("Add") {
-                    //TODO: Get sharedData's values and send to server once add
-                    print("add the item!")
-                }
+                trailing:
+                    Button("Add") {
+                        //TODO: ADD the salary info to addInterviewToFirestore and update firestore to include the fields
+                        Task {
+                            do {
+                                guard let userProfile = authModel.userProfile else {
+                                    print("User profile is not available")
+                                    return
+                                }
+                                //Add interview
+                                try await sharedData.addInterviewToFirestore(
+                                    user: userProfile, status: InterviewStatus.pending
+                                )
+                                routerManager.isSheetPresented = false
+                                print("Interview added successfully")
+                            } catch {
+                                // Handle the error appropriately
+                                print("Error adding interview: \(error)")
+                            }
+                        }
+                    }
             )
         } //NavigationView ends
         .edgesIgnoringSafeArea(.top)
@@ -55,7 +85,7 @@ struct AddPendingScreen: View {
 }
 
 struct PastRounds: View {
-    @ObservedObject var sharedData: InterviewSharedData
+    @ObservedObject var sharedData: AddInterviewModel
     
     @State private var index = 0
     
@@ -98,7 +128,7 @@ struct PastRounds: View {
 
 struct FutureRounds: View {
     
-    @ObservedObject var sharedData: InterviewSharedData
+    @ObservedObject var sharedData: AddInterviewModel
     @State private var checkedStates: [String: Bool] = [:]
    
     var futureRounds: [ExtendedRoundData] {
@@ -148,6 +178,8 @@ struct CheckboxView: View {
 
 struct AddPendingScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AddPendingScreen().environmentObject(AddScreenViewRouterManager())
+        AddPendingScreen()
+            .environmentObject(AddScreenViewRouterManager())
+            .environmentObject(AuthenticationModel())
     }
 }

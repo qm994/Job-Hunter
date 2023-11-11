@@ -11,6 +11,10 @@ import SwiftUI
 class SignUpViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
+    @Published var username: String = ""
+    
+    
+    @Published private(set) var errorMessage: String? = nil
     
     private var authModel: AuthenticationModel
     
@@ -19,14 +23,20 @@ class SignUpViewModel: ObservableObject {
     }
     
     func signUp() async throws {
-        guard !email.isEmpty, !password.isEmpty else {
-            print("emial or password cannot be empty")
+        guard !email.isEmpty, !password.isEmpty, !username.isEmpty else {
+            self.errorMessage = "Email, Password, Username are required!"
             return
         }
         
-        try await authModel.createUserWithEmailAndProfile(
-            email: email, password: password
-        )
+        do {
+            try await authModel.createUserWithEmailAndProfile(
+                email: email, password: password
+            )
+        } catch {
+            self.errorMessage = error.localizedDescription
+            throw error
+        }
+        
     }
 }
 
@@ -34,7 +44,6 @@ struct SignUpEmailView: View {
     @StateObject private var authModel: AuthenticationModel
     @StateObject private var model: SignUpViewModel
     @State private var showAlert: Bool = false
-    @State private var errorMessage: String?
     
     // Initialize SignUpViewModel with AuthenticationModel so we can use AuthenticationModel's method in SignUpViewModel
     
@@ -62,6 +71,14 @@ struct SignUpEmailView: View {
                 isVerticalDivider: false
             )
             
+            CustomizedTextField(
+                label: "Username *",
+                fieldPlaceHolder: "ex: jonhn_doe",
+                fieldValue: $model.username,
+                isVerticalDivider: false
+            )
+            
+            
             AuthButton(label: "Sign Up") {
                 Task {
                     do {
@@ -69,14 +86,13 @@ struct SignUpEmailView: View {
                         presentationMode.wrappedValue.dismiss()
                     } catch {
                         showAlert = true
-                        errorMessage = error.localizedDescription
                     }
                 }
             }
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("Error"),
-                    message: Text(errorMessage ?? "Unknown error"),
+                    message: Text(model.errorMessage ?? "Unknown error"),
                     dismissButton: .default(Text("OK")) {
                         model.email = ""
                         model.password = ""

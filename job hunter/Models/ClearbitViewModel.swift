@@ -60,9 +60,8 @@ class ClearbitViewModel: ObservableObject {
     let manager = ClearbitViewDataManager()
     
     func fetchCompaniesData(startwith query: String) async -> () {
-        let data = try? await manager.downloadCompaniesDataAsync(query: "app")
-        //TODO
-        
+        let data = try? await manager.downloadCompaniesDataAsync(query: query)
+
         if let data = data {
             let transformData = data.map { companyData in
                 DropdownMenuCompanyOption(name: companyData.name, icon: companyData.logo)

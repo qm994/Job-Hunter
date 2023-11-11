@@ -12,7 +12,7 @@ struct DebugView: View {
 
     init(_ message: String) {
         self.message = message
-        print("DebugView initialized with message: \(message)")
+        print("DebugView message: \(message)")
     }
 
     var body: some View {

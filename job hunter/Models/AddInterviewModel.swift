@@ -14,25 +14,19 @@ struct Round {
     let roundDate: Date = Date()
 }
 
-
-class InterviewSharedData: ObservableObject {
+class AddInterviewModel: ObservableObject {
     
     
     @Published var company: Company
     
     @Published var jobTitle = ""
     @Published var startDate: Date = Date()
+    @Published var status: ApplicationStatus = .pending
     
     @Published var locationPreference: String = ""
     @Published var relocationRequired: String = ""
     @Published var addExpectedSalary: Bool = false 
     
-    @Published var base: String = ""
-    @Published var equity: String = ""
-    @Published var bonus: String = ""
-    @Published var signon: String = ""
-    
-   
     
     /*
      When add one past round, always use the top one as the newly add one
@@ -89,10 +83,32 @@ class InterviewSharedData: ObservableObject {
         futureRounds.rounds = allRounds.filter { !existingRoundNames.contains($0) }
     }
     
-//    @Published var selectedRound = "HR Call"
-//    @Published var hasNextRound: Bool = true
-//    @Published var status: String = "Pending"
-//    @Published var rejectionReason: String = ""
+    //TODO: Buiild encode and decode for data
+    // Called when click Add
+    func addInterviewToFirestore(user: DBUser, status: InterviewStatus) async throws {
+        
+        let is_relocation: Bool = {
+            switch relocationRequired.lowercased() {
+            case "true":
+                return true
+            case "false":
+                return false
+            default:
+                return false // You can decide on a default value (true/false) or throw an error if needed.
+            }
+        }()
+        
+        var data: [String: Any]  = [
+            "company": company.name,
+            "title": jobTitle,
+            "startDate": startDate,
+            "is_relocation": is_relocation,
+            "work_location": locationPreference,
+            "status": status.rawValue,
+        ]
+        return try await AddInterviewManager.shared.createInterview(user: user, data: &data)
+    }
+    
 }
 
 class FutureRoundsModel: ObservableObject {
