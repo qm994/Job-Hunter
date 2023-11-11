@@ -14,6 +14,14 @@ class SalarySectionModel: ObservableObject {
     @Published var bonus: Double = .zero // percent?
 }
 
+// Define a struct to hold the salary information
+struct SalaryInfo {
+    var base: Double
+    var bonus: Double
+    var equity: Double
+    var signon: Double
+}
+
 struct AddPendingScreen: View {
     @StateObject var sharedData: AddInterviewModel = AddInterviewModel()
     
@@ -66,9 +74,19 @@ struct AddPendingScreen: View {
                                     print("User profile is not available")
                                     return
                                 }
+                                
+                                // Extract salary info if enabled
+                                var salaryInfo = SalaryInfo(
+                                    base:  sharedData.addExpectedSalary ? salaryModel.base : 0,
+                                    bonus: sharedData.addExpectedSalary ? salaryModel.bonus : 0,
+                                    equity: sharedData.addExpectedSalary ? salaryModel.equity: 0,
+                                    signon: sharedData.addExpectedSalary ? salaryModel.signon : 0
+                                )
+                                        
                                 //Add interview
                                 try await sharedData.addInterviewToFirestore(
-                                    user: userProfile, status: InterviewStatus.pending
+                                        user: userProfile,
+                                        salary: salaryInfo
                                 )
                                 routerManager.isSheetPresented = false
                                 print("Interview added successfully")

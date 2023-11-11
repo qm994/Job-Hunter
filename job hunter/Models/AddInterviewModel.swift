@@ -84,8 +84,8 @@ class AddInterviewModel: ObservableObject {
     }
     
     //TODO: Buiild encode and decode for data
-    // Called when click Add
-    func addInterviewToFirestore(user: DBUser, status: InterviewStatus) async throws {
+    // Add Interview to the FireStore
+    func addInterviewToFirestore(user: DBUser, salary: SalaryInfo) async throws {
         
         let is_relocation: Bool = {
             switch relocationRequired.lowercased() {
@@ -98,6 +98,15 @@ class AddInterviewModel: ObservableObject {
             }
         }()
         
+        // Convert to dictionary
+        let salaryInfoDict: [String: Double] = [
+            "base": salary.base,
+            "bonus": salary.bonus,
+            "equity": salary.equity,
+            "signon": salary.signon
+        ]
+
+        
         var data: [String: Any]  = [
             "company": company.name,
             "title": jobTitle,
@@ -105,6 +114,7 @@ class AddInterviewModel: ObservableObject {
             "is_relocation": is_relocation,
             "work_location": locationPreference,
             "status": status.rawValue,
+            "salary": salaryInfoDict
         ]
         return try await AddInterviewManager.shared.createInterview(user: user, data: &data)
     }
