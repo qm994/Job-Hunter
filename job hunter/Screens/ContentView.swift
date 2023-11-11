@@ -6,27 +6,36 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct ContentView: View {
     @StateObject var router = AddScreenViewRouterManager()
     @StateObject var coreModel = CoreModel()    
     @StateObject var authModel = AuthenticationModel()
-    
+
     var body: some View {
+        DebugView("\(authModel.userProfile)")
         MainScreenView()
             .environmentObject(authModel)
             .environmentObject(router)
             .environmentObject(coreModel)
             /// check if user authenticated, otherwise show the auth screen
             .onAppear {
-                let authUser = try? AuthenticationManager.sharedAuth.getAuthenticatedUser()
-                
-                authModel.showAuthMainScreen = authUser == nil ? true : false
+                Task {
+                    do {
+                        let authUser = try await authModel.loadCurrentUser()
+                        authModel.showAuthMainScreen = authUser == nil ? true : false
+                    } catch let error {
+                        authModel.showAuthMainScreen = true
+                        print("load app auth issue: \(error.localizedDescription)")
+                    }
+                }
             }
             .fullScreenCover(isPresented: $authModel.showAuthMainScreen) {
                 AuthenticationMainScreen()
                     .environmentObject(authModel)
             }
+            
     }
 }
 

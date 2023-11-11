@@ -10,7 +10,7 @@ import SwiftUI
 struct DropdownMenuList: View {
     
     let options: [DropdownMenuCompanyOption]
-    @ObservedObject var sharedData: InterviewSharedData
+    @ObservedObject var sharedData: AddInterviewModel
     
     @Binding var isOptionsPresented: Bool
     @Binding var optionSelected: Bool
@@ -53,7 +53,7 @@ struct DropdownMenuList_Previews: PreviewProvider {
     static var previews: some View {
         DropdownMenuList(
             options: DropdownMenuCompanyOption.allOptions,
-            sharedData: InterviewSharedData(),
+            sharedData: AddInterviewModel(),
             isOptionsPresented: $isOptionsPresented,
             optionSelected: $optionSelected
         )

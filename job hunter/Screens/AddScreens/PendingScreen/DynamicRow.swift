@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DynamicRow: View {
     @ObservedObject var rowData: RoundData
-    @ObservedObject var sharedData: InterviewSharedData
+    @ObservedObject var sharedData: AddInterviewModel
     
     var body: some View {
         HStack {

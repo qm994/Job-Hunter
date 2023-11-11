@@ -13,8 +13,9 @@ final class ProfileViewModel: ObservableObject {
 
     func loadCurrentUser() async throws {
         let authResult = try AuthenticationManager.sharedAuth.getAuthenticatedUser()
-        let result = try await UserManager.shared.getUser(userId: authResult.uid)
-        self.user = result
+        let dbUser = try await UserManager.shared.getUser(userId: authResult.uid)
+        //try AuthenticationManager.sharedAuth.signOutUser()
+        self.user = dbUser
     }
 }
 
@@ -33,10 +34,12 @@ struct ProfileScreenView: View {
                     if let email = user.email {
                         Text(email)
                     }
+                    SignOutView()
 
                 }
+                
             }
-            SignOutView()
+            
         }
         .task {
             do {

@@ -11,6 +11,7 @@ struct SignOutView: View {
     
     @EnvironmentObject var authModel: AuthenticationModel
     var body: some View {
+        
         Button {
             do {
                 try AuthenticationManager.sharedAuth.signOutUser()

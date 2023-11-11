@@ -9,56 +9,67 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct DBUser {
+
+//TODO: USE CUSTOM ENCODING AND DECODING KEYS 
+
+struct DBUser: Codable {
     let userId: String
     let dateCreated: Date?
-    let dateModifiedd: Date?
+    let dateModified: Date?
     let email: String?
     let photoUrl: String?
+    
+    init(user: AuthUserResultModel) {
+        self.userId = user.uid
+        self.dateCreated = Date()
+        self.dateModified = Date()
+        self.email = user.email
+        self.photoUrl = user.photoUrl
+    }
 }
 
+// UserManager used to access the `users` collection
 final class UserManager {
 
     static let shared = UserManager()
-
+    
     init() {}
-    ///When signup the user, createNewUserProfile() store the user document in users collection
-    func createNewUserProfile(authUser: AuthUserResultModel) async throws {
-        var documentData: [String: Any] = [
-            "user_id": authUser.uid,
-            "date_created": Timestamp(),
-            "date_modified": Timestamp()
-        ]
-
-        if let email = authUser.email {
-            documentData["email"] = email
-        }
-
-        if let photoUrl = authUser.photoUrl {
-            documentData["photo_url"] = photoUrl
-        }
-        try await Firestore.firestore().collection("users").document(authUser.uid).setData(documentData, merge: false)
+    
+    private let usersCollection = Firestore.firestore().collection("users")
+    
+    func userDocument(userId: String) -> DocumentReference {
+        usersCollection.document(userId)
     }
+    
+    // Encoder will encode the DBUser and transform its keys from camelcase to snakecase in firestore
+    private let userEncoder: Firestore.Encoder = {
+        let encoder = Firestore.Encoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        return encoder
+    }()
+    
+    // When signup the user, createNewUserProfile() store the user document in users collection
+    func createNewUserProfile(user: DBUser) async throws {
+        try await userDocument(userId: user.userId).setData(from: user, merge: false, encoder: userEncoder)
+    }
+    
+    
 
-    func getUser(userId: String) async throws -> DBUser {
-        let snapshot = try await Firestore.firestore().collection("users").document(userId).getDocument()
-
-        guard let data = snapshot.data(), let userId = data["user_id"] as? String else {
-            throw URLError(.badServerResponse)
+    
+    private let userDecoder: Firestore.Decoder = {
+        let decoder = Firestore.Decoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return decoder
+    }()
+    
+    // used to get the authenticated user profile from firestore
+    func getUser(userId: String) async throws -> DBUser? {
+        let document = try await userDocument(userId: userId).getDocument()
+        if document.exists {
+            return try userDecoder.decode(DBUser.self, from: document.data() as Any)
+        } else {
+            // Handle the scenario where the user doesn't exist.
+            return nil
         }
-
-        let email = data["email"] as? String
-        let dateCreated = data["date_created"] as? Date
-        let dateModifiedd = data["date_modified"] as? Date
-        let photoUrl = data["photo_url"] as? String
-
-        return DBUser(
-            userId: userId,
-            dateCreated: dateCreated,
-            dateModifiedd: dateModifiedd,
-            email: email,
-            photoUrl: photoUrl
-        )
-
     }
 }

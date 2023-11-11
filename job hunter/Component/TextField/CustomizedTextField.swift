@@ -23,20 +23,9 @@ struct CustomizedTextField: View {
     var body: some View {
         HStack {
             //MARK: LABEL + DIVIDER
-            HStack {
-                Text(label)
-                    .fontWeight(.bold)
-                    .foregroundColor(.blue)
-                
-                if isVerticalDivider {
-                    Rectangle()
-                        .frame(width: 1, height: 20, alignment: .center)  // Creates a thin vertical line
-                        .foregroundColor(.gray)
-                }
-               
-                //Spacer()
-            }
-            .frame(width: screenWidth * 0.35)
+            Text(label)
+                .fontWeight(.bold)
+                .foregroundColor(.blue)
             
             Spacer()
             
@@ -47,8 +36,8 @@ struct CustomizedTextField: View {
                 .frame(height: 50)
             
         }
+        .padding()
         .frame(height: 50)
-        
         .overlay(alignment: .center) {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(.gray, lineWidth: 2)
@@ -58,6 +47,6 @@ struct CustomizedTextField: View {
 }
 
 #Preview() {
-    @State var value: String = "Apple"
+    @State var value: String = ""
     return   CustomizedTextField(label: "Company *", fieldPlaceHolder: "ex: Apple", fieldValue: $value)
 }

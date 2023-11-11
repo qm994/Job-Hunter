@@ -44,7 +44,7 @@ struct DropdownMenu: View {
     var options: [DropdownMenuCompanyOption]?
     var dropDownLabel: String
    
-    @ObservedObject var sharedData: InterviewSharedData
+    @ObservedObject var sharedData: AddInterviewModel
     
     
     @State private var isOptionsPresented: Bool = false
@@ -57,22 +57,11 @@ struct DropdownMenu: View {
     
     var body: some View {
         HStack {
-            HStack {
-                Spacer()
-                Text(dropDownLabel)
-                    .fontWeight(.bold)
-                    .foregroundColor(.blue)
-                
-                Rectangle()
-                    .frame(width: 1, height: 20, alignment: .center)  // Creates a thin vertical line
-                    .foregroundColor(.gray)
-                Spacer()
-            }
-            .frame(width: screenWidth * 0.35)
-         
-            
-            
-            TextField(selectedOption == nil ? "Select company" : selectedOption!.name, text: $sharedData.company.name)
+            Text(dropDownLabel)
+                .fontWeight(.bold)
+                .foregroundColor(.blue)
+            Spacer()
+            TextField(selectedOption == nil ? "ex: Microsoft" : selectedOption!.name, text: $sharedData.company.name)
                 .autocapitalization(.none)
                 .fontWeight(.medium)
                 .foregroundColor(selectedOption == nil ? .gray : .black)
@@ -136,7 +125,7 @@ struct DropdownMenu_Previews: PreviewProvider {
     static var previews: some View {
         DropdownMenu(
             dropDownLabel: "Company *",
-            sharedData: InterviewSharedData()) { query in
+            sharedData: AddInterviewModel()) { query in
                 
             }
     }
