@@ -67,7 +67,6 @@ struct AddPendingScreen: View {
                 },
                 trailing:
                     Button("Add") {
-                        //TODO: ADD the salary info to addInterviewToFirestore and update firestore to include the fields
                         Task {
                             do {
                                 guard let userProfile = authModel.userProfile else {

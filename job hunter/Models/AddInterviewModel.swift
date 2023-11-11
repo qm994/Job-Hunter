@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import FirebaseFirestore
 
 struct Round {
     let id = UUID()
@@ -83,8 +84,10 @@ class AddInterviewModel: ObservableObject {
         futureRounds.rounds = allRounds.filter { !existingRoundNames.contains($0) }
     }
     
-    //TODO: Buiild encode and decode for data
-    // Add Interview to the FireStore
+    
+    
+    //TODO: Build encode and decode for data
+    // Add Interview to the FireStore and add its document id to the user's interviews array
     func addInterviewToFirestore(user: DBUser, salary: SalaryInfo) async throws {
         
         let is_relocation: Bool = {

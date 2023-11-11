@@ -16,12 +16,20 @@ final class AddInterviewManager {
     
     private let interviewCollection = Firestore.firestore().collection("interviews")
     
-    //
+    func addInterviewReferenceToUser(userRef: DocumentReference, interviewId: String) async throws {
+        try await userRef.updateData(["interviews": FieldValue.arrayUnion([interviewId])])
+    }
+    
+    // Create interview and store its refernece to User in FireStore
     func createInterview(user: DBUser, data: inout [String: Any]) async throws {
         // Reference to the users collection and the specific user document
         let userReference = UserManager.shared.userDocument(userId: user.userId)
         data["user_id"] = userReference
-        print("createInterview data: \(data)")
-        return try await interviewCollection.document().setData(data)
+        let newInterviewDocRef = interviewCollection.document()
+        
+        // 1. Create interview
+        try await newInterviewDocRef.setData(data)
+        // 2. Add interview document id to the User's interviews array field
+        return try await addInterviewReferenceToUser(userRef: userReference, interviewId: newInterviewDocRef.documentID)
     }
 }
