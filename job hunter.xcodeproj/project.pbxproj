@@ -49,6 +49,8 @@
 		EB5F20AA2AD348940096C9A3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F20A92AD348940096C9A3 /* CardView.swift */; };
 		EB5F20AC2AD34D430096C9A3 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F20AB2AD34D430096C9A3 /* Utilities.swift */; };
 		EB6C29132AFAECD300B66BFA /* AddInterviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6C29122AFAECD300B66BFA /* AddInterviewManager.swift */; };
+		EB8F91832B000DE00081F398 /* PastRounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F91822B000DE00081F398 /* PastRounds.swift */; };
+		EB8F91852B0011820081F398 /* FutureRounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F91842B0011820081F398 /* FutureRounds.swift */; };
 		EBA751892AE2F593008247CD /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA751882AE2F593008247CD /* ResetPasswordView.swift */; };
 		EBB11A782ADF6CA3002AAFDE /* SignUpEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB11A772ADF6CA3002AAFDE /* SignUpEmailView.swift */; };
 		EBB11A7C2AE08495002AAFDE /* AuthenticationMainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB11A7B2AE08495002AAFDE /* AuthenticationMainScreen.swift */; };
@@ -103,6 +105,8 @@
 		EB5F20A92AD348940096C9A3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		EB5F20AB2AD34D430096C9A3 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		EB6C29122AFAECD300B66BFA /* AddInterviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInterviewManager.swift; sourceTree = "<group>"; };
+		EB8F91822B000DE00081F398 /* PastRounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastRounds.swift; sourceTree = "<group>"; };
+		EB8F91842B0011820081F398 /* FutureRounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureRounds.swift; sourceTree = "<group>"; };
 		EBA751882AE2F593008247CD /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		EBB11A772ADF6CA3002AAFDE /* SignUpEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailView.swift; sourceTree = "<group>"; };
 		EBB11A7B2AE08495002AAFDE /* AuthenticationMainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationMainScreen.swift; sourceTree = "<group>"; };
@@ -277,6 +281,8 @@
 				EB4679FB2ACF1E930026ACC3 /* AddSucceedScreen.swift */,
 				EB4679FD2ACF1EA20026ACC3 /* AddRejectedScreen.swift */,
 				EBD35D482AD9BF440076BE33 /* DownloadImagesAsync.swift */,
+				EB8F91822B000DE00081F398 /* PastRounds.swift */,
+				EB8F91842B0011820081F398 /* FutureRounds.swift */,
 			);
 			path = AddScreens;
 			sourceTree = "<group>";
@@ -431,12 +437,14 @@
 				EBB11A812AE0D9B7002AAFDE /* DefaultTextField.swift in Sources */,
 				EBB11A7E2AE0D8D5002AAFDE /* SignOutView.swift in Sources */,
 				EB4679E22AC1F1920026ACC3 /* Data.swift in Sources */,
+				EB8F91832B000DE00081F398 /* PastRounds.swift in Sources */,
 				EBD35D412AD6FDD00076BE33 /* PostionDetailSection.swift in Sources */,
 				EBED85A72ADB05B300F25636 /* DropdownMenuList.swift in Sources */,
 				EBD35D472AD7583D0076BE33 /* CoreModel.swift in Sources */,
 				EBD35D3D2AD5F1F20076BE33 /* VisaSectionView.swift in Sources */,
 				EB5D062C2AE1D43700C7A94B /* BottomNavigationView.swift in Sources */,
 				EB4679FA2ACF1E7E0026ACC3 /* AddPendingScreen.swift in Sources */,
+				EB8F91852B0011820081F398 /* FutureRounds.swift in Sources */,
 				EB4679E62AC9F63E0026ACC3 /* BasicFields.swift in Sources */,
 				EB5322C42ADC76EA00004E9C /* ClearbitViewModel.swift in Sources */,
 				EBED85A52ADAF90A00F25636 /* DropdownMenu.swift in Sources */,
