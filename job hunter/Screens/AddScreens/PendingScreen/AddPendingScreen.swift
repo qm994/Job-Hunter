@@ -27,6 +27,8 @@ struct AddPendingScreen: View {
     
     @StateObject var salaryModel: SalarySectionModel = SalarySectionModel()
     
+    @StateObject var roundModel = InterviewRoundsModel()
+    
     @EnvironmentObject var routerManager: AddScreenViewRouterManager
     @EnvironmentObject var authModel: AuthenticationModel
     
@@ -44,7 +46,7 @@ struct AddPendingScreen: View {
                 )
                 
                 // MARK: Past rounds
-                PastRounds(sharedData: sharedData)
+                PastRounds(roundModel: roundModel)
                 
                 // MARK: Next round
             
@@ -82,10 +84,11 @@ struct AddPendingScreen: View {
                                     signon: sharedData.addExpectedSalary ? salaryModel.signon : 0
                                 )
                                         
-                                //Add interview
+                                //Add interview and its sub collections
                                 try await sharedData.addInterviewToFirestore(
                                         user: userProfile,
-                                        salary: salaryInfo
+                                        salary: salaryInfo,
+                                        pastRounds: roundModel.pastRounds
                                 )
                                 routerManager.isSheetPresented = false
                                 print("Interview added successfully")

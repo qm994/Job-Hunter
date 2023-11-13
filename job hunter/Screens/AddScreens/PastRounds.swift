@@ -68,26 +68,13 @@ class InterviewRoundsModel: ObservableObject {
 }
 
 struct PastRounds: View {
-    @ObservedObject var sharedData: AddInterviewModel
-    @StateObject var roundModel = InterviewRoundsModel()
+    @ObservedObject var roundModel: InterviewRoundsModel
     
     @State private var expandSection: Bool = false
     
-    func encodeRoundModels(roundModels: [RoundModel]) {
-        let encoder = Firestore.Encoder()
-        do {
-            let encodedRounds = try roundModels.map { try encoder.encode($0) }
-            print("encodedRounds are: \(encodedRounds)")
-            // Now `encodedRounds` is an array of dictionaries with the encoded round data
-        } catch {
-            print(error)
-        }
-
-    }
-    
     var body: some View {
         Button("Encode") {
-            encodeRoundModels(roundModels: roundModel.pastRounds)
+            //encodeRoundModels(roundModels: roundModel.pastRounds)
         }
         Section("PAST ROUNDS") {
             
@@ -184,6 +171,6 @@ struct PastRounds: View {
 }
 #Preview {
     List {
-        PastRounds(sharedData: AddInterviewModel())
+        PastRounds(roundModel: InterviewRoundsModel())
     }
 }

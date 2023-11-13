@@ -20,38 +20,27 @@ final class AddInterviewManager {
         try await userRef.updateData(["interviews": FieldValue.arrayUnion([interviewId])])
     }
 
-    
-    func encodeRoundModels(roundModels: [RoundModel]) {
+    // Encode the RoundModel to match pastRounds sub collection doc.
+    func encodeRoundModels(roundModels: [RoundModel]) throws -> [[String: Any]] {
         let encoder = Firestore.Encoder()
-        do {
-            let encodedRounds = try roundModels.map { try encoder.encode($0) }
-            print("encodedRounds are: \(encodedRounds)")
-            // Now `encodedRounds` is an array of dictionaries with the encoded round data
-        } catch {
-            print(error)
-        }
-
+        let encodedRounds = try roundModels.map { try encoder.encode($0) }
+        print("encodedRounds are: \(encodedRounds)")
+        return encodedRounds
     }
     
-    // TODO: func of add the encoded past rounds to firestore
-    
-    // Add pastRounds subCollection to interview document
-    func addPastRoundsToInterview(interviewDocumentId: String, pastRounds: [RoundModel]) async throws {
+    // Add Encoded PastRounds subCollection to interview document
+    func addPastRounds(to interviewDocumentId: String, pastRounds: [RoundModel]) async throws {
         let pastRoundsCollection = interviewCollection.document(interviewDocumentId).collection("pastRounds")
-        let pastRoundsDocs = pastRoundsCollection.document()
+        let encodedPastRounds = try encodeRoundModels(roundModels: pastRounds)
         
-        let pastRoundsData: [String: Any] = [
-            "date": Timestamp(date: Date()), // Use Timestamp for Firestore date fields
-            "name": "HR Call",
-            "notes": "notes for the round of interview",
-            "description": "",
-            "last_time": 60
-        ]
-        
+        for encodedRound in encodedPastRounds {
+            let pastRoundDoc = pastRoundsCollection.document() // Create a new document reference
+            try await pastRoundDoc.setData(encodedRound) // Add the encoded round as a new document
+        }
     }
     
     // Create interview and store its refernece to User in FireStore
-    func createInterview(user: DBUser, data: inout [String: Any]) async throws {
+    func createInterview(user: DBUser, data: inout [String: Any]) async throws -> DocumentReference {
         // Reference to the users collection and the specific user document
         let userReference = UserManager.shared.userDocument(userId: user.userId)
         data["user_id"] = userReference
@@ -59,7 +48,9 @@ final class AddInterviewManager {
         
         // 1. Create interview
         try await newInterviewDocRef.setData(data)
-        // 2. Add interview document id to the User's interviews array field
-        return try await addInterviewReferenceToUser(userRef: userReference, interviewId: newInterviewDocRef.documentID)
+        // 2. Connect interview and user: Add interview document_id to the User's interviews array field
+        try await addInterviewReferenceToUser(userRef: userReference, interviewId: newInterviewDocRef.documentID)
+        return newInterviewDocRef
+        
     }
 }

@@ -88,7 +88,7 @@ class AddInterviewModel: ObservableObject {
     
     //TODO: Build encode and decode for data
     // Add Interview to the FireStore and add its document id to the user's interviews array
-    func addInterviewToFirestore(user: DBUser, salary: SalaryInfo) async throws {
+    func addInterviewToFirestore(user: DBUser, salary: SalaryInfo, pastRounds: [RoundModel]) async throws {
         
         let is_relocation: Bool = {
             switch relocationRequired.lowercased() {
@@ -120,7 +120,12 @@ class AddInterviewModel: ObservableObject {
             "salary": salaryInfoDict
         ]
         
-        return try await AddInterviewManager.shared.createInterview(user: user, data: &data)
+        let interviewDocument = try await AddInterviewManager.shared.createInterview(user: user, data: &data)
+        // Create pastRounds subCollection in interview document
+        return try await AddInterviewManager.shared.addPastRounds(
+            to: interviewDocument.documentID,
+            pastRounds: pastRounds
+        )
     }
     
 }
