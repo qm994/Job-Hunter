@@ -109,7 +109,7 @@ let mockInterview1 = MockInterview(
 )
 
 let AllRounds = [
-    "Online/Technical Assessment", "HR Call", "Peer Interview", "HM Call",
+    "Online Assessment", "HR Call", "Peer Interview", "HM Call",
     "Case Study/Presentation", "Final/Onsite Round", "References Check", "HR Offer Call", "Final Offer",
     "Accept Offer"
 ]

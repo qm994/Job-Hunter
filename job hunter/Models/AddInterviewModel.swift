@@ -119,6 +119,7 @@ class AddInterviewModel: ObservableObject {
             "status": status.rawValue,
             "salary": salaryInfoDict
         ]
+        
         return try await AddInterviewManager.shared.createInterview(user: user, data: &data)
     }
     

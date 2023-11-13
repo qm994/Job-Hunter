@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+//TODO: isolate FutureRounds from AddInterviewModel to a new Observable object
+
+
 struct FutureRounds: View {
     
     @ObservedObject var sharedData: AddInterviewModel

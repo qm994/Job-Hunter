@@ -75,7 +75,7 @@ struct AddPendingScreen: View {
                                 }
                                 
                                 // Extract salary info if enabled
-                                var salaryInfo = SalaryInfo(
+                                let salaryInfo = SalaryInfo(
                                     base:  sharedData.addExpectedSalary ? salaryModel.base : 0,
                                     bonus: sharedData.addExpectedSalary ? salaryModel.bonus : 0,
                                     equity: sharedData.addExpectedSalary ? salaryModel.equity: 0,
