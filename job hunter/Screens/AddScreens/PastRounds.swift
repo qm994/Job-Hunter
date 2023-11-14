@@ -73,9 +73,6 @@ struct PastRounds: View {
     @State private var expandSection: Bool = false
     
     var body: some View {
-        Button("Encode") {
-            //encodeRoundModels(roundModels: roundModel.pastRounds)
-        }
         Section("PAST ROUNDS") {
             
             HStack(alignment: .center) {

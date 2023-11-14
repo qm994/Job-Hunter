@@ -33,10 +33,16 @@ struct AddPendingScreen: View {
     @EnvironmentObject var authModel: AuthenticationModel
     
     @State private var isFutureEnabled: Bool = false
-
+    
+    @Binding var path: [String]
+    
+    init(path: Binding<[String]>) {
+        print("AddPendingScreen inited")
+        _path = path // Note the underscore here
+    }
     
     var body: some View {        
-        NavigationStack {
+        //NavigationStack {
             List {
                 BasicFields(sharedData: sharedData)
                 
@@ -64,9 +70,14 @@ struct AddPendingScreen: View {
             .listStyle(SidebarListStyle())
             .navigationBarTitle("Pending Interview", displayMode: .inline)
             .navigationBarItems(
-                leading:Button("Cancel") {
-                    routerManager.isSheetPresented = false
-                },
+                leading:
+                    Button("Cancel") {
+                        print("cancel called")
+                       
+                        if let screenName = path.firstIndex(of: NavigationPath.addInterviewScreen.rawValue) {
+                            path.remove(at: screenName)
+                        }
+                    },
                 trailing:
                     Button("Add") {
                         Task {
@@ -90,7 +101,11 @@ struct AddPendingScreen: View {
                                         salary: salaryInfo,
                                         pastRounds: roundModel.pastRounds
                                 )
-                                routerManager.isSheetPresented = false
+                                
+                                // Move back screen
+                                path.removeAll { pathName in
+                                    pathName == NavigationPath.addInterviewScreen.rawValue
+                                }
                                 print("Interview added successfully")
                             } catch {
                                 // Handle the error appropriately
@@ -99,8 +114,9 @@ struct AddPendingScreen: View {
                         }
                     }
             )
-        } //NavigationView ends
-        .edgesIgnoringSafeArea(.top)
+            .navigationBarBackButtonHidden(true)
+        //} //NavigationStack ends
+        //
     }
 }
 
@@ -123,11 +139,20 @@ struct CheckboxView: View {
     }
 }
 
+//struct AddPendingScreen: View {
+//    var body: some View {
+//        Text("Add pending view")
+//    }
+//}
+
 
 struct AddPendingScreen_Previews: PreviewProvider {
+    @State static var path: [String] = []
     static var previews: some View {
-        AddPendingScreen()
+        
+        AddPendingScreen(path: $path)
             .environmentObject(AddScreenViewRouterManager())
             .environmentObject(AuthenticationModel())
+        
     }
 }

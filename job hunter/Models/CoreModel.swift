@@ -11,4 +11,5 @@ import Foundation
 class CoreModel: ObservableObject {
     @Published var showAddPopMenu: Bool = false
     @Published var selectedTab: BottomNavigationModel = .home
+    @Published var stackPath: [String] = []
 }
