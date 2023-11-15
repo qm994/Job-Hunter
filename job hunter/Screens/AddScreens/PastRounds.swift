@@ -70,7 +70,7 @@ class InterviewRoundsModel: ObservableObject {
 struct PastRounds: View {
     @ObservedObject var roundModel: InterviewRoundsModel
     
-    @State private var expandSection: Bool = false
+    @State private var showSheet: Bool = false
     
     var body: some View {
         Section("PAST ROUNDS") {
@@ -79,15 +79,17 @@ struct PastRounds: View {
                 Text("Past Rounds")
                     .font(.headline)
                 Spacer()
-                // Toggel button
+                // Show the sheet
                 Button {
-                    expandSection.toggle()
+                   showSheet = true
                 } label: {
-                    Image(systemName: expandSection ? "arrow.down.square.fill": "arrow.up.square.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 25)
-                        .foregroundColor(.gray)
+                    Image(
+                        systemName: "arrow.up.left.and.arrow.down.right"
+                    )
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 20)
+                    .foregroundColor(.blue)
                 }
                 .buttonStyle(BorderlessButtonStyle())
             } // Header ends
@@ -95,7 +97,7 @@ struct PastRounds: View {
             .contentShape(Rectangle()) // Makes the entire HStack tappable
             .onTapGesture {
                 withAnimation(.spring) { // Add animation here
-                    expandSection.toggle()
+                    showSheet.toggle()
                 }
             }
             
@@ -130,44 +132,69 @@ struct PastRounds: View {
                 } // VStack ends
                 .animation(.easeInOut, value: roundModel.pastRounds)
             }
-            
-            
-            //MARK: List of all
-            if expandSection {
-                ScrollView {
-                    VStack(spacing: 10) {
-                        ForEach(AllRounds, id: \.self) { round in
-                            Button{
-                                // Add past round to roundModel
-                                roundModel.addPastRound(name: round)
-                            } label: {
-                                HStack {
-                                    Text(round)
-                                        .fontWeight(.bold)
-                                    Spacer()
-                                    Image(systemName: "plus.app.fill")
-                                }
-                                .foregroundStyle(.black)
-                                .padding(.horizontal)
-                                .padding(.vertical, 10)
-                                .frame(maxWidth: .infinity)
-                            //roundModel.pastRounds.contains(where: { $0.name == round }) decide if the round added to pastRounds
-                                .background(roundModel.pastRounds.contains(where: { $0.name == round }) ? Color.gray : Color(UIColor.systemGreen))
-                                .clipShape(Capsule())
-                            }
-                            .disabled(roundModel.pastRounds.contains(where: { $0.name == round }))
-                            .opacity(roundModel.pastRounds.contains(where: { $0.name == round }) ? 0.5 : 1)
-                        }
-                    }
-                    .padding()
-                }
-                .transition(.move(edge: .bottom))
-            }
         }// Section ends
+        .sheet(isPresented: $showSheet) {
+            PastRoundsList(roundModel: roundModel)
+                .presentationDetents([.medium, .large])
+                .presentationBackground(.thinMaterial)
+                .presentationDragIndicator(.visible)
+                .presentationContentInteraction(.scrolls)
+                .presentationCornerRadius(50)
+        }
+       
+        
     }
 }
-#Preview {
-    List {
-        PastRounds(roundModel: InterviewRoundsModel())
+
+struct PastRoundsList: View {
+    @ObservedObject var roundModel: InterviewRoundsModel
+    
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 10) {
+
+                ForEach(AllRounds, id: \.self) { round in
+                    Button{
+                        // Add past round to roundModel
+                        roundModel.addPastRound(name: round)
+                    } label: {
+                        HStack {
+                            Text(round)
+                                .fontWeight(.bold)
+                            Spacer()
+                            Image(systemName: "plus.app.fill")
+                        }
+                        .foregroundStyle(.black)
+                        .padding(.horizontal)
+                        .padding(.vertical, 10)
+                        .frame(maxWidth: .infinity)
+                    //roundModel.pastRounds.contains(where: { $0.name == round }) decide if the round added to pastRounds
+                        .background(roundModel.pastRounds.contains(where: { $0.name == round }) ? Color.gray : Color(UIColor.systemGreen))
+                        .clipShape(Capsule())
+                    }
+                    .disabled(roundModel.pastRounds.contains(where: { $0.name == round }))
+                    .opacity(roundModel.pastRounds.contains(where: { $0.name == round }) ? 0.5 : 1)
+                }
+            }
+            .padding()
+        }
+        .transition(.move(edge: .bottom))
     }
+}
+
+
+#Preview {
+    struct Wrapper: View {
+        
+        var body: some View {
+            List {
+                PastRounds(
+                    roundModel: InterviewRoundsModel()
+                    
+                )
+            }
+        }
+    }
+    return Wrapper()
 }
