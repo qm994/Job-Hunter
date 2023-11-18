@@ -48,16 +48,6 @@ class DownloadImagesAsyncManager {
 class DownloadImagesAsyncViewModel: ObservableObject {
     @Published var image: UIImage? = nil
     let manager = DownloadImagesAsyncManager()
-//    func fetchImage() {
-//        manager.downloadWithEscaping { [weak self] image, error in
-//
-//            DispatchQueue.main.async {
-//                if let image = image {
-//                    self?.image = image
-//                }
-//            }
-//        }
-//    }
     
     func fetchImage() async {
         let image = try? await manager.downloadWithAsync()

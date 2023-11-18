@@ -76,14 +76,6 @@ struct BottomNavigationView: View {
 }
 
 #Preview {
-//    struct Wrapper: View {
-//        @State private var path: [String] = []
-//        var body: some View {
-//            BottomNavigationView(path: $path)
-//                .environmentObject(CoreModel())
-//        }
-//    }
-//    return Wrapper()
     BottomNavigationView()
         .environmentObject(CoreModel())
 }

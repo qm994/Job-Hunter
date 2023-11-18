@@ -36,84 +36,91 @@ struct AddPendingScreen: View {
     
     @Binding var path: [String]
     
-    init(path: Binding<[String]>) {
-        print("AddPendingScreen inited")
-        _path = path // Note the underscore here
-    }
-    
     var body: some View {
-        List {
-            BasicFields(sharedData: sharedData)
-            
-            PostionDetailSection(
-                sharedData: sharedData,
-                salaryModel: salaryModel
-            )
-            
-            // MARK: Past rounds
-            PastRounds(roundModel: roundModel)
-            
-            // MARK: Next round
-            
-            Toggle("Add Future Interview", isOn: $isFutureEnabled)
-            
-            if isFutureEnabled {
-                Text("No Duplicates Allowed Between Past and Future Rounds")
-                    .font(.footnote)
-                    .frame(width: .infinity)
-                    .multilineTextAlignment(.leading)
-                FutureRounds(sharedData: sharedData)
-            }
-            
-        } //LIST ENDS
-        .listStyle(SidebarListStyle())
-        .navigationBarTitle("Pending Interview", displayMode: .inline)
-        .navigationBarItems(
-            leading:
-                Button("Cancel") {
-                    print("cancel called")
-                    
-                    if let screenName = path.firstIndex(of: NavigationPath.addInterviewScreen.rawValue) {
-                        path.remove(at: screenName)
-                    }
-                },
-            trailing:
-                Button("Add") {
-                    Task {
-                        do {
-                            guard let userProfile = authModel.userProfile else {
-                                print("User profile is not available")
-                                return
-                            }
-                            
-                            // Extract salary info if enabled
-                            let salaryInfo = SalaryInfo(
-                                base:  sharedData.addExpectedSalary ? salaryModel.base : 0,
-                                bonus: sharedData.addExpectedSalary ? salaryModel.bonus : 0,
-                                equity: sharedData.addExpectedSalary ? salaryModel.equity: 0,
-                                signon: sharedData.addExpectedSalary ? salaryModel.signon : 0
-                            )
-                            
-                            //Add interview and its sub collections
-                            try await sharedData.addInterviewToFirestore(
-                                user: userProfile,
-                                salary: salaryInfo,
-                                pastRounds: roundModel.pastRounds
-                            )
-                            
-                            // Move back screen
-                            path.removeAll { pathName in
-                                pathName == NavigationPath.addInterviewScreen.rawValue
-                            }
-                            print("Interview added successfully")
-                        } catch {
-                            // Handle the error appropriately
-                            print("Error adding interview: \(error)")
-                        }
+        // MARK: ScrollViewReader Auto Scroll
+        ScrollViewReader { scrollView in
+            List {
+                BasicFields(sharedData: sharedData)
+                
+                PostionDetailSection(
+                    sharedData: sharedData,
+                    salaryModel: salaryModel
+                )
+                
+                // MARK: Past rounds
+                PastRounds(roundModel: roundModel)
+                
+                // MARK: Next round
+                
+                Toggle("Add Future Interview", isOn: $isFutureEnabled)
+                
+                if isFutureEnabled {
+                    Text("No Duplicates Allowed Between Past and Future Rounds")
+                        .font(.footnote)
+                        .multilineTextAlignment(.leading)
+                    FutureRounds(
+                        roundModel: roundModel
+                    )
+                }
+                
+            } //LIST ENDS
+            .onChange(of: isFutureEnabled, initial: false) { _, newValue in
+                print("new value is : \(newValue)")
+                if newValue {
+                    withAnimation {
+                        scrollView.scrollTo("futureRoundsEnd", anchor: .bottomLeading)
                     }
                 }
-        )
-        .navigationBarBackButtonHidden(true)
+            }
+            .listStyle(SidebarListStyle())
+            .navigationBarTitle("Add \(sharedData.status.rawValue) Interview", displayMode: .inline)
+            .navigationBarItems(
+                leading:
+                    Button("Cancel") {
+                        print("cancel called")
+                        
+                        if let screenName = path.firstIndex(of: NavigationPath.addInterviewScreen.rawValue) {
+                            path.remove(at: screenName)
+                        }
+                    },
+                trailing:
+                    Button("Add") {
+                        Task {
+                            do {
+                                guard let userProfile = authModel.userProfile else {
+                                    print("User profile is not available")
+                                    return
+                                }
+                                
+                                // Extract salary info if enabled
+                                let salaryInfo = SalaryInfo(
+                                    base:  sharedData.addExpectedSalary ? salaryModel.base : 0,
+                                    bonus: sharedData.addExpectedSalary ? salaryModel.bonus : 0,
+                                    equity: sharedData.addExpectedSalary ? salaryModel.equity: 0,
+                                    signon: sharedData.addExpectedSalary ? salaryModel.signon : 0
+                                )
+                                
+                                //Add interview and its sub collections
+                                try await sharedData.addInterviewToFirestore(
+                                    user: userProfile,
+                                    salary: salaryInfo,
+                                    pastRounds: roundModel.pastRounds
+                                )
+                                
+                                // Move back screen
+                                path.removeAll { pathName in
+                                    pathName == NavigationPath.addInterviewScreen.rawValue
+                                }
+                                print("Interview added successfully")
+                            } catch {
+                                // Handle the error appropriately
+                                print("Error adding interview: \(error)")
+                            }
+                        }
+                    }
+            )
+            .navigationBarBackButtonHidden(true)
+        }
     }
 }
 

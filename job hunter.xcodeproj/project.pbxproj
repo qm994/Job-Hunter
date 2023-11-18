@@ -22,7 +22,7 @@
 		EB4679E62AC9F63E0026ACC3 /* BasicFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E52AC9F63E0026ACC3 /* BasicFields.swift */; };
 		EB4679E82ACCB5AF0026ACC3 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E72ACCB5AF0026ACC3 /* CustomTabView.swift */; };
 		EB4679F42ACE590A0026ACC3 /* PopUpMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679F32ACE590A0026ACC3 /* PopUpMenu.swift */; };
-		EB4679F72ACE610B0026ACC3 /* TabMenuIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679F62ACE610B0026ACC3 /* TabMenuIcon.swift */; };
+		EB4679F72ACE610B0026ACC3 /* CirclePlusAddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679F62ACE610B0026ACC3 /* CirclePlusAddButton.swift */; };
 		EB4679FA2ACF1E7E0026ACC3 /* AddPendingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679F92ACF1E7E0026ACC3 /* AddPendingScreen.swift */; };
 		EB4679FC2ACF1E930026ACC3 /* AddSucceedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679FB2ACF1E930026ACC3 /* AddSucceedScreen.swift */; };
 		EB4679FE2ACF1EA20026ACC3 /* AddRejectedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679FD2ACF1EA20026ACC3 /* AddRejectedScreen.swift */; };
@@ -41,7 +41,6 @@
 		EB53232E2ADDBA9C00004E9C /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = EB53232D2ADDBA9C00004E9C /* FirebasePerformance */; };
 		EB5D062A2AE1B80B00C7A94B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EB5D06292AE1B80B00C7A94B /* FirebaseAuth */; };
 		EB5D062C2AE1D43700C7A94B /* BottomNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5D062B2AE1D43700C7A94B /* BottomNavigationView.swift */; };
-		EB5F209E2AD1BBCD0096C9A3 /* DynamicRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F209D2AD1BBCD0096C9A3 /* DynamicRow.swift */; };
 		EB5F20A02AD1D7450096C9A3 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F209F2AD1D7450096C9A3 /* DebugView.swift */; };
 		EB5F20A22AD262720096C9A3 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F20A12AD262720096C9A3 /* BlurView.swift */; };
 		EB5F20A62AD33F200096C9A3 /* InterviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F20A52AD33F200096C9A3 /* InterviewModel.swift */; };
@@ -86,7 +85,7 @@
 		EB4679E52AC9F63E0026ACC3 /* BasicFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicFields.swift; sourceTree = "<group>"; };
 		EB4679E72ACCB5AF0026ACC3 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		EB4679F32ACE590A0026ACC3 /* PopUpMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpMenu.swift; sourceTree = "<group>"; };
-		EB4679F62ACE610B0026ACC3 /* TabMenuIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabMenuIcon.swift; sourceTree = "<group>"; };
+		EB4679F62ACE610B0026ACC3 /* CirclePlusAddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePlusAddButton.swift; sourceTree = "<group>"; };
 		EB4679F92ACF1E7E0026ACC3 /* AddPendingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPendingScreen.swift; sourceTree = "<group>"; };
 		EB4679FB2ACF1E930026ACC3 /* AddSucceedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSucceedScreen.swift; sourceTree = "<group>"; };
 		EB4679FD2ACF1EA20026ACC3 /* AddRejectedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRejectedScreen.swift; sourceTree = "<group>"; };
@@ -97,7 +96,6 @@
 		EB5322C52ADC772300004E9C /* CustomizedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizedTextField.swift; sourceTree = "<group>"; };
 		EB5322C72ADDB2FC00004E9C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EB5D062B2AE1D43700C7A94B /* BottomNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavigationView.swift; sourceTree = "<group>"; };
-		EB5F209D2AD1BBCD0096C9A3 /* DynamicRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicRow.swift; sourceTree = "<group>"; };
 		EB5F209F2AD1D7450096C9A3 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		EB5F20A12AD262720096C9A3 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		EB5F20A52AD33F200096C9A3 /* InterviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewModel.swift; sourceTree = "<group>"; };
@@ -268,7 +266,7 @@
 			children = (
 				EB4679E72ACCB5AF0026ACC3 /* CustomTabView.swift */,
 				EB5D062B2AE1D43700C7A94B /* BottomNavigationView.swift */,
-				EB4679F62ACE610B0026ACC3 /* TabMenuIcon.swift */,
+				EB4679F62ACE610B0026ACC3 /* CirclePlusAddButton.swift */,
 			);
 			path = BottomTab;
 			sourceTree = "<group>";
@@ -291,7 +289,6 @@
 			isa = PBXGroup;
 			children = (
 				EB4679F92ACF1E7E0026ACC3 /* AddPendingScreen.swift */,
-				EB5F209D2AD1BBCD0096C9A3 /* DynamicRow.swift */,
 				EBD35D402AD6FDD00076BE33 /* PostionDetailSection.swift */,
 			);
 			path = PendingScreen;
@@ -427,7 +424,6 @@
 				EBB11A782ADF6CA3002AAFDE /* SignUpEmailView.swift in Sources */,
 				EB467A022ACF424A0026ACC3 /* AddInterviewModel.swift in Sources */,
 				EBD35D432AD71BAE0076BE33 /* NumericInput.swift in Sources */,
-				EB5F209E2AD1BBCD0096C9A3 /* DynamicRow.swift in Sources */,
 				EB6C29132AFAECD300B66BFA /* AddInterviewManager.swift in Sources */,
 				EB4679FE2ACF1EA20026ACC3 /* AddRejectedScreen.swift in Sources */,
 				EBA751892AE2F593008247CD /* ResetPasswordView.swift in Sources */,
@@ -458,7 +454,7 @@
 				EB4679E82ACCB5AF0026ACC3 /* CustomTabView.swift in Sources */,
 				EB36C7D42AE5C0F80090A2D0 /* ProfileScreenView.swift in Sources */,
 				EB4679AF2AC0E2EE0026ACC3 /* HomeScreenView.swift in Sources */,
-				EB4679F72ACE610B0026ACC3 /* TabMenuIcon.swift in Sources */,
+				EB4679F72ACE610B0026ACC3 /* CirclePlusAddButton.swift in Sources */,
 				EBD35D3F2AD64EC00076BE33 /* CardFooterView.swift in Sources */,
 				EB4679FC2ACF1E930026ACC3 /* AddSucceedScreen.swift in Sources */,
 				EB5F20A62AD33F200096C9A3 /* InterviewModel.swift in Sources */,

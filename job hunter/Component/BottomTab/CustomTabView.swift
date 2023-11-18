@@ -39,13 +39,11 @@ struct MainScreenView: View {
                     
                     
                     VStack {
-                        TabMenuIcon()
-                            .onTapGesture {
-                                withAnimation {
-                                    path.append(NavigationPath.addInterviewScreen.rawValue)
-                                }
+                        CirclePlusAddButton() {
+                            withAnimation {
+                                path.append(NavigationPath.addInterviewScreen.rawValue)
                             }
-
+                        }
                         //MARK: Bottom Navigation
                         BottomNavigationView()
                     }

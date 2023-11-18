@@ -17,10 +17,6 @@ struct HomeScreenView: View {
                     CardView(interview: interview)
                 }
             }
-            
-            //Text("hellow")
-            //MARK: Bottom Navigation
-            //BottomNavigationView()
         }
     }
 }

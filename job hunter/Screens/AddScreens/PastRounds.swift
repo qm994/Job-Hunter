@@ -8,38 +8,39 @@
 import SwiftUI
 import FirebaseFirestore
 
-
 class RoundModel: Encodable, ObservableObject, Equatable {
     var name: String
-    @Published var date: Date
+    @Published var startDate: Date
+    @Published var endDate: Date
     @Published var notes: String
-    @Published var lastingTime: Int
     
     init(
         name: String,
-        date: Date = Date(),
-        notes: String = "",
-        lastingTime: Int = 60
+        startDate: Date = Date(),
+        endDate: Date = Date(),
+        notes: String = ""
+        
     ) {
         self.name = name
-        self.date = date
+        self.startDate = startDate
+        self.endDate = endDate
         self.notes = notes
-        self.lastingTime = lastingTime
+        
     }
     
     // Equatable Conformance
     static func == (lhs: RoundModel, rhs: RoundModel) -> Bool {
         return lhs.name == rhs.name &&
-        lhs.date == rhs.date &&
-        lhs.notes == rhs.notes &&
-        lhs.lastingTime == rhs.lastingTime
+        lhs.startDate == rhs.startDate &&
+        lhs.endDate == rhs.endDate &&
+        lhs.notes == rhs.notes
     }
     
     enum CodingKeys: String, CodingKey {
         case name
-        case date
+        case startDate = "start_date"
+        case endDate = "end_date"
         case notes
-        case lastingTime = "lasting_time"
     }
     
     /**
@@ -50,21 +51,34 @@ class RoundModel: Encodable, ObservableObject, Equatable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
-        try container.encode(date, forKey: .date)
+        try container.encode(startDate, forKey: .startDate)
+        try container.encode(endDate, forKey: .endDate)
         try container.encode(notes, forKey: .notes)
-        try container.encode(lastingTime, forKey: .lastingTime)
     }
 }
 
-
+//TODO: Set up future rounds
 class InterviewRoundsModel: ObservableObject {
     @Published var pastRounds: [RoundModel] = []
     @Published var futureRounds: [RoundModel] = []
     
-    func addPastRound(name: String) {
-        pastRounds.append(RoundModel(name: name))
+    var availableRounds: [RoundModel] {
+        let usedNames = Set(pastRounds.map { $0.name } + futureRounds.map { $0.name })
+        let availableOnes = AllRounds.filter { !usedNames.contains($0) }
+        return availableOnes.map { RoundModel(name: $0) }
     }
     
+    func addPastRound(name: String) {
+        if !pastRounds.contains(where: { $0.name == name }) {
+            pastRounds.append(RoundModel(name: name))
+        }
+    }
+    
+    func addFutureRound(name: String) {
+        if !futureRounds.contains(where: { $0.name == name }) {
+            futureRounds.append(RoundModel(name: name))
+        }
+    }
 }
 
 struct PastRounds: View {
@@ -84,7 +98,9 @@ struct PastRounds: View {
                    showSheet = true
                 } label: {
                     Image(
-                        systemName: "arrow.up.left.and.arrow.down.right"
+                        systemName: showSheet ?
+                        "arrow.down.right.and.arrow.up.left"
+                        :"arrow.up.left.and.arrow.down.right"
                     )
                     .resizable()
                     .scaledToFit()
@@ -92,7 +108,7 @@ struct PastRounds: View {
                     .foregroundColor(.blue)
                 }
                 .buttonStyle(BorderlessButtonStyle())
-            } // Header ends
+            } // HStack ends
             .padding(.top, 5)
             .contentShape(Rectangle()) // Makes the entire HStack tappable
             .onTapGesture {
@@ -102,36 +118,9 @@ struct PastRounds: View {
             }
             
             //MARK: Added past rounds
-            if (roundModel.pastRounds.count != 0) {
-                VStack {
-                    ForEach(roundModel.pastRounds.indices, id: \.self) { index in
-                        HStack {
-                            Button {
-                                // Remove past round from model
-                                let roundNameToRemove = roundModel.pastRounds[index].name
-                                withAnimation {
-                                    DispatchQueue.main.async {
-                                        roundModel.pastRounds.removeAll { $0.name == roundNameToRemove }
-                                    }
-                                }
-                            } label: {
-                                Image(systemName: "xmark.circle.fill")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(Color(UIColor.systemRed))
-                            }
-                            .contentShape(Circle())
-                            .buttonStyle(BorderlessButtonStyle())
-                            
-                            Text(roundModel.pastRounds[index].name)
-                            DatePicker("", selection: $roundModel.pastRounds[index].date, displayedComponents: [.date])
-                        } // HStack ends
-                        .transition(.slide)
-                    }
-                } // VStack ends
-                .animation(.easeInOut, value: roundModel.pastRounds)
-            }
+
+            SelectedRoundsView(rounds: $roundModel.pastRounds)
+            
         }// Section ends
         .sheet(isPresented: $showSheet) {
             PastRoundsList(roundModel: roundModel)
@@ -146,9 +135,45 @@ struct PastRounds: View {
     }
 }
 
+struct SelectedRoundsView: View {
+    @Binding var rounds: [RoundModel]
+    var body: some View {
+        if !rounds.isEmpty {
+            VStack {
+                
+                ForEach(rounds.indices, id: \.self) { index in
+                    HStack {
+                        Button {
+                            // Remove past round from model
+                            let roundNameToRemove = rounds[index].name
+                            withAnimation {
+                                DispatchQueue.main.async {
+                                    rounds.removeAll { $0.name == roundNameToRemove }
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(Color(UIColor.systemRed))
+                        }
+                        .contentShape(Circle())
+                        .buttonStyle(BorderlessButtonStyle())
+                        
+                        Text(rounds[index].name)
+                        DatePicker("", selection: $rounds[index].startDate, displayedComponents: [.date])
+                    } // HStack ends
+                    .transition(.slide)
+                } // ForEach ends
+            } // VStack ends
+            .animation(.easeInOut, value: rounds)
+        }
+    }
+}
+
 struct PastRoundsList: View {
     @ObservedObject var roundModel: InterviewRoundsModel
-    
     
     var body: some View {
         ScrollView {
