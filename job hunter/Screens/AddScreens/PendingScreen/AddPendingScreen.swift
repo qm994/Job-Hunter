@@ -102,7 +102,6 @@ struct AddPendingScreen: View {
                                 
                                 //Add interview and its sub collections
                                 
-                                //TODO: ADD FUTURE ROUNDS
                                 try await sharedData.addInterviewToFirestore(
                                     user: userProfile,
                                     salary: salaryInfo,

@@ -39,6 +39,8 @@ final class AddInterviewManager {
         }
     }
     
+    //TODO: Merge addFutureRounds and addPastRounds to one function
+    
     // Add Encoded FutureRounds subCollection to interview document
     func addFutureRounds(to interviewDocumentId: String, futureRounds: [RoundModel]) async throws {
         let futureRoundsCollection = interviewCollection.document(interviewDocumentId).collection("futureRounds")
