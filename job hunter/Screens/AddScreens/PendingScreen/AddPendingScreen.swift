@@ -101,13 +101,16 @@ struct AddPendingScreen: View {
                                 )
                                 
                                 //Add interview and its sub collections
+                                
+                                //TODO: ADD FUTURE ROUNDS
                                 try await sharedData.addInterviewToFirestore(
                                     user: userProfile,
                                     salary: salaryInfo,
-                                    pastRounds: roundModel.pastRounds
+                                    pastRounds: roundModel.pastRounds,
+                                    futureRounds: roundModel.futureRounds
                                 )
                                 
-                                // Move back screen
+                                // Move back to main screen
                                 path.removeAll { pathName in
                                     pathName == NavigationPath.addInterviewScreen.rawValue
                                 }

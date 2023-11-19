@@ -18,7 +18,7 @@ struct Round {
 class AddInterviewModel: ObservableObject {
     
     
-    @Published var company: Company
+    @Published var company: Company = Company(name: "")
     
     @Published var jobTitle = ""
     @Published var startDate: Date = Date()
@@ -27,68 +27,12 @@ class AddInterviewModel: ObservableObject {
     @Published var locationPreference: String = ""
     @Published var relocationRequired: String = ""
     @Published var addExpectedSalary: Bool = false 
-    
-    
-    /*
-     When add one past round, always use the top one as the newly add one
-     */
-    @Published var allRounds: [String] = AllRounds
-    
-    @Published var pastRounds: PastRoundsModel = PastRoundsModel()
-    
-    @Published var futureRounds: FutureRoundsModel = FutureRoundsModel()
-    
-    private var cancellables = Set<AnyCancellable>()
-    private var roundNameCancellables = Set<AnyCancellable>()
-    
-    
-    // sink return a cancellable instance which has to be stored so keep the observable updates alive
-    init() {
-        self.company = Company(name: "")
-        
-        self.pastRounds.objectWillChange.sink { [weak self] _ in
-            //self.company = Company(name: "")
-            self?.objectWillChange.send()
-        }.store(in: &cancellables)
 
-        self.futureRounds.objectWillChange.sink { [weak self] _ in
-            self?.objectWillChange.send()
-        }.store(in: &cancellables)
-        
-        
-        /*
-         Used for the interaction between pastRounds and futruRounds
-         */
-        self.pastRounds.$rounds.sink {[weak self] newPastRounds in
-            // Remove old roundName subscriptions
-        
-            
-            /*
-             Instead of removing all Cancellable objects, you might want to keep track of the ones related to roundName separately and only remove those when needed.
-             */
-            self?.roundNameCancellables.removeAll()
-            
-            // Subscribe to roundName changes for each RoundData object
-            for round in newPastRounds {
-                round.$roundName.sink {[weak self] newRound in
-                    self?.updateFutureRounds(with: newPastRounds)
-                }.store(in: &self!.roundNameCancellables)
-            }
-        }.store(in: &cancellables)
-        
-    }
-    
-    private func updateFutureRounds(with newPastRounds: [RoundData]) {
-        let existingRoundNames = newPastRounds.map { $0.roundName }
-        print("updateFutureRounds existingRoundNames: \(existingRoundNames)")
-        futureRounds.rounds = allRounds.filter { !existingRoundNames.contains($0) }
-    }
-    
-    
-    
     //TODO: Build encode and decode for data
-    // Add Interview to the FireStore and add its document id to the user's interviews array
-    func addInterviewToFirestore(user: DBUser, salary: SalaryInfo, pastRounds: [RoundModel]) async throws {
+    /// Create Interview to the FireStore:
+    /// (1)Add interview document id to the user's document interviews field array
+    /// (2) Add past rounds as to the sub collection of pastRounds 
+    func addInterviewToFirestore(user: DBUser, salary: SalaryInfo, pastRounds: [RoundModel], futureRounds: [RoundModel]) async throws {
         
         let is_relocation: Bool = {
             switch relocationRequired.lowercased() {
@@ -122,10 +66,12 @@ class AddInterviewModel: ObservableObject {
         
         let interviewDocument = try await AddInterviewManager.shared.createInterview(user: user, data: &data)
         // Create pastRounds subCollection in interview document
-        return try await AddInterviewManager.shared.addPastRounds(
+        try await AddInterviewManager.shared.addPastRounds(
             to: interviewDocument.documentID,
             pastRounds: pastRounds
         )
+        return try await AddInterviewManager.shared.addFutureRounds(to: interviewDocument.documentID,
+                                                                    futureRounds: futureRounds)
     }
     
 }

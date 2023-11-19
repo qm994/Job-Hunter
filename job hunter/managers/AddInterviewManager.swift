@@ -39,6 +39,17 @@ final class AddInterviewManager {
         }
     }
     
+    // Add Encoded FutureRounds subCollection to interview document
+    func addFutureRounds(to interviewDocumentId: String, futureRounds: [RoundModel]) async throws {
+        let futureRoundsCollection = interviewCollection.document(interviewDocumentId).collection("futureRounds")
+        let encodedFutureRounds = try encodeRoundModels(roundModels: futureRounds)
+        
+        for encodedRound in encodedFutureRounds {
+            let futureRoundDoc = futureRoundsCollection.document() // Create a new document reference
+            try await futureRoundDoc.setData(encodedRound) // Add the encoded round as a new document
+        }
+    }
+    
     // Create interview and store its refernece to User in FireStore
     func createInterview(user: DBUser, data: inout [String: Any]) async throws -> DocumentReference {
         // Reference to the users collection and the specific user document
