@@ -17,7 +17,7 @@ struct PostionDetailSection: View {
             VStack(spacing: 20) {
                 // location preference
                 VStack(alignment: .leading) {
-                    Text("Location Preference *")
+                    Text("Position Location *")
                         .font(.subheadline)
                         .fontWeight(.bold)
                         .foregroundColor(.blue)

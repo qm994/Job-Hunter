@@ -55,17 +55,17 @@ enum AddScreenViewModel: Int, CaseIterable {
             return Color.red
         }
     }
-    
+//    
     var addScreenView: some View {
         switch self {
 //        case .addUpComing:
 //            return AnyView(AddPendingScreen())
         case .addPending:
-           return AnyView(AddPendingScreen())
+           return AnyView(AddSucceedScreen())
         case .addSucceed:
-            return AnyView(AddPendingScreen())
+            return AnyView(AddSucceedScreen())
         case .addRejected:
-            return AnyView(AddPendingScreen())
+            return AnyView(AddSucceedScreen())
         }
     
     

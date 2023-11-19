@@ -9,16 +9,15 @@ import SwiftUI
 import Firebase
 
 struct ContentView: View {
-    @StateObject var router = AddScreenViewRouterManager()
-    @StateObject var coreModel = CoreModel()    
+    
     @StateObject var authModel = AuthenticationModel()
 
     var body: some View {
         DebugView("\(authModel.userProfile)")
         MainScreenView()
             .environmentObject(authModel)
-            .environmentObject(router)
-            .environmentObject(coreModel)
+            .environmentObject(AddScreenViewRouterManager())
+            .environmentObject(CoreModel())
             /// check if user authenticated, otherwise show the auth screen
             .onAppear {
                 Task {

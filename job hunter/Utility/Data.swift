@@ -108,5 +108,9 @@ let mockInterview1 = MockInterview(
     experienceRating: 4
 )
 
-let AllRounds = ["Online Assessment", "HR Call", "Init Technical Round", "HM Call", "Final Round", "HR Offer Call", "Final Offer", "Accept Offer"]
+let AllRounds = [
+    "Online Assessment", "HR Call", "Peer Interview", "HM Call",
+    "Case Study/Presentation", "Final/Onsite Round", "References Check", "HR Offer Call", "Final Offer",
+    "Accept Offer"
+]
 

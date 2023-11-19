@@ -59,21 +59,19 @@ struct TabButton: View {
 struct BottomNavigationView: View {
     @EnvironmentObject var coreModel: CoreModel
     
+    //@Binding var path: [String]
+    
     var body: some View {
-        HStack {
+        HStack(spacing: 50) {
             TabButton(tab: .home)
-            TabMenuIcon()
-                .onTapGesture {
-                    withAnimation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 0.5)) {
-                        coreModel.showAddPopMenu.toggle()
-                    }
-                }
             TabButton(tab: .profile)
         }
         .frame(height: UIScreen.main.bounds.height / 8)
         .frame(maxWidth: .infinity)
         .padding(.horizontal, 40)
         .background(Color(.systemGray5))
+       
+
     }
 }
 

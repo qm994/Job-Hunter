@@ -19,12 +19,17 @@ struct DBUser: Codable {
     let email: String?
     let photoUrl: String?
     
+    // Array to store references to the user's interviews
+    var interviews: [String]
+    
     init(user: AuthUserResultModel) {
         self.userId = user.uid
         self.dateCreated = Date()
         self.dateModified = Date()
         self.email = user.email
         self.photoUrl = user.photoUrl
+        // Initialize the interview references as an empty array
+        self.interviews = []
     }
 }
 
@@ -48,13 +53,12 @@ final class UserManager {
         return encoder
     }()
     
-    // When signup the user, createNewUserProfile() store the user document in users collection
+    // Signup the user, createNewUserProfile() store the user document in users collection
     func createNewUserProfile(user: DBUser) async throws {
-        try await userDocument(userId: user.userId).setData(from: user, merge: false, encoder: userEncoder)
+        try await userDocument(userId: user.userId)
+            .setData(from: user, merge: false, encoder: userEncoder)
     }
     
-    
-
     
     private let userDecoder: Firestore.Decoder = {
         let decoder = Firestore.Decoder()
@@ -62,7 +66,7 @@ final class UserManager {
         return decoder
     }()
     
-    // used to get the authenticated user profile from firestore
+    // Authenticated user profile from firestore
     func getUser(userId: String) async throws -> DBUser? {
         let document = try await userDocument(userId: userId).getDocument()
         if document.exists {
@@ -72,4 +76,6 @@ final class UserManager {
             return nil
         }
     }
+    
+    //
 }
