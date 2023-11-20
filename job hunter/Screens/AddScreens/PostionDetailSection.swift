@@ -48,7 +48,7 @@ struct PostionDetailSection: View {
                 
                 // salary info
                 Toggle(
-                    isOn: $addInterviewModel.addExpectedSalary.animation(   .linear(duration: 0.5)
+                    isOn: $addInterviewModel.addExpectedSalary.animation(.linear(duration: 0.5)
                     )
                 ) {
                     Text("Add Expect Salary Info")

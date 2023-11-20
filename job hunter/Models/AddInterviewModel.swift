@@ -63,7 +63,8 @@ class AddInterviewModel: ObservableObject {
             "is_relocation": is_relocation,
             "work_location": locationPreference,
             "status": status.rawValue,
-            "salary": salaryInfoDict
+            "salary": salaryInfoDict,
+            "visa_required": requiredVisa ?? ""
         ]
         
         let interviewDocument = try await AddInterviewManager.shared.createInterview(user: user, data: &data)

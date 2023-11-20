@@ -22,6 +22,8 @@ struct SalaryInfo {
     var signon: Double
 }
 
+
+//TODO: Prevent users add if required fields are missing ex: mark the fields with red border and exclamation mark
 struct AddPendingScreen: View {
     @StateObject var addInterviewModel: AddInterviewModel = AddInterviewModel()
     
@@ -121,7 +123,7 @@ struct AddPendingScreen: View {
                     }
             )
             .navigationBarBackButtonHidden(true)
-        }
+        } // ScrollView Ends
         .environmentObject(addInterviewModel)
     }
 }

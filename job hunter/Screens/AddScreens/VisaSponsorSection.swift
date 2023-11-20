@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-//TODO: Add one visa will add to the shareModel
 struct VisaSponsorSection: View {
     @State private var showSheet: Bool = false
     @EnvironmentObject var addInterviewModel: AddInterviewModel
