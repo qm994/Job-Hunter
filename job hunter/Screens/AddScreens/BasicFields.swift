@@ -30,7 +30,7 @@ enum ApplicationStatus: String, CaseIterable, Identifiable {
 
 struct BasicFields: View {
     
-    @ObservedObject var sharedData: AddInterviewModel
+    @EnvironmentObject var addInterviewModel: AddInterviewModel
     
     @StateObject var clearbitModel = ClearbitViewModel()
     
@@ -50,8 +50,7 @@ struct BasicFields: View {
             
             DropdownMenu(
                 options: clearbitModel.companyList,
-                dropDownLabel: "Company *",
-                sharedData: sharedData
+                dropDownLabel: "Company *"
             ) { value in
                 debouncer.debounce {
                     Task {
@@ -62,9 +61,9 @@ struct BasicFields: View {
             .zIndex(1)  // This will ensure the DropdownMenu appears on top of other views
             
             
-            CustomizedTextField(label: "Job Title *", fieldPlaceHolder: "ex: Senior Software Enginer", fieldValue: $sharedData.jobTitle)
+            CustomizedTextField(label: "Job Title *", fieldPlaceHolder: "ex: Senior Software Enginer", fieldValue: $addInterviewModel.jobTitle)
             
-            DatePicker("Start Date *", selection: $sharedData.startDate, displayedComponents: [.date])
+            DatePicker("Start Date *", selection: $addInterviewModel.startDate, displayedComponents: [.date])
                 .fontWeight(.bold)
                 .foregroundColor(.blue)
         
@@ -73,7 +72,7 @@ struct BasicFields: View {
                     .fontWeight(.bold)
                     .foregroundColor(.blue)
                 Spacer()
-                Picker("", selection: $sharedData.status) {
+                Picker("", selection: $addInterviewModel.status) {
                     ForEach(ApplicationStatus.allCases) { status in
                         Text(status.rawValue).tag(status)
                     }
@@ -92,7 +91,8 @@ struct BasicFields_Previews: PreviewProvider {
     
     static var previews: some View {
         VStack {
-            BasicFields(sharedData: AddInterviewModel())
+            BasicFields()
+                .environmentObject(AddInterviewModel())
         }
     }
 }

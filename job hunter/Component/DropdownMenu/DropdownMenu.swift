@@ -44,7 +44,7 @@ struct DropdownMenu: View {
     var options: [DropdownMenuCompanyOption]?
     var dropDownLabel: String
    
-    @ObservedObject var sharedData: AddInterviewModel
+    @EnvironmentObject var addInterviewModel: AddInterviewModel
     
     
     @State private var isOptionsPresented: Bool = false
@@ -61,13 +61,13 @@ struct DropdownMenu: View {
                 .fontWeight(.bold)
                 .foregroundColor(.blue)
             Spacer()
-            TextField(selectedOption == nil ? "ex: Microsoft" : selectedOption!.name, text: $sharedData.company.name)
+            TextField(selectedOption == nil ? "ex: Microsoft" : selectedOption!.name, text: $addInterviewModel.company.name)
                 .autocapitalization(.none)
                 .fontWeight(.medium)
                 .foregroundColor(selectedOption == nil ? .gray : .black)
                 .frame(maxWidth: .infinity)
-                .onChange(of: sharedData.company.name, initial: false) { _, newValue in
-                    //optionSelected: without this check, whenever we tap a option, the sharedData.company.name will change, then cause isOptionsPresented = true. So the dropdown wont be closed
+                .onChange(of: addInterviewModel.company.name, initial: false) { _, newValue in
+                    //optionSelected: without this check, whenever we tap a option, the addInterviewModel.company.name will change, then cause isOptionsPresented = true. So the dropdown wont be closed
                     if !optionSelected {
                         onLoadDataWhenChange(newValue)
                         print("called after debounce")
@@ -79,7 +79,7 @@ struct DropdownMenu: View {
             ///Add logo to the textfield
                 .overlay(
                     Group {
-                        if let logoURL = sharedData.company.logo {
+                        if let logoURL = addInterviewModel.company.logo {
                             AsyncImageView(url: logoURL)
                         }
                     }, alignment: .trailing
@@ -109,7 +109,6 @@ struct DropdownMenu: View {
                 if isOptionsPresented, let options = options {
                     DropdownMenuList(
                         options: options,
-                        sharedData: sharedData,
                         isOptionsPresented: $isOptionsPresented,
                         optionSelected: $optionSelected
                     )
@@ -124,9 +123,9 @@ struct DropdownMenu: View {
 struct DropdownMenu_Previews: PreviewProvider {
     static var previews: some View {
         DropdownMenu(
-            dropDownLabel: "Company *",
-            sharedData: AddInterviewModel()) { query in
+            dropDownLabel: "Company *") { query in
                 
             }
+            .environmentObject(AddInterviewModel())
     }
 }

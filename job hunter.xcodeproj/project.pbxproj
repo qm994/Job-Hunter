@@ -25,8 +25,9 @@
 		EB4679F72ACE610B0026ACC3 /* CirclePlusAddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679F62ACE610B0026ACC3 /* CirclePlusAddButton.swift */; };
 		EB4679FA2ACF1E7E0026ACC3 /* AddPendingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679F92ACF1E7E0026ACC3 /* AddPendingScreen.swift */; };
 		EB4679FC2ACF1E930026ACC3 /* AddSucceedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679FB2ACF1E930026ACC3 /* AddSucceedScreen.swift */; };
-		EB4679FE2ACF1EA20026ACC3 /* AddRejectedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679FD2ACF1EA20026ACC3 /* AddRejectedScreen.swift */; };
 		EB467A022ACF424A0026ACC3 /* AddInterviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB467A012ACF424A0026ACC3 /* AddInterviewModel.swift */; };
+		EB4E111A2B0B0CAC003D3764 /* VisaSponsorSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4E11192B0B0CAC003D3764 /* VisaSponsorSection.swift */; };
+		EB4E111C2B0B0CF8003D3764 /* SalarySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4E111B2B0B0CF8003D3764 /* SalarySection.swift */; };
 		EB5322C02ADC62CC00004E9C /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5322BF2ADC62CC00004E9C /* VisualEffectView.swift */; };
 		EB5322C22ADC646100004E9C /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5322C12ADC646100004E9C /* AsyncImageView.swift */; };
 		EB5322C42ADC76EA00004E9C /* ClearbitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5322C32ADC76EA00004E9C /* ClearbitViewModel.swift */; };
@@ -88,8 +89,9 @@
 		EB4679F62ACE610B0026ACC3 /* CirclePlusAddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePlusAddButton.swift; sourceTree = "<group>"; };
 		EB4679F92ACF1E7E0026ACC3 /* AddPendingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPendingScreen.swift; sourceTree = "<group>"; };
 		EB4679FB2ACF1E930026ACC3 /* AddSucceedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSucceedScreen.swift; sourceTree = "<group>"; };
-		EB4679FD2ACF1EA20026ACC3 /* AddRejectedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRejectedScreen.swift; sourceTree = "<group>"; };
 		EB467A012ACF424A0026ACC3 /* AddInterviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInterviewModel.swift; sourceTree = "<group>"; };
+		EB4E11192B0B0CAC003D3764 /* VisaSponsorSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisaSponsorSection.swift; sourceTree = "<group>"; };
+		EB4E111B2B0B0CF8003D3764 /* SalarySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalarySection.swift; sourceTree = "<group>"; };
 		EB5322BF2ADC62CC00004E9C /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		EB5322C12ADC646100004E9C /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		EB5322C32ADC76EA00004E9C /* ClearbitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearbitViewModel.swift; sourceTree = "<group>"; };
@@ -274,10 +276,10 @@
 		EB4679F82ACF1E640026ACC3 /* AddScreens */ = {
 			isa = PBXGroup;
 			children = (
+				EB4E11182B0B0C74003D3764 /* PositionDetailSection */,
 				EB4679E52AC9F63E0026ACC3 /* BasicFields.swift */,
 				EB5F209C2AD1BBA30096C9A3 /* PendingScreen */,
 				EB4679FB2ACF1E930026ACC3 /* AddSucceedScreen.swift */,
-				EB4679FD2ACF1EA20026ACC3 /* AddRejectedScreen.swift */,
 				EBD35D482AD9BF440076BE33 /* DownloadImagesAsync.swift */,
 				EB8F91822B000DE00081F398 /* PastRounds.swift */,
 				EB8F91842B0011820081F398 /* FutureRounds.swift */,
@@ -285,11 +287,20 @@
 			path = AddScreens;
 			sourceTree = "<group>";
 		};
+		EB4E11182B0B0C74003D3764 /* PositionDetailSection */ = {
+			isa = PBXGroup;
+			children = (
+				EBD35D402AD6FDD00076BE33 /* PostionDetailSection.swift */,
+				EB4E11192B0B0CAC003D3764 /* VisaSponsorSection.swift */,
+				EB4E111B2B0B0CF8003D3764 /* SalarySection.swift */,
+			);
+			name = PositionDetailSection;
+			sourceTree = "<group>";
+		};
 		EB5F209C2AD1BBA30096C9A3 /* PendingScreen */ = {
 			isa = PBXGroup;
 			children = (
 				EB4679F92ACF1E7E0026ACC3 /* AddPendingScreen.swift */,
-				EBD35D402AD6FDD00076BE33 /* PostionDetailSection.swift */,
 			);
 			path = PendingScreen;
 			sourceTree = "<group>";
@@ -425,7 +436,6 @@
 				EB467A022ACF424A0026ACC3 /* AddInterviewModel.swift in Sources */,
 				EBD35D432AD71BAE0076BE33 /* NumericInput.swift in Sources */,
 				EB6C29132AFAECD300B66BFA /* AddInterviewManager.swift in Sources */,
-				EB4679FE2ACF1EA20026ACC3 /* AddRejectedScreen.swift in Sources */,
 				EBA751892AE2F593008247CD /* ResetPasswordView.swift in Sources */,
 				EB36C7D72AE5C1630090A2D0 /* AuthenticationManager.swift in Sources */,
 				EB46799D2AC0DBF00026ACC3 /* ContentView.swift in Sources */,
@@ -451,6 +461,7 @@
 				EB4679E42AC1F2E00026ACC3 /* InterviewDetail.swift in Sources */,
 				EBED85A92ADB0BF200F25636 /* DropdownMenuOptionRow.swift in Sources */,
 				EB5322C22ADC646100004E9C /* AsyncImageView.swift in Sources */,
+				EB4E111C2B0B0CF8003D3764 /* SalarySection.swift in Sources */,
 				EB4679E82ACCB5AF0026ACC3 /* CustomTabView.swift in Sources */,
 				EB36C7D42AE5C0F80090A2D0 /* ProfileScreenView.swift in Sources */,
 				EB4679AF2AC0E2EE0026ACC3 /* HomeScreenView.swift in Sources */,
@@ -468,6 +479,7 @@
 				EB5F20AC2AD34D430096C9A3 /* Utilities.swift in Sources */,
 				EB36C7CF2AE5BFF60090A2D0 /* AuthenticationModel.swift in Sources */,
 				EB36C7D92AE5C1AC0090A2D0 /* UserManager.swift in Sources */,
+				EB4E111A2B0B0CAC003D3764 /* VisaSponsorSection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

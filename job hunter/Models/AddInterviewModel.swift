@@ -24,6 +24,8 @@ class AddInterviewModel: ObservableObject {
     @Published var startDate: Date = Date()
     @Published var status: ApplicationStatus = .pending
     
+    @Published var needVisaSponsor: Bool = false
+    @Published var requiredVisa: String? = nil
     @Published var locationPreference: String = ""
     @Published var relocationRequired: String = ""
     @Published var addExpectedSalary: Bool = false 

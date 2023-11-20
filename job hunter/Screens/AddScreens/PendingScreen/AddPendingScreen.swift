@@ -23,7 +23,7 @@ struct SalaryInfo {
 }
 
 struct AddPendingScreen: View {
-    @StateObject var sharedData: AddInterviewModel = AddInterviewModel()
+    @StateObject var addInterviewModel: AddInterviewModel = AddInterviewModel()
     
     @StateObject var salaryModel: SalarySectionModel = SalarySectionModel()
     
@@ -40,10 +40,9 @@ struct AddPendingScreen: View {
         // MARK: ScrollViewReader Auto Scroll
         ScrollViewReader { scrollView in
             List {
-                BasicFields(sharedData: sharedData)
+                BasicFields()
                 
                 PostionDetailSection(
-                    sharedData: sharedData,
                     salaryModel: salaryModel
                 )
                 
@@ -73,7 +72,7 @@ struct AddPendingScreen: View {
                 }
             }
             .listStyle(SidebarListStyle())
-            .navigationBarTitle("Add \(sharedData.status.rawValue) Interview", displayMode: .inline)
+            .navigationBarTitle("Add \(addInterviewModel.status.rawValue) Interview", displayMode: .inline)
             .navigationBarItems(
                 leading:
                     Button("Cancel") {
@@ -94,15 +93,15 @@ struct AddPendingScreen: View {
                                 
                                 // Extract salary info if enabled
                                 let salaryInfo = SalaryInfo(
-                                    base:  sharedData.addExpectedSalary ? salaryModel.base : 0,
-                                    bonus: sharedData.addExpectedSalary ? salaryModel.bonus : 0,
-                                    equity: sharedData.addExpectedSalary ? salaryModel.equity: 0,
-                                    signon: sharedData.addExpectedSalary ? salaryModel.signon : 0
+                                    base:  addInterviewModel.addExpectedSalary ? salaryModel.base : 0,
+                                    bonus: addInterviewModel.addExpectedSalary ? salaryModel.bonus : 0,
+                                    equity: addInterviewModel.addExpectedSalary ? salaryModel.equity: 0,
+                                    signon: addInterviewModel.addExpectedSalary ? salaryModel.signon : 0
                                 )
                                 
                                 //Add interview and its sub collections
                                 
-                                try await sharedData.addInterviewToFirestore(
+                                try await addInterviewModel.addInterviewToFirestore(
                                     user: userProfile,
                                     salary: salaryInfo,
                                     pastRounds: roundModel.pastRounds,
@@ -123,6 +122,7 @@ struct AddPendingScreen: View {
             )
             .navigationBarBackButtonHidden(true)
         }
+        .environmentObject(addInterviewModel)
     }
 }
 
