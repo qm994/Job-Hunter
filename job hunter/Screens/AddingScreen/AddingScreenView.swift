@@ -1,5 +1,5 @@
 //
-//  AddPendingScreen.swift
+//  AddingScreenView.swift
 //  job hunter
 //
 //  Created by Qingyuan Ma on 10/5/23.
@@ -24,14 +24,13 @@ struct SalaryInfo {
 
 
 //TODO: Prevent users add if required fields are missing ex: mark the fields with red border and exclamation mark
-struct AddPendingScreen: View {
+struct AddingScreenView: View {
     @StateObject var addInterviewModel: AddInterviewModel = AddInterviewModel()
     
     @StateObject var salaryModel: SalarySectionModel = SalarySectionModel()
     
     @StateObject var roundModel = InterviewRoundsModel()
-    
-    @EnvironmentObject var routerManager: AddScreenViewRouterManager
+
     @EnvironmentObject var authModel: AuthenticationModel
     
     @State private var isFutureEnabled: Bool = false
@@ -85,42 +84,11 @@ struct AddPendingScreen: View {
                         }
                     },
                 trailing:
-                    Button("Add") {
-                        Task {
-                            do {
-                                guard let userProfile = authModel.userProfile else {
-                                    print("User profile is not available")
-                                    return
-                                }
-                                
-                                // Extract salary info if enabled
-                                let salaryInfo = SalaryInfo(
-                                    base:  addInterviewModel.addExpectedSalary ? salaryModel.base : 0,
-                                    bonus: addInterviewModel.addExpectedSalary ? salaryModel.bonus : 0,
-                                    equity: addInterviewModel.addExpectedSalary ? salaryModel.equity: 0,
-                                    signon: addInterviewModel.addExpectedSalary ? salaryModel.signon : 0
-                                )
-                                
-                                //Add interview and its sub collections
-                                
-                                try await addInterviewModel.addInterviewToFirestore(
-                                    user: userProfile,
-                                    salary: salaryInfo,
-                                    pastRounds: roundModel.pastRounds,
-                                    futureRounds: roundModel.futureRounds
-                                )
-                                
-                                // Move back to main screen
-                                path.removeAll { pathName in
-                                    pathName == NavigationPath.addInterviewScreen.rawValue
-                                }
-                                print("Interview added successfully")
-                            } catch {
-                                // Handle the error appropriately
-                                print("Error adding interview: \(error)")
-                            }
-                        }
-                    }
+                    AddInterviewButton(
+                        salaryModel: salaryModel,
+                        roundModel: roundModel,
+                        path: $path
+                    )
             )
             .navigationBarBackButtonHidden(true)
         } // ScrollView Ends
@@ -147,12 +115,11 @@ struct CheckboxView: View {
     }
 }
 
-struct AddPendingScreen_Previews: PreviewProvider {
+struct AddingScreenView_Previews: PreviewProvider {
     @State static var path: [String] = []
     static var previews: some View {
         
-        AddPendingScreen(path: $path)
-            .environmentObject(AddScreenViewRouterManager())
+        AddingScreenView(path: $path)
             .environmentObject(AuthenticationModel())
         
     }

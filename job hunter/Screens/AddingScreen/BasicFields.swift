@@ -61,17 +61,26 @@ struct BasicFields: View {
             .zIndex(1)  // This will ensure the DropdownMenu appears on top of other views
             
             
-            CustomizedTextField(label: "Job Title *", fieldPlaceHolder: "ex: Senior Software Enginer", fieldValue: $addInterviewModel.jobTitle)
+            CustomizedTextField(
+                label: "Job Title *",
+                fieldPlaceHolder: "ex: Senior Software Enginer",
+                fieldValue: $addInterviewModel.jobTitle,
+                showBorderWarning: addInterviewModel.jobTitleMissing
+            ) {
+                if (addInterviewModel.jobTitleMissing) {
+                    addInterviewModel.jobTitleMissing = false
+                }
+            }
             
-            DatePicker("Start Date *", selection: $addInterviewModel.startDate, displayedComponents: [.date])
+            DatePicker("Start Date", selection: $addInterviewModel.startDate, displayedComponents: [.date])
                 .fontWeight(.bold)
-                .foregroundColor(.blue)
         
             HStack {
                 Text("Status")
                     .fontWeight(.bold)
-                    .foregroundColor(.blue)
+                
                 Spacer()
+                
                 Picker("", selection: $addInterviewModel.status) {
                     ForEach(ApplicationStatus.allCases) { status in
                         Text(status.rawValue).tag(status)

@@ -19,16 +19,25 @@ class AddInterviewModel: ObservableObject {
     
     
     @Published var company: Company = Company(name: "")
-    
     @Published var jobTitle = ""
     @Published var startDate: Date = Date()
     @Published var status: ApplicationStatus = .pending
     
     @Published var needVisaSponsor: Bool = false
     @Published var requiredVisa: String? = nil
-    @Published var locationPreference: String = ""
-    @Published var relocationRequired: String = ""
+    @Published var locationPreference: String = "onsite"
+    @Published var relocationRequired: String = "NO"
     @Published var addExpectedSalary: Bool = false 
+    
+    @Published var companyMissing: Bool = false
+    @Published var jobTitleMissing: Bool = false
+    
+    func validateFields() {
+        companyMissing = company.name.isEmpty
+        jobTitleMissing = jobTitle.isEmpty
+    }
+
+    
 
     //TODO: Build encode and decode for data
     /// Create Interview to the FireStore:
@@ -73,35 +82,12 @@ class AddInterviewModel: ObservableObject {
             to: interviewDocument.documentID,
             pastRounds: pastRounds
         )
-        return try await AddInterviewManager.shared.addFutureRounds(to: interviewDocument.documentID,
-                                                                    futureRounds: futureRounds)
+        return try await AddInterviewManager.shared.addFutureRounds(
+            to: interviewDocument.documentID,
+            futureRounds: futureRounds
+        )
     }
     
-}
-
-class FutureRoundsModel: ObservableObject {
-    @Published var rounds: [String] = AllRounds
-    @Published var selectedRounds: [ExtendedRoundData] = []
-    //@Published var roundsTest: [ExtendedRoundData] = []
-}
-
-class PastRoundsModel:ObservableObject {
-    @Published var rounds: [RoundData] = []
-}
-
-
-class RoundData: ObservableObject, CustomStringConvertible {
-    let id = UUID()
-    @Published var roundName = ""
-    @Published var roundTime = Date()
-    
-    var description: String {
-           return "Round Name: \(roundName), roundTime: \(roundTime), id is: \(id)"
-       }
-}
-
-class ExtendedRoundData: RoundData {
-    @Published var isChecked: Bool = false
 }
 
 

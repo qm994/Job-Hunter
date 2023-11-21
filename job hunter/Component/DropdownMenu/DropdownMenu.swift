@@ -67,6 +67,9 @@ struct DropdownMenu: View {
                 .foregroundColor(selectedOption == nil ? .gray : .black)
                 .frame(maxWidth: .infinity)
                 .onChange(of: addInterviewModel.company.name, initial: false) { _, newValue in
+                    if (addInterviewModel.companyMissing) {
+                        addInterviewModel.companyMissing = false
+                    }
                     //optionSelected: without this check, whenever we tap a option, the addInterviewModel.company.name will change, then cause isOptionsPresented = true. So the dropdown wont be closed
                     if !optionSelected {
                         onLoadDataWhenChange(newValue)
@@ -102,7 +105,7 @@ struct DropdownMenu: View {
         .padding()
         .overlay {
             RoundedRectangle(cornerRadius: 10)
-                .stroke(.gray,lineWidth: 2)
+                .stroke(addInterviewModel.companyMissing ? Color.red : .gray, lineWidth: 2)
         }
         .overlay() {
             VStack {

@@ -14,7 +14,7 @@ struct VisaSponsorSection: View {
         VStack {
             HStack {
                 Text("Visa Sponsorship")
-                    .font(.subheadline)
+                    .fontWeight(.bold)
                 
                 Spacer()
                 

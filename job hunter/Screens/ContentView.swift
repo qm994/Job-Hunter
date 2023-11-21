@@ -16,7 +16,6 @@ struct ContentView: View {
         DebugView("\(authModel.userProfile)")
         MainScreenView()
             .environmentObject(authModel)
-            .environmentObject(AddScreenViewRouterManager())
             .environmentObject(CoreModel())
             /// check if user authenticated, otherwise show the auth screen
             .onAppear {
@@ -41,6 +40,5 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(AddScreenViewRouterManager())
     }
 }

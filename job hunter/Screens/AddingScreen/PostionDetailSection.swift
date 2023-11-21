@@ -17,10 +17,9 @@ struct PostionDetailSection: View {
             VStack(spacing: 20) {
                 // location preference
                 VStack(alignment: .leading) {
-                    Text("Position Location *")
-                        .font(.subheadline)
+                    Text("Position Location")
                         .fontWeight(.bold)
-                        .foregroundColor(.blue)
+                        
                     Picker("", selection: $addInterviewModel.locationPreference) {
                         ForEach(["onsite", "remote", "hybrid"], id: \.self) {
                             Text($0)
@@ -30,10 +29,8 @@ struct PostionDetailSection: View {
                 }
                 // relocation
                 VStack(alignment: .leading) {
-                    Text("Is Relocation Required *")
-                        .font(.subheadline)
+                    Text("Relocation Required")
                         .fontWeight(.bold)
-                        .foregroundColor(.blue)
                     
                     Picker("", selection: $addInterviewModel.relocationRequired) {
                         ForEach(["YES", "NO"], id: \.self) { value in
@@ -52,7 +49,7 @@ struct PostionDetailSection: View {
                     )
                 ) {
                     Text("Add Expect Salary Info")
-                        .font(.subheadline)
+                        .fontWeight(.bold)
                 }
                 
                 if addInterviewModel.addExpectedSalary {
