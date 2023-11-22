@@ -27,14 +27,10 @@ struct SignInView: View {
                 AuthButton(label: "Login") {
                     Task {
                         do {
-                            try await AuthenticationManager.sharedAuth.signInWithEmailAndPass(
-                                email: self.email,
-                                password: self.password
+                            try await authModel.signInAndLoadUserProfile(
+                                email: email,
+                                password: password
                             )
-                            
-                            authModel.showAuthMainScreen = false
-                            
-                            
                         } catch {
                             print("sign in failed with error: \(error)")
                         }

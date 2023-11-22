@@ -187,6 +187,7 @@
 		EB4679992AC0DBF00026ACC3 /* job hunter */ = {
 			isa = PBXGroup;
 			children = (
+				EB46799C2AC0DBF00026ACC3 /* ContentView.swift */,
 				EB36C7D52AE5C1370090A2D0 /* managers */,
 				EBB11A762ADF6C6D002AAFDE /* Authentication */,
 				EB46799A2AC0DBF00026ACC3 /* job_hunterApp.swift */,
@@ -212,7 +213,6 @@
 		EB4679AA2AC0DCF00026ACC3 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				EB46799C2AC0DBF00026ACC3 /* ContentView.swift */,
 				EB4679AE2AC0E2EE0026ACC3 /* HomeScreenView.swift */,
 				EB36C7D22AE5C0DF0090A2D0 /* Profile */,
 				EB4679F82ACF1E640026ACC3 /* AddingScreen */,

@@ -20,13 +20,15 @@ final class ProfileViewModel: ObservableObject {
 }
 
 struct ProfileScreenView: View {
-    @StateObject private var viewModel = ProfileViewModel()
+
+    @EnvironmentObject var authModel: AuthenticationModel
 
     var body: some View {
 
         VStack {
+            SignOutView()
             List {
-                if let user = viewModel.user {
+                if let user = authModel.userProfile {
                     Text("user id: \(user.userId)")
                     if let dateCreated = user.dateCreated {
                         Text(DateFormatter().string(from: dateCreated))
@@ -34,18 +36,7 @@ struct ProfileScreenView: View {
                     if let email = user.email {
                         Text(email)
                     }
-                    SignOutView()
-
                 }
-                
-            }
-            
-        }
-        .task {
-            do {
-                try await viewModel.loadCurrentUser()
-            } catch {
-                print("loadCurrentUser error: \(error)")
             }
         }
         .navigationTitle("Profile")

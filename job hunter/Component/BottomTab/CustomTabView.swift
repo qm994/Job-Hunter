@@ -11,8 +11,6 @@ enum NavigationPath: String {
 
 struct MainScreenView: View {
     @EnvironmentObject var coreModel: CoreModel
-    
-    @State private var showAddView: Bool = false
     @State private var path: [String] = []
     
     var body: some View {
