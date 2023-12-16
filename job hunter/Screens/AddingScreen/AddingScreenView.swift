@@ -20,6 +20,14 @@ struct SalaryInfo {
     var bonus: Double
     var equity: Double
     var signon: Double
+    
+    // Initialize with default values
+    init(base: Double = 0, bonus: Double = 0, equity: Double = 0, signon: Double = 0) {
+        self.base = base
+        self.bonus = bonus
+        self.equity = equity
+        self.signon = signon
+    }
 }
 
 

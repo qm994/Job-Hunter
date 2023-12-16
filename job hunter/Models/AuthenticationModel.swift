@@ -60,13 +60,14 @@ class AuthenticationModel: ObservableObject {
         }
     }
     
-    func loadCurrentUser() async throws -> DBUser? {
+    func loadCurrentUser() async throws {
         let authResult = try AuthenticationManager.sharedAuth.getAuthenticatedUser()
         let dbUser = try await UserManager.shared.getUser(userId: authResult.uid)
         // Dispatch the update of the @Published properties to the main thread
         DispatchQueue.main.async {
+            self.isLoggedIn = true
             self.userProfile = dbUser
         }
-        return dbUser
+        //return dbUser
     }
 }

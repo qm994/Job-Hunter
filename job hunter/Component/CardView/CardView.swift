@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct CardView: View {
-    let interview: Interview
+    let interview: FetchedInterviewModel
     var body: some View {
         VStack(spacing: 20) {
             //MARK: FIRST ROW
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(interview.job.company.name)
+                    Text(interview.company)
                         .font(.headline)
                     
                     VStack(alignment: .leading) {
-                        Label(interview.job.title, systemImage: "briefcase.circle")
-                        Label(interview.job.location.rawValue, systemImage: "location.circle")
-                        Label(formatDateWithoutTime(interview.job.apppliedDate), systemImage: "clock.badge.checkmark")
+                        Label(interview.jobTitle, systemImage: "briefcase.circle")
+                        Label(interview.locationPreference, systemImage: "location.circle")
+                        Label(formatDateWithoutTime(interview.startDate), systemImage: "clock.badge.checkmark")
                     }
                     .font(.caption)
                 }// First row 1ST VStack end
@@ -32,13 +32,13 @@ struct CardView: View {
                     //status
                     HStack(spacing: 5) {  // You can adjust the spacing value as per your need
                         HStack {
-                            Image(systemName: interview.status.iconName)
+                            Image(systemName: interview.status)
                             Text("Status:")
                                 
                         }
-                        Text(interview.status.rawValue)
+                        Text(interview.status)
                     }
-                    .foregroundColor(interview.status.textColor)
+                    .foregroundColor(ApplicationStatus(rawValue: interview.status)?.statusColor ?? .black)
                     .font(.headline)
                     
                     CardSalarySection(interview: interview)
@@ -58,13 +58,14 @@ struct CardView: View {
 }
 
 struct CardSalarySection: View {
-    var interview: Interview
+    var interview: FetchedInterviewModel
     
-    var totalExpected: String {
-        let base = Double(interview.job.expectedSalary?.baseRange  ?? "0")
-        let other = Double(interview.job.expectedSalary?.otherCompensation  ?? "0")
-        let total = base! + other!
-        return total == 0 ? "unknow" : String(total)
+    var otherExpected: Double {
+        return interview.salary.equity / 4 + interview.salary.base * interview.salary.bonus + interview.salary.signon
+    }
+    
+    var totalExpected: Double {
+        return otherExpected + interview.salary.base
     }
     
     var body: some View {
@@ -73,10 +74,10 @@ struct CardSalarySection: View {
             HStack(spacing: 5) {  // You can adjust the spacing value as per your need
                 HStack {
                     Image(systemName: "dollarsign.circle")
-                    Text("Base expect range:")
+                    Text("Base expect:")
                 }
 
-                Text(interview.job.expectedSalary?.baseRange  ?? "0")
+                Text(String(interview.salary.base))
             }
             .foregroundColor(Color("usDollarGreen"))
             .font(.caption)
@@ -85,23 +86,23 @@ struct CardSalarySection: View {
             HStack(spacing: 5) {  // You can adjust the spacing value as per your need
                 HStack {
                     Image(systemName: "dollarsign.circle")
-                    Text("Other comp range:")
+                    Text("Misc<bonus, stock etc>:")
                 }
 
-                Text(interview.job.expectedSalary?.otherCompensation  ?? "unknow")
+                Text(String(otherExpected))
             }
             .foregroundColor(Color("usDollarGreen"))
             .font(.caption)
             
             //TODO: SHOW THE Increase/Decrease percent compare with user's current TC
-            // total expec
+            //MARK: Total Pay
             HStack(spacing: 5) {  // You can adjust the spacing value as per your need
                 HStack {
                     Image(systemName: "dollarsign.circle")
                     Text("Total expect:")
                 }
 
-                Text(totalExpected)
+                Text(String(totalExpected))
             }
             .foregroundColor(Color("usDollarGreen"))
             .font(.caption)
@@ -113,7 +114,7 @@ struct CardSalarySection: View {
 struct CardView_Previews: PreviewProvider {
     static var interview = Interview.sampleData[0]
     static var previews: some View {
-        CardView(interview: interview)
+        CardView(interview: FetchedInterviewModel.sampleData)
             //.previewLayout(.fixed(width: 400, height: 60))
     }
 }

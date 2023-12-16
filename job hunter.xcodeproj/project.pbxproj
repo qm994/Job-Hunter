@@ -28,6 +28,8 @@
 		EB4E111A2B0B0CAC003D3764 /* VisaSponsorSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4E11192B0B0CAC003D3764 /* VisaSponsorSection.swift */; };
 		EB4E111C2B0B0CF8003D3764 /* SalarySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4E111B2B0B0CF8003D3764 /* SalarySection.swift */; };
 		EB4E111E2B0C6A09003D3764 /* AddInterviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4E111D2B0C6A09003D3764 /* AddInterviewButton.swift */; };
+		EB4E11202B0E89D9003D3764 /* IndexScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4E111F2B0E89D9003D3764 /* IndexScreen.swift */; };
+		EB4E11222B0E9B01003D3764 /* FirestoreInterviewDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4E11212B0E9B01003D3764 /* FirestoreInterviewDataManager.swift */; };
 		EB5322C02ADC62CC00004E9C /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5322BF2ADC62CC00004E9C /* VisualEffectView.swift */; };
 		EB5322C22ADC646100004E9C /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5322C12ADC646100004E9C /* AsyncImageView.swift */; };
 		EB5322C42ADC76EA00004E9C /* ClearbitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5322C32ADC76EA00004E9C /* ClearbitViewModel.swift */; };
@@ -91,6 +93,8 @@
 		EB4E11192B0B0CAC003D3764 /* VisaSponsorSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisaSponsorSection.swift; sourceTree = "<group>"; };
 		EB4E111B2B0B0CF8003D3764 /* SalarySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalarySection.swift; sourceTree = "<group>"; };
 		EB4E111D2B0C6A09003D3764 /* AddInterviewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInterviewButton.swift; sourceTree = "<group>"; };
+		EB4E111F2B0E89D9003D3764 /* IndexScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexScreen.swift; sourceTree = "<group>"; };
+		EB4E11212B0E9B01003D3764 /* FirestoreInterviewDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreInterviewDataManager.swift; sourceTree = "<group>"; };
 		EB5322BF2ADC62CC00004E9C /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		EB5322C12ADC646100004E9C /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		EB5322C32ADC76EA00004E9C /* ClearbitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearbitViewModel.swift; sourceTree = "<group>"; };
@@ -163,6 +167,7 @@
 				EB36C7D62AE5C1630090A2D0 /* AuthenticationManager.swift */,
 				EB36C7D82AE5C1AC0090A2D0 /* UserManager.swift */,
 				EB6C29122AFAECD300B66BFA /* AddInterviewManager.swift */,
+				EB4E11212B0E9B01003D3764 /* FirestoreInterviewDataManager.swift */,
 			);
 			path = managers;
 			sourceTree = "<group>";
@@ -188,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				EB46799C2AC0DBF00026ACC3 /* ContentView.swift */,
+				EB4E111F2B0E89D9003D3764 /* IndexScreen.swift */,
 				EB36C7D52AE5C1370090A2D0 /* managers */,
 				EBB11A762ADF6C6D002AAFDE /* Authentication */,
 				EB46799A2AC0DBF00026ACC3 /* job_hunterApp.swift */,
@@ -455,11 +461,13 @@
 				EB36C7D42AE5C0F80090A2D0 /* ProfileScreenView.swift in Sources */,
 				EB4679AF2AC0E2EE0026ACC3 /* HomeScreenView.swift in Sources */,
 				EB4679F72ACE610B0026ACC3 /* CirclePlusAddButton.swift in Sources */,
+				EB4E11222B0E9B01003D3764 /* FirestoreInterviewDataManager.swift in Sources */,
 				EBD35D3F2AD64EC00076BE33 /* CardFooterView.swift in Sources */,
 				EB4679FC2ACF1E930026ACC3 /* AddSucceedScreen.swift in Sources */,
 				EB5F20A62AD33F200096C9A3 /* InterviewModel.swift in Sources */,
 				EB5F20A02AD1D7450096C9A3 /* DebugView.swift in Sources */,
 				EB5322C02ADC62CC00004E9C /* VisualEffectView.swift in Sources */,
+				EB4E11202B0E89D9003D3764 /* IndexScreen.swift in Sources */,
 				EB5F20A22AD262720096C9A3 /* BlurView.swift in Sources */,
 				EB5322C62ADC772300004E9C /* CustomizedTextField.swift in Sources */,
 				EBB11A7C2AE08495002AAFDE /* AuthenticationMainScreen.swift in Sources */,
