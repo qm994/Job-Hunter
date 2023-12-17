@@ -24,7 +24,6 @@ struct AuthUserResultModel {
 // Singleton interface controls all direct api access to Firebase use FirebaseAuth methods
 final class AuthenticationManager {
     static var sharedAuth = AuthenticationManager()
-    var showAuthMainScreen: Bool = false
 
 
     private init() {}
@@ -49,10 +48,14 @@ final class AuthenticationManager {
     }
 
     func signOutUser() throws  {
-        try Auth.auth().signOut()
+        return try Auth.auth().signOut()
     }
+    
+    
 
     func resetPassWithEmail(email: String) async throws {
         return try await Auth.auth().sendPasswordReset(withEmail: email)
     }
+    
+    
 }

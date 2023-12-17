@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DropdownMenuOptionRow: View {
     let option: DropdownMenuCompanyOption
-    @ObservedObject var sharedData: AddInterviewModel
+    @EnvironmentObject var addInterviewModel: AddInterviewModel
     
     @Binding var isOptionsPresented: Bool
     @Binding var optionSelected: Bool
@@ -32,7 +32,7 @@ struct DropdownMenuOptionRow: View {
                 isOptionsPresented = false
                 optionSelected = true
                 let selectedCompany = Company(name: option.name, logo: option.logo)
-                sharedData.company = selectedCompany
+                addInterviewModel.company = selectedCompany
             }
         }
     }
@@ -45,9 +45,9 @@ struct DropdownMenuOptionRow_Previews: PreviewProvider {
     static var previews: some View {
         DropdownMenuOptionRow(
             option: option,
-            sharedData: AddInterviewModel(),
             isOptionsPresented: $isOptionsPresented,
             optionSelected: $optionSelected
         )
+        .environmentObject(AddInterviewModel())
     }
 }

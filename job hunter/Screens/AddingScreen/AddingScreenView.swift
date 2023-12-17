@@ -1,5 +1,5 @@
 //
-//  AddPendingScreen.swift
+//  AddingScreenView.swift
 //  job hunter
 //
 //  Created by Qingyuan Ma on 10/5/23.
@@ -20,16 +20,25 @@ struct SalaryInfo {
     var bonus: Double
     var equity: Double
     var signon: Double
+    
+    // Initialize with default values
+    init(base: Double = 0, bonus: Double = 0, equity: Double = 0, signon: Double = 0) {
+        self.base = base
+        self.bonus = bonus
+        self.equity = equity
+        self.signon = signon
+    }
 }
 
-struct AddPendingScreen: View {
-    @StateObject var sharedData: AddInterviewModel = AddInterviewModel()
+
+//TODO: Prevent users add if required fields are missing ex: mark the fields with red border and exclamation mark
+struct AddingScreenView: View {
+    @StateObject var addInterviewModel: AddInterviewModel = AddInterviewModel()
     
     @StateObject var salaryModel: SalarySectionModel = SalarySectionModel()
     
     @StateObject var roundModel = InterviewRoundsModel()
-    
-    @EnvironmentObject var routerManager: AddScreenViewRouterManager
+
     @EnvironmentObject var authModel: AuthenticationModel
     
     @State private var isFutureEnabled: Bool = false
@@ -40,10 +49,9 @@ struct AddPendingScreen: View {
         // MARK: ScrollViewReader Auto Scroll
         ScrollViewReader { scrollView in
             List {
-                BasicFields(sharedData: sharedData)
+                BasicFields()
                 
                 PostionDetailSection(
-                    sharedData: sharedData,
                     salaryModel: salaryModel
                 )
                 
@@ -73,7 +81,7 @@ struct AddPendingScreen: View {
                 }
             }
             .listStyle(SidebarListStyle())
-            .navigationBarTitle("Add \(sharedData.status.rawValue) Interview", displayMode: .inline)
+            .navigationBarTitle("Add \(addInterviewModel.status.rawValue) Interview", displayMode: .inline)
             .navigationBarItems(
                 leading:
                     Button("Cancel") {
@@ -84,45 +92,15 @@ struct AddPendingScreen: View {
                         }
                     },
                 trailing:
-                    Button("Add") {
-                        Task {
-                            do {
-                                guard let userProfile = authModel.userProfile else {
-                                    print("User profile is not available")
-                                    return
-                                }
-                                
-                                // Extract salary info if enabled
-                                let salaryInfo = SalaryInfo(
-                                    base:  sharedData.addExpectedSalary ? salaryModel.base : 0,
-                                    bonus: sharedData.addExpectedSalary ? salaryModel.bonus : 0,
-                                    equity: sharedData.addExpectedSalary ? salaryModel.equity: 0,
-                                    signon: sharedData.addExpectedSalary ? salaryModel.signon : 0
-                                )
-                                
-                                //Add interview and its sub collections
-                                
-                                try await sharedData.addInterviewToFirestore(
-                                    user: userProfile,
-                                    salary: salaryInfo,
-                                    pastRounds: roundModel.pastRounds,
-                                    futureRounds: roundModel.futureRounds
-                                )
-                                
-                                // Move back to main screen
-                                path.removeAll { pathName in
-                                    pathName == NavigationPath.addInterviewScreen.rawValue
-                                }
-                                print("Interview added successfully")
-                            } catch {
-                                // Handle the error appropriately
-                                print("Error adding interview: \(error)")
-                            }
-                        }
-                    }
+                    AddInterviewButton(
+                        salaryModel: salaryModel,
+                        roundModel: roundModel,
+                        path: $path
+                    )
             )
             .navigationBarBackButtonHidden(true)
-        }
+        } // ScrollView Ends
+        .environmentObject(addInterviewModel)
     }
 }
 
@@ -145,12 +123,11 @@ struct CheckboxView: View {
     }
 }
 
-struct AddPendingScreen_Previews: PreviewProvider {
+struct AddingScreenView_Previews: PreviewProvider {
     @State static var path: [String] = []
     static var previews: some View {
         
-        AddPendingScreen(path: $path)
-            .environmentObject(AddScreenViewRouterManager())
+        AddingScreenView(path: $path)
             .environmentObject(AuthenticationModel())
         
     }

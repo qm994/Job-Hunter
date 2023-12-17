@@ -9,16 +9,20 @@ import SwiftUI
 
 struct CustomizedTextField: View {
     
+    @EnvironmentObject var addInterviewModel: AddInterviewModel
+    
+    
+    
     let screenWidth = UIScreen.main.bounds.width
     
     var label: String
     var fieldPlaceHolder: String
-
-    
     @Binding var fieldValue: String
-    
     var isVerticalDivider: Bool = false
     
+    var showBorderWarning: Bool = false
+    
+    var onChangeAction:  (() -> Void)?
     
     var body: some View {
         HStack {
@@ -34,13 +38,18 @@ struct CustomizedTextField: View {
                 .fontWeight(.medium)
                 .frame(maxWidth: .infinity)
                 .frame(height: 50)
+                .onChange(of: fieldValue) { _, _ in
+                    if let action = onChangeAction {
+                        action()
+                    }
+                }
             
         }
         .padding()
         .frame(height: 50)
         .overlay(alignment: .center) {
             RoundedRectangle(cornerRadius: 10)
-                .stroke(.gray, lineWidth: 2)
+                .stroke(showBorderWarning ? .red : .gray, lineWidth: 4)
         }
         .cornerRadius(10)
     }
@@ -48,5 +57,11 @@ struct CustomizedTextField: View {
 
 #Preview() {
     @State var value: String = ""
-    return   CustomizedTextField(label: "Company *", fieldPlaceHolder: "ex: Apple", fieldValue: $value)
+    return   CustomizedTextField(
+        label: "Company *",
+        fieldPlaceHolder: "ex: Apple",
+        fieldValue: $value
+    )
+    .environmentObject(AddInterviewModel())
+    
 }

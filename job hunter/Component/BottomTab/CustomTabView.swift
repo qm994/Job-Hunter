@@ -10,15 +10,12 @@ enum NavigationPath: String {
 }
 
 struct MainScreenView: View {
-    @EnvironmentObject var router: AddScreenViewRouterManager
     @EnvironmentObject var coreModel: CoreModel
-    
-    @State private var showAddView: Bool = false
     @State private var path: [String] = []
     
     var body: some View {
         
-        //TODO: Fix navigation of + button to AddPendingScreen
+        //TODO: Fix navigation of + button to AddingScreenView
         
         NavigationStack(path: $path) {
             ZStack{
@@ -48,15 +45,10 @@ struct MainScreenView: View {
                         BottomNavigationView()
                     }
                 }// Zstack ends
-                
-                if (coreModel.showAddPopMenu) {
-                    PopUpMenu()
-                        .padding(.vertical, UIScreen.main.bounds.height / 8 + 40)
-                }
             }
             .navigationDestination(for: String.self) { value in
                 if value == NavigationPath.addInterviewScreen.rawValue {
-                    AddPendingScreen(path: $path)
+                    AddingScreenView(path: $path)
                 }
             }
             .ignoresSafeArea(.all, edges: .bottom)
@@ -71,7 +63,6 @@ struct CustomTabView_Previews: PreviewProvider {
         NavigationStack {
             MainScreenView()
                 .environmentObject(AuthenticationModel())
-                .environmentObject(AddScreenViewRouterManager())
                 .environmentObject(CoreModel())
         }
        

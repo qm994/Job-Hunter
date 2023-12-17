@@ -5,8 +5,6 @@ struct AuthenticationMainScreen: View {
     
     @State private var email: String = ""
     @State private var password: String = ""
-    @EnvironmentObject var authModel: AuthenticationModel
-    
     
     var body: some View {
         NavigationStack {

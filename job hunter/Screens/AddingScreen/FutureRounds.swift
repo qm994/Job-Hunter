@@ -97,13 +97,20 @@ struct FutureRoundRow: View {
         isChecked.toggle()
     }
     
-    private func updateSelectedRoundDate(round: RoundModel, newDate: Date) {
+    private func updateSelectedRoundDate(round: RoundModel, newDate: Date, field: String) {
         let index = roundModel.futureRounds.firstIndex { futureRound in
             futureRound.name == round.name
         }
-       
+        
         if let index = index {
-            roundModel.futureRounds[index].startDate = newDate
+            switch field {
+                case "startDate":
+                    roundModel.futureRounds[index].startDate = newDate
+                case "endDate":
+                    roundModel.futureRounds[index].endDate = newDate
+                default:
+                    return
+            }
         }
     }
     
@@ -138,7 +145,7 @@ struct FutureRoundRow: View {
                         }
                     }
                     .onChange(of: roundStartDate) { _, newValue in
-                        updateSelectedRoundDate(round: round, newDate: newValue)
+                        updateSelectedRoundDate(round: round, newDate: newValue, field: "startDate")
                     }
                     
                     DatePicker(selection: $roundEndDate) {
@@ -149,7 +156,7 @@ struct FutureRoundRow: View {
                         }
                     }
                     .onChange(of: roundEndDate) { _, newValue in
-                        updateSelectedRoundDate(round: round, newDate: newValue)
+                        updateSelectedRoundDate(round: round, newDate: newValue, field: "endDate")
                     }
                 }
                 .animation(.linear, value: isChecked)

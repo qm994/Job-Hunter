@@ -13,13 +13,8 @@ struct SignOutView: View {
     var body: some View {
         
         Button {
-            do {
-                try AuthenticationManager.sharedAuth.signOutUser()
-                authModel.showAuthMainScreen = true
-                
-            } catch {
-                print("sign out error: \(error)")
-            }
+            authModel.signOut()
+            
         } label: {
             Text("Log Out")
                 .font(.headline)
@@ -34,4 +29,5 @@ struct SignOutView: View {
 
 #Preview {
     SignOutView()
+        .environmentObject(AuthenticationModel())
 }
