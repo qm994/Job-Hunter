@@ -12,42 +12,52 @@ struct CardView: View {
     var body: some View {
         VStack(spacing: 20) {
             //MARK: FIRST ROW
-            HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text(interview.company)
-                        .font(.headline)
-                    
-                    VStack(alignment: .leading) {
-                        Label(interview.jobTitle, systemImage: "briefcase.circle")
-                        Label(interview.locationPreference, systemImage: "location.circle")
-                        Label(formatDateWithoutTime(interview.startDate), systemImage: "clock.badge.checkmark")
-                    }
-                    .font(.caption)
-                }// First row 1ST VStack end
+            HStack {
+                Text(interview.company)
+                    .font(.headline)
+                Spacer()
+                HStack {
+                    Text("Status:")
+                    Text(interview.status)
+                        .foregroundColor(ApplicationStatus(rawValue: interview.status)?.statusColor ?? .black)
+                        
+                }
+            }
+            .font(.headline)
+            //MARK: Second row
+            HStack {
+                VStack(alignment: .leading) {
+                    Label(interview.jobTitle, systemImage: "briefcase.circle")
+                    Label(interview.locationPreference, systemImage: "location.circle")
+                    Label(formatDateWithoutTime(interview.startDate), systemImage: "clock.badge.checkmark")
+                }
                 
                 Spacer()
-                
-                //MARK: 1ST ROW'S 2ND COL
-                VStack(alignment: .leading, spacing: 10) {
-                    //status
-                    HStack(spacing: 5) {  // You can adjust the spacing value as per your need
-                        HStack {
-                            Image(systemName: interview.status)
-                            Text("Status:")
-                                
-                        }
-                        Text(interview.status)
+                VStack(alignment: .trailing) {
+                    HStack {
+                        Text("Visa Sponsor")
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundColor(.green)
                     }
-                    .foregroundColor(ApplicationStatus(rawValue: interview.status)?.statusColor ?? .black)
-                    .font(.headline)
                     
-                    CardSalarySection(interview: interview)
                     
-                } // First row 2nd VStack end
-            } //FIRST ROW ENDS
+                    HStack {
+                        Text("Relocation Required")
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.red)
+                    }
+                    HStack {
+                        Text("Remote availablew")
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.red)
+                    }
+                }
+                
+            } // Second row ends
+            .font(.subheadline)
             
-            CardFooterView()
-            
+            //MARK: 3rd row
+            CardSalarySection(interview: interview)
             
         }// Root VSTACK ENDS
         .padding()
@@ -58,6 +68,7 @@ struct CardView: View {
 }
 
 struct CardSalarySection: View {
+    @State var showDetails: Bool = false
     var interview: FetchedInterviewModel
     
     var otherExpected: Double {
@@ -70,49 +81,86 @@ struct CardSalarySection: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            // pay
-            HStack(spacing: 5) {  // You can adjust the spacing value as per your need
-                HStack {
-                    Image(systemName: "dollarsign.circle")
-                    Text("Base expect:")
+            //MARK: Total Compensation header
+            Button(action: {
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    showDetails.toggle()
                 }
-
-                Text(String(interview.salary.base))
-            }
-            .foregroundColor(Color("usDollarGreen"))
-            .font(.caption)
-            
-            // other comp
-            HStack(spacing: 5) {  // You can adjust the spacing value as per your need
+            }) {
                 HStack {
-                    Image(systemName: "dollarsign.circle")
-                    Text("Misc<bonus, stock etc>:")
+                    // Arrow symbol
+                   Image(systemName: showDetails ? "chevron.down" : "chevron.right")
+                       .foregroundColor(.gray)
+                       .onTapGesture {
+                           withAnimation {
+                               showDetails.toggle()
+                           }
+                       }
+                    Image(systemName: "dollarsign.circle.fill")
+                        .foregroundColor(.green)
+                    Text("Total Compensation: \(formatNumber(totalExpected))")
                 }
-
-                Text(String(otherExpected))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .fontWeight(.bold)
+                .font(.system(size: 15))
+                .foregroundColor(Color(red: 0.68, green: 0.85, blue: 0.90))
             }
-            .foregroundColor(Color("usDollarGreen"))
-            .font(.caption)
-            
-            //TODO: SHOW THE Increase/Decrease percent compare with user's current TC
-            //MARK: Total Pay
-            HStack(spacing: 5) {  // You can adjust the spacing value as per your need
-                HStack {
-                    Image(systemName: "dollarsign.circle")
-                    Text("Total expect:")
-                }
+            .buttonStyle(.bordered)
 
-                Text(String(totalExpected))
+            if showDetails {
+                VStack(alignment: .leading) {
+                    // base pay
+                    HStack(spacing: 5) {
+                        HStack {
+                            Image(systemName: "dollarsign.circle")
+                            Text("Base expect:")
+                        }
+
+                        Text(String(interview.salary.base))
+                    }
+                    .foregroundColor(Color("usDollarGreen"))
+                    
+                    // Euqity
+                    HStack(spacing: 5) {
+                        HStack {
+                            Image(systemName: "dollarsign.circle")
+                            Text("Equity 4 Years:")
+                        }
+
+                        Text(String(interview.salary.equity))
+                    }
+                    .foregroundColor(Color("usDollarGreen"))
+                    
+                    // Bonus
+                    HStack(spacing: 5) {
+                        HStack {
+                            Image(systemName: "dollarsign.circle")
+                            Text("Yearly Bonus %:")
+                        }
+
+                        Text(String(interview.salary.bonus * 100))
+                    }
+                    .foregroundColor(Color("usDollarGreen"))
+                    
+                    //MARK: Total Pay
+                    HStack(spacing: 5) {
+                        HStack {
+                            Image(systemName: "dollarsign.circle")
+                            Text("Total / Year:")
+                        }
+
+                        Text(String(totalExpected))
+                    }
+                    .foregroundColor(Color("usDollarGreen"))
+                } // ShowDetails vstack ends
+                .transition(AnyTransition.slide.combined(with: .opacity).animation(.easeInOut(duration: 0.5)))
+
             }
-            .foregroundColor(Color("usDollarGreen"))
-            .font(.caption)
-            
         }
     }
 }
 
 struct CardView_Previews: PreviewProvider {
-    static var interview = Interview.sampleData[0]
     static var previews: some View {
         CardView(interview: FetchedInterviewModel.sampleData)
             //.previewLayout(.fixed(width: 400, height: 60))

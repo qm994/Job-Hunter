@@ -92,7 +92,6 @@ struct HomeScreenView: View {
                 try await authModel.loadCurrentUser()
                 try await interviewsViewModel.fetchInterviews()
                 
-//                try await FirestoreInterviewDataManager.shared.fetchInterviews(fromUser: authModel.userProfile?.userId)
             }
         }
     }
@@ -131,7 +130,7 @@ extension FetchedInterviewModel {
             visaRequired: "H1B",
             locationPreference: "Remote",
             relocationRequired: true,
-            salary: SalaryInfo(base: 120000, bonus: 10000, equity: 5000, signon: 5000)
+            salary: SalaryInfo(base: 120000, bonus: 0.2, equity: 5000, signon: 5000)
         )
     }
 }

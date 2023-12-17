@@ -58,7 +58,6 @@
 		EBB11A7C2AE08495002AAFDE /* AuthenticationMainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB11A7B2AE08495002AAFDE /* AuthenticationMainScreen.swift */; };
 		EBB11A7E2AE0D8D5002AAFDE /* SignOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB11A7D2AE0D8D5002AAFDE /* SignOutView.swift */; };
 		EBB11A812AE0D9B7002AAFDE /* DefaultTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB11A802AE0D9B7002AAFDE /* DefaultTextField.swift */; };
-		EBD35D3D2AD5F1F20076BE33 /* VisaSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD35D3C2AD5F1F20076BE33 /* VisaSectionView.swift */; };
 		EBD35D3F2AD64EC00076BE33 /* CardFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD35D3E2AD64EBF0076BE33 /* CardFooterView.swift */; };
 		EBD35D412AD6FDD00076BE33 /* PostionDetailSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD35D402AD6FDD00076BE33 /* PostionDetailSection.swift */; };
 		EBD35D432AD71BAE0076BE33 /* NumericInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD35D422AD71BAE0076BE33 /* NumericInput.swift */; };
@@ -115,7 +114,6 @@
 		EBB11A7B2AE08495002AAFDE /* AuthenticationMainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationMainScreen.swift; sourceTree = "<group>"; };
 		EBB11A7D2AE0D8D5002AAFDE /* SignOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutView.swift; sourceTree = "<group>"; };
 		EBB11A802AE0D9B7002AAFDE /* DefaultTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTextField.swift; sourceTree = "<group>"; };
-		EBD35D3C2AD5F1F20076BE33 /* VisaSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisaSectionView.swift; sourceTree = "<group>"; };
 		EBD35D3E2AD64EBF0076BE33 /* CardFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFooterView.swift; sourceTree = "<group>"; };
 		EBD35D402AD6FDD00076BE33 /* PostionDetailSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostionDetailSection.swift; sourceTree = "<group>"; };
 		EBD35D422AD71BAE0076BE33 /* NumericInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericInput.swift; sourceTree = "<group>"; };
@@ -326,7 +324,6 @@
 			isa = PBXGroup;
 			children = (
 				EB5F20A92AD348940096C9A3 /* CardView.swift */,
-				EBD35D3C2AD5F1F20076BE33 /* VisaSectionView.swift */,
 				EBD35D3E2AD64EBF0076BE33 /* CardFooterView.swift */,
 			);
 			path = CardView;
@@ -443,7 +440,6 @@
 				EBD35D412AD6FDD00076BE33 /* PostionDetailSection.swift in Sources */,
 				EBED85A72ADB05B300F25636 /* DropdownMenuList.swift in Sources */,
 				EBD35D472AD7583D0076BE33 /* CoreModel.swift in Sources */,
-				EBD35D3D2AD5F1F20076BE33 /* VisaSectionView.swift in Sources */,
 				EB5D062C2AE1D43700C7A94B /* BottomNavigationView.swift in Sources */,
 				EB4679FA2ACF1E7E0026ACC3 /* AddingScreenView.swift in Sources */,
 				EB8F91852B0011820081F398 /* FutureRounds.swift in Sources */,
