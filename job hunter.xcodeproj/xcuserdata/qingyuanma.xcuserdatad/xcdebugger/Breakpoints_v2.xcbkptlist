@@ -24,16 +24,48 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "F04AAE6F-1BD2-4018-BE46-C3EB053ECA1A"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "job hunter/Screens/HomeScreenView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
             landmarkName = "HomeScreenView"
             landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "F04AAE6F-1BD2-4018-BE46-C3EB053ECA1A - 7100257c28aa6846"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "job_hunter.HomeScreenView.init() -&gt; job_hunter.HomeScreenView"
+                  moduleName = "job hunter"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/qingyuanma/Desktop/Job%20Hunter/job%20hunter/job%20hunter/Screens/HomeScreenView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "264">
+               </Location>
+               <Location
+                  uuid = "F04AAE6F-1BD2-4018-BE46-C3EB053ECA1A - 55809bcce8ccab3a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "job_hunter.HomeScreenView.init(authModel: SwiftUI.EnvironmentObject&lt;job_hunter.AuthenticationModel&gt;, interviewsViewModel: @autoclosure () -&gt; job_hunter.InterviewsViewModel) -&gt; job_hunter.HomeScreenView"
+                  moduleName = "job hunter"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/qingyuanma/Desktop/Job%20Hunter/job%20hunter/job%20hunter/Screens/HomeScreenView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

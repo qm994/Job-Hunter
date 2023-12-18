@@ -59,7 +59,7 @@ class FirestoreInterviewDataManager {
                 throw error
             }
         }
-        print(allInterviewDocuments)
+        
         return allInterviewDocuments
     }
 }

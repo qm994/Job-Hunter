@@ -12,6 +12,7 @@
 		EB36C7D42AE5C0F80090A2D0 /* ProfileScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB36C7D32AE5C0F80090A2D0 /* ProfileScreenView.swift */; };
 		EB36C7D72AE5C1630090A2D0 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB36C7D62AE5C1630090A2D0 /* AuthenticationManager.swift */; };
 		EB36C7D92AE5C1AC0090A2D0 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB36C7D82AE5C1AC0090A2D0 /* UserManager.swift */; };
+		EB3DB3A22B30C19B005F9397 /* FetchedInterviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3DB3A12B30C19B005F9397 /* FetchedInterviewModel.swift */; };
 		EB46799B2AC0DBF00026ACC3 /* job_hunterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46799A2AC0DBF00026ACC3 /* job_hunterApp.swift */; };
 		EB46799D2AC0DBF00026ACC3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46799C2AC0DBF00026ACC3 /* ContentView.swift */; };
 		EB46799F2AC0DBF20026ACC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB46799E2AC0DBF20026ACC3 /* Assets.xcassets */; };
@@ -20,7 +21,7 @@
 		EB4679E22AC1F1920026ACC3 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E12AC1F1920026ACC3 /* Data.swift */; };
 		EB4679E42AC1F2E00026ACC3 /* InterviewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E32AC1F2E00026ACC3 /* InterviewDetail.swift */; };
 		EB4679E62AC9F63E0026ACC3 /* BasicFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E52AC9F63E0026ACC3 /* BasicFields.swift */; };
-		EB4679E82ACCB5AF0026ACC3 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E72ACCB5AF0026ACC3 /* CustomTabView.swift */; };
+		EB4679E82ACCB5AF0026ACC3 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679E72ACCB5AF0026ACC3 /* MainScreenView.swift */; };
 		EB4679F72ACE610B0026ACC3 /* CirclePlusAddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679F62ACE610B0026ACC3 /* CirclePlusAddButton.swift */; };
 		EB4679FA2ACF1E7E0026ACC3 /* AddingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679F92ACF1E7E0026ACC3 /* AddingScreenView.swift */; };
 		EB4679FC2ACF1E930026ACC3 /* AddSucceedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4679FB2ACF1E930026ACC3 /* AddSucceedScreen.swift */; };
@@ -75,6 +76,7 @@
 		EB36C7D32AE5C0F80090A2D0 /* ProfileScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenView.swift; sourceTree = "<group>"; };
 		EB36C7D62AE5C1630090A2D0 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		EB36C7D82AE5C1AC0090A2D0 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		EB3DB3A12B30C19B005F9397 /* FetchedInterviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedInterviewModel.swift; sourceTree = "<group>"; };
 		EB4679972AC0DBF00026ACC3 /* job hunter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "job hunter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB46799A2AC0DBF00026ACC3 /* job_hunterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = job_hunterApp.swift; sourceTree = "<group>"; };
 		EB46799C2AC0DBF00026ACC3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -84,7 +86,7 @@
 		EB4679E12AC1F1920026ACC3 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		EB4679E32AC1F2E00026ACC3 /* InterviewDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewDetail.swift; sourceTree = "<group>"; };
 		EB4679E52AC9F63E0026ACC3 /* BasicFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicFields.swift; sourceTree = "<group>"; };
-		EB4679E72ACCB5AF0026ACC3 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
+		EB4679E72ACCB5AF0026ACC3 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		EB4679F62ACE610B0026ACC3 /* CirclePlusAddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePlusAddButton.swift; sourceTree = "<group>"; };
 		EB4679F92ACF1E7E0026ACC3 /* AddingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingScreenView.swift; sourceTree = "<group>"; };
 		EB4679FB2ACF1E930026ACC3 /* AddSucceedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSucceedScreen.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 		EB4679AA2AC0DCF00026ACC3 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				EB4679E72ACCB5AF0026ACC3 /* MainScreenView.swift */,
 				EB4679AE2AC0E2EE0026ACC3 /* HomeScreenView.swift */,
 				EB36C7D22AE5C0DF0090A2D0 /* Profile */,
 				EB4679F82ACF1E640026ACC3 /* AddingScreen */,
@@ -259,6 +262,7 @@
 				EB5F20A52AD33F200096C9A3 /* InterviewModel.swift */,
 				EB5322C32ADC76EA00004E9C /* ClearbitViewModel.swift */,
 				EB36C7CE2AE5BFF60090A2D0 /* AuthenticationModel.swift */,
+				EB3DB3A12B30C19B005F9397 /* FetchedInterviewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -266,7 +270,6 @@
 		EB4679F52ACE60320026ACC3 /* BottomTab */ = {
 			isa = PBXGroup;
 			children = (
-				EB4679E72ACCB5AF0026ACC3 /* CustomTabView.swift */,
 				EB5D062B2AE1D43700C7A94B /* BottomNavigationView.swift */,
 				EB4679F62ACE610B0026ACC3 /* CirclePlusAddButton.swift */,
 			);
@@ -428,6 +431,7 @@
 				EB467A022ACF424A0026ACC3 /* AddInterviewModel.swift in Sources */,
 				EBD35D432AD71BAE0076BE33 /* NumericInput.swift in Sources */,
 				EB6C29132AFAECD300B66BFA /* AddInterviewManager.swift in Sources */,
+				EB3DB3A22B30C19B005F9397 /* FetchedInterviewModel.swift in Sources */,
 				EB4E111E2B0C6A09003D3764 /* AddInterviewButton.swift in Sources */,
 				EBA751892AE2F593008247CD /* ResetPasswordView.swift in Sources */,
 				EB36C7D72AE5C1630090A2D0 /* AuthenticationManager.swift in Sources */,
@@ -453,7 +457,7 @@
 				EBED85A92ADB0BF200F25636 /* DropdownMenuOptionRow.swift in Sources */,
 				EB5322C22ADC646100004E9C /* AsyncImageView.swift in Sources */,
 				EB4E111C2B0B0CF8003D3764 /* SalarySection.swift in Sources */,
-				EB4679E82ACCB5AF0026ACC3 /* CustomTabView.swift in Sources */,
+				EB4679E82ACCB5AF0026ACC3 /* MainScreenView.swift in Sources */,
 				EB36C7D42AE5C0F80090A2D0 /* ProfileScreenView.swift in Sources */,
 				EB4679AF2AC0E2EE0026ACC3 /* HomeScreenView.swift in Sources */,
 				EB4679F72ACE610B0026ACC3 /* CirclePlusAddButton.swift in Sources */,
