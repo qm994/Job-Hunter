@@ -24,7 +24,6 @@ struct ProfileScreenView: View {
     @EnvironmentObject var authModel: AuthenticationModel
 
     var body: some View {
-
         VStack {
             SignOutView()
             List {
@@ -39,7 +38,6 @@ struct ProfileScreenView: View {
                 }
             }
         }
-        .navigationTitle("Profile")
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {

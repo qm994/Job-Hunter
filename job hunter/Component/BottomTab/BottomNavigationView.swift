@@ -66,10 +66,16 @@ struct BottomNavigationView: View {
             TabButton(tab: .home)
             TabButton(tab: .profile)
         }
-        .frame(height: UIScreen.main.bounds.height / 8)
-        .frame(maxWidth: .infinity)
+        .frame(width:  UIScreen.main.bounds.width / 1.5, height: UIScreen.main.bounds.height / 10)
         .padding(.horizontal, 40)
         .background(Color(.systemGray5))
+        .clipShape(
+            RoundedRectangle(cornerRadius: 20)
+        )
+        .overlay(alignment: .center) {
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(.gray, lineWidth: 2)
+        }
        
 
     }

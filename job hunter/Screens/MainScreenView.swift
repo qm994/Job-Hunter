@@ -16,45 +16,46 @@ struct MainScreenView: View {
     
     var body: some View {
         DebugView("MainScreenView userProfile is: \(authModel.userProfile)")
-        //TODO: Fix navigation of + button to AddingScreenView
         
         NavigationStack(path: $path) {
-            ZStack{
-                ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
+            ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
+                
+                TabView(selection: $coreModel.selectedTab) {
+                    HomeScreenView()
+                        .tag(BottomNavigationModel.home)
+                        .navigationTitle("Home")
                     
-                    //MARK: TABVIEW
-                    TabView(selection: $coreModel.selectedTab) {
-                        HomeScreenView()
-                            .tag(BottomNavigationModel.home)
-                        
-                        ProfileScreenView()
-                            .tag(BottomNavigationModel.profile)
-                        
-                    } //TabView ends
-                    .tabViewStyle(
-                        PageTabViewStyle(indexDisplayMode: .always))
-                    .ignoresSafeArea(.all, edges: .bottom)
+                    ProfileScreenView()
+                        .tag(BottomNavigationModel.profile)
+                        .navigationTitle("Profile")
                     
-                    
-                    VStack {
-                        CirclePlusAddButton() {
-                            withAnimation {
-                                path.append(NavigationPath.addInterviewScreen.rawValue)
-                            }
+                } //TabView ends
+                .tabViewStyle(
+                    PageTabViewStyle(indexDisplayMode: .always))
+                
+                
+                VStack {
+                    CirclePlusAddButton() {
+                        withAnimation {
+                            path.append(NavigationPath.addInterviewScreen.rawValue)
                         }
-                        //MARK: Bottom Navigation
-                        BottomNavigationView()
                     }
-                }// Zstack ends
-            }
+                    
+                    //MARK: Bottom Navigation
+                    BottomNavigationView()
+                        .padding(.bottom, 5)
+                    
+                }
+                
+            }// Zstack ends
+            
             .navigationDestination(for: String.self) { value in
                 if value == NavigationPath.addInterviewScreen.rawValue {
                     AddingScreenView(path: $path)
                 }
             }
-            .ignoresSafeArea(.all, edges: .bottom)
-            
         }
+        .ignoresSafeArea(.all, edges: .bottom)
     }
 }
 

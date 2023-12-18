@@ -65,3 +65,31 @@ class InterviewsViewModel: ObservableObject {
     }
 }
 
+extension FetchedInterviewModel {
+    init(id: String, company: String, jobTitle: String, startDate: Date, status: String, visaRequired: String?, locationPreference: String, relocationRequired: Bool, salary: SalaryInfo) {
+        self.id = id
+        self.company = company
+        self.jobTitle = jobTitle
+        self.startDate = startDate
+        self.status = status
+        self.visaRequired = visaRequired
+        self.locationPreference = locationPreference
+        self.relocationRequired = relocationRequired
+        self.salary = salary
+    }
+    
+    static var sampleData: FetchedInterviewModel {
+        return FetchedInterviewModel(
+            id: "1",
+            company: "Sample Company",
+            jobTitle: "Software Engineer",
+            startDate: Date(),
+            status: "pending",
+            visaRequired: "H1B",
+            locationPreference: "Remote",
+            relocationRequired: true,
+            salary: SalaryInfo(base: 120000, bonus: 0.2, equity: 5000, signon: 5000)
+        )
+    }
+}
+
