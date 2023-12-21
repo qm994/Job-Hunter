@@ -15,8 +15,14 @@ struct Round {
     let roundDate: Date = Date()
 }
 
+struct Company {
+    var name: String
+    var website: URL?
+    var logo: String?
+}
+
+
 class AddInterviewModel: ObservableObject {
-    
     
     @Published var company: Company = Company(name: "")
     @Published var jobTitle = ""

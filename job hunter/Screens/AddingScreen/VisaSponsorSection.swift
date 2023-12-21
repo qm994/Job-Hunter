@@ -7,6 +7,22 @@
 
 import SwiftUI
 
+let VisaTypeNames: [String] = [
+    "H-1B Visa",
+    "L-1 Visa",
+    "E-2 Visa",
+    "O-1 Visa",
+    "TN Visa",
+    "J-1 Visa",
+    "H-2B Visa",
+    "EB-1 Visa",
+    "EB-2 Visa",
+    "EB-3 Visa",
+    "E-1 Visa",
+    "H-1B1 Visa",
+    "E-3 Visa"
+]
+
 struct VisaSponsorSection: View {
     @State private var showSheet: Bool = false
     @EnvironmentObject var addInterviewModel: AddInterviewModel

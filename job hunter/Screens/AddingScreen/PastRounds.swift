@@ -8,6 +8,13 @@
 import SwiftUI
 import FirebaseFirestore
 
+let AllRounds = [
+    "Online Assessment", "HR Call", "Peer Interview", "HM Call",
+    "Case Study/Presentation", "Final/Onsite Round", "References Check", "HR Offer Call", "Final Offer",
+    "Accept Offer"
+]
+
+
 class RoundModel: Encodable, ObservableObject, Equatable {
     var name: String
     @Published var startDate: Date

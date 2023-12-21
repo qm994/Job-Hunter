@@ -27,7 +27,7 @@ struct MainScreenView: View {
                     
                     ProfileScreenView()
                         .tag(BottomNavigationModel.profile)
-                        .navigationTitle("Profile")
+                        .navigationTitle("Account")
                     
                 } //TabView ends
                 .tabViewStyle(

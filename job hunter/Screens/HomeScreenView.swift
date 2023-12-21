@@ -16,8 +16,7 @@ struct HomeScreenView: View {
     
     
     var body: some View {
-        
-//        ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
+        ZStack {
             ScrollView {
                 VStack(spacing: 10) {
                     ForEach(interviewsViewModel.interviews, id: \.self.id) { interview in
@@ -26,15 +25,27 @@ struct HomeScreenView: View {
                 }
                 .padding(.top)
             }
+            .padding(.bottom, UIScreen.main.bounds.height / 10) // This is the height of bottom nav bar
             
-        //}
-        .padding(.bottom, UIScreen.main.bounds.height / 10)
-        
+            // Show spinner when loading
+            if interviewsViewModel.isLoading {
+                ProgressView()
+                    .scaleEffect(1.5, anchor: .center)
+                    .progressViewStyle(CircularProgressViewStyle(tint: .primary))
+            }
+            
+            if let error = interviewsViewModel.error {
+                Text("Failed to load interviews: \(error.localizedDescription)")
+                    .foregroundColor(.red)
+                    // Add more UI customization as needed
+            }
+        }
+        // TODO: HANDLE ERROR
         .onAppear {
             Task {
                 try await authModel.loadCurrentUser()
                 try await interviewsViewModel.fetchInterviews()
-                
+
             }
         }
     }

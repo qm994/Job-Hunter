@@ -46,22 +46,37 @@ struct FetchedInterviewModel: Identifiable {
 
 class InterviewsViewModel: ObservableObject {
     @Published var interviews = [FetchedInterviewModel]()
+    @Published var isLoading = false
+    @Published var error: Error?
 
     //TODO: Cache the fetchInterviews results if no data change instead of just interviews.removeAll()
     func fetchInterviews() async throws {
-        interviews.removeAll()
+        self.isLoading = true
         // Firestore fetch logic
         // For each document snapshot, initialize a FetchedInterviewModel
         // Append each model to the interviews array
-        guard let currentUser = try? AuthenticationManager.sharedAuth.getAuthenticatedUser() else {
-            // Handle the case where currentUser is nil, either due to an error or no authenticated user
-            return
+        do {
+            guard let currentUser = try AuthenticationManager.sharedAuth.getAuthenticatedUser() else {
+                print("fetchInterviews currentUser is nil")
+                throw NSError(domain: "AuthenticationError", code: 0, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found"])
+            }
+            
+            print("fetchInterviews currentUser is \(currentUser)")
+            let documentsSnap = try await FirestoreInterviewDataManager.shared.fetchInterviews(
+                fromUser: currentUser.uid
+                //fromUser: "testError"
+            )
+            
+            // Clear the old data only when new data is successfully fetched
+            interviews.removeAll()
+            interviews.append(contentsOf: documentsSnap.compactMap { document in FetchedInterviewModel(document: document) })
+            self.error = nil // Clear any existing error
+            
+        } catch {
+            self.error = error
         }
-      
-        let documentsSnap = try await FirestoreInterviewDataManager.shared.fetchInterviews(fromUser: currentUser.uid)
         
-        interviews.append(contentsOf: documentsSnap.compactMap { document in FetchedInterviewModel(document: document)
-        })
+        self.isLoading = false
     }
 }
 
@@ -82,7 +97,7 @@ extension FetchedInterviewModel {
         return FetchedInterviewModel(
             id: "1",
             company: "Sample Company",
-            jobTitle: "Software Engineer",
+            jobTitle: "Senior Software Engineer with long title",
             startDate: Date(),
             status: "pending",
             visaRequired: "H1B",

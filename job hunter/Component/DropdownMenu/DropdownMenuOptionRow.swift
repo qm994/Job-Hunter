@@ -17,7 +17,10 @@ struct DropdownMenuOptionRow: View {
     var body: some View {
         HStack(alignment: .center, spacing: 10) {
             if let icon = option.logo {
-                AsyncImageView(url: icon)
+                AsyncImageView(url: icon) {
+                    ProgressView()
+                        .frame(width: 100, height: 100)
+                }
 
             } else {
                 Image(systemName: "building.columns")

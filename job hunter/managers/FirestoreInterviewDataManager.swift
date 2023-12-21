@@ -25,7 +25,7 @@ class FirestoreInterviewDataManager {
         let userDocument = try await usersCollection.document(userID).getDocument().data()
         
         guard let interviewIDs = userDocument?["interviews"] as? [String] else {
-            throw NSError(domain: "FirestoreInterviewDataManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "Interviews field is missing or not an array of strings"])
+            throw NSError(domain: "FirestoreInterviewDataManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "Interviews field is missing or not an array of strings. Please contact the admin."])
         }
         return interviewIDs
         
@@ -35,9 +35,13 @@ class FirestoreInterviewDataManager {
     // Parse them into an array of Interview models
     
     func fetchInterviews(fromUser userId: String?) async throws -> [DocumentSnapshot] {
+        //MARK: Test error
+//        if userId == "testError" {
+//               throw NSError(domain: "FirestoreInterviewDataManager", code: 1002, userInfo: [NSLocalizedDescriptionKey: "Simulated Error for Testing"])
+//           }
         
         guard let userId = userId else {
-            throw NSError(domain: "FirestoreInterviewDataManager", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Please sign in first!"])
+            throw NSError(domain: "FirestoreInterviewDataManager", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Cannot find the user profile..."])
         }
         
         let interviewIDs = try await fetchUserInterviewIDs(userID: userId)
