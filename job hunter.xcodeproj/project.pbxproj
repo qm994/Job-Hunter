@@ -15,6 +15,7 @@
 		EB3DB3A22B30C19B005F9397 /* FetchedInterviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3DB3A12B30C19B005F9397 /* FetchedInterviewModel.swift */; };
 		EB3DB3A42B339E9F005F9397 /* ProfileTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3DB3A32B339E9F005F9397 /* ProfileTopView.swift */; };
 		EB3DB3A62B34F230005F9397 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EB3DB3A52B34F230005F9397 /* FirebaseStorage */; };
+		EB3DB3A82B360028005F9397 /* ProfileTabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3DB3A72B360028005F9397 /* ProfileTabsView.swift */; };
 		EB46799B2AC0DBF00026ACC3 /* job_hunterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46799A2AC0DBF00026ACC3 /* job_hunterApp.swift */; };
 		EB46799D2AC0DBF00026ACC3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46799C2AC0DBF00026ACC3 /* ContentView.swift */; };
 		EB46799F2AC0DBF20026ACC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB46799E2AC0DBF20026ACC3 /* Assets.xcassets */; };
@@ -77,6 +78,7 @@
 		EB36C7D82AE5C1AC0090A2D0 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		EB3DB3A12B30C19B005F9397 /* FetchedInterviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedInterviewModel.swift; sourceTree = "<group>"; };
 		EB3DB3A32B339E9F005F9397 /* ProfileTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTopView.swift; sourceTree = "<group>"; };
+		EB3DB3A72B360028005F9397 /* ProfileTabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabsView.swift; sourceTree = "<group>"; };
 		EB4679972AC0DBF00026ACC3 /* job hunter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "job hunter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB46799A2AC0DBF00026ACC3 /* job_hunterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = job_hunterApp.swift; sourceTree = "<group>"; };
 		EB46799C2AC0DBF00026ACC3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			children = (
 				EB36C7D32AE5C0F80090A2D0 /* ProfileScreenView.swift */,
 				EB3DB3A32B339E9F005F9397 /* ProfileTopView.swift */,
+				EB3DB3A72B360028005F9397 /* ProfileTabsView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				EBD35D3F2AD64EC00076BE33 /* CardFooterView.swift in Sources */,
 				EB4679FC2ACF1E930026ACC3 /* AddSucceedScreen.swift in Sources */,
 				EB5F20A02AD1D7450096C9A3 /* DebugView.swift in Sources */,
+				EB3DB3A82B360028005F9397 /* ProfileTabsView.swift in Sources */,
 				EB5322C02ADC62CC00004E9C /* VisualEffectView.swift in Sources */,
 				EB4E11202B0E89D9003D3764 /* IndexScreen.swift in Sources */,
 				EB5F20A22AD262720096C9A3 /* BlurView.swift in Sources */,

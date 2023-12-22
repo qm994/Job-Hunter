@@ -18,7 +18,6 @@ struct ProfileTopView: View {
     }()
     
     var body: some View {
-        DebugView("\(authModel.userProfile)")
         GeometryReader { geometry in
             HStack(alignment: .center) {
                 ZStack {
