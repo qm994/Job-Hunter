@@ -14,6 +14,7 @@
 		EB36C7D92AE5C1AC0090A2D0 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB36C7D82AE5C1AC0090A2D0 /* UserManager.swift */; };
 		EB3DB3A22B30C19B005F9397 /* FetchedInterviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3DB3A12B30C19B005F9397 /* FetchedInterviewModel.swift */; };
 		EB3DB3A42B339E9F005F9397 /* ProfileTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3DB3A32B339E9F005F9397 /* ProfileTopView.swift */; };
+		EB3DB3A62B34F230005F9397 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EB3DB3A52B34F230005F9397 /* FirebaseStorage */; };
 		EB46799B2AC0DBF00026ACC3 /* job_hunterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46799A2AC0DBF00026ACC3 /* job_hunterApp.swift */; };
 		EB46799D2AC0DBF00026ACC3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46799C2AC0DBF00026ACC3 /* ContentView.swift */; };
 		EB46799F2AC0DBF20026ACC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB46799E2AC0DBF20026ACC3 /* Assets.xcassets */; };
@@ -130,6 +131,7 @@
 			files = (
 				EB53231A2ADDBA9C00004E9C /* FirebaseFirestore in Frameworks */,
 				EB53231E2ADDBA9C00004E9C /* FirebaseFirestoreSwift in Frameworks */,
+				EB3DB3A62B34F230005F9397 /* FirebaseStorage in Frameworks */,
 				EB53230A2ADDBA9C00004E9C /* FirebaseAppCheck in Frameworks */,
 				EB5323122ADDBA9C00004E9C /* FirebaseCrashlytics in Frameworks */,
 				EB53232E2ADDBA9C00004E9C /* FirebasePerformance in Frameworks */,
@@ -361,6 +363,7 @@
 				EB5323272ADDBA9C00004E9C /* FirebaseInstallations */,
 				EB53232D2ADDBA9C00004E9C /* FirebasePerformance */,
 				EB5D06292AE1B80B00C7A94B /* FirebaseAuth */,
+				EB3DB3A52B34F230005F9397 /* FirebaseStorage */,
 			);
 			productName = "job hunter";
 			productReference = EB4679972AC0DBF00026ACC3 /* job hunter.app */;
@@ -685,6 +688,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EB3DB3A52B34F230005F9397 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB5323002ADDBA9B00004E9C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
 		EB5323092ADDBA9C00004E9C /* FirebaseAppCheck */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EB5323002ADDBA9B00004E9C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

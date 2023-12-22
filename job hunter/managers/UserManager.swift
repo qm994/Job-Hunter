@@ -17,7 +17,7 @@ struct DBUser: Codable {
     let dateCreated: Date?
     let dateModified: Date?
     let email: String?
-    let photoUrl: String?
+    var photoUrl: String?
     
     // Array to store references to the user's interviews
     var interviews: [String]

@@ -10,10 +10,12 @@ import SwiftUI
 struct AsyncImageView<Placeholder: View>: View {
     
     let url: String
+    let geometry: GeometryProxy
     var placeholder: () -> Placeholder
     
-    init(url: String, @ViewBuilder placeholder: @escaping () -> Placeholder) {
+    init(url: String, geometry: GeometryProxy, @ViewBuilder placeholder: @escaping () -> Placeholder) {
         self.url = url
+        self.geometry = geometry
         self.placeholder = placeholder
     }
     
@@ -24,9 +26,11 @@ struct AsyncImageView<Placeholder: View>: View {
                 image
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 20, height: 20)
+                    .aspectRatio(0.70, contentMode: .fit)
+                    .frame(width: geometry.size.width * 0.2, height: geometry.size.width * 0.2)
                     .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.gray, lineWidth: 1))
+                    .foregroundColor(Color.white)
+                    .overlay(Circle().stroke(Color.gray, lineWidth: 2))
             } else if phase.error != nil {
                 // Error: Display a fallback image or a custom error view.
                 placeholder()
@@ -40,9 +44,13 @@ struct AsyncImageView<Placeholder: View>: View {
 
 
 #Preview {
-    AsyncImageView(url: "https://logo.clearbit.com/segmentify.com") {
-        //Image(systemName: "photo")
-        ProgressView()
-            .frame(width: 100, height: 100)
+    GeometryReader {
+        geometry in
+        AsyncImageView(url: "https://logo.clearbit.com/segmentify.com", geometry: geometry) {
+            //Image(systemName: "photo")
+            ProgressView()
+                .frame(width: 100, height: 100)
+        }
+
     }
 }

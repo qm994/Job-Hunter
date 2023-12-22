@@ -24,27 +24,15 @@ struct ProfileTopView: View {
         DebugView("\(authModel.userProfile)")
         GeometryReader { geometry in
             HStack(alignment: .center) {
-                VStack {
-             
-                    AsyncImageView(url: authModel.userProfile?.photoUrl ?? "") {
-                        //photoUrl exists but failed to load
-                        if let photoUrl = authModel.userProfile?.photoUrl {
-                            Image(systemName: "person.fill.xmark")
-                                .resizable()
-                                .scaledToFit()
-                                .aspectRatio(0.70, contentMode: .fit)
-                                .frame(width: geometry.size.width * 0.2, height: geometry.size.width * 0.2)
-                                .clipShape(Circle())
-                                .overlay(Circle().stroke(Color.gray, lineWidth: 2))
-                        } else {
-                            ProfilePhotoUploadButton(
-                                geometry: geometry,
-                                avatarItem: $avatarItem,
-                                avatarImage: $avatarImage
-                            )
-                        }
-                    } // AsyncImageView ends
-                } // first VStack ends
+                ZStack {
+                    ProfilePhotoView(
+                        geometry: geometry,
+                        avatarItem: $avatarItem,
+                        avatarImage: $avatarImage
+                    )
+                    
+                    ProfilePhotoPlusView(geometry: geometry)
+                } // ZStack ends
                 .padding([.top, .leading], 20)
                 
                 VStack(alignment: .leading) {
@@ -72,44 +60,58 @@ struct ProfileTopView: View {
     }
 }
 
-struct ProfilePhotoUploadButton: View {
+struct ProfilePhotoView: View {
     let geometry: GeometryProxy
     @Binding var avatarItem: PhotosPickerItem?
     @Binding var avatarImage: UIImage?
+    
+    @EnvironmentObject var authModel: AuthenticationModel
+    
+    @State private var errorMessage: String? = nil
+    @State private var showError: Bool = false
+    
     var body: some View {
-        DebugView("ProfilePhotoUploadButton")
         
         PhotosPicker(selection: $avatarItem) {
-            ZStack {
-                Image(systemName: "person")
-                    .resizable()
-                    .scaledToFit()
-                    .aspectRatio(0.70, contentMode: .fit)
+            AsyncImageView(url: authModel.userProfile?.photoUrl ?? "", geometry: geometry) {
+                ProgressView()
                     .frame(width: geometry.size.width * 0.2, height: geometry.size.width * 0.2)
                     .clipShape(Circle())
-                    .foregroundColor(Color.white)
                     .overlay(Circle().stroke(Color.gray, lineWidth: 2))
-                
-                
-                ProfilePhotoPlusView(geometry: geometry)
-            }
+            } // AsyncImageView ends
         }
         .onChange(of: avatarItem) {
+            self.errorMessage = nil
+            self.showError = false
             Task {
                 if let imageData = try await avatarItem?.loadTransferable(type: Data.self) {
                     avatarImage = UIImage(data: imageData)
                     // TODO: Additional action, such as uploading avatarImage to a database
                     if let imageToUpload = avatarImage {
                         if let uploadData = imageToUpload.jpegData(compressionQuality: 0.9) {
-                            // Upload 'uploadData' to Firebase Storage
-                            print("uploadData: \(uploadData)")
+                            // Upload 'uploadData' to Firebase Storage and FireStore user document
+                            
+                            do {
+                                let url = try await authModel.uploadImageToFirebaseStorage(imageData: uploadData)
+                                let urlString = try await authModel.updateUserPhotoURLInFirestore(photoURL: url)
+                                authModel.userProfile?.photoUrl = urlString
+                                print("URL updated successfully: \(urlString)")
+                            } catch {
+                                self.errorMessage = error.localizedDescription
+                                self.showError = true
+                            }
                         }
                     }
-                } else {
-                    print("Failed")
                 }
             }
-        }
+        } // onChange ends
+        .alert(isPresented: $showError, content: {
+            Alert(
+                title: Text("Error"),
+                message: Text(errorMessage ?? "Failed to update photo."),
+                dismissButton: .default(Text("OK")))
+        })
+        
     }
 }
 

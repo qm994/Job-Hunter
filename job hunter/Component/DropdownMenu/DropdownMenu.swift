@@ -81,14 +81,18 @@ struct DropdownMenu: View {
                 }
             ///Add logo to the textfield
                 .overlay(
-                    Group {
-                        if let logoURL = addInterviewModel.company.logo {
-                            AsyncImageView(url: logoURL) {
-                                ProgressView()
-                                    .frame(width: 100, height: 100)
+                    GeometryReader {
+                        geometry in
+                        Group {
+                            if let logoURL = addInterviewModel.company.logo {
+                                AsyncImageView(url: logoURL, geometry: geometry) {
+                                    ProgressView()
+                                        .frame(width: 100, height: 100)
+                                }
                             }
                         }
-                    }, alignment: .trailing
+                    },
+                    alignment: .trailing
                 )
             
             
