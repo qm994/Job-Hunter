@@ -28,15 +28,18 @@ struct CirclePlusAddButton: View {
                 .frame(width: 50, height: 50)
                 .rotationEffect(Angle(degrees: onTap ? 90 : 0))
         }
+        .frame(maxWidth: .infinity, alignment: .trailing)
         .onTapGesture {
             withAnimation {
                 onTap.toggle()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { onTapAction() }
             }
         }
+       
         .onAppear {
             onTap = false
         }
+        
     }
 }
 

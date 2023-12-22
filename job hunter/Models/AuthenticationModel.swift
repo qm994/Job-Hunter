@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import FirebaseStorage
+import FirebaseAuth
+import FirebaseFirestore
 
 
 class AuthenticationModel: ObservableObject {
@@ -61,7 +64,9 @@ class AuthenticationModel: ObservableObject {
     }
     
     func loadCurrentUser() async throws {
-        let authResult = try AuthenticationManager.sharedAuth.getAuthenticatedUser()
+        guard let authResult = try AuthenticationManager.sharedAuth.getAuthenticatedUser() else {
+            return
+        }
         let dbUser = try await UserManager.shared.getUser(userId: authResult.uid)
         // Dispatch the update of the @Published properties to the main thread
         DispatchQueue.main.async {
@@ -70,4 +75,43 @@ class AuthenticationModel: ObservableObject {
         }
         //return dbUser
     }
+    
+    func uploadImageToFirebaseStorage(imageData: Data) async throws -> URL {
+        let storageRef = Storage.storage().reference()
+        
+        guard let userId = Auth.auth().currentUser?.uid else {
+            throw NSError(domain: "FirebaseError", code: 0, userInfo: [NSLocalizedDescriptionKey: "User ID not found"])
+        }
+
+        let imageRef = storageRef.child("profilePictures/\(userId).jpg")
+
+        do {
+            // Upload the image
+            let metadata = try await imageRef.putDataAsync(imageData)
+           
+            // Retrieve and return the download URL
+            let url = try await imageRef.downloadURL()
+            return url
+        } catch {
+            throw NSError(domain: "FirebaseError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to Upload Image To Firebase Storage"])
+        }
+        
+    }
+
+    
+    func updateUserPhotoURLInFirestore(photoURL: URL) async throws -> String {
+        let db = Firestore.firestore()
+        guard let userId = Auth.auth().currentUser?.uid else {
+            throw NSError(domain: "FirebaseError", code: 0, userInfo: [NSLocalizedDescriptionKey: "User ID not found"])
+        }
+        
+        do {
+            try await db.collection("users").document(userId).updateData(["photoUrl": photoURL.absoluteString])
+            return photoURL.absoluteString
+        } catch {
+            throw NSError(domain: "FirebaseError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to Update User Photo URL In Firestore"])
+        }
+    }
+
 }
+

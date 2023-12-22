@@ -27,29 +27,31 @@ struct CardView: View {
             //MARK: Second row
             HStack {
                 VStack(alignment: .leading) {
-                    Label(interview.jobTitle, systemImage: "briefcase.circle")
+                    HStack {
+                        Image(systemName: "briefcase.circle")
+                        Text(interview.jobTitle)
+                            .lineLimit(1)
+                    }
                     Label(interview.locationPreference, systemImage: "location.circle")
                     Label(formatDateWithoutTime(interview.startDate), systemImage: "clock.badge.checkmark")
                 }
                 
                 Spacer()
-                VStack(alignment: .trailing) {
+                VStack(alignment: .leading) {
                     HStack {
-                        Text("Visa Sponsor")
                         Image(systemName: "checkmark.circle.fill")
                             .foregroundColor(.green)
+                        Text("Visa Sponsor")
                     }
-                    
-                    
                     HStack {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.red)
                         Text("Relocation Required")
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.red)
                     }
                     HStack {
-                        Text("Remote availablew")
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(.red)
+                        Text("Remote availablew")
                     }
                 }
                 

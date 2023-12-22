@@ -16,21 +16,16 @@ struct IndexScreen: View {
                 MainScreenView()
                     .environmentObject(authModel)
                     .environmentObject(CoreModel())
-                    .onAppear {
-                        Task {
-                            try await authModel.loadCurrentUser()
-                        }
-                    }
                     .transition(.slide)
                     .animation(.linear, value: authModel.isLoggedIn)
-    //                    .fullScreenCover(isPresented: $authModel.showAuthMainScreen) {
-    //                        AuthenticationMainScreen()
-    //                            .environmentObject(authModel)
-    //                    }
             } else {
                 AuthenticationMainScreen()
                     .environmentObject(authModel)
-                    //.transition(.move(edge: .leading))
+            }
+        }
+        .onAppear {
+            Task {
+                try await authModel.loadCurrentUser()
             }
         }
     }

@@ -37,7 +37,6 @@ struct TabButton: View {
     
     var body: some View {
         Button {
-            coreModel.showAddPopMenu = false
             coreModel.selectedTab = tab
         } label: {
             VStack(spacing: 10) {
@@ -66,12 +65,19 @@ struct BottomNavigationView: View {
             TabButton(tab: .home)
             TabButton(tab: .profile)
         }
-        .frame(height: UIScreen.main.bounds.height / 8)
-        .frame(maxWidth: .infinity)
+        .frame(height: UIScreen.main.bounds.height / 10)
+        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
         .padding(.horizontal, 40)
         .background(Color(.systemGray5))
-       
-
+//        .clipShape(
+//            RoundedRectangle(cornerRadius: 20)
+//        )
+        .overlay(
+            Rectangle()
+                .fill(Color.gray)
+                .frame(height: 2),
+            alignment: .top
+        )
     }
 }
 
