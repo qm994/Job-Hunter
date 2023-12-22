@@ -11,9 +11,6 @@ import PhotosUI
 struct ProfileTopView: View {
     @EnvironmentObject var authModel: AuthenticationModel
     
-    @State private var avatarItem: PhotosPickerItem?
-    @State private var avatarImage: UIImage?
-    
     let dateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -26,9 +23,7 @@ struct ProfileTopView: View {
             HStack(alignment: .center) {
                 ZStack {
                     ProfilePhotoView(
-                        geometry: geometry,
-                        avatarItem: $avatarItem,
-                        avatarImage: $avatarImage
+                        geometry: geometry
                     )
                     
                     ProfilePhotoPlusView(geometry: geometry)
@@ -61,9 +56,11 @@ struct ProfileTopView: View {
 }
 
 struct ProfilePhotoView: View {
+    @State private var avatarItem: PhotosPickerItem?
+    @State private var avatarImage: UIImage?
+    @State private var isUpdatingPhoto: Bool = false
     let geometry: GeometryProxy
-    @Binding var avatarItem: PhotosPickerItem?
-    @Binding var avatarImage: UIImage?
+    
     
     @EnvironmentObject var authModel: AuthenticationModel
     
@@ -73,16 +70,24 @@ struct ProfilePhotoView: View {
     var body: some View {
         
         PhotosPicker(selection: $avatarItem) {
-            AsyncImageView(url: authModel.userProfile?.photoUrl ?? "", geometry: geometry) {
+            if isUpdatingPhoto {
                 ProgressView()
                     .frame(width: geometry.size.width * 0.2, height: geometry.size.width * 0.2)
                     .clipShape(Circle())
                     .overlay(Circle().stroke(Color.gray, lineWidth: 2))
-            } // AsyncImageView ends
+            } else {
+                AsyncImageView(url: authModel.userProfile?.photoUrl ?? "", geometry: geometry) {
+                    ProgressView()
+                        .frame(width: geometry.size.width * 0.2, height: geometry.size.width * 0.2)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+                } // AsyncImageView ends
+            }
         }
         .onChange(of: avatarItem) {
             self.errorMessage = nil
             self.showError = false
+            self.isUpdatingPhoto = true // Start loading
             Task {
                 if let imageData = try await avatarItem?.loadTransferable(type: Data.self) {
                     avatarImage = UIImage(data: imageData)
@@ -100,6 +105,7 @@ struct ProfilePhotoView: View {
                                 self.errorMessage = error.localizedDescription
                                 self.showError = true
                             }
+                            self.isUpdatingPhoto = false // Stop loading
                         }
                     }
                 }

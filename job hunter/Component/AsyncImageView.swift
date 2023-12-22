@@ -26,7 +26,7 @@ struct AsyncImageView<Placeholder: View>: View {
                 image
                     .resizable()
                     .scaledToFit()
-                    .aspectRatio(0.70, contentMode: .fit)
+                    .aspectRatio(0.70, contentMode: .fill)
                     .frame(width: geometry.size.width * 0.2, height: geometry.size.width * 0.2)
                     .clipShape(Circle())
                     .foregroundColor(Color.white)
