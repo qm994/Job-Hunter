@@ -14,17 +14,14 @@ struct HomeScreenView: View {
     @EnvironmentObject var authModel: AuthenticationModel
     @StateObject var interviewsViewModel: InterviewsViewModel = InterviewsViewModel()
     
-    
     var body: some View {
         ZStack {
-            ScrollView {
-                VStack(spacing: 10) {
-                    ForEach(interviewsViewModel.interviews, id: \.self.id) { interview in
-                        CardView(interview: interview)
-                    }
-                }
-                .padding(.top)
+            List(interviewsViewModel.interviews, id: \.id) { interview in
+                CardView(interview: interview)
+                    
             }
+            .listStyle(.plain)
+//            .listRowInsets(EdgeInsets())
             .padding(.bottom, UIScreen.main.bounds.height / 10) // This is the height of bottom nav bar
             
             // Show spinner when loading
@@ -44,16 +41,19 @@ struct HomeScreenView: View {
         .onAppear {
             Task {
                 try await authModel.loadCurrentUser()
-                try await interviewsViewModel.fetchInterviews()
+                try await interviewsViewModel.fetchInterviewsData()
 
             }
         }
+        
     }
 }
 
 struct HomeScreenView_Previews: PreviewProvider {
+    
     static var previews: some View {
         let interviewsViewModel = InterviewsViewModel()
+       
         NavigationStack {
             HomeScreenView(interviewsViewModel: interviewsViewModel)
                 .environmentObject(AuthenticationModel())

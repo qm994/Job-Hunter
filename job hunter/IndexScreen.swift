@@ -18,11 +18,13 @@ struct IndexScreen: View {
                     .environmentObject(CoreModel())
                     .transition(.slide)
                     .animation(.linear, value: authModel.isLoggedIn)
+                    
             } else {
                 AuthenticationMainScreen()
                     .environmentObject(authModel)
             }
         }
+        
         .onAppear {
             Task {
                 try await authModel.loadCurrentUser()

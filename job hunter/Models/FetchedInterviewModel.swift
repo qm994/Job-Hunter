@@ -19,6 +19,9 @@ struct FetchedInterviewModel: Identifiable {
     var relocationRequired: Bool
     var salary: SalaryInfo
     // Add other properties as needed
+    //var pastRounds:  [RoundModel]?
+    //var futureRounds:  [RoundModel]?
+
 
     init?(document: DocumentSnapshot) {
         guard let data = document.data() else { return nil }
@@ -40,7 +43,14 @@ struct FetchedInterviewModel: Identifiable {
         } else {
             self.salary = SalaryInfo() // Default empty values
         }
-        // Initialize other properties similarly
+        
+//        if let pastRounds = data["pastRounds"] as? [String: String] {
+//            self.pastRounds = pastRounds.map({ key, value in
+//                return RoundModel()
+//            })
+//        }
+        
+        
     }
 }
 
@@ -50,18 +60,16 @@ class InterviewsViewModel: ObservableObject {
     @Published var error: Error?
 
     //TODO: Cache the fetchInterviews results if no data change instead of just interviews.removeAll()
-    func fetchInterviews() async throws {
+    func fetchInterviewsData() async throws {
         self.isLoading = true
         // Firestore fetch logic
         // For each document snapshot, initialize a FetchedInterviewModel
         // Append each model to the interviews array
         do {
             guard let currentUser = try AuthenticationManager.sharedAuth.getAuthenticatedUser() else {
-                print("fetchInterviews currentUser is nil")
                 throw NSError(domain: "AuthenticationError", code: 0, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found"])
             }
             
-            print("fetchInterviews currentUser is \(currentUser)")
             let documentsSnap = try await FirestoreInterviewDataManager.shared.fetchInterviews(
                 fromUser: currentUser.uid
                 //fromUser: "testError"

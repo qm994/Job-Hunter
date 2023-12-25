@@ -67,13 +67,9 @@ struct ProfileScreenView: View {
 struct ProfileScreenView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            TabView {
-                ProfileScreenView()
-                    .navigationTitle("Account")
-                    .environmentObject(AuthenticationModel())
-            }
-            .tabViewStyle(
-                PageTabViewStyle(indexDisplayMode: .never))
+            ProfileScreenView()
+                .navigationTitle("Account")
+                .environmentObject(AuthenticationModel())
             
         }
         .navigationDestination(for: String.self) { value in

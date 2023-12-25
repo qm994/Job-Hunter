@@ -8,10 +8,17 @@
 import SwiftUI
 
 class SalarySectionModel: ObservableObject {
-    @Published var base: Double = .zero
-    @Published var equity: Double = .zero
-    @Published var signon: Double = .zero
-    @Published var bonus: Double = .zero // percent?
+    @Published var base: Double
+    @Published var equity: Double
+    @Published var signon: Double
+    @Published var bonus: Double
+    
+    init(base: Double = 0, equity: Double = 0, signon: Double = 0, bonus: Double = 0) {
+        self.base = base
+        self.equity = equity
+        self.signon = signon
+        self.bonus = bonus
+    }
 }
 
 // Define a struct to hold the salary information
@@ -40,10 +47,13 @@ struct AddingScreenView: View {
     @StateObject var roundModel = InterviewRoundsModel()
 
     @EnvironmentObject var authModel: AuthenticationModel
+    @EnvironmentObject var coreModel: CoreModel
     
     @State private var isFutureEnabled: Bool = false
     
-    @Binding var path: [String]
+   
+    
+    @Binding var existingInterview:  FetchedInterviewModel?
     
     var body: some View {
         // MARK: ScrollViewReader Auto Scroll
@@ -86,21 +96,54 @@ struct AddingScreenView: View {
                 leading:
                     Button("Cancel") {
                         print("cancel called")
-                        
-                        if let screenName = path.firstIndex(of: NavigationPath.addInterviewScreen.rawValue) {
-                            path.remove(at: screenName)
+                        print("coreModel.path is \(coreModel.path)")
+                        if let screenName = coreModel.path.firstIndex(of: NavigationPath.addInterviewScreen.rawValue) {
+                            print("screenName is \(screenName)")
+                            print("screenName is \(coreModel.path)")
+                            coreModel.path.remove(at: screenName)
                         }
                     },
                 trailing:
                     AddInterviewButton(
                         salaryModel: salaryModel,
-                        roundModel: roundModel,
-                        path: $path
+                        roundModel: roundModel
                     )
             )
             .navigationBarBackButtonHidden(true)
         } // ScrollView Ends
         .environmentObject(addInterviewModel)
+        .onAppear {
+            if let interview = existingInterview {
+                // Populate your models with existing data
+                addInterviewModel.addExpectedSalary = true
+                salaryModel.base = interview.salary.base
+                salaryModel.equity = interview.salary.equity
+                salaryModel.signon = interview.salary.signon
+                salaryModel.bonus = interview.salary.bonus
+                
+                addInterviewModel.company = Company(name: interview.company)
+                addInterviewModel.jobTitle = interview.jobTitle
+                addInterviewModel.startDate = interview.startDate
+                if let status = ApplicationStatus(rawValue: interview.status) {
+                    addInterviewModel.status = status
+                }
+                addInterviewModel.locationPreference = interview.locationPreference
+                if interview.relocationRequired {
+                    addInterviewModel.locationPreference = "YES"
+                } else {
+                    addInterviewModel.locationPreference = "NO"
+                }
+                
+                if let visaRequired = interview.visaRequired {
+                    addInterviewModel.needVisaSponsor = true
+                    addInterviewModel.requiredVisa = visaRequired
+                }
+                
+                // TODO: Prefill rounds data
+                
+            }
+        }
+
     }
 }
 
@@ -124,11 +167,12 @@ struct CheckboxView: View {
 }
 
 struct AddingScreenView_Previews: PreviewProvider {
-    @State static var path: [String] = []
+    @State static var existingInterview: FetchedInterviewModel? = nil
     static var previews: some View {
         
-        AddingScreenView(path: $path)
+        AddingScreenView(existingInterview: $existingInterview)
             .environmentObject(AuthenticationModel())
+            .environmentObject(CoreModel())
         
     }
 }

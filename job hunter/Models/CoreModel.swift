@@ -10,4 +10,6 @@ import Foundation
 
 class CoreModel: ObservableObject {
     @Published var selectedTab: BottomNavigationModel = .home
+    @Published var path: [String] = []
+    @Published var editInterview: FetchedInterviewModel?
 }

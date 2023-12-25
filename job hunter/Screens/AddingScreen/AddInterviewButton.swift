@@ -10,10 +10,10 @@ import SwiftUI
 struct AddInterviewButton: View {
     @EnvironmentObject var authModel: AuthenticationModel
     @EnvironmentObject var addInterviewModel: AddInterviewModel
+    @EnvironmentObject var coreModel: CoreModel
     
     var salaryModel: SalarySectionModel
     var roundModel: InterviewRoundsModel
-    @Binding var path: [String]
     
     var body: some View {
         Button("Add") {
@@ -48,7 +48,7 @@ struct AddInterviewButton: View {
                     )
                     
                     // Move back to main screen
-                    path.removeAll { pathName in
+                    coreModel.path.removeAll { pathName in
                         pathName == NavigationPath.addInterviewScreen.rawValue
                     }
                     print("Interview added successfully")
@@ -61,20 +61,3 @@ struct AddInterviewButton: View {
 
     }
 }
-
-//#Preview {
-//    struct Wrapper: View {
-//        @State static var path: [String] = []
-//        var body: some View {
-//            AddInterviewButton(
-//                salaryModel: SalarySectionModel(),
-//                roundModel: InterviewRoundsModel(),
-//                path: Wrapper.$path
-//            )
-//            .environmentObject(AuthenticationModel())
-//            .environmentObject(AddInterviewModel())
-//        }
-//    }
-//    return Wrapper()
-//    
-//}

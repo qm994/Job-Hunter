@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CardView: View {
+    @EnvironmentObject var coreModel: CoreModel
     let interview: FetchedInterviewModel
     var body: some View {
         VStack(spacing: 20) {
@@ -32,8 +33,14 @@ struct CardView: View {
                         Text(interview.jobTitle)
                             .lineLimit(1)
                     }
-                    Label(interview.locationPreference, systemImage: "location.circle")
-                    Label(formatDateWithoutTime(interview.startDate), systemImage: "clock.badge.checkmark")
+                    HStack {
+                        Image(systemName: "location.circle")
+                        Text(interview.locationPreference)
+                    }
+                    HStack {
+                        Image(systemName: "clock.badge.checkmark")
+                        Text(formatDateWithoutTime(interview.startDate))
+                    }
                 }
                 
                 Spacer()
@@ -41,17 +48,17 @@ struct CardView: View {
                     HStack {
                         Image(systemName: "checkmark.circle.fill")
                             .foregroundColor(.green)
-                        Text("Visa Sponsor")
+                        Text("Sponsor visa")
                     }
                     HStack {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(.red)
-                        Text("Relocation Required")
+                        Text("Need relocation")
                     }
                     HStack {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(.red)
-                        Text("Remote availablew")
+                        Text("Remote available")
                     }
                 }
                 
@@ -66,6 +73,23 @@ struct CardView: View {
         .background(BlurView(style: .systemThickMaterialDark))
         .cornerRadius(15)
         .shadow(color: Color.white.opacity(0.2), radius: 10, x: 0, y: 10)
+        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+            Button {
+                
+                coreModel.path.append(NavigationPath.addInterviewScreen.rawValue)
+                coreModel.editInterview = interview
+                
+            } label: {
+                Label("Edit", systemImage: "pencil")
+            }
+            .tint(.blue)
+
+            Button(role: .destructive) {
+                // Handle delete action
+            } label: {
+                Label("Delete", systemImage: "trash")
+            }
+        }
     }
 }
 
@@ -164,7 +188,10 @@ struct CardSalarySection: View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(interview: FetchedInterviewModel.sampleData)
-            //.previewLayout(.fixed(width: 400, height: 60))
+        List{
+            CardView(interview: FetchedInterviewModel.sampleData)
+                .environmentObject(CoreModel())
+        }
+        .listStyle(.plain)
     }
 }

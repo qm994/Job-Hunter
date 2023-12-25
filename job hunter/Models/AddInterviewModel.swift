@@ -49,7 +49,7 @@ class AddInterviewModel: ObservableObject {
     /// Create Interview to the FireStore:
     /// (1)Add interview document id to the user's document interviews field array
     /// (2) Add past rounds as to the sub collection of pastRounds 
-    func addInterviewToFirestore(user: DBUser, salary: SalaryInfo, pastRounds: [RoundModel], futureRounds: [RoundModel]) async throws {
+    func addInterviewToFirestore(user: DBUser, salary: SalaryInfo, pastRounds: [RoundModel], futureRounds: [RoundModel], isUpdate: Bool = false) async throws {
         
         let is_relocation: Bool = {
             switch relocationRequired.lowercased() {
@@ -82,16 +82,24 @@ class AddInterviewModel: ObservableObject {
             "visa_required": requiredVisa ?? ""
         ]
         
-        let interviewDocument = try await AddInterviewManager.shared.createInterview(user: user, data: &data)
-        // Create pastRounds subCollection in interview document
-        try await AddInterviewManager.shared.addPastRounds(
-            to: interviewDocument.documentID,
-            pastRounds: pastRounds
-        )
-        return try await AddInterviewManager.shared.addFutureRounds(
-            to: interviewDocument.documentID,
-            futureRounds: futureRounds
-        )
+        if !isUpdate {
+            let interviewDocument = try await AddInterviewManager.shared.createInterview(
+                user: user, data: &data, pastRounds: pastRounds, futureRounds: futureRounds
+            )
+//            // Create pastRounds subCollection in interview document
+//            try await AddInterviewManager.shared.addPastRounds(
+//                to: interviewDocument.documentID,
+//                pastRounds: pastRounds
+//            )
+//            return try await AddInterviewManager.shared.addFutureRounds(
+//                to: interviewDocument.documentID,
+//                futureRounds: futureRounds
+//            )
+        } else {
+            
+        }
+        
+        
     }
     
 }
