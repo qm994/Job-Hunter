@@ -18,7 +18,8 @@ struct FetchedInterviewModel: Identifiable {
     var locationPreference: String
     var relocationRequired: Bool
     var salary: SalaryInfo
-    // Add other properties as needed
+    var pastRounds:  [RoundModel]
+    var futureRounds:  [RoundModel]
 
     init?(document: DocumentSnapshot) {
         guard let data = document.data() else { return nil }
@@ -40,7 +41,19 @@ struct FetchedInterviewModel: Identifiable {
         } else {
             self.salary = SalaryInfo() // Default empty values
         }
-        // Initialize other properties similarly
+        
+       
+        if let pastRoundsArray = data["pastRounds"] as? [[String: Any]] {
+            self.pastRounds = pastRoundsArray.compactMap { RoundModel(dictionary: $0) }
+        } else {
+            self.pastRounds = []
+        }
+
+        if let futureRoundsArray = data["futureRounds"] as? [[String: Any]] {
+            self.futureRounds = futureRoundsArray.compactMap { RoundModel(dictionary: $0) }
+        } else {
+            self.futureRounds = []
+        }
     }
 }
 
@@ -50,27 +63,33 @@ class InterviewsViewModel: ObservableObject {
     @Published var error: Error?
 
     //TODO: Cache the fetchInterviews results if no data change instead of just interviews.removeAll()
-    func fetchInterviews() async throws {
+    func fetchInterviewsData() async throws {
         self.isLoading = true
         // Firestore fetch logic
         // For each document snapshot, initialize a FetchedInterviewModel
         // Append each model to the interviews array
         do {
             guard let currentUser = try AuthenticationManager.sharedAuth.getAuthenticatedUser() else {
-                print("fetchInterviews currentUser is nil")
                 throw NSError(domain: "AuthenticationError", code: 0, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found"])
             }
             
-            print("fetchInterviews currentUser is \(currentUser)")
             let documentsSnap = try await FirestoreInterviewDataManager.shared.fetchInterviews(
                 fromUser: currentUser.uid
                 //fromUser: "testError"
             )
             
-            // Clear the old data only when new data is successfully fetched
-            interviews.removeAll()
-            interviews.append(contentsOf: documentsSnap.compactMap { document in FetchedInterviewModel(document: document) })
-            self.error = nil // Clear any existing error
+            DispatchQueue.main.async {
+                guard let documentsSnap = documentsSnap else {
+                    self.interviews = []
+                    self.error = nil
+                    self.isLoading = false
+                    return
+                }
+                // Clear the old data only when new data is successfully fetched
+                self.interviews.removeAll()
+                self.interviews.append(contentsOf: documentsSnap.compactMap { document in FetchedInterviewModel(document: document) })
+                self.error = nil // Clear any existing error
+            }
             
         } catch {
             self.error = error
@@ -81,7 +100,7 @@ class InterviewsViewModel: ObservableObject {
 }
 
 extension FetchedInterviewModel {
-    init(id: String, company: String, jobTitle: String, startDate: Date, status: String, visaRequired: String?, locationPreference: String, relocationRequired: Bool, salary: SalaryInfo) {
+    init(id: String, company: String, jobTitle: String, startDate: Date, status: String, visaRequired: String?, locationPreference: String, relocationRequired: Bool, salary: SalaryInfo, pastRounds: [RoundModel], futureRounds: [RoundModel]) {
         self.id = id
         self.company = company
         self.jobTitle = jobTitle
@@ -91,6 +110,8 @@ extension FetchedInterviewModel {
         self.locationPreference = locationPreference
         self.relocationRequired = relocationRequired
         self.salary = salary
+        self.pastRounds = pastRounds
+        self.futureRounds = futureRounds
     }
     
     static var sampleData: FetchedInterviewModel {
@@ -103,7 +124,9 @@ extension FetchedInterviewModel {
             visaRequired: "H1B",
             locationPreference: "Remote",
             relocationRequired: true,
-            salary: SalaryInfo(base: 120000, bonus: 0.2, equity: 5000, signon: 5000)
+            salary: SalaryInfo(base: 120000, bonus: 0.2, equity: 5000, signon: 5000),
+            pastRounds: [],
+            futureRounds: []
         )
     }
 }

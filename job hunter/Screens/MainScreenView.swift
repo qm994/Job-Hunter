@@ -12,50 +12,34 @@ enum NavigationPath: String {
 struct MainScreenView: View {
     @EnvironmentObject var coreModel: CoreModel
     @EnvironmentObject var authModel: AuthenticationModel
-    @State private var path: [String] = []
-    
-    var body: some View {
-        DebugView("MainScreenView userProfile is: \(authModel.userProfile)")
-        
-        NavigationStack(path: $path) {
-            ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
+   
+    var body: some View {        
+        NavigationStack(path: $coreModel.path) {
+            ZStack(
+                alignment: Alignment(horizontal: .center, vertical: .bottom)
+            ) {
                 
-                TabView(selection: $coreModel.selectedTab) {
-                    HomeScreenView()
-                        .tag(BottomNavigationModel.home)
-                        .navigationTitle("Home")
-                    
-                    ProfileScreenView()
-                        .tag(BottomNavigationModel.profile)
-                        .navigationTitle("Account")
-                    
-                } //TabView ends
-                .tabViewStyle(
-                    PageTabViewStyle(indexDisplayMode: .always))
-                
-                
-                VStack {
-                    CirclePlusAddButton() {
-                        withAnimation {
-                            path.append(NavigationPath.addInterviewScreen.rawValue)
-                        }
+                Group {
+                    switch coreModel.selectedTab {
+                        case .home:
+                            HomeScreenView()
+                                //.navigationTitle("Home")
+                        case .profile:
+                            ProfileScreenView()
+                                
                     }
-                    
-                    //MARK: Bottom Navigation
-                    BottomNavigationView()
-                        .padding(.bottom, 5)
-                    
                 }
+                BottomNavigationView()
                 
             }// Zstack ends
-            
+            .ignoresSafeArea(edges: .bottom)
             .navigationDestination(for: String.self) { value in
                 if value == NavigationPath.addInterviewScreen.rawValue {
-                    AddingScreenView(path: $path)
+                    AddingScreenView(existingInterview: $coreModel.editInterview)
                 }
             }
-        }
-        .ignoresSafeArea(.all, edges: .bottom)
+        } // NavigationStack ends
+        //.environment(CoreModel())
     }
 }
 

@@ -41,7 +41,6 @@ struct BasicFields: View {
         guard let applicationStatus = ApplicationStatus(rawValue: status) else {
             return .black // Default color if there's an unknown status
         }
-        print("applicationStatus: \(applicationStatus.statusColor)")
         return applicationStatus.statusColor
     }
     

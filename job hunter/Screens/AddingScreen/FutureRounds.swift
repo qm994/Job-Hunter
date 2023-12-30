@@ -18,9 +18,6 @@ struct FutureRounds: View {
     }
         
     var body: some View {
-        Button("Future add") {
-            print(roundModel.futureRounds[0].startDate)
-        }
         Section("Future Rounds") {
             HStack(alignment: .center) {
                 Text("Future Rounds")
@@ -74,6 +71,14 @@ struct FutureRoundRow: View {
     @State private var isChecked: Bool = false
     @State private var roundStartDate: Date = Date()
     @State private var roundEndDate: Date = Date()
+    
+    private func updateStateFromModel() {
+         if let existingRound = roundModel.futureRounds.first(where: { $0.name == round.name }) {
+             isChecked = true
+             roundStartDate = existingRound.startDate
+             roundEndDate = existingRound.endDate
+         }
+     }
     
     /// If check the box, add the round. Otherwise remove it from futureRounds
     private func updateFutureRounds () {
@@ -160,7 +165,10 @@ struct FutureRoundRow: View {
                     }
                 }
                 .animation(.linear, value: isChecked)
-            }
+            } // isChecked ends
+        }
+        .onAppear {
+            updateStateFromModel()
         }
     }
 }

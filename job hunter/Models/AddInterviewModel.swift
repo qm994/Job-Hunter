@@ -31,12 +31,15 @@ class AddInterviewModel: ObservableObject {
     
     @Published var needVisaSponsor: Bool = false
     @Published var requiredVisa: String? = nil
-    @Published var locationPreference: String = "onsite"
-    @Published var relocationRequired: String = "NO"
-    @Published var addExpectedSalary: Bool = false 
+    @Published var locationPreference: String = "onsite" // onsite / remote/ hybrid
+    @Published var relocationRequired: String = "NO" // YES / NO
+    @Published var addExpectedSalary: Bool = false
     
     @Published var companyMissing: Bool = false
     @Published var jobTitleMissing: Bool = false
+    
+    @Published var errorAddInterview: String? = nil
+    @Published var existingInterviewId: String? = nil
     
     func validateFields() {
         companyMissing = company.name.isEmpty
@@ -44,23 +47,19 @@ class AddInterviewModel: ObservableObject {
     }
 
     
-
-    //TODO: Build encode and decode for data
-    /// Create Interview to the FireStore:
-    /// (1)Add interview document id to the user's document interviews field array
-    /// (2) Add past rounds as to the sub collection of pastRounds 
-    func addInterviewToFirestore(user: DBUser, salary: SalaryInfo, pastRounds: [RoundModel], futureRounds: [RoundModel]) async throws {
-        
+    private func encodeInterviewData(salary: SalaryInfo) -> [String: Any] {
         let is_relocation: Bool = {
             switch relocationRequired.lowercased() {
-            case "true":
+            case "yes":
                 return true
-            case "false":
+            case "no":
                 return false
             default:
                 return false // You can decide on a default value (true/false) or throw an error if needed.
             }
         }()
+        
+        print("relocationRequired.lowercased() is \(relocationRequired.lowercased())")
         
         // Convert to dictionary
         let salaryInfoDict: [String: Double] = [
@@ -71,7 +70,7 @@ class AddInterviewModel: ObservableObject {
         ]
 
         
-        var data: [String: Any]  = [
+        let data: [String: Any]  = [
             "company": company.name,
             "title": jobTitle,
             "startDate": startDate,
@@ -81,17 +80,23 @@ class AddInterviewModel: ObservableObject {
             "salary": salaryInfoDict,
             "visa_required": requiredVisa ?? ""
         ]
-        
-        let interviewDocument = try await AddInterviewManager.shared.createInterview(user: user, data: &data)
-        // Create pastRounds subCollection in interview document
-        try await AddInterviewManager.shared.addPastRounds(
-            to: interviewDocument.documentID,
-            pastRounds: pastRounds
-        )
-        return try await AddInterviewManager.shared.addFutureRounds(
-            to: interviewDocument.documentID,
-            futureRounds: futureRounds
-        )
+        return data
+    }
+    
+    func manageInterviewInFirestore(user: DBUser, salary: SalaryInfo, pastRounds: [RoundModel], futureRounds: [RoundModel], isUpdate: Bool = false) async throws {
+        var data: [String: Any] = encodeInterviewData(salary: salary)
+        print("update data: \(data)")
+        if isUpdate, let interviewId = existingInterviewId {
+            // Update existing interview
+            try await AddInterviewManager.shared.updateInterview(
+                user: user, data: &data, pastRounds: pastRounds, futureRounds: futureRounds, interviewId: interviewId
+            )
+        } else {
+            // Add new interview
+            try await AddInterviewManager.shared.createInterview(
+                user: user, data: &data, pastRounds: pastRounds, futureRounds: futureRounds
+            )
+        }
     }
     
 }

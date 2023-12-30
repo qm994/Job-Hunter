@@ -15,7 +15,7 @@ struct CirclePlusAddButton: View {
         ZStack {
             Circle()
                 .foregroundColor(.black)
-                .frame(width: 56, height: 56)
+                .frame(width: 52, height: 52)
                 .shadow(radius: 4)
                 .background(.ultraThinMaterial, in: Circle())
                 
@@ -28,7 +28,7 @@ struct CirclePlusAddButton: View {
                 .frame(width: 50, height: 50)
                 .rotationEffect(Angle(degrees: onTap ? 90 : 0))
         }
-        .frame(maxWidth: .infinity, alignment: .trailing)
+        .frame(maxWidth: .infinity, alignment: .top)
         .onTapGesture {
             withAnimation {
                 onTap.toggle()

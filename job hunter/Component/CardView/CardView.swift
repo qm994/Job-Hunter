@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CardView: View {
+    @EnvironmentObject var coreModel: CoreModel
     let interview: FetchedInterviewModel
     var body: some View {
         VStack(spacing: 20) {
@@ -32,29 +33,34 @@ struct CardView: View {
                         Text(interview.jobTitle)
                             .lineLimit(1)
                     }
-                    Label(interview.locationPreference, systemImage: "location.circle")
-                    Label(formatDateWithoutTime(interview.startDate), systemImage: "clock.badge.checkmark")
+                    HStack {
+                        Image(systemName: "location.circle")
+                        Text(interview.locationPreference)
+                    }
+                    HStack {
+                        Image(systemName: "clock.badge.checkmark")
+                        Text(formatDateWithoutTime(interview.startDate))
+                    }
                 }
                 
                 Spacer()
                 VStack(alignment: .leading) {
-                    HStack {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(.green)
-                        Text("Visa Sponsor")
-                    }
-                    HStack {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.red)
-                        Text("Relocation Required")
-                    }
-                    HStack {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.red)
-                        Text("Remote availablew")
-                    }
+                    CheckmarkView(
+                        imageName: interview.visaRequired != nil ? "checkmark.circle.fill" : "xmark.circle.fill",
+                        text: "Sponsor visa",
+                        isPositive: interview.visaRequired != nil
+                    )
+                    CheckmarkView(
+                        imageName: interview.relocationRequired ? "checkmark.circle.fill" : "xmark.circle.fill",
+                        text: "Need relocation",
+                        isPositive: interview.relocationRequired
+                    )
+                    CheckmarkView(
+                        imageName: interview.locationPreference == "remote" ? "checkmark.circle.fill" : "xmark.circle.fill",
+                        text: "Remote available",
+                        isPositive: interview.locationPreference == "remote"
+                    )
                 }
-                
             } // Second row ends
             .font(.subheadline)
             
@@ -66,6 +72,23 @@ struct CardView: View {
         .background(BlurView(style: .systemThickMaterialDark))
         .cornerRadius(15)
         .shadow(color: Color.white.opacity(0.2), radius: 10, x: 0, y: 10)
+        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+            Button {
+                
+                coreModel.path.append(NavigationPath.addInterviewScreen.rawValue)
+                coreModel.editInterview = interview
+                
+            } label: {
+                Label("Edit", systemImage: "pencil")
+            }
+            .tint(.blue)
+
+            Button(role: .destructive) {
+                // Handle delete action
+            } label: {
+                Label("Delete", systemImage: "trash")
+            }
+        }
     }
 }
 
@@ -140,9 +163,21 @@ struct CardSalarySection: View {
                             Text("Yearly Bonus %:")
                         }
 
-                        Text(String(interview.salary.bonus * 100))
+                        Text("\(Int(interview.salary.bonus * 100))%")
                     }
                     .foregroundColor(Color("usDollarGreen"))
+                    
+                    // Signon
+                    HStack(spacing: 5) {
+                        HStack {
+                            Image(systemName: "dollarsign.circle")
+                            Text("Sign on:")
+                        }
+
+                        Text(String(interview.salary.signon))
+                    }
+                    .foregroundColor(Color("usDollarGreen"))
+                    
                     
                     //MARK: Total Pay
                     HStack(spacing: 5) {
@@ -162,9 +197,27 @@ struct CardSalarySection: View {
     }
 }
 
+struct CheckmarkView: View {
+    var imageName: String
+    var text: String
+    var isPositive: Bool // Determines the color
+
+    var body: some View {
+        HStack {
+            Image(systemName: imageName)
+                .foregroundColor(isPositive ? .green : .red)
+            Text(text)
+        }
+    }
+}
+
+
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(interview: FetchedInterviewModel.sampleData)
-            //.previewLayout(.fixed(width: 400, height: 60))
+        List{
+            CardView(interview: FetchedInterviewModel.sampleData)
+                .environmentObject(CoreModel())
+        }
+        .listStyle(.plain)
     }
 }

@@ -58,28 +58,30 @@ struct TabButton: View {
 struct BottomNavigationView: View {
     @EnvironmentObject var coreModel: CoreModel
     
-    //@Binding var path: [String]
-    
     var body: some View {
-        HStack(spacing: 50) {
-            TabButton(tab: .home)
-            TabButton(tab: .profile)
+        VStack {
+            Spacer()
+            Divider() // This replaces the overlay with a simple line.
+
+            HStack(spacing: 50) {
+                TabButton(tab: .home)
+                CirclePlusAddButton() {
+                    withAnimation {
+                        coreModel.path.append(NavigationPath.addInterviewScreen.rawValue)
+                    }
+                }
+                TabButton(tab: .profile)
+            }
+            .padding(.horizontal, 40)
+            .padding(.vertical) // Add some vertical padding for space around the buttons.
+            .frame(height: 82) // Fixed height for the tab bar
+            .background(Color(.systemGray5))
+            
         }
-        .frame(height: UIScreen.main.bounds.height / 10)
-        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
-        .padding(.horizontal, 40)
-        .background(Color(.systemGray5))
-//        .clipShape(
-//            RoundedRectangle(cornerRadius: 20)
-//        )
-        .overlay(
-            Rectangle()
-                .fill(Color.gray)
-                .frame(height: 2),
-            alignment: .top
-        )
+        
     }
 }
+
 
 #Preview {
     BottomNavigationView()

@@ -8,15 +8,19 @@
 import SwiftUI
 
 struct AddInterviewButton: View {
+    
     @EnvironmentObject var authModel: AuthenticationModel
     @EnvironmentObject var addInterviewModel: AddInterviewModel
+    @EnvironmentObject var coreModel: CoreModel
     
     var salaryModel: SalarySectionModel
     var roundModel: InterviewRoundsModel
-    @Binding var path: [String]
+    
+    var isUpdate: Bool = false
     
     var body: some View {
-        Button("Add") {
+        Button(isUpdate ? "Update" : "Add") {
+            
             Task {
                 do {
                     guard let userProfile = authModel.userProfile else {
@@ -38,18 +42,30 @@ struct AddInterviewButton: View {
                         signon: addInterviewModel.addExpectedSalary ? salaryModel.signon : 0
                     )
                     
-                    //Add interview and its sub collections: pastRounds and futureRounds
-                    
-                    try await addInterviewModel.addInterviewToFirestore(
-                        user: userProfile,
-                        salary: salaryInfo,
-                        pastRounds: roundModel.pastRounds,
-                        futureRounds: roundModel.futureRounds
-                    )
-                    
-                    // Move back to main screen
-                    path.removeAll { pathName in
-                        pathName == NavigationPath.addInterviewScreen.rawValue
+                    if (isUpdate) {
+                        try await addInterviewModel.manageInterviewInFirestore(
+                            user: userProfile,
+                            salary: salaryInfo,
+                            pastRounds: roundModel.pastRounds,
+                            futureRounds: roundModel.futureRounds,
+                            isUpdate: isUpdate
+                        )
+                    } else {
+                        try await addInterviewModel.manageInterviewInFirestore(
+                            user: userProfile,
+                            salary: salaryInfo,
+                            pastRounds: roundModel.pastRounds,
+                            futureRounds: roundModel.futureRounds,
+                            isUpdate: isUpdate
+                        )
+                    }
+                    // Move back to main screen and clear the form
+                    DispatchQueue.main.async {
+                        coreModel.path.removeAll { pathName in
+                            pathName == NavigationPath.addInterviewScreen.rawValue
+                        }
+                        addInterviewModel.existingInterviewId = nil
+                        coreModel.editInterview = nil
                     }
                     print("Interview added successfully")
                 } catch {
@@ -61,20 +77,3 @@ struct AddInterviewButton: View {
 
     }
 }
-
-//#Preview {
-//    struct Wrapper: View {
-//        @State static var path: [String] = []
-//        var body: some View {
-//            AddInterviewButton(
-//                salaryModel: SalarySectionModel(),
-//                roundModel: InterviewRoundsModel(),
-//                path: Wrapper.$path
-//            )
-//            .environmentObject(AuthenticationModel())
-//            .environmentObject(AddInterviewModel())
-//        }
-//    }
-//    return Wrapper()
-//    
-//}

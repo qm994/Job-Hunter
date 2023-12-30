@@ -34,7 +34,7 @@ class FirestoreInterviewDataManager {
     // Fetch each interview document using the interviewIDs
     // Parse them into an array of Interview models
     
-    func fetchInterviews(fromUser userId: String?) async throws -> [DocumentSnapshot] {
+    func fetchInterviews(fromUser userId: String?) async throws -> [DocumentSnapshot]? {
         //MARK: Test error
 //        if userId == "testError" {
 //               throw NSError(domain: "FirestoreInterviewDataManager", code: 1002, userInfo: [NSLocalizedDescriptionKey: "Simulated Error for Testing"])
@@ -46,8 +46,8 @@ class FirestoreInterviewDataManager {
         
         let interviewIDs = try await fetchUserInterviewIDs(userID: userId)
          
-        guard !interviewIDs.isEmpty else {
-            throw NSError(domain: "FirestoreInterviewDataManager", code: 1001, userInfo: [NSLocalizedDescriptionKey: "No Interviews Available"])
+        if interviewIDs.isEmpty {
+            return nil
         }
 
         // Split the array into chunks of 10 to conform to Firestore's limitation
