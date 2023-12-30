@@ -15,7 +15,7 @@ struct CirclePlusAddButton: View {
         ZStack {
             Circle()
                 .foregroundColor(.black)
-                .frame(width: 56, height: 56)
+                .frame(width: 52, height: 52)
                 .shadow(radius: 4)
                 .background(.ultraThinMaterial, in: Circle())
                 
