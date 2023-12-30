@@ -13,6 +13,7 @@ struct PostionDetailSection: View {
     @ObservedObject var salaryModel: SalarySectionModel
     
     var body: some View {
+        DebugView("addInterviewModel.locationPreference in PostionDetailSection : \(addInterviewModel.locationPreference)")
         Section("Position Metadata") {
             VStack(spacing: 20) {
                 // location preference

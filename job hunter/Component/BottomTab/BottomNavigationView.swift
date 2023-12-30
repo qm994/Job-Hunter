@@ -60,6 +60,7 @@ struct BottomNavigationView: View {
     
     var body: some View {
         VStack {
+            Spacer()
             Divider() // This replaces the overlay with a simple line.
 
             HStack(spacing: 50) {
@@ -73,8 +74,11 @@ struct BottomNavigationView: View {
             }
             .padding(.horizontal, 40)
             .padding(.vertical) // Add some vertical padding for space around the buttons.
+            .frame(height: 82) // Fixed height for the tab bar
+            .background(Color(.systemGray5))
+            
         }
-        .background(Color(.systemGray5))
+        
     }
 }
 

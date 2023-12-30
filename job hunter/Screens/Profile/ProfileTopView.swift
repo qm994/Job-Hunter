@@ -76,7 +76,10 @@ struct ProfilePhotoView: View {
                     .overlay(Circle().stroke(Color.gray, lineWidth: 2))
             } else {
                 AsyncImageView(url: authModel.userProfile?.photoUrl ?? "", geometry: geometry) {
-                    ProgressView()
+                    Image(systemName: "person")
+                        .resizable()
+                        .scaledToFit()
+                        .scaleEffect(0.7)
                         .frame(width: geometry.size.width * 0.2, height: geometry.size.width * 0.2)
                         .clipShape(Circle())
                         .overlay(Circle().stroke(Color.gray, lineWidth: 2))

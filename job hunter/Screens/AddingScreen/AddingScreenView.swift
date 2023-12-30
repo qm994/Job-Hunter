@@ -57,6 +57,7 @@ struct AddingScreenView: View {
     
     var body: some View {
         // MARK: ScrollViewReader Auto Scroll
+        DebugView("addInterviewModel.existingInterviewId is \(addInterviewModel.existingInterviewId)")
         ScrollViewReader { scrollView in
             List {
                 BasicFields()
@@ -96,24 +97,34 @@ struct AddingScreenView: View {
                 leading:
                     Button("Cancel") {
                         print("cancel called")
-                        print("coreModel.path is \(coreModel.path)")
+                        addInterviewModel.existingInterviewId = nil
+                        coreModel.editInterview = nil
                         if let screenName = coreModel.path.firstIndex(of: NavigationPath.addInterviewScreen.rawValue) {
-                            print("screenName is \(screenName)")
-                            print("screenName is \(coreModel.path)")
                             coreModel.path.remove(at: screenName)
                         }
                     },
                 trailing:
-                    AddInterviewButton(
-                        salaryModel: salaryModel,
-                        roundModel: roundModel
-                    )
+                    Group {
+                        if let existingInterview = existingInterview {
+                            AddInterviewButton(
+                                salaryModel: salaryModel,
+                                roundModel: roundModel,
+                                isUpdate: true
+                            )
+                        } else {
+                            AddInterviewButton(
+                                salaryModel: salaryModel,
+                                roundModel: roundModel
+                            )
+                        }
+                    }
             )
             .navigationBarBackButtonHidden(true)
         } // ScrollView Ends
         .environmentObject(addInterviewModel)
         .onAppear {
             if let interview = existingInterview {
+                addInterviewModel.existingInterviewId = interview.id
                 // Populate your models with existing data
                 addInterviewModel.addExpectedSalary = true
                 salaryModel.base = interview.salary.base
@@ -127,11 +138,12 @@ struct AddingScreenView: View {
                 if let status = ApplicationStatus(rawValue: interview.status) {
                     addInterviewModel.status = status
                 }
+                
                 addInterviewModel.locationPreference = interview.locationPreference
                 if interview.relocationRequired {
-                    addInterviewModel.locationPreference = "YES"
+                    addInterviewModel.relocationRequired = "YES"
                 } else {
-                    addInterviewModel.locationPreference = "NO"
+                    addInterviewModel.relocationRequired = "NO"
                 }
                 
                 if let visaRequired = interview.visaRequired {
@@ -140,6 +152,14 @@ struct AddingScreenView: View {
                 }
                 
                 // TODO: Prefill rounds data
+                print("interview.pastRounds: \(interview.pastRounds)")
+                
+                roundModel.pastRounds = interview.pastRounds
+                if interview.futureRounds.count > 0 {
+                    self.isFutureEnabled = true
+                    roundModel.futureRounds = interview.futureRounds
+                }
+                
                 
             }
         }

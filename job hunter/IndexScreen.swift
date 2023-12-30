@@ -9,13 +9,13 @@ import SwiftUI
 
 struct IndexScreen: View {
     @StateObject var authModel: AuthenticationModel = AuthenticationModel()
+    @StateObject var coreModel: CoreModel = CoreModel()
     var body: some View {
-        DebugView("\(authModel.userProfile)")
         Group {
             if authModel.isLoggedIn, let _  = authModel.userProfile {
                 MainScreenView()
                     .environmentObject(authModel)
-                    .environmentObject(CoreModel())
+                    .environmentObject(coreModel)
                     .transition(.slide)
                     .animation(.linear, value: authModel.isLoggedIn)
                     

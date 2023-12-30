@@ -28,28 +28,17 @@ struct ProfileScreenView: View {
                 
                 
                 ProfileTopView()
-                .frame(height: geometry.size.height * 0.15)
+                    .frame(height: geometry.size.height * 0.15)
                 
                 ProfileTabsView()
+                    .frame(height: geometry.size.height * 0.5)
                 
-                List {
-                    Section(header: Text("Authentication")) {
-                        SignOutView()
-                        if let user = authModel.userProfile {
-                            Text("user id: \(user.userId)")
-                            if let dateCreated = user.dateCreated {
-                                Text(DateFormatter().string(from: dateCreated))
-                            }
-                            if let email = user.email {
-                                Text(email)
-                            }
-                        }
-                    }
+                if let user = authModel.userProfile {
+                    SignOutView()
+                    
                 }
-                .listSectionSeparator(.hidden)
-                
-                
             } // Vstack ends
+            
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -67,10 +56,10 @@ struct ProfileScreenView: View {
 struct ProfileScreenView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ProfileScreenView()
-                .navigationTitle("Account")
-                .environmentObject(AuthenticationModel())
-            
+                ProfileScreenView()
+                    //.navigationTitle("Profile")
+                    .environmentObject(AuthenticationModel())
+        
         }
         .navigationDestination(for: String.self) { value in
             if value == NavigationPath.addInterviewScreen.rawValue {

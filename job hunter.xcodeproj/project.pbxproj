@@ -45,6 +45,7 @@
 		EB53231E2ADDBA9C00004E9C /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EB53231D2ADDBA9C00004E9C /* FirebaseFirestoreSwift */; };
 		EB5323282ADDBA9C00004E9C /* FirebaseInstallations in Frameworks */ = {isa = PBXBuildFile; productRef = EB5323272ADDBA9C00004E9C /* FirebaseInstallations */; };
 		EB53232E2ADDBA9C00004E9C /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = EB53232D2ADDBA9C00004E9C /* FirebasePerformance */; };
+		EB5621EC2B3FD64D00C910D0 /* RoundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5621EB2B3FD64D00C910D0 /* RoundModel.swift */; };
 		EB5D062A2AE1B80B00C7A94B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EB5D06292AE1B80B00C7A94B /* FirebaseAuth */; };
 		EB5D062C2AE1D43700C7A94B /* BottomNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5D062B2AE1D43700C7A94B /* BottomNavigationView.swift */; };
 		EB5F20A02AD1D7450096C9A3 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F209F2AD1D7450096C9A3 /* DebugView.swift */; };
@@ -102,6 +103,7 @@
 		EB5322C32ADC76EA00004E9C /* ClearbitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearbitViewModel.swift; sourceTree = "<group>"; };
 		EB5322C52ADC772300004E9C /* CustomizedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizedTextField.swift; sourceTree = "<group>"; };
 		EB5322C72ADDB2FC00004E9C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EB5621EB2B3FD64D00C910D0 /* RoundModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundModel.swift; sourceTree = "<group>"; };
 		EB5D062B2AE1D43700C7A94B /* BottomNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavigationView.swift; sourceTree = "<group>"; };
 		EB5F209F2AD1D7450096C9A3 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		EB5F20A12AD262720096C9A3 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 				EB5322C32ADC76EA00004E9C /* ClearbitViewModel.swift */,
 				EB36C7CE2AE5BFF60090A2D0 /* AuthenticationModel.swift */,
 				EB3DB3A12B30C19B005F9397 /* FetchedInterviewModel.swift */,
+				EB5621EB2B3FD64D00C910D0 /* RoundModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 				EBB11A7C2AE08495002AAFDE /* AuthenticationMainScreen.swift in Sources */,
 				EB5F20AA2AD348940096C9A3 /* CardView.swift in Sources */,
 				EB5F20AC2AD34D430096C9A3 /* Utilities.swift in Sources */,
+				EB5621EC2B3FD64D00C910D0 /* RoundModel.swift in Sources */,
 				EB36C7CF2AE5BFF60090A2D0 /* AuthenticationModel.swift in Sources */,
 				EB36C7D92AE5C1AC0090A2D0 /* UserManager.swift in Sources */,
 				EB4E111A2B0B0CAC003D3764 /* VisaSponsorSection.swift in Sources */,

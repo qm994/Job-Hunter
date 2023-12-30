@@ -45,23 +45,22 @@ struct CardView: View {
                 
                 Spacer()
                 VStack(alignment: .leading) {
-                    HStack {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(.green)
-                        Text("Sponsor visa")
-                    }
-                    HStack {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.red)
-                        Text("Need relocation")
-                    }
-                    HStack {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.red)
-                        Text("Remote available")
-                    }
+                    CheckmarkView(
+                        imageName: interview.visaRequired != nil ? "checkmark.circle.fill" : "xmark.circle.fill",
+                        text: "Sponsor visa",
+                        isPositive: interview.visaRequired != nil
+                    )
+                    CheckmarkView(
+                        imageName: interview.relocationRequired ? "checkmark.circle.fill" : "xmark.circle.fill",
+                        text: "Need relocation",
+                        isPositive: interview.relocationRequired
+                    )
+                    CheckmarkView(
+                        imageName: interview.locationPreference == "remote" ? "checkmark.circle.fill" : "xmark.circle.fill",
+                        text: "Remote available",
+                        isPositive: interview.locationPreference == "remote"
+                    )
                 }
-                
             } // Second row ends
             .font(.subheadline)
             
@@ -164,9 +163,21 @@ struct CardSalarySection: View {
                             Text("Yearly Bonus %:")
                         }
 
-                        Text(String(interview.salary.bonus * 100))
+                        Text("\(Int(interview.salary.bonus * 100))%")
                     }
                     .foregroundColor(Color("usDollarGreen"))
+                    
+                    // Signon
+                    HStack(spacing: 5) {
+                        HStack {
+                            Image(systemName: "dollarsign.circle")
+                            Text("Sign on:")
+                        }
+
+                        Text(String(interview.salary.signon))
+                    }
+                    .foregroundColor(Color("usDollarGreen"))
+                    
                     
                     //MARK: Total Pay
                     HStack(spacing: 5) {
@@ -185,6 +196,21 @@ struct CardSalarySection: View {
         }
     }
 }
+
+struct CheckmarkView: View {
+    var imageName: String
+    var text: String
+    var isPositive: Bool // Determines the color
+
+    var body: some View {
+        HStack {
+            Image(systemName: imageName)
+                .foregroundColor(isPositive ? .green : .red)
+            Text(text)
+        }
+    }
+}
+
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {

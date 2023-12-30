@@ -16,11 +16,11 @@ struct SignOutView: View {
             authModel.signOut()
             
         } label: {
-            Text("Log Out")
+            Text("Sign Out")
                 .font(.headline)
                 .foregroundColor(.white)
                 .frame(height: 55)
-                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                .frame(maxWidth: UIScreen.main.bounds.width / 2)
                 .background(.blue)
                 .cornerRadius(20)
         }

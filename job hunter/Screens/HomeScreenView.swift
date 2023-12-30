@@ -15,26 +15,26 @@ struct HomeScreenView: View {
     @StateObject var interviewsViewModel: InterviewsViewModel = InterviewsViewModel()
     
     var body: some View {
-        ZStack {
-            List(interviewsViewModel.interviews, id: \.id) { interview in
-                CardView(interview: interview)
-                    
-            }
-            .listStyle(.plain)
-//            .listRowInsets(EdgeInsets())
-            .padding(.bottom, UIScreen.main.bounds.height / 10) // This is the height of bottom nav bar
-            
-            // Show spinner when loading
-            if interviewsViewModel.isLoading {
+        VStack {
+            if interviewsViewModel.interviews.isEmpty {
+                Text("No Interviews Available. Add it through bottom plus button.")
+                    .font(.headline)
+                    .multilineTextAlignment(.center)
+                
+            } else if interviewsViewModel.isLoading {
                 ProgressView()
                     .scaleEffect(1.5, anchor: .center)
                     .progressViewStyle(CircularProgressViewStyle(tint: .primary))
-            }
-            
-            if let error = interviewsViewModel.error {
+            } else if let error = interviewsViewModel.error {
                 Text("Failed to load interviews: \(error.localizedDescription)")
                     .foregroundColor(.red)
-                    // Add more UI customization as needed
+                // Add more UI customization as needed
+            } else {
+                List(interviewsViewModel.interviews, id: \.id) { interview in
+                    CardView(interview: interview)
+                    
+                }
+                .listStyle(.plain)
             }
         }
         // TODO: HANDLE ERROR

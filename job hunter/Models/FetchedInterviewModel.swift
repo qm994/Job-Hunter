@@ -18,10 +18,8 @@ struct FetchedInterviewModel: Identifiable {
     var locationPreference: String
     var relocationRequired: Bool
     var salary: SalaryInfo
-    // Add other properties as needed
-    //var pastRounds:  [RoundModel]?
-    //var futureRounds:  [RoundModel]?
-
+    var pastRounds:  [RoundModel]
+    var futureRounds:  [RoundModel]
 
     init?(document: DocumentSnapshot) {
         guard let data = document.data() else { return nil }
@@ -44,13 +42,18 @@ struct FetchedInterviewModel: Identifiable {
             self.salary = SalaryInfo() // Default empty values
         }
         
-//        if let pastRounds = data["pastRounds"] as? [String: String] {
-//            self.pastRounds = pastRounds.map({ key, value in
-//                return RoundModel()
-//            })
-//        }
-        
-        
+       
+        if let pastRoundsArray = data["pastRounds"] as? [[String: Any]] {
+            self.pastRounds = pastRoundsArray.compactMap { RoundModel(dictionary: $0) }
+        } else {
+            self.pastRounds = []
+        }
+
+        if let futureRoundsArray = data["futureRounds"] as? [[String: Any]] {
+            self.futureRounds = futureRoundsArray.compactMap { RoundModel(dictionary: $0) }
+        } else {
+            self.futureRounds = []
+        }
     }
 }
 
@@ -75,10 +78,18 @@ class InterviewsViewModel: ObservableObject {
                 //fromUser: "testError"
             )
             
-            // Clear the old data only when new data is successfully fetched
-            interviews.removeAll()
-            interviews.append(contentsOf: documentsSnap.compactMap { document in FetchedInterviewModel(document: document) })
-            self.error = nil // Clear any existing error
+            DispatchQueue.main.async {
+                guard let documentsSnap = documentsSnap else {
+                    self.interviews = []
+                    self.error = nil
+                    self.isLoading = false
+                    return
+                }
+                // Clear the old data only when new data is successfully fetched
+                self.interviews.removeAll()
+                self.interviews.append(contentsOf: documentsSnap.compactMap { document in FetchedInterviewModel(document: document) })
+                self.error = nil // Clear any existing error
+            }
             
         } catch {
             self.error = error
@@ -89,7 +100,7 @@ class InterviewsViewModel: ObservableObject {
 }
 
 extension FetchedInterviewModel {
-    init(id: String, company: String, jobTitle: String, startDate: Date, status: String, visaRequired: String?, locationPreference: String, relocationRequired: Bool, salary: SalaryInfo) {
+    init(id: String, company: String, jobTitle: String, startDate: Date, status: String, visaRequired: String?, locationPreference: String, relocationRequired: Bool, salary: SalaryInfo, pastRounds: [RoundModel], futureRounds: [RoundModel]) {
         self.id = id
         self.company = company
         self.jobTitle = jobTitle
@@ -99,6 +110,8 @@ extension FetchedInterviewModel {
         self.locationPreference = locationPreference
         self.relocationRequired = relocationRequired
         self.salary = salary
+        self.pastRounds = pastRounds
+        self.futureRounds = futureRounds
     }
     
     static var sampleData: FetchedInterviewModel {
@@ -111,7 +124,9 @@ extension FetchedInterviewModel {
             visaRequired: "H1B",
             locationPreference: "Remote",
             relocationRequired: true,
-            salary: SalaryInfo(base: 120000, bonus: 0.2, equity: 5000, signon: 5000)
+            salary: SalaryInfo(base: 120000, bonus: 0.2, equity: 5000, signon: 5000),
+            pastRounds: [],
+            futureRounds: []
         )
     }
 }
