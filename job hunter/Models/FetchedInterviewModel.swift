@@ -60,7 +60,7 @@ struct FetchedInterviewModel: Identifiable {
 class InterviewsViewModel: ObservableObject {
     @Published var interviews = [FetchedInterviewModel]()
     @Published var isLoading = false
-    @Published var error: Error?
+    @Published var error: String?
 
     //TODO: Cache the fetchInterviews results if no data change instead of just interviews.removeAll()
     func fetchInterviewsData() async throws {
@@ -92,10 +92,28 @@ class InterviewsViewModel: ObservableObject {
             }
             
         } catch {
-            self.error = error
+            self.error = error.localizedDescription
         }
         
         self.isLoading = false
+    }
+    
+    func deleteInterviewAndUpdate(interviewId: String) async throws {
+        do {
+            guard let currentUser = try AuthenticationManager.sharedAuth.getAuthenticatedUser() else {
+                throw NSError(domain: "AuthenticationError", code: 0, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found"])
+            }
+            
+            try await FirestoreInterviewDataManager.shared.deleteInterview(from: currentUser.uid, with: interviewId)
+            
+            // If the delete operation succeeds, remove the interview from the interviews array
+            DispatchQueue.main.async {
+                self.interviews.removeAll { $0.id == interviewId }
+            }
+        } catch let error {
+            self.error = "Failed to Delete the Interview! \(error.localizedDescription)"
+        }
+        
     }
 }
 

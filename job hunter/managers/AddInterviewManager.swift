@@ -39,12 +39,10 @@ final class AddInterviewManager {
         return data
     }
     
-    //TODO:
     func updateInterview(user: DBUser, data: inout [String: Any], pastRounds: [RoundModel], futureRounds: [RoundModel], interviewId: String?) async throws {
         guard let interviewId = interviewId else {
             throw NSError(domain: "AddInterviewManager", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Cannot find updating interview."])
         }
-        let userReference = UserManager.shared.userDocument(userId: user.userId)
         let data = try updateDataWithRounds(user: user, data: &data, pastRounds: pastRounds, futureRounds: futureRounds)
         
         let interviewRef = interviewCollection.document(interviewId)

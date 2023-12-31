@@ -9,7 +9,10 @@ import SwiftUI
 
 struct CardView: View {
     @EnvironmentObject var coreModel: CoreModel
+    @ObservedObject var interviewsViewModel: InterviewsViewModel
+    
     let interview: FetchedInterviewModel
+    
     var body: some View {
         VStack(spacing: 20) {
             //MARK: FIRST ROW
@@ -71,10 +74,9 @@ struct CardView: View {
         .padding()
         .background(BlurView(style: .systemThickMaterialDark))
         .cornerRadius(15)
-        .shadow(color: Color.white.opacity(0.2), radius: 10, x: 0, y: 10)
+        .shadow(color: Color.white.opacity(0.2), radius: 15, x: 0, y: 10)
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
             Button {
-                
                 coreModel.path.append(NavigationPath.addInterviewScreen.rawValue)
                 coreModel.editInterview = interview
                 
@@ -85,6 +87,11 @@ struct CardView: View {
 
             Button(role: .destructive) {
                 // Handle delete action
+                Task {
+                    try await interviewsViewModel.deleteInterviewAndUpdate(
+                        interviewId: interview.id
+                    )
+                }
             } label: {
                 Label("Delete", systemImage: "trash")
             }
@@ -213,10 +220,14 @@ struct CheckmarkView: View {
 
 
 struct CardView_Previews: PreviewProvider {
+    //@StateObject var interviewsViewModel = InterviewsViewModel()
     static var previews: some View {
         List{
-            CardView(interview: FetchedInterviewModel.sampleData)
-                .environmentObject(CoreModel())
+            CardView(
+                interviewsViewModel: InterviewsViewModel(),
+                interview: FetchedInterviewModel.sampleData
+            )
+            .environmentObject(CoreModel())
         }
         .listStyle(.plain)
     }

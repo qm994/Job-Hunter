@@ -35,11 +35,6 @@ class FirestoreInterviewDataManager {
     // Parse them into an array of Interview models
     
     func fetchInterviews(fromUser userId: String?) async throws -> [DocumentSnapshot]? {
-        //MARK: Test error
-//        if userId == "testError" {
-//               throw NSError(domain: "FirestoreInterviewDataManager", code: 1002, userInfo: [NSLocalizedDescriptionKey: "Simulated Error for Testing"])
-//           }
-        
         guard let userId = userId else {
             throw NSError(domain: "FirestoreInterviewDataManager", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Cannot find the user profile..."])
         }
@@ -66,6 +61,27 @@ class FirestoreInterviewDataManager {
         
         return allInterviewDocuments
     }
+    
+    func deleteInterview(from userId: String, with interviewId: String) async throws {
+        // Begin a batch to ensure atomic operations
+        let batch = Firestore.firestore().batch()
+
+        // Reference to the user's document
+        let userDocumentRef = usersCollection.document(userId)
+
+        // Remove the interview ID from the user's document
+        batch.updateData(["interviews": FieldValue.arrayRemove([interviewId])], forDocument: userDocumentRef)
+
+        // Reference to the interview document
+        let interviewDocumentRef = interviewsCollection.document(interviewId)
+
+        // Delete the interview document
+        batch.deleteDocument(interviewDocumentRef)
+
+        // Commit the batch
+        try await batch.commit()
+    }
+
 }
 
 extension Array {

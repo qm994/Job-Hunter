@@ -88,12 +88,12 @@ class AddInterviewModel: ObservableObject {
         print("update data: \(data)")
         if isUpdate, let interviewId = existingInterviewId {
             // Update existing interview
-            try await AddInterviewManager.shared.updateInterview(
+             try await AddInterviewManager.shared.updateInterview(
                 user: user, data: &data, pastRounds: pastRounds, futureRounds: futureRounds, interviewId: interviewId
             )
         } else {
             // Add new interview
-            try await AddInterviewManager.shared.createInterview(
+             try await AddInterviewManager.shared.createInterview(
                 user: user, data: &data, pastRounds: pastRounds, futureRounds: futureRounds
             )
         }
