@@ -12,7 +12,7 @@ import FirebaseFirestoreSwift
 struct HomeScreenView: View {
     
     @EnvironmentObject var authModel: AuthenticationModel
-    @StateObject var interviewsViewModel: InterviewsViewModel = InterviewsViewModel()
+    @EnvironmentObject var interviewsViewModel: InterviewsViewModel
     
     @State private var showAlert = false
     @State private var errorMessage = ""
@@ -75,8 +75,9 @@ struct HomeScreenView_Previews: PreviewProvider {
         let interviewsViewModel = InterviewsViewModel()
        
         NavigationStack {
-            HomeScreenView(interviewsViewModel: interviewsViewModel)
+            HomeScreenView()
                 .environmentObject(AuthenticationModel())
+                .environmentObject(InterviewsViewModel())
         }
     }
 }

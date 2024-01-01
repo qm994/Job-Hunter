@@ -27,7 +27,7 @@ struct FetchedInterviewModel: Identifiable {
         self.company = data["company"] as? String ?? ""
         self.jobTitle = data["title"] as? String ?? ""
         self.startDate = (data["startDate"] as? Timestamp)?.dateValue() ?? Date()
-        self.status = data["status"] as? String ?? ""
+        self.status = data["status"] as? String ?? ApplicationStatus.pending.rawValue
         self.visaRequired = data["visa_required"] as? String
         self.locationPreference = data["work_location"] as? String ?? "onsite"
         self.relocationRequired = data["is_relocation"] as? Bool ?? false
