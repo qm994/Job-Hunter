@@ -69,6 +69,7 @@ class FirestoreInterviewDataManager {
         // Reference to the user's document
         let userDocumentRef = usersCollection.document(userId)
 
+
         // Remove the interview ID from the user's document
         batch.updateData(["interviews": FieldValue.arrayRemove([interviewId])], forDocument: userDocumentRef)
 

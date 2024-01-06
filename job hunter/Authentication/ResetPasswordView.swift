@@ -18,7 +18,7 @@ struct ResetPasswordView: View {
         VStack {
             DefaultTextField(forField: "email", placeholder: "Email used before", text: $resetEmail)
             
-            AuthButton(label: "Reset") {
+            AuthButton(label: "Send reset link") {
                 Task {
                     guard !resetEmail.isEmpty else {
                         print("")
@@ -33,6 +33,11 @@ struct ResetPasswordView: View {
                     } catch {
                         showAlert = true
                     }
+                }
+            }
+            .onAppear {
+                if let email = authModel.userProfile?.email {
+                    resetEmail = email
                 }
             }
             .alert(isPresented: $showAlert) {

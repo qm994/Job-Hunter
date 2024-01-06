@@ -23,13 +23,15 @@ struct ProfileScreenView: View {
         GeometryReader { geometry in
             VStack(spacing: 5) {
                 HStack {
+                    Spacer()
                     Button {
-                        
+                        coreModel.path.append(NavigationPath.settingsView.rawValue)
                     } label: {
                         Image(systemName: "gear")
                             .font(.title2)
                     }
                 }
+                .padding(.trailing, 15)
                 
                 // Simulated line
                 Rectangle()
@@ -42,11 +44,6 @@ struct ProfileScreenView: View {
                 
                 ProfileTabsView()
                     
-                //TODO: ADD DELETE ACCOUNT
-                if let _ = authModel.userProfile {
-                    SignOutView()
-                        //.frame(height: geometry.size.height * 0.2)
-                }
             } // Vstack ends
             .frame(height: geometry.size.height)
         }

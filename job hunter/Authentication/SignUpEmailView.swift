@@ -14,8 +14,6 @@ class SignUpViewModel: ObservableObject {
     @Published var username: String = ""
     
     
-    @Published private(set) var errorMessage: String? = nil
-    
     private var authModel: AuthenticationModel
     
     init(authModel: AuthenticationModel) {
@@ -24,17 +22,16 @@ class SignUpViewModel: ObservableObject {
     
     func signUp() async throws {
         guard !email.isEmpty, !password.isEmpty, !username.isEmpty else {
-            self.errorMessage = "Email, Password, Username are required!"
-            return
+            
+            throw NSError(domain: "SignUpViewModel", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Email, Password, Username are required!"])
         }
         
         do {
             try await authModel.createUserWithEmailAndProfile(
-                email: email, password: password
+                email: email, password: password, userName: username
             )
         } catch {
-            self.errorMessage = error.localizedDescription
-            throw error
+            throw NSError(domain: "SignUpViewModel", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Create user failed! Please try again later and contact me."])
         }
         
     }
@@ -44,6 +41,7 @@ struct SignUpEmailView: View {
     @StateObject private var authModel: AuthenticationModel
     @StateObject private var model: SignUpViewModel
     @State private var showAlert: Bool = false
+    @State private var errorMessage: String = ""
     
     // Initialize SignUpViewModel with AuthenticationModel so we can use AuthenticationModel's method in SignUpViewModel
     
@@ -85,17 +83,19 @@ struct SignUpEmailView: View {
                         try await model.signUp()
                         presentationMode.wrappedValue.dismiss()
                     } catch {
-                        showAlert = true
+                        self.showAlert = true
+                        self.errorMessage = error.localizedDescription
                     }
                 }
             }
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("Error"),
-                    message: Text(model.errorMessage ?? "Unknown error"),
+                    message: Text(errorMessage),
                     dismissButton: .default(Text("OK")) {
                         model.email = ""
                         model.password = ""
+                        model.username = ""
                     }
                 )
             }

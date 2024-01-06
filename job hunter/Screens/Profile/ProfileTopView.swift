@@ -96,7 +96,7 @@ struct ProfileTopView: View {
             } // Vstack ends
         } // Geometry ends
         //.frame(height: geom)
-        .overlay(Rectangle().stroke())
+        //.overlay(Rectangle().stroke())
         .onAppear {
             Task {
                 try await authModel.loadCurrentUser()

@@ -57,5 +57,15 @@ final class AuthenticationManager {
         return try await Auth.auth().sendPasswordReset(withEmail: email)
     }
     
-    
+    func deleteUserFromAuthentication() async throws {
+        guard let user = Auth.auth().currentUser else {
+            throw NSError(domain: "AuthenticationManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found"])
+        }
+        do {
+            try await user.delete()
+        } catch let error {
+            throw NSError(domain: "AuthenticationManager", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to delete user: \(error.localizedDescription)"])
+        }
+    }
+  
 }

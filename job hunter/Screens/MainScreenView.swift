@@ -3,6 +3,8 @@ import SwiftUI
 enum NavigationPath: String {
     case addInterviewScreen
     case addInterviewPastRoundsScreen
+    case settingsView
+    case resetPasswordView
     
     var id: String {
         self.rawValue
@@ -30,7 +32,7 @@ struct MainScreenView: View {
                     .environmentObject(interviewModel)
                     
                     
-                    BottomNavigationView()
+                    BottomNavigationView(interviewModel: interviewModel)
                         //.overlay(Rectangle().stroke(Color.red, lineWidth: 1))
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -38,6 +40,10 @@ struct MainScreenView: View {
                 .navigationDestination(for: String.self) { value in
                     if value == NavigationPath.addInterviewScreen.rawValue {
                         AddingScreenView(existingInterview: $coreModel.editInterview)
+                    } else if value == NavigationPath.settingsView.rawValue {
+                        SettingsView()
+                    } else if value == NavigationPath.resetPasswordView.rawValue {
+                        ResetPasswordView()
                     }
             }
             }

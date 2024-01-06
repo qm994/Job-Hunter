@@ -19,9 +19,13 @@ struct HomeScreenView: View {
     
     
     var body: some View {
-        DebugView("interviewsViewModel.interviews is \(interviewsViewModel.interviews)")
         VStack {
-            if interviewsViewModel.interviews.isEmpty {
+            if interviewsViewModel.isLoading {
+                ProgressView()
+                    .scaleEffect(1.5, anchor: .center)
+                    .progressViewStyle(CircularProgressViewStyle(tint: .primary))
+            } 
+            else if interviewsViewModel.interviews.isEmpty {
                 VStack {
                     Spacer()
                     Text("No Interviews Available. Add it through bottom plus button.")
@@ -29,11 +33,8 @@ struct HomeScreenView: View {
                         .multilineTextAlignment(.center)
                     Spacer()
                 }
-            } else if interviewsViewModel.isLoading {
-                ProgressView()
-                    .scaleEffect(1.5, anchor: .center)
-                    .progressViewStyle(CircularProgressViewStyle(tint: .primary))
-            } else {
+            }
+            else {
                 List(interviewsViewModel.interviews, id: \.id) { interview in
                     CardView(interviewsViewModel: interviewsViewModel, interview: interview)
                     
@@ -66,14 +67,43 @@ struct HomeScreenView: View {
             )
         }
         
+        .toolbar {
+            ToolbarItemGroup(placement: .topBarLeading) {
+                VStack(alignment: .leading, spacing: 5) {
+                    HStack {
+                        Text("Welcome back: ")
+                            .foregroundColor(.secondary) // Less prominent
+                            .blur(radius: 0.5)
+                            .font(.title2)
+                        
+                        Text("\(authModel.userProfile?.userName ?? "unknown")")
+                            .fontWeight(.bold) // Highlighted part
+                            .foregroundColor(.yellow)
+                        
+                    }
+                    HStack {
+                        Text("Total ")
+                            .foregroundColor(.secondary) // Less prominent
+                            .blur(radius: 0.5)
+                        Text("\(interviewsViewModel.interviews.count)")
+                            .fontWeight(.bold) // Highlighted part
+                            .foregroundColor(.primary)
+                        Text(" interviews on track")
+                            .foregroundColor(.secondary) // Less prominent
+                            .blur(radius: 0.5)
+                    }
+                } // vstack ends
+                
+            } // ToolbarItem end
+        } //toolbar ends
+        .toolbarColorScheme(.dark)
     }
 }
 
 struct HomeScreenView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let interviewsViewModel = InterviewsViewModel()
-       
+        
         NavigationStack {
             HomeScreenView()
                 .environmentObject(AuthenticationModel())
