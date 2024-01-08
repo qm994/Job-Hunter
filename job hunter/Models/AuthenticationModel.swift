@@ -128,6 +128,7 @@ class AuthenticationModel: ObservableObject {
         
         1. document from users collection
         2. user's corresponding interviews documents
+        3. user's profile picture
         3. user from Authentication
      */
     
@@ -138,6 +139,8 @@ class AuthenticationModel: ObservableObject {
         
         let usersCollection = Firestore.firestore().collection("users")
         let interviewsCollection = Firestore.firestore().collection("interviews")
+        let storageRef = Storage.storage().reference().child("profilePictures/\(userProfile.userId).jpg")
+        
         // Begin a batch to ensure atomic operations
         let batch = Firestore.firestore().batch()
 
@@ -155,7 +158,23 @@ class AuthenticationModel: ObservableObject {
                 }
             }
             
+            //
+            
+            
+            
             try await batch.commit()
+            
+            // Attempt to delete the user's profile image from Firebase Storage
+            do {
+                try await storageRef.delete()
+            } catch let storageError as NSError {
+                // Check if the error is because the file doesn't exist
+                if storageError.domain == StorageErrorDomain && storageError.code == StorageErrorCode.objectNotFound.rawValue {
+                    print("Profile image does not exist, no deletion needed.")
+                } else {
+                    throw storageError
+                }
+            }
             
             // Delete user Authentication profile
             // Attempt to delete the user from Authentication

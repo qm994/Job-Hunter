@@ -31,7 +31,7 @@ class SignUpViewModel: ObservableObject {
                 email: email, password: password, userName: username
             )
         } catch {
-            throw NSError(domain: "SignUpViewModel", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Create user failed! Please try again later and contact me."])
+            throw NSError(domain: "SignUpViewModel", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Create user failed! Please try again later and contact the developer at: ma791778711@gmail.com."])
         }
         
     }

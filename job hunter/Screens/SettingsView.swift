@@ -22,6 +22,12 @@ struct SettingsView: View {
                     Task {
                         do {
                             try await authModel.signOut()
+                            // Reset navigation state
+                            DispatchQueue.main.async {
+                                coreModel.path = [] // Clears the navigation stack
+                                coreModel.selectedTab = .home // Sets the selected tab to home
+                            }
+                            
                         } catch {
                             errorMessage = error.localizedDescription
                             showError = true

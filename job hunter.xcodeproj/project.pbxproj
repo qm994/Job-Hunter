@@ -70,6 +70,7 @@
 		EBED85A72ADB05B300F25636 /* DropdownMenuList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBED85A62ADB05B300F25636 /* DropdownMenuList.swift */; };
 		EBED85A92ADB0BF200F25636 /* DropdownMenuOptionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBED85A82ADB0BF200F25636 /* DropdownMenuOptionRow.swift */; };
 		EBF149512B44F4E300F97F4F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF149502B44F4E300F97F4F /* SettingsView.swift */; };
+		EBF55F812B4CAA2500100B21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBF55F802B4CAA2500100B21 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +129,8 @@
 		EBED85A62ADB05B300F25636 /* DropdownMenuList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuList.swift; sourceTree = "<group>"; };
 		EBED85A82ADB0BF200F25636 /* DropdownMenuOptionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuOptionRow.swift; sourceTree = "<group>"; };
 		EBF149502B44F4E300F97F4F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		EBF149522B4B62A900F97F4F /* job hunter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "job hunter.entitlements"; sourceTree = "<group>"; };
+		EBF55F802B4CAA2500100B21 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +201,7 @@
 		EB4679992AC0DBF00026ACC3 /* job hunter */ = {
 			isa = PBXGroup;
 			children = (
+				EBF149522B4B62A900F97F4F /* job hunter.entitlements */,
 				EB46799C2AC0DBF00026ACC3 /* ContentView.swift */,
 				EB4E111F2B0E89D9003D3764 /* IndexScreen.swift */,
 				EB46799A2AC0DBF00026ACC3 /* job_hunterApp.swift */,
@@ -210,6 +214,7 @@
 				EB4679A02AC0DBF20026ACC3 /* Preview Content */,
 				EB46799E2AC0DBF20026ACC3 /* Assets.xcassets */,
 				EB5322C72ADDB2FC00004E9C /* GoogleService-Info.plist */,
+				EBF55F802B4CAA2500100B21 /* LaunchScreen.storyboard */,
 			);
 			path = "job hunter";
 			sourceTree = "<group>";
@@ -420,6 +425,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB4679A22AC0DBF20026ACC3 /* Preview Assets.xcassets in Resources */,
+				EBF55F812B4CAA2500100B21 /* LaunchScreen.storyboard in Resources */,
 				EB5322C82ADDB2FC00004E9C /* GoogleService-Info.plist in Resources */,
 				EB46799F2AC0DBF20026ACC3 /* Assets.xcassets in Resources */,
 			);
@@ -608,15 +614,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "job hunter/job hunter.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"job hunter/Preview Content\"";
 				DEVELOPMENT_TEAM = L9BAQ636P7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = MyInterviews;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
@@ -639,15 +649,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "job hunter/job hunter.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"job hunter/Preview Content\"";
 				DEVELOPMENT_TEAM = L9BAQ636P7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = MyInterviews;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
