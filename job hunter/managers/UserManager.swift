@@ -22,7 +22,13 @@ struct DBUser: Codable {
     // Array to store references to the user's interviews
     var interviews: [String]
     
-    init(user: AuthUserResultModel) {
+    //
+    var isPremium: Bool
+    
+    var maxInterviewsAllowed: Int
+    var userName: String
+    
+    init(user: AuthUserResultModel, userName: String) {
         self.userId = user.uid
         self.dateCreated = Date()
         self.dateModified = Date()
@@ -30,6 +36,9 @@ struct DBUser: Codable {
         self.photoUrl = user.photoUrl
         // Initialize the interview references as an empty array
         self.interviews = []
+        self.isPremium = false
+        self.maxInterviewsAllowed = 5
+        self.userName = userName
     }
 }
 
@@ -68,12 +77,16 @@ final class UserManager {
     
     // Authenticated user profile from firestore
     func getUser(userId: String) async throws -> DBUser? {
-        let document = try await userDocument(userId: userId).getDocument()
-        if document.exists {
-            return try userDecoder.decode(DBUser.self, from: document.data() as Any)
-        } else {
-            // Handle the scenario where the user doesn't exist.
-            return nil
+        do {
+            let document = try await userDocument(userId: userId).getDocument()
+            if let data = document.data(), document.exists {
+                return try userDecoder.decode(DBUser.self, from: data as Any)
+            } else {
+                // Handle the scenario where the user doesn't exist.
+                throw NSError(domain: "UserManager", code: 0, userInfo: ["description": "No user document found!"])
+            }
+        } catch {
+            throw NSError(domain: "UserManager", code: 1, userInfo: ["description": "Error fetching user: \(error.localizedDescription)"])
         }
     }
     

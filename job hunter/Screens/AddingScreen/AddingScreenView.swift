@@ -55,9 +55,16 @@ struct AddingScreenView: View {
     
     @Binding var existingInterview:  FetchedInterviewModel?
     
+    var navigationBarTitle: String {
+        if let _ = existingInterview  {
+            return "Update \(addInterviewModel.status.rawValue) Interview"
+        } else {
+            return "Add \(addInterviewModel.status.rawValue) Interview"
+        }
+    }
+    
     var body: some View {
         // MARK: ScrollViewReader Auto Scroll
-        DebugView("addInterviewModel.existingInterviewId is \(addInterviewModel.existingInterviewId)")
         ScrollViewReader { scrollView in
             List {
                 BasicFields()
@@ -84,7 +91,6 @@ struct AddingScreenView: View {
                 
             } //LIST ENDS
             .onChange(of: isFutureEnabled, initial: false) { _, newValue in
-                print("new value is : \(newValue)")
                 if newValue {
                     withAnimation {
                         scrollView.scrollTo("futureRoundsEnd", anchor: .bottomLeading)
@@ -92,7 +98,9 @@ struct AddingScreenView: View {
                 }
             }
             .listStyle(SidebarListStyle())
-            .navigationBarTitle("Add \(addInterviewModel.status.rawValue) Interview", displayMode: .inline)
+            .navigationBarTitle(
+                navigationBarTitle, displayMode: .inline
+            )
             .navigationBarItems(
                 leading:
                     Button("Cancel") {
@@ -105,7 +113,7 @@ struct AddingScreenView: View {
                     },
                 trailing:
                     Group {
-                        if let existingInterview = existingInterview {
+                        if let _ = existingInterview {
                             AddInterviewButton(
                                 salaryModel: salaryModel,
                                 roundModel: roundModel,

@@ -3,6 +3,8 @@ import SwiftUI
 enum NavigationPath: String {
     case addInterviewScreen
     case addInterviewPastRoundsScreen
+    case settingsView
+    case resetPasswordView
     
     var id: String {
         self.rawValue
@@ -12,31 +14,38 @@ enum NavigationPath: String {
 struct MainScreenView: View {
     @EnvironmentObject var coreModel: CoreModel
     @EnvironmentObject var authModel: AuthenticationModel
+    @StateObject var interviewModel: InterviewsViewModel = InterviewsViewModel()
    
     var body: some View {        
         NavigationStack(path: $coreModel.path) {
-            ZStack(
-                alignment: Alignment(horizontal: .center, vertical: .bottom)
-            ) {
-                
-                Group {
-                    switch coreModel.selectedTab {
-                        case .home:
-                            HomeScreenView()
-                                //.navigationTitle("Home")
-                        case .profile:
-                            ProfileScreenView()
-                                
+            GeometryReader { geometry in
+                VStack(spacing: 5) {
+                    Group {
+                        switch coreModel.selectedTab {
+                            case .home:
+                                HomeScreenView()
+                            case .profile:
+                                ProfileScreenView()
+                        }
                     }
+                    .frame(height: geometry.size.height * 0.9) // 90% of available height
+                    .environmentObject(interviewModel)
+                    
+                    
+                    BottomNavigationView(interviewModel: interviewModel)
+                        //.overlay(Rectangle().stroke(Color.red, lineWidth: 1))
                 }
-                BottomNavigationView()
-                
-            }// Zstack ends
-            .ignoresSafeArea(edges: .bottom)
-            .navigationDestination(for: String.self) { value in
-                if value == NavigationPath.addInterviewScreen.rawValue {
-                    AddingScreenView(existingInterview: $coreModel.editInterview)
-                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .ignoresSafeArea(edges: .bottom)
+                .navigationDestination(for: String.self) { value in
+                    if value == NavigationPath.addInterviewScreen.rawValue {
+                        AddingScreenView(existingInterview: $coreModel.editInterview)
+                    } else if value == NavigationPath.settingsView.rawValue {
+                        SettingsView()
+                    } else if value == NavigationPath.resetPasswordView.rawValue {
+                        ResetPasswordView()
+                    }
+            }
             }
         } // NavigationStack ends
         //.environment(CoreModel())

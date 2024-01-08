@@ -8,7 +8,7 @@
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct FetchedInterviewModel: Identifiable {
+struct FetchedInterviewModel: Identifiable, Equatable {
     var id: String
     var company: String
     var jobTitle: String
@@ -20,6 +20,13 @@ struct FetchedInterviewModel: Identifiable {
     var salary: SalaryInfo
     var pastRounds:  [RoundModel]
     var futureRounds:  [RoundModel]
+    
+    // Implement the static '==' function for Equatable
+    static func ==(lhs: FetchedInterviewModel, rhs: FetchedInterviewModel) -> Bool {
+        // Provide logic to determine if two FetchedInterviewModels are equal
+        // For example:
+        return lhs.id == rhs.id // if each model has a unique 'id' property
+    }
 
     init?(document: DocumentSnapshot) {
         guard let data = document.data() else { return nil }
@@ -27,7 +34,7 @@ struct FetchedInterviewModel: Identifiable {
         self.company = data["company"] as? String ?? ""
         self.jobTitle = data["title"] as? String ?? ""
         self.startDate = (data["startDate"] as? Timestamp)?.dateValue() ?? Date()
-        self.status = data["status"] as? String ?? ""
+        self.status = data["status"] as? String ?? ApplicationStatus.pending.rawValue
         self.visaRequired = data["visa_required"] as? String
         self.locationPreference = data["work_location"] as? String ?? "onsite"
         self.relocationRequired = data["is_relocation"] as? Bool ?? false
@@ -60,11 +67,23 @@ struct FetchedInterviewModel: Identifiable {
 class InterviewsViewModel: ObservableObject {
     @Published var interviews = [FetchedInterviewModel]()
     @Published var isLoading = false
-    @Published var error: Error?
-
+    @Published var error: String?
+    
     //TODO: Cache the fetchInterviews results if no data change instead of just interviews.removeAll()
     func fetchInterviewsData() async throws {
         self.isLoading = true
+        let timeoutInterval: TimeInterval = 10 // 10 seconds timeout
+        
+        // Start a timed block
+        DispatchQueue.main.asyncAfter(deadline: .now() + timeoutInterval) {
+            if self.isLoading { // Still loading after timeout
+                self.isLoading = false
+                self.error = "Request timed out"
+                print("DispatchQueue.main.asyncAfter timeout")
+                // Handle timeout scenario, such as canceling the request or showing an error message
+            }
+        }
+        
         // Firestore fetch logic
         // For each document snapshot, initialize a FetchedInterviewModel
         // Append each model to the interviews array
@@ -86,16 +105,37 @@ class InterviewsViewModel: ObservableObject {
                     return
                 }
                 // Clear the old data only when new data is successfully fetched
+                self.error = nil
+                self.isLoading = false
                 self.interviews.removeAll()
                 self.interviews.append(contentsOf: documentsSnap.compactMap { document in FetchedInterviewModel(document: document) })
-                self.error = nil // Clear any existing error
             }
             
         } catch {
-            self.error = error
+            DispatchQueue.main.async {
+                self.error = error.localizedDescription
+                self.isLoading = false // Also needs to be set here in case of error
+            }
         }
-        
-        self.isLoading = false
+    }
+    
+    func deleteInterviewAndUpdate(interviewId: String) async throws {
+        do {
+            guard let currentUser = try AuthenticationManager.sharedAuth.getAuthenticatedUser() else {
+                throw NSError(domain: "AuthenticationError", code: 0, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found"])
+            }
+            
+            try await FirestoreInterviewDataManager.shared.deleteInterview(from: currentUser.uid, with: interviewId)
+            
+            // If the delete operation succeeds, remove the interview from the interviews array
+            DispatchQueue.main.async {
+                self.interviews.removeAll { $0.id == interviewId }
+            }
+        } catch let error {
+            DispatchQueue.main.async {
+                self.error = "Failed to Delete the Interview! \(error.localizedDescription)"
+            }
+        }
     }
 }
 

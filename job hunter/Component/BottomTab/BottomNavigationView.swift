@@ -57,6 +57,8 @@ struct TabButton: View {
 
 struct BottomNavigationView: View {
     @EnvironmentObject var coreModel: CoreModel
+    @EnvironmentObject var authModel: AuthenticationModel
+    @ObservedObject var interviewModel: InterviewsViewModel
     
     var body: some View {
         VStack {
@@ -76,14 +78,30 @@ struct BottomNavigationView: View {
             .padding(.vertical) // Add some vertical padding for space around the buttons.
             .frame(height: 82) // Fixed height for the tab bar
             .background(Color(.systemGray5))
-            
         }
-        
+        .onChange(of: interviewModel.interviews) {
+            if let userProfile = authModel.userProfile {
+                let currentCounts = interviewModel.interviews.count
+                let maxAllowed = userProfile.maxInterviewsAllowed
+                if currentCounts < maxAllowed {
+                    coreModel.addButtonStatus = "enabled"
+                } else {
+                    coreModel.addButtonStatus = "disabled"
+                }
+            }
+        }
     }
 }
 
 
 #Preview {
-    BottomNavigationView()
-        .environmentObject(CoreModel())
+    struct Wrapper: View {
+        @StateObject var interviewModel = InterviewsViewModel()
+        var body: some View {
+            BottomNavigationView(interviewModel: interviewModel)
+                .environmentObject(CoreModel())
+                .environmentObject(AuthenticationModel())
+        }
+    }
+    return Wrapper()
 }

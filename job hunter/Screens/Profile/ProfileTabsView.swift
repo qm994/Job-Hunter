@@ -33,6 +33,7 @@ struct ProfileTabsView: View {
                 .font(.largeTitle)
             }
         }
+        //.overlay(Rectangle().stroke())
     }
 }
 

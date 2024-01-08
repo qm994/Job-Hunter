@@ -8,19 +8,31 @@
 import SwiftUI
 
 struct ProfileScreenView: View {
+    
+    @EnvironmentObject var authModel: AuthenticationModel
+    @EnvironmentObject var coreModel: CoreModel
+    
 
     private let dateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
-    
-    @EnvironmentObject var authModel: AuthenticationModel
-
+  
     var body: some View {
         GeometryReader { geometry in
-            
-            VStack {
+            VStack(spacing: 5) {
+                HStack {
+                    Spacer()
+                    Button {
+                        coreModel.path.append(NavigationPath.settingsView.rawValue)
+                    } label: {
+                        Image(systemName: "gear")
+                            .font(.title2)
+                    }
+                }
+                .padding(.trailing, 15)
+                
                 // Simulated line
                 Rectangle()
                     .frame(height: 1) // Set the height to 1 to create a line
@@ -28,27 +40,12 @@ struct ProfileScreenView: View {
                 
                 
                 ProfileTopView()
-                    .frame(height: geometry.size.height * 0.15)
+                    .frame(height: geometry.size.height * 0.3)
                 
                 ProfileTabsView()
-                    .frame(height: geometry.size.height * 0.5)
-                
-                if let user = authModel.userProfile {
-                    SignOutView()
                     
-                }
             } // Vstack ends
-            
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        
-                    } label: {
-                        Image(systemName: "gear")
-                            .font(.title2)
-                    }
-                }
-            }//toolbar ends
+            .frame(height: geometry.size.height)
         }
     }
 }
@@ -59,6 +56,11 @@ struct ProfileScreenView_Previews: PreviewProvider {
                 ProfileScreenView()
                     //.navigationTitle("Profile")
                     .environmentObject(AuthenticationModel())
+                    .environmentObject(CoreModel())
+                    .environmentObject(InterviewsViewModel())
+            
+            
+                //BottomNavigationView()
         
         }
         .navigationDestination(for: String.self) { value in

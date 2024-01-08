@@ -58,7 +58,7 @@
 		EBA751892AE2F593008247CD /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA751882AE2F593008247CD /* ResetPasswordView.swift */; };
 		EBB11A782ADF6CA3002AAFDE /* SignUpEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB11A772ADF6CA3002AAFDE /* SignUpEmailView.swift */; };
 		EBB11A7C2AE08495002AAFDE /* AuthenticationMainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB11A7B2AE08495002AAFDE /* AuthenticationMainScreen.swift */; };
-		EBB11A7E2AE0D8D5002AAFDE /* SignOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB11A7D2AE0D8D5002AAFDE /* SignOutView.swift */; };
+		EBB11A7E2AE0D8D5002AAFDE /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB11A7D2AE0D8D5002AAFDE /* ActionButton.swift */; };
 		EBB11A812AE0D9B7002AAFDE /* DefaultTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB11A802AE0D9B7002AAFDE /* DefaultTextField.swift */; };
 		EBD35D3F2AD64EC00076BE33 /* CardFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD35D3E2AD64EBF0076BE33 /* CardFooterView.swift */; };
 		EBD35D412AD6FDD00076BE33 /* PostionDetailSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD35D402AD6FDD00076BE33 /* PostionDetailSection.swift */; };
@@ -69,6 +69,8 @@
 		EBED85A52ADAF90A00F25636 /* DropdownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBED85A42ADAF90A00F25636 /* DropdownMenu.swift */; };
 		EBED85A72ADB05B300F25636 /* DropdownMenuList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBED85A62ADB05B300F25636 /* DropdownMenuList.swift */; };
 		EBED85A92ADB0BF200F25636 /* DropdownMenuOptionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBED85A82ADB0BF200F25636 /* DropdownMenuOptionRow.swift */; };
+		EBF149512B44F4E300F97F4F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF149502B44F4E300F97F4F /* SettingsView.swift */; };
+		EBF55F812B4CAA2500100B21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBF55F802B4CAA2500100B21 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,7 +117,7 @@
 		EBA751882AE2F593008247CD /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		EBB11A772ADF6CA3002AAFDE /* SignUpEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailView.swift; sourceTree = "<group>"; };
 		EBB11A7B2AE08495002AAFDE /* AuthenticationMainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationMainScreen.swift; sourceTree = "<group>"; };
-		EBB11A7D2AE0D8D5002AAFDE /* SignOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutView.swift; sourceTree = "<group>"; };
+		EBB11A7D2AE0D8D5002AAFDE /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		EBB11A802AE0D9B7002AAFDE /* DefaultTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTextField.swift; sourceTree = "<group>"; };
 		EBD35D3E2AD64EBF0076BE33 /* CardFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFooterView.swift; sourceTree = "<group>"; };
 		EBD35D402AD6FDD00076BE33 /* PostionDetailSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostionDetailSection.swift; sourceTree = "<group>"; };
@@ -126,6 +128,9 @@
 		EBED85A42ADAF90A00F25636 /* DropdownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenu.swift; sourceTree = "<group>"; };
 		EBED85A62ADB05B300F25636 /* DropdownMenuList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuList.swift; sourceTree = "<group>"; };
 		EBED85A82ADB0BF200F25636 /* DropdownMenuOptionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuOptionRow.swift; sourceTree = "<group>"; };
+		EBF149502B44F4E300F97F4F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		EBF149522B4B62A900F97F4F /* job hunter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "job hunter.entitlements"; sourceTree = "<group>"; };
+		EBF55F802B4CAA2500100B21 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,11 +201,12 @@
 		EB4679992AC0DBF00026ACC3 /* job hunter */ = {
 			isa = PBXGroup;
 			children = (
+				EBF149522B4B62A900F97F4F /* job hunter.entitlements */,
 				EB46799C2AC0DBF00026ACC3 /* ContentView.swift */,
 				EB4E111F2B0E89D9003D3764 /* IndexScreen.swift */,
+				EB46799A2AC0DBF00026ACC3 /* job_hunterApp.swift */,
 				EB36C7D52AE5C1370090A2D0 /* managers */,
 				EBB11A762ADF6C6D002AAFDE /* Authentication */,
-				EB46799A2AC0DBF00026ACC3 /* job_hunterApp.swift */,
 				EB4679F02ACE2D310026ACC3 /* Models */,
 				EB4679AA2AC0DCF00026ACC3 /* Screens */,
 				EB4679DE2AC1EAA80026ACC3 /* Component */,
@@ -208,6 +214,7 @@
 				EB4679A02AC0DBF20026ACC3 /* Preview Content */,
 				EB46799E2AC0DBF20026ACC3 /* Assets.xcassets */,
 				EB5322C72ADDB2FC00004E9C /* GoogleService-Info.plist */,
+				EBF55F802B4CAA2500100B21 /* LaunchScreen.storyboard */,
 			);
 			path = "job hunter";
 			sourceTree = "<group>";
@@ -224,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				EB4679E72ACCB5AF0026ACC3 /* MainScreenView.swift */,
+				EBF149502B44F4E300F97F4F /* SettingsView.swift */,
 				EB4679AE2AC0E2EE0026ACC3 /* HomeScreenView.swift */,
 				EB36C7D22AE5C0DF0090A2D0 /* Profile */,
 				EB4679F82ACF1E640026ACC3 /* AddingScreen */,
@@ -251,6 +259,7 @@
 				EB4679E32AC1F2E00026ACC3 /* InterviewDetail.swift */,
 				EB5F20A12AD262720096C9A3 /* BlurView.swift */,
 				EB5322BF2ADC62CC00004E9C /* VisualEffectView.swift */,
+				EBB11A7D2AE0D8D5002AAFDE /* ActionButton.swift */,
 				EB5322C12ADC646100004E9C /* AsyncImageView.swift */,
 			);
 			path = Component;
@@ -308,7 +317,6 @@
 			children = (
 				EBB11A7B2AE08495002AAFDE /* AuthenticationMainScreen.swift */,
 				EBB11A772ADF6CA3002AAFDE /* SignUpEmailView.swift */,
-				EBB11A7D2AE0D8D5002AAFDE /* SignOutView.swift */,
 				EBA751882AE2F593008247CD /* ResetPasswordView.swift */,
 				EB36C7CC2AE5BFC20090A2D0 /* SignInView.swift */,
 			);
@@ -417,6 +425,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB4679A22AC0DBF20026ACC3 /* Preview Assets.xcassets in Resources */,
+				EBF55F812B4CAA2500100B21 /* LaunchScreen.storyboard in Resources */,
 				EB5322C82ADDB2FC00004E9C /* GoogleService-Info.plist in Resources */,
 				EB46799F2AC0DBF20026ACC3 /* Assets.xcassets in Resources */,
 			);
@@ -440,7 +449,7 @@
 				EB46799D2AC0DBF00026ACC3 /* ContentView.swift in Sources */,
 				EB36C7CD2AE5BFC20090A2D0 /* SignInView.swift in Sources */,
 				EBB11A812AE0D9B7002AAFDE /* DefaultTextField.swift in Sources */,
-				EBB11A7E2AE0D8D5002AAFDE /* SignOutView.swift in Sources */,
+				EBB11A7E2AE0D8D5002AAFDE /* ActionButton.swift in Sources */,
 				EB8F91832B000DE00081F398 /* PastRounds.swift in Sources */,
 				EBD35D412AD6FDD00076BE33 /* PostionDetailSection.swift in Sources */,
 				EB3DB3A42B339E9F005F9397 /* ProfileTopView.swift in Sources */,
@@ -468,6 +477,7 @@
 				EB4679FC2ACF1E930026ACC3 /* AddSucceedScreen.swift in Sources */,
 				EB5F20A02AD1D7450096C9A3 /* DebugView.swift in Sources */,
 				EB3DB3A82B360028005F9397 /* ProfileTabsView.swift in Sources */,
+				EBF149512B44F4E300F97F4F /* SettingsView.swift in Sources */,
 				EB5322C02ADC62CC00004E9C /* VisualEffectView.swift in Sources */,
 				EB4E11202B0E89D9003D3764 /* IndexScreen.swift in Sources */,
 				EB5F20A22AD262720096C9A3 /* BlurView.swift in Sources */,
@@ -604,15 +614,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "job hunter/job hunter.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"job hunter/Preview Content\"";
 				DEVELOPMENT_TEAM = L9BAQ636P7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = MyInterviews;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
@@ -635,15 +649,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "job hunter/job hunter.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"job hunter/Preview Content\"";
 				DEVELOPMENT_TEAM = L9BAQ636P7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = MyInterviews;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
