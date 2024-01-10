@@ -35,7 +35,6 @@ struct SignInView: View {
                                 password: password
                             )
                         } catch let signInError {
-                            print(signInError)
                             self.errorMessage = authModel.parseFirebaseError(signInError)
 
                             self.showError = true

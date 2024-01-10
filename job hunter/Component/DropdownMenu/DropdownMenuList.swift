@@ -22,7 +22,7 @@ struct DropdownMenuList: View {
                 //.edgesIgnoringSafeArea(.all)
             
             ScrollView {
-                LazyVStack(alignment: .leading, spacing: 20) {
+                LazyVStack(alignment: .leading, spacing: 30) {
                     ForEach(options, id: \.id) { option in
                         DropdownMenuOptionRow(
                             option: option,
@@ -31,6 +31,7 @@ struct DropdownMenuList: View {
                         )
                     }
                 }
+                .padding()
             } //ScrollView Ends
             /// If all options height > 300, make the container as 300 and use the scroll. Otherwise use the dynamic height
             .frame(height: CGFloat(self.options.count * 30) > 300
@@ -42,7 +43,6 @@ struct DropdownMenuList: View {
                     .stroke(.gray, lineWidth: 2)
             }
         }
-        
     }
 }
 

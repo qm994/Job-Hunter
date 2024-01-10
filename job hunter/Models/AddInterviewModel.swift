@@ -59,8 +59,6 @@ class AddInterviewModel: ObservableObject {
             }
         }()
         
-        print("relocationRequired.lowercased() is \(relocationRequired.lowercased())")
-        
         // Convert to dictionary
         let salaryInfoDict: [String: Double] = [
             "base": salary.base,
@@ -85,7 +83,6 @@ class AddInterviewModel: ObservableObject {
     
     func manageInterviewInFirestore(user: DBUser, salary: SalaryInfo, pastRounds: [RoundModel], futureRounds: [RoundModel], isUpdate: Bool = false) async throws {
         var data: [String: Any] = encodeInterviewData(salary: salary)
-        print("update data: \(data)")
         if isUpdate, let interviewId = existingInterviewId {
             // Update existing interview
              try await AddInterviewManager.shared.updateInterview(

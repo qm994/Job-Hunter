@@ -104,7 +104,6 @@ struct AddingScreenView: View {
             .navigationBarItems(
                 leading:
                     Button("Cancel") {
-                        print("cancel called")
                         addInterviewModel.existingInterviewId = nil
                         coreModel.editInterview = nil
                         if let screenName = coreModel.path.firstIndex(of: NavigationPath.addInterviewScreen.rawValue) {
@@ -158,9 +157,6 @@ struct AddingScreenView: View {
                     addInterviewModel.needVisaSponsor = true
                     addInterviewModel.requiredVisa = visaRequired
                 }
-                
-                // TODO: Prefill rounds data
-                print("interview.pastRounds: \(interview.pastRounds)")
                 
                 roundModel.pastRounds = interview.pastRounds
                 if interview.futureRounds.count > 0 {

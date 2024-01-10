@@ -13,8 +13,12 @@ class FirestoreInterviewDataManager {
     
     static let shared = FirestoreInterviewDataManager()
     
-    private let usersCollection = Firestore.firestore().collection("users")
-    private let interviewsCollection = Firestore.firestore().collection("interviews")
+    private var usersCollection: CollectionReference {
+        FirebaseServices.shared.firestore.collection("users")
+    }
+    private var interviewsCollection: CollectionReference {
+        FirebaseServices.shared.firestore.collection("interviews")
+    }
     
     init(){}
     
@@ -64,7 +68,7 @@ class FirestoreInterviewDataManager {
     
     func deleteInterview(from userId: String, with interviewId: String) async throws {
         // Begin a batch to ensure atomic operations
-        let batch = Firestore.firestore().batch()
+        let batch = FirebaseServices.shared.firestore.batch()
 
         // Reference to the user's document
         let userDocumentRef = usersCollection.document(userId)

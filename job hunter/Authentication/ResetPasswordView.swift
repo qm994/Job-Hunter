@@ -21,7 +21,6 @@ struct ResetPasswordView: View {
             AuthButton(label: "Send reset link") {
                 Task {
                     guard !resetEmail.isEmpty else {
-                        print("")
                         return
                     }
                 

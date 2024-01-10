@@ -27,16 +27,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         #if DEBUG
         if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
-            print("running on preview")
+            print("AppDelegate running on preview")
             let providerFactory = AppCheckDebugProviderFactory()
             AppCheck.setAppCheckProviderFactory(providerFactory)
         } else {
             #if targetEnvironment(simulator)
-            print("running on simulator")
+            print("AppDelegate running on simulator")
             let providerFactory = AppCheckDebugProviderFactory()
             AppCheck.setAppCheckProviderFactory(providerFactory)
             #else
-            print("running on production")
+            print("AppDelegate running on production")
             let providerFactory = MyAppCheckProviderFactory()
             AppCheck.setAppCheckProviderFactory(providerFactory)
             #endif

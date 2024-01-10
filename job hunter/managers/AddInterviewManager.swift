@@ -14,7 +14,9 @@ final class AddInterviewManager {
     static let shared = AddInterviewManager()
     init(){}
     
-    private let interviewCollection = Firestore.firestore().collection("interviews")
+    private var interviewCollection: CollectionReference {
+        FirebaseServices.shared.firestore.collection("interviews")
+    }
     
     func addInterviewReferenceToUser(userRef: DocumentReference, interviewId: String) async throws {
         try await userRef.updateData(["interviews": FieldValue.arrayUnion([interviewId])])
