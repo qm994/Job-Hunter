@@ -21,25 +21,46 @@ struct AsyncImageView<Placeholder: View>: View {
     
     var body: some View {
         AsyncImage(url: URL(string: url)) { phase in
-            // Success: Display the loaded image.
-            if let image = phase.image {
-                image
-                    .resizable()
-                    .scaledToFit()
-                    .aspectRatio(0.70, contentMode: .fill)
-                    .frame(width: geometry.size.width * 0.2, height: geometry.size.width * 0.2)
-                    .clipShape(Circle())
-                    .foregroundColor(Color.white)
-                    .overlay(Circle().stroke(Color.gray, lineWidth: 2))
-            } else if phase.error != nil {
-                // Error: Display a fallback image or a custom error view.
-                placeholder()
-            } else {
-                // Loading: Show a progress indicator.
-                placeholder()
+                    switch phase {
+                    case .success(let image):
+                        image
+                            .resizable() // Apply resizable to the image itself
+                            .scaledToFit()
+                    case .failure(_):
+                        placeholder()
+                    case .empty:
+                        placeholder()
+                    @unknown default:
+                        placeholder()
+                    }
+                }
+                .aspectRatio(1, contentMode: .fit) // Control the aspect ratio
+                .clipShape(Circle())
+                .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+                .frame(width: geometry.size.width, height: geometry.size.height) // Apply frame to the entire AsyncImage
             }
-        }
-    }
+//        AsyncImage(url: URL(string: url)) { phase in
+//            // Success: Display the loaded image.
+//            
+//            if let image = phase.image {
+//                image
+//                    .resizable()
+//                    .scaledToFit()
+//                    .scaleEffect(0.7)
+//                    //.aspectRatio(0.70, contentMode: .fill)
+//                    .clipShape(Circle())
+//                    .foregroundColor(Color.white)
+//                    .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+//                
+//            } else if phase.error != nil {
+//                // Error: Display a fallback image or a custom error view.
+//                placeholder()
+//            } else {
+//                // Loading: Show a progress indicator.
+//                placeholder()
+//            }
+//        }
+    //}
 }
 
 

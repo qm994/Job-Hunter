@@ -24,7 +24,6 @@ class ClearbitViewDataManager {
             let companies = try decoder.decode([CompanyData].self, from: data)
             return companies
         } catch {
-            print("Failed to decode JSON: \(error)")
             return nil
         }
     }

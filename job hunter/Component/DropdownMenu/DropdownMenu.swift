@@ -22,18 +22,18 @@ struct DropdownMenuCompanyOption: Identifiable {
 
 extension DropdownMenuCompanyOption {
     static let allOptions: [DropdownMenuCompanyOption] = [
-        DropdownMenuCompanyOption(name: "Apple"),
-        DropdownMenuCompanyOption(name: "Applepie"),
-        DropdownMenuCompanyOption(name: "Appal"),
-        DropdownMenuCompanyOption(name: "Apple"),
-        DropdownMenuCompanyOption(name: "Applepie"),
-        DropdownMenuCompanyOption(name: "Appal"),
-        DropdownMenuCompanyOption(name: "Apple"),
-        DropdownMenuCompanyOption(name: "Applepie"),
-        DropdownMenuCompanyOption(name: "Appal"),
-        DropdownMenuCompanyOption(name: "Apple"),
-        DropdownMenuCompanyOption(name: "Applepie"),
-        DropdownMenuCompanyOption(name: "Appal")
+        DropdownMenuCompanyOption(name: "Apple", icon: "https://logo.clearbit.com/microsoftcasualgames.com"),
+        DropdownMenuCompanyOption(name: "Applepie", icon: "https://logo.clearbit.com/microsoftcasualgames.com"),
+        DropdownMenuCompanyOption(name: "Appal", icon: "https://logo.clearbit.com/microsoftcasualgames.com"),
+        DropdownMenuCompanyOption(name: "Apple", icon: "https://logo.clearbit.com/microsoftcasualgames.com"),
+        DropdownMenuCompanyOption(name: "Applepie", icon: "https://logo.clearbit.com/microsoftcasualgames.com"),
+        DropdownMenuCompanyOption(name: "Appal", icon: "https://logo.clearbit.com/microsoftcasualgames.com"),
+        DropdownMenuCompanyOption(name: "Apple", icon: "https://logo.clearbit.com/microsoftcasualgames.com"),
+        DropdownMenuCompanyOption(name: "Applepie", icon: "https://logo.clearbit.com/microsoftcasualgames.com"),
+        DropdownMenuCompanyOption(name: "Appal", icon: "https://logo.clearbit.com/microsoftcasualgames.com"),
+        DropdownMenuCompanyOption(name: "Apple", icon: "https://logo.clearbit.com/microsoftcasualgames.com"),
+        DropdownMenuCompanyOption(name: "Applepie", icon: "https://logo.clearbit.com/microsoftcasualgames.com"),
+        DropdownMenuCompanyOption(name: "Appal", icon: "https://logo.clearbit.com/microsoftcasualgames.com")
     ]
 }
 

@@ -14,6 +14,14 @@ import FirebaseFirestore
 class AuthenticationModel: ObservableObject {
     @Published var isLoggedIn: Bool = false
     @Published var userProfile: DBUser? = nil
+    
+    private var usersCollection: CollectionReference = {
+        return FirebaseServices.shared.firestore.collection("users")
+    }()
+    
+    private var interviewsCollection: CollectionReference = {
+        FirebaseServices.shared.firestore.collection("interviews")
+    }()
 
     func createUserWithEmailAndProfile(email: String, password: String, userName: String)  async throws {
         //1. create authenticate user: AuthUserResultModel
@@ -87,17 +95,17 @@ class AuthenticationModel: ObservableObject {
     }
     
     func uploadImageToFirebaseStorage(imageData: Data) async throws -> URL {
-        let storageRef = Storage.storage().reference()
+        let storageRef = FirebaseServices.shared.storage.reference()
         
-        guard let userId = Auth.auth().currentUser?.uid else {
+        guard let userId = FirebaseServices.shared.auth.currentUser?.uid else {
             throw NSError(domain: "AuthenticationModel", code: 0, userInfo: [NSLocalizedDescriptionKey: "User ID not found"])
         }
-
+        
         let imageRef = storageRef.child("profilePictures/\(userId).jpg")
-
+        
         do {
             // Upload the image
-            let metadata = try await imageRef.putDataAsync(imageData)
+            try await imageRef.putDataAsync(imageData)
            
             // Retrieve and return the download URL
             let url = try await imageRef.downloadURL()
@@ -110,13 +118,12 @@ class AuthenticationModel: ObservableObject {
 
     
     func updateUserPhotoURLInFirestore(photoURL: URL) async throws -> String {
-        let db = Firestore.firestore()
-        guard let userId = Auth.auth().currentUser?.uid else {
+        guard let userId = FirebaseServices.shared.auth.currentUser?.uid else {
             throw NSError(domain: "FirebaseError", code: 0, userInfo: [NSLocalizedDescriptionKey: "User ID not found"])
         }
         
         do {
-            try await db.collection("users").document(userId).updateData(["photoUrl": photoURL.absoluteString])
+            try await usersCollection.document(userId).updateData(["photoUrl": photoURL.absoluteString])
             return photoURL.absoluteString
         } catch {
             throw NSError(domain: "FirebaseError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to Update User Photo URL In Firestore"])
@@ -137,12 +144,10 @@ class AuthenticationModel: ObservableObject {
             throw NSError(domain: "AuthenticationModel", code: 0, userInfo: [NSLocalizedDescriptionKey: "No authenticated user profile found"])
         }
         
-        let usersCollection = Firestore.firestore().collection("users")
-        let interviewsCollection = Firestore.firestore().collection("interviews")
-        let storageRef = Storage.storage().reference().child("profilePictures/\(userProfile.userId).jpg")
+        let storageRef = FirebaseServices.shared.storage.reference().child("profilePictures/\(userProfile.userId).jpg")
         
         // Begin a batch to ensure atomic operations
-        let batch = Firestore.firestore().batch()
+        let batch = FirebaseServices.shared.firestore.batch()
 
         do {
             // Reference to the user's document
@@ -157,10 +162,6 @@ class AuthenticationModel: ObservableObject {
                     batch.deleteDocument(interviewDocumentRef)
                 }
             }
-            
-            //
-            
-            
             
             try await batch.commit()
             

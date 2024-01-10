@@ -41,6 +41,7 @@ struct ProfileScreenView: View {
                 
                 ProfileTopView()
                     .frame(height: geometry.size.height * 0.3)
+                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
                 
                 ProfileTabsView()
                     

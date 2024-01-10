@@ -15,18 +15,25 @@ struct DropdownMenuOptionRow: View {
     @Binding var optionSelected: Bool
 
     var body: some View {
+        
         GeometryReader { geometry in
-            HStack(alignment: .center, spacing: 10) {
-                if let icon = option.logo {
-                    AsyncImageView(url: icon, geometry: geometry) {
-                        ProgressView()
-                            .frame(width: 100, height: 100)
-                    }
+            HStack(alignment: .center, spacing: 15) {
+                Group {
+                    if let icon = option.logo {
+                        //DebugView("url is \(icon)")
+                        AsyncImageView(url: icon, geometry: geometry) {
+                            ProgressView()
+                                .frame(width: 100, height: 100)
+                        }
 
-                } else {
-                    Image(systemName: "building.columns")
-                        .symbolRenderingMode(.multicolor)
+                    } else {
+                        Image(systemName: "building.columns")
+                            .symbolRenderingMode(.multicolor)
+                    }
                 }
+                .frame(width: geometry.size.width * 0.08, height:  geometry.size.height * 0.08)
+                
+                
                 
                 Text(option.name)
                     .fontWeight(.semibold)
@@ -44,7 +51,7 @@ struct DropdownMenuOptionRow: View {
 }
 
 struct DropdownMenuOptionRow_Previews: PreviewProvider {
-    @State static private var option =  DropdownMenuCompanyOption(name: "Apple")
+    @State static private var option =  DropdownMenuCompanyOption(name: "Microsoft", icon: "https://logo.clearbit.com/microsoft.com")
     @State static var isOptionsPresented: Bool = false
     @State static var optionSelected: Bool = false
     static var previews: some View {

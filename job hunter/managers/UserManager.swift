@@ -49,7 +49,9 @@ final class UserManager {
     
     init() {}
     
-    private let usersCollection = Firestore.firestore().collection("users")
+    private var usersCollection: CollectionReference {
+        FirebaseServices.shared.firestore.collection("users")
+    }
     
     func userDocument(userId: String) -> DocumentReference {
         usersCollection.document(userId)

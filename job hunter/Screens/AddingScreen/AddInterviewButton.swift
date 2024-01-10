@@ -67,9 +67,9 @@ struct AddInterviewButton: View {
                         addInterviewModel.existingInterviewId = nil
                         coreModel.editInterview = nil
                     }
-                    print("Interview added successfully")
+                    
                 } catch {
-                    // Handle the error appropriately
+                    //TODO: Handle the error appropriately
                     print("Error adding interview: \(error)")
                 }
             }
