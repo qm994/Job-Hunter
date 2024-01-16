@@ -60,7 +60,6 @@
 		EBB11A7C2AE08495002AAFDE /* AuthenticationMainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB11A7B2AE08495002AAFDE /* AuthenticationMainScreen.swift */; };
 		EBB11A7E2AE0D8D5002AAFDE /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB11A7D2AE0D8D5002AAFDE /* ActionButton.swift */; };
 		EBB11A812AE0D9B7002AAFDE /* DefaultTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB11A802AE0D9B7002AAFDE /* DefaultTextField.swift */; };
-		EBD35D3F2AD64EC00076BE33 /* CardFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD35D3E2AD64EBF0076BE33 /* CardFooterView.swift */; };
 		EBD35D412AD6FDD00076BE33 /* PostionDetailSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD35D402AD6FDD00076BE33 /* PostionDetailSection.swift */; };
 		EBD35D432AD71BAE0076BE33 /* NumericInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD35D422AD71BAE0076BE33 /* NumericInput.swift */; };
 		EBD35D472AD7583D0076BE33 /* CoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD35D462AD7583D0076BE33 /* CoreModel.swift */; };
@@ -71,6 +70,11 @@
 		EBED85A92ADB0BF200F25636 /* DropdownMenuOptionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBED85A82ADB0BF200F25636 /* DropdownMenuOptionRow.swift */; };
 		EBF149512B44F4E300F97F4F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF149502B44F4E300F97F4F /* SettingsView.swift */; };
 		EBF55F812B4CAA2500100B21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBF55F802B4CAA2500100B21 /* LaunchScreen.storyboard */; };
+		EBF55F832B4CEFA300100B21 /* FirebaseServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF55F822B4CEFA300100B21 /* FirebaseServices.swift */; };
+		EBF55F852B4CFCD900100B21 /* firebase.json in Resources */ = {isa = PBXBuildFile; fileRef = EBF55F842B4CFCD900100B21 /* firebase.json */; };
+		EBF55F872B4D011600100B21 /* .firebaserc in Resources */ = {isa = PBXBuildFile; fileRef = EBF55F862B4D011600100B21 /* .firebaserc */; };
+		EBF55F892B4D03D000100B21 /* firestore.rules in Resources */ = {isa = PBXBuildFile; fileRef = EBF55F882B4D03D000100B21 /* firestore.rules */; };
+		EBF55F8B2B4D042900100B21 /* storage.rules in Resources */ = {isa = PBXBuildFile; fileRef = EBF55F8A2B4D042900100B21 /* storage.rules */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -119,18 +123,23 @@
 		EBB11A7B2AE08495002AAFDE /* AuthenticationMainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationMainScreen.swift; sourceTree = "<group>"; };
 		EBB11A7D2AE0D8D5002AAFDE /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		EBB11A802AE0D9B7002AAFDE /* DefaultTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTextField.swift; sourceTree = "<group>"; };
-		EBD35D3E2AD64EBF0076BE33 /* CardFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFooterView.swift; sourceTree = "<group>"; };
 		EBD35D402AD6FDD00076BE33 /* PostionDetailSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostionDetailSection.swift; sourceTree = "<group>"; };
 		EBD35D422AD71BAE0076BE33 /* NumericInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericInput.swift; sourceTree = "<group>"; };
 		EBD35D462AD7583D0076BE33 /* CoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreModel.swift; sourceTree = "<group>"; };
 		EBD35D482AD9BF440076BE33 /* DownloadImagesAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImagesAsync.swift; sourceTree = "<group>"; };
 		EBD35D4A2ADA49E60076BE33 /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
+		EBDC41FD2B4FA2CC00FE3D20 /* job-hunter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "job-hunter-Info.plist"; sourceTree = SOURCE_ROOT; };
 		EBED85A42ADAF90A00F25636 /* DropdownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenu.swift; sourceTree = "<group>"; };
 		EBED85A62ADB05B300F25636 /* DropdownMenuList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuList.swift; sourceTree = "<group>"; };
 		EBED85A82ADB0BF200F25636 /* DropdownMenuOptionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuOptionRow.swift; sourceTree = "<group>"; };
 		EBF149502B44F4E300F97F4F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EBF149522B4B62A900F97F4F /* job hunter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "job hunter.entitlements"; sourceTree = "<group>"; };
 		EBF55F802B4CAA2500100B21 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EBF55F822B4CEFA300100B21 /* FirebaseServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseServices.swift; sourceTree = "<group>"; };
+		EBF55F842B4CFCD900100B21 /* firebase.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firebase.json; sourceTree = "<group>"; };
+		EBF55F862B4D011600100B21 /* .firebaserc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .firebaserc; sourceTree = "<group>"; };
+		EBF55F882B4D03D000100B21 /* firestore.rules */ = {isa = PBXFileReference; lastKnownFileType = text; path = firestore.rules; sourceTree = "<group>"; };
+		EBF55F8A2B4D042900100B21 /* storage.rules */ = {isa = PBXFileReference; lastKnownFileType = text; path = storage.rules; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +186,7 @@
 				EB36C7D82AE5C1AC0090A2D0 /* UserManager.swift */,
 				EB6C29122AFAECD300B66BFA /* AddInterviewManager.swift */,
 				EB4E11212B0E9B01003D3764 /* FirestoreInterviewDataManager.swift */,
+				EBF55F822B4CEFA300100B21 /* FirebaseServices.swift */,
 			);
 			path = managers;
 			sourceTree = "<group>";
@@ -201,6 +211,9 @@
 		EB4679992AC0DBF00026ACC3 /* job hunter */ = {
 			isa = PBXGroup;
 			children = (
+				EBDC41FD2B4FA2CC00FE3D20 /* job-hunter-Info.plist */,
+				EBF55F862B4D011600100B21 /* .firebaserc */,
+				EBF55F842B4CFCD900100B21 /* firebase.json */,
 				EBF149522B4B62A900F97F4F /* job hunter.entitlements */,
 				EB46799C2AC0DBF00026ACC3 /* ContentView.swift */,
 				EB4E111F2B0E89D9003D3764 /* IndexScreen.swift */,
@@ -215,6 +228,8 @@
 				EB46799E2AC0DBF20026ACC3 /* Assets.xcassets */,
 				EB5322C72ADDB2FC00004E9C /* GoogleService-Info.plist */,
 				EBF55F802B4CAA2500100B21 /* LaunchScreen.storyboard */,
+				EBF55F882B4D03D000100B21 /* firestore.rules */,
+				EBF55F8A2B4D042900100B21 /* storage.rules */,
 			);
 			path = "job hunter";
 			sourceTree = "<group>";
@@ -337,7 +352,6 @@
 			isa = PBXGroup;
 			children = (
 				EB5F20A92AD348940096C9A3 /* CardView.swift */,
-				EBD35D3E2AD64EBF0076BE33 /* CardFooterView.swift */,
 			);
 			path = CardView;
 			sourceTree = "<group>";
@@ -425,6 +439,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB4679A22AC0DBF20026ACC3 /* Preview Assets.xcassets in Resources */,
+				EBF55F872B4D011600100B21 /* .firebaserc in Resources */,
+				EBF55F892B4D03D000100B21 /* firestore.rules in Resources */,
+				EBF55F8B2B4D042900100B21 /* storage.rules in Resources */,
+				EBF55F852B4CFCD900100B21 /* firebase.json in Resources */,
 				EBF55F812B4CAA2500100B21 /* LaunchScreen.storyboard in Resources */,
 				EB5322C82ADDB2FC00004E9C /* GoogleService-Info.plist in Resources */,
 				EB46799F2AC0DBF20026ACC3 /* Assets.xcassets in Resources */,
@@ -467,13 +485,13 @@
 				EB4679E42AC1F2E00026ACC3 /* InterviewDetail.swift in Sources */,
 				EBED85A92ADB0BF200F25636 /* DropdownMenuOptionRow.swift in Sources */,
 				EB5322C22ADC646100004E9C /* AsyncImageView.swift in Sources */,
+				EBF55F832B4CEFA300100B21 /* FirebaseServices.swift in Sources */,
 				EB4E111C2B0B0CF8003D3764 /* SalarySection.swift in Sources */,
 				EB4679E82ACCB5AF0026ACC3 /* MainScreenView.swift in Sources */,
 				EB36C7D42AE5C0F80090A2D0 /* ProfileScreenView.swift in Sources */,
 				EB4679AF2AC0E2EE0026ACC3 /* HomeScreenView.swift in Sources */,
 				EB4679F72ACE610B0026ACC3 /* CirclePlusAddButton.swift in Sources */,
 				EB4E11222B0E9B01003D3764 /* FirestoreInterviewDataManager.swift in Sources */,
-				EBD35D3F2AD64EC00076BE33 /* CardFooterView.swift in Sources */,
 				EB4679FC2ACF1E930026ACC3 /* AddSucceedScreen.swift in Sources */,
 				EB5F20A02AD1D7450096C9A3 /* DebugView.swift in Sources */,
 				EB3DB3A82B360028005F9397 /* ProfileTabsView.swift in Sources */,
@@ -621,8 +639,9 @@
 				DEVELOPMENT_TEAM = L9BAQ636P7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "job-hunter-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MyInterviews;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -636,6 +655,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.qingyuanhub.job-hunter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -656,8 +676,9 @@
 				DEVELOPMENT_TEAM = L9BAQ636P7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "job-hunter-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MyInterviews;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -671,6 +692,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.qingyuanhub.job-hunter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

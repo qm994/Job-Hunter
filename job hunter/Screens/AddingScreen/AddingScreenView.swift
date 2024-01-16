@@ -90,7 +90,7 @@ struct AddingScreenView: View {
                 }
                 
             } //LIST ENDS
-            .onChange(of: isFutureEnabled, initial: false) { _, newValue in
+            .onChange(of: isFutureEnabled) { newValue in
                 if newValue {
                     withAnimation {
                         scrollView.scrollTo("futureRoundsEnd", anchor: .bottomLeading)

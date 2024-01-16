@@ -66,7 +66,7 @@ struct DropdownMenu: View {
                 .fontWeight(.medium)
                 .foregroundColor(selectedOption == nil ? .gray : .black)
                 .frame(maxWidth: .infinity)
-                .onChange(of: addInterviewModel.company.name, initial: false) { _, newValue in
+                .onChange(of: addInterviewModel.company.name) { newValue in
                     if (addInterviewModel.companyMissing) {
                         addInterviewModel.companyMissing = false
                     }

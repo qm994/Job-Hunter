@@ -135,6 +135,29 @@ struct ProfilePhotoView: View {
     
     @EnvironmentObject var authModel: AuthenticationModel
     
+    func handleImageUpload(imageData: Data) async {
+        avatarImage = UIImage(data: imageData)
+        // TODO: Additional action, such as uploading avatarImage to a database
+        if let imageToUpload = avatarImage {
+            if let uploadData = imageToUpload.jpegData(compressionQuality: 0.9) {
+                // Upload 'uploadData' to Firebase Storage and FireStore user document
+                await uploadImage(uploadData: uploadData)
+            }
+        }
+    }
+
+    func uploadImage(uploadData: Data) async {
+        do {
+            let url = try await authModel.uploadImageToFirebaseStorage(imageData: uploadData)
+            let urlString = try await authModel.updateUserPhotoURLInFirestore(photoURL: url)
+            authModel.userProfile?.photoUrl = urlString
+        } catch {
+            self.errorMessage = error.localizedDescription
+            self.showError = true
+        }
+        self.isUpdatingPhoto = false // Stop loading
+    }
+    
     
     var body: some View {
         GeometryReader { geometry in
@@ -158,30 +181,33 @@ struct ProfilePhotoView: View {
                 } // Group
                 .frame(width: geometry.size.width, height: geometry.size.height)
             }
-            .onChange(of: avatarItem) {
+            .onChange(of: avatarItem) { _ in
                 self.errorMessage = nil
                 self.showError = false
                 self.isUpdatingPhoto = true // Start loading
                 Task {
                     if let imageData = try await avatarItem?.loadTransferable(type: Data.self) {
-                        avatarImage = UIImage(data: imageData)
-                        // TODO: Additional action, such as uploading avatarImage to a database
-                        if let imageToUpload = avatarImage {
-                            if let uploadData = imageToUpload.jpegData(compressionQuality: 0.9) {
-                                // Upload 'uploadData' to Firebase Storage and FireStore user document
-                                
-                                do {
-                                    let url = try await authModel.uploadImageToFirebaseStorage(imageData: uploadData)
-                                    let urlString = try await authModel.updateUserPhotoURLInFirestore(photoURL: url)
-                                    authModel.userProfile?.photoUrl = urlString
-                                } catch {
-                                    self.errorMessage = error.localizedDescription
-                                    self.showError = true
-                                }
-                                self.isUpdatingPhoto = false // Stop loading
-                            }
-                        }
+                        await handleImageUpload(imageData: imageData)
                     }
+//                    if let imageData = try await avatarItem?.loadTransferable(type: Data.self) {
+//                        avatarImage = UIImage(data: imageData)
+//                        // TODO: Additional action, such as uploading avatarImage to a database
+//                        if let imageToUpload = avatarImage {
+//                            if let uploadData = imageToUpload.jpegData(compressionQuality: 0.9) {
+//                                // Upload 'uploadData' to Firebase Storage and FireStore user document
+//                                
+//                                do {
+//                                    let url = try await authModel.uploadImageToFirebaseStorage(imageData: uploadData)
+//                                    let urlString = try await authModel.updateUserPhotoURLInFirestore(photoURL: url)
+//                                    authModel.userProfile?.photoUrl = urlString
+//                                } catch {
+//                                    self.errorMessage = error.localizedDescription
+//                                    self.showError = true
+//                                }
+//                                self.isUpdatingPhoto = false // Stop loading
+//                            }
+//                        }
+//                    }
                 }
             } // onChange ends
             .alert(isPresented: $showError, content: {

@@ -61,12 +61,22 @@ struct VisaSponsorSection: View {
         }
         
         .sheet(isPresented: $showSheet) {
-            VisaSponsorSelectionsSheet(showSheet: $showSheet)
-                .presentationDetents([.medium, .large])
-                .presentationBackground(.thinMaterial)
-                .presentationDragIndicator(.visible)
-                .presentationContentInteraction(.scrolls)
-                .presentationCornerRadius(50)
+            if #available(iOS 16.4, *) {
+                VisaSponsorSelectionsSheet(showSheet: $showSheet)
+                    .presentationDetents([.medium, .large])
+                    .presentationBackground(.thinMaterial)
+                    .presentationDragIndicator(.visible)
+                    .presentationContentInteraction(.scrolls)
+                    .presentationCornerRadius(50)
+            } else {
+                ScrollView {
+                    VisaSponsorSelectionsSheet(showSheet: $showSheet)
+                        .presentationDetents([.medium, .large])
+                        .presentationDragIndicator(.visible)
+                }
+                .background(BlurView(style: .systemThinMaterial))
+                .cornerRadius(50)
+            }
         }
     }
 }

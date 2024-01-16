@@ -149,7 +149,7 @@ struct FutureRoundRow: View {
                             Image(systemName: "calendar.badge.clock")
                         }
                     }
-                    .onChange(of: roundStartDate) { _, newValue in
+                    .onChange(of: roundStartDate) { newValue in
                         updateSelectedRoundDate(round: round, newDate: newValue, field: "startDate")
                     }
                     
@@ -160,7 +160,7 @@ struct FutureRoundRow: View {
                             Image(systemName: "calendar.badge.clock")
                         }
                     }
-                    .onChange(of: roundEndDate) { _, newValue in
+                    .onChange(of: roundEndDate) { newValue in
                         updateSelectedRoundDate(round: round, newDate: newValue, field: "endDate")
                     }
                 }

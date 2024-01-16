@@ -79,15 +79,23 @@ struct PastRounds: View {
             
         }// Section ends
         .sheet(isPresented: $showSheet) {
-            PastRoundsList(roundModel: roundModel)
-                .presentationDetents([.medium, .large])
-                .presentationBackground(.thinMaterial)
-                .presentationDragIndicator(.visible)
-                .presentationContentInteraction(.scrolls)
-                .presentationCornerRadius(50)
+            if #available(iOS 16.4, *) {
+                PastRoundsList(roundModel: roundModel)
+                    .presentationDetents([.medium, .large])
+                    .presentationBackground(.thinMaterial)
+                    .presentationDragIndicator(.visible)
+                    .presentationContentInteraction(.scrolls)
+                    .presentationCornerRadius(50)
+            } else {
+                ScrollView {
+                    PastRoundsList(roundModel: roundModel)
+                        .presentationDetents([.medium, .large])
+                        .presentationDragIndicator(.visible)
+                }
+                .background(BlurView(style: .systemThinMaterial))
+                .cornerRadius(50)
+            }
         }
-       
-        
     }
 }
 

@@ -79,7 +79,7 @@ struct BottomNavigationView: View {
             .frame(height: 82) // Fixed height for the tab bar
             .background(Color(.systemGray5))
         }
-        .onChange(of: interviewModel.interviews) {
+        .onChange(of: interviewModel.interviews) { _ in
             if let userProfile = authModel.userProfile {
                 let currentCounts = interviewModel.interviews.count
                 let maxAllowed = userProfile.maxInterviewsAllowed
