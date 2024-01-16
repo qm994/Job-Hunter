@@ -38,7 +38,7 @@ struct CustomizedTextField: View {
                 .fontWeight(.medium)
                 .frame(maxWidth: .infinity)
                 .frame(height: 50)
-                .onChange(of: fieldValue) { _, _ in
+                .onChange(of: fieldValue) { _ in
                     if let action = onChangeAction {
                         action()
                     }

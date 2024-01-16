@@ -45,6 +45,7 @@ class AuthenticationModel: ObservableObject {
                 self.userProfile = result
             }
         } catch {
+            print("error is \(error)")
             // Handle the error here. If this is a UI-related error, make sure to dispatch on the main thread.
             DispatchQueue.main.async {
                 // Update any relevant @Published properties or show an error message to the user.
@@ -139,64 +140,68 @@ class AuthenticationModel: ObservableObject {
         3. user from Authentication
      */
     
-    func batchDeleteUserDocAndMetadata() async throws {
+    
+    private func deleteUserAuthentication() async throws {
+        let maxRetries = 3
+        for attempt in 1...maxRetries {
+            do {
+                try await AuthenticationManager.sharedAuth.deleteUserFromAuthentication()
+                break
+            } catch {
+                if attempt == maxRetries {
+                    throw NSError(domain: "AuthenticationModel", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to delete user from Authentication after \(maxRetries) attempts."])
+                }
+                try await Task.sleep(nanoseconds: 2_000_000_000 ) // Sleep for 2 seconds before retrying
+            }
+        }
+    }
+    
+    private func deleteStorageData() async throws {
         guard let userProfile = userProfile else {
             throw NSError(domain: "AuthenticationModel", code: 0, userInfo: [NSLocalizedDescriptionKey: "No authenticated user profile found"])
         }
-        
         let storageRef = FirebaseServices.shared.storage.reference().child("profilePictures/\(userProfile.userId).jpg")
-        
-        // Begin a batch to ensure atomic operations
-        let batch = FirebaseServices.shared.firestore.batch()
-
         do {
-            // Reference to the user's document
-            let userDocumentRef = usersCollection.document(userProfile.userId)
-            // Delete user document
-            batch.deleteDocument(userDocumentRef)
-            
-            // Delete user's all interviews document
-            if (userProfile.interviews.count > 0) {
-                for interviewId in userProfile.interviews {
-                    let interviewDocumentRef = interviewsCollection.document(interviewId)
-                    batch.deleteDocument(interviewDocumentRef)
-                }
+            try await storageRef.delete()
+        } catch let storageError as NSError {
+            if storageError.domain == StorageErrorDomain && storageError.code == StorageErrorCode.objectNotFound.rawValue {
+                print("Profile image does not exist, no deletion needed.")
+            } else {
+                throw storageError
             }
-            
+        }
+    }
+    
+    private func batchDeleteFirestoreData() async throws {
+        guard let userProfile = userProfile else {
+            throw NSError(domain: "AuthenticationModel", code: 0, userInfo: [NSLocalizedDescriptionKey: "No authenticated user profile found"])
+        }
+        let batch = FirebaseServices.shared.firestore.batch()
+        let userDocumentRef = usersCollection.document(userProfile.userId)
+        batch.deleteDocument(userDocumentRef)
+        
+        for interviewId in userProfile.interviews {
+            let interviewDocumentRef = interviewsCollection.document(interviewId)
+            batch.deleteDocument(interviewDocumentRef)
+        }
+        do {
             try await batch.commit()
-            
-            // Attempt to delete the user's profile image from Firebase Storage
-            do {
-                try await storageRef.delete()
-            } catch let storageError as NSError {
-                // Check if the error is because the file doesn't exist
-                if storageError.domain == StorageErrorDomain && storageError.code == StorageErrorCode.objectNotFound.rawValue {
-                    print("Profile image does not exist, no deletion needed.")
-                } else {
-                    throw storageError
-                }
-            }
-            
-            // Delete user Authentication profile
-            // Attempt to delete the user from Authentication
-            let maxRetries = 3
-            for attempt in 1...maxRetries {
-                do {
-                    try await AuthenticationManager.sharedAuth.deleteUserFromAuthentication()
-                    break  // Exit the loop if successful
-                } catch {
-                    if attempt == maxRetries {
-                        // Log this issue for manual intervention and throw error
-                        // Consider flagging this user in your database
-                        throw NSError(domain: "AuthenticationModel", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to delete user from Authentication after \(maxRetries) attempts."])
-                    }
-                    // Optional: wait before retrying
-                }
-            }
-        } catch let error {
+        } catch {
+            throw NSError(domain: "AuthenticationModel", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to delete user's firestore data. Please contact us in support page to resovle this."])
+        }
+    }
+    
+    func deleteUser() async throws {
+        do {
+            try await batchDeleteFirestoreData()
+            try await deleteStorageData()
+            try await deleteUserAuthentication()
+        } catch {
+            print("deleteUser error: \(error)")
             throw error
         }
     }
+    
 }
 
 extension AuthenticationModel {

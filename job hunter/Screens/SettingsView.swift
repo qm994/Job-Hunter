@@ -42,7 +42,7 @@ struct SettingsView: View {
                     
                     Task {
                         do {
-                            try await authModel.batchDeleteUserDocAndMetadata()
+                            try await authModel.deleteUser()
                             
                             DispatchQueue.main.async {
                                 authModel.userProfile = nil

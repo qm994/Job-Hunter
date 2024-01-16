@@ -50,7 +50,7 @@ struct HomeScreenView: View {
 
             }
         }
-        .onChange(of: interviewsViewModel.error) { _, newValue in
+        .onChange(of: interviewsViewModel.error) { newValue in
             if let error = newValue {
                 errorMessage = error
                 showAlert = true
