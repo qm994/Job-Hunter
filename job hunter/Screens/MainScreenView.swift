@@ -26,6 +26,10 @@ struct MainScreenView: View {
                                 HomeScreenView()
                             case .profile:
                                 ProfileScreenView()
+                            case .companies:
+                                Text("Companies tab")
+                            case .logInterview:
+                                EmptyView()
                         }
                     }
                     .frame(height: geometry.size.height * 0.9) // 90% of available height
@@ -33,6 +37,7 @@ struct MainScreenView: View {
                     
                     
                     BottomNavigationView(interviewModel: interviewModel)
+                        .frame(height: geometry.size.height * 0.1)
                         //.overlay(Rectangle().stroke(Color.red, lineWidth: 1))
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -48,7 +53,6 @@ struct MainScreenView: View {
             }
             }
         } // NavigationStack ends
-        //.environment(CoreModel())
     }
 }
 

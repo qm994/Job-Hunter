@@ -10,13 +10,19 @@ import SwiftUI
 enum BottomNavigationModel: Int, CaseIterable {
     case home
     case profile
+    case companies
+    case logInterview
     
     var tabIcon: String {
         switch self {
             case .home: 
-                return "house.fill"
+                return "house.circle.fill"
             case .profile:
                 return "person.crop.circle"
+            case .companies:
+                return "building.2.crop.circle.fill"
+            case .logInterview:
+                return "plus.square.fill.on.square.fill"
         }
     }
     
@@ -26,6 +32,10 @@ enum BottomNavigationModel: Int, CaseIterable {
                 return "Home"
             case .profile:
                 return "Profile"
+            case .companies:
+                return "Companies"
+            case .logInterview:
+                return "Log Interview"
         }
     }
 }
@@ -35,15 +45,26 @@ struct TabButton: View {
     var tab: BottomNavigationModel
     @EnvironmentObject var coreModel: CoreModel
     
+    var action: (() -> Void)?
     var body: some View {
         Button {
-            coreModel.selectedTab = tab
+            if tab == .logInterview {
+                // Perform navigation when the logInterview tab is tapped
+                withAnimation {
+                    coreModel.path.append(NavigationPath.addInterviewScreen.rawValue)
+                }
+            } else {
+                // For other tabs, just update the selectedTab
+                coreModel.selectedTab = tab
+            }
         } label: {
             VStack(spacing: 10) {
                 Image(systemName: tab.tabIcon)
                     .font(Font.title2.weight(.bold))
                 
                 Text(tab.tabName)
+                    .font(.footnote)
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
             }
             .foregroundColor(
                 coreModel.selectedTab == tab
@@ -51,6 +72,15 @@ struct TabButton: View {
                 : .white
             )
         }
+//        .onTapGesture {
+//            if coreModel.addButtonStatus == "disabled" {
+//                //showWarning.toggle() // Toggle tooltip visibility
+//            } else {
+//                //onTap.toggle()
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { action()
+//                }
+//            }
+//        }
     }
 }
 
@@ -65,18 +95,32 @@ struct BottomNavigationView: View {
             Spacer()
             Divider() // This replaces the overlay with a simple line.
 
-            HStack(spacing: 50) {
+            HStack(spacing: 5) {
                 TabButton(tab: .home)
-                CirclePlusAddButton() {
-                    withAnimation {
-                        coreModel.path.append(NavigationPath.addInterviewScreen.rawValue)
+                TabButton(tab: .companies)
+                TabButton(tab: .logInterview)
+                    .onTapGesture {
+                        if coreModel.addButtonStatus == "disabled" {
+                            //showWarning.toggle() // Toggle tooltip visibility
+                        } else {
+                            //onTap.toggle()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                withAnimation {
+                                    coreModel.path.append(NavigationPath.addInterviewScreen.rawValue)
+                                }
+                            }
+                        }
                     }
-                }
+//                CirclePlusAddButton() {
+//                    withAnimation {
+//                        coreModel.path.append(NavigationPath.addInterviewScreen.rawValue)
+//                    }
+//                }
                 TabButton(tab: .profile)
             }
-            .padding(.horizontal, 40)
+            .padding(.horizontal, 5)
             .padding(.vertical) // Add some vertical padding for space around the buttons.
-            .frame(height: 82) // Fixed height for the tab bar
+            //.frame(height: 82) // Fixed height for the tab bar
             .background(Color(.systemGray5))
         }
         .onChange(of: interviewModel.interviews) { _ in
