@@ -48,7 +48,6 @@ struct BasicFields: View {
         VStack {
             
             DropdownMenu(
-                options: clearbitModel.companyList,
                 dropDownLabel: "Company *"
             ) { value in
                 debouncer.debounce {
@@ -58,6 +57,7 @@ struct BasicFields: View {
                 }
             }
             .zIndex(1)  // This will ensure the DropdownMenu appears on top of other views
+            .environmentObject(clearbitModel)
             
             
             CustomizedTextField(
