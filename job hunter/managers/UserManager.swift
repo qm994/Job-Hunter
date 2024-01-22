@@ -37,7 +37,7 @@ struct DBUser: Codable {
         // Initialize the interview references as an empty array
         self.interviews = []
         self.isPremium = false
-        self.maxInterviewsAllowed = 5
+        self.maxInterviewsAllowed = 10
         self.userName = userName
     }
 }

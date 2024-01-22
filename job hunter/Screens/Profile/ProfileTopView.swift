@@ -19,11 +19,11 @@ struct ProfileTopView: View {
     @EnvironmentObject var authModel: AuthenticationModel
     @EnvironmentObject var interviewsModel: InterviewsViewModel
     
-    private var statusCounts: (pending: Int, rejected: Int, offer: Int, total: Int) {
+    private var statusCounts: (ongoing: Int, rejected: Int, offer: Int, total: Int) {
         if interviewsModel.interviews.count == 0 {
             return (0, 0, 0, 0)
         }
-        let pendingCount = interviewsModel.interviews.filter { $0.status == ApplicationStatus.pending.rawValue }.count
+        let pendingCount = interviewsModel.interviews.filter { $0.status == ApplicationStatus.ongoing.rawValue }.count
         let rejectedCount = interviewsModel.interviews.filter { $0.status == ApplicationStatus.rejected.rawValue }.count
         
         let offerCount = interviewsModel.interviews.filter { $0.status == ApplicationStatus.offer.rawValue }.count
@@ -87,7 +87,7 @@ struct ProfileTopView: View {
                 //MARK: status counts
                 HStack {
                     let vStacks = [
-                        StatusViewItem(count: statusCounts.pending, status: .pending),
+                        StatusViewItem(count: statusCounts.ongoing, status: .ongoing),
                         StatusViewItem(count: statusCounts.rejected, status: .rejected),
                         StatusViewItem(count: statusCounts.offer, status: .offer),
                     ]

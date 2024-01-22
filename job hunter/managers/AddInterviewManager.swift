@@ -54,6 +54,11 @@ final class AddInterviewManager {
         }
     }
     
+    func updateInterviewField(on name: String, newData: Any,  interviewId: String) async throws {
+        let interviewRef = interviewCollection.document(interviewId)
+        try await interviewRef.updateData([name: newData])
+    }
+    
     
     // Create interview and store its refernece to User in FireStore
     func createInterview(user: DBUser, data: inout [String: Any], pastRounds: [RoundModel], futureRounds: [RoundModel]) async throws -> DocumentReference {

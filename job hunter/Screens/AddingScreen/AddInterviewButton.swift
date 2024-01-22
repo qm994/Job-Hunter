@@ -59,6 +59,8 @@ struct AddInterviewButton: View {
                             isUpdate: isUpdate
                         )
                     }
+                    
+                    try await coreModel.triggerInterviewsUpdate()
                     // Move back to main screen and clear the form
                     DispatchQueue.main.async {
                         coreModel.path.removeAll { pathName in

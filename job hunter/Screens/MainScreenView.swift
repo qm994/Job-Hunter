@@ -12,9 +12,10 @@ enum NavigationPath: String {
 }
 
 struct MainScreenView: View {
-    @EnvironmentObject var coreModel: CoreModel
+    //@EnvironmentObject var coreModel: CoreModel
     @EnvironmentObject var authModel: AuthenticationModel
     @StateObject var interviewModel: InterviewsViewModel = InterviewsViewModel()
+    @StateObject var coreModel: CoreModel = CoreModel()
    
     var body: some View {        
         NavigationStack(path: $coreModel.path) {
@@ -27,13 +28,13 @@ struct MainScreenView: View {
                             case .profile:
                                 ProfileScreenView()
                             case .companies:
-                                Text("Companies tab")
+                                CompaniesListScreenView()
                             case .logInterview:
                                 EmptyView()
                         }
                     }
                     .frame(height: geometry.size.height * 0.9) // 90% of available height
-                    .environmentObject(interviewModel)
+                    //.environmentObject(interviewModel)
                     
                     
                     BottomNavigationView(interviewModel: interviewModel)
@@ -53,6 +54,8 @@ struct MainScreenView: View {
             }
             }
         } // NavigationStack ends
+        .environmentObject(interviewModel)
+        .environmentObject(coreModel)
     }
 }
 
@@ -62,7 +65,7 @@ struct MainScreenView_Previews: PreviewProvider {
         NavigationStack {
             MainScreenView()
                 .environmentObject(AuthenticationModel())
-                .environmentObject(CoreModel())
+                //.environmentObject(CoreModel())
         }
        
     }

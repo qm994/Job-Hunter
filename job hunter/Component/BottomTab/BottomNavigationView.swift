@@ -72,15 +72,6 @@ struct TabButton: View {
                 : .white
             )
         }
-//        .onTapGesture {
-//            if coreModel.addButtonStatus == "disabled" {
-//                //showWarning.toggle() // Toggle tooltip visibility
-//            } else {
-//                //onTap.toggle()
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { action()
-//                }
-//            }
-//        }
     }
 }
 
@@ -89,6 +80,8 @@ struct BottomNavigationView: View {
     @EnvironmentObject var coreModel: CoreModel
     @EnvironmentObject var authModel: AuthenticationModel
     @ObservedObject var interviewModel: InterviewsViewModel
+    
+    @State private var showWarning = false
     
     var body: some View {
         VStack {
@@ -99,9 +92,11 @@ struct BottomNavigationView: View {
                 TabButton(tab: .home)
                 TabButton(tab: .companies)
                 TabButton(tab: .logInterview)
+                    .disabled(coreModel.addButtonStatus == "disabled")
+                   
                     .onTapGesture {
                         if coreModel.addButtonStatus == "disabled" {
-                            //showWarning.toggle() // Toggle tooltip visibility
+                            showWarning.toggle() // Toggle tooltip visibility
                         } else {
                             //onTap.toggle()
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -111,11 +106,7 @@ struct BottomNavigationView: View {
                             }
                         }
                     }
-//                CirclePlusAddButton() {
-//                    withAnimation {
-//                        coreModel.path.append(NavigationPath.addInterviewScreen.rawValue)
-//                    }
-//                }
+                    
                 TabButton(tab: .profile)
             }
             .padding(.horizontal, 5)
@@ -133,6 +124,13 @@ struct BottomNavigationView: View {
                     coreModel.addButtonStatus = "disabled"
                 }
             }
+        }
+        .alert(isPresented: $showWarning) {
+            Alert(
+                title: Text(LocalizedStringKey("Not Support!")),
+                message:  Text(LocalizedStringKey("For cost reasons, we can only support user add at most 10 interviews. Once we figure out the cost, more spaces will be available. Stay tuned!")),
+                dismissButton: .default(Text(LocalizedStringKey("OK")))
+            )
         }
     }
 }

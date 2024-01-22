@@ -7,10 +7,11 @@
 
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import Combine
 
 struct FetchedInterviewModel: Identifiable, Equatable {
     var id: String
-    var company: String
+    var company: Company
     var jobTitle: String
     var startDate: Date
     var status: String
@@ -20,6 +21,7 @@ struct FetchedInterviewModel: Identifiable, Equatable {
     var salary: SalaryInfo
     var pastRounds:  [RoundModel]
     var futureRounds:  [RoundModel]
+    var favorite: Bool
     
     // Implement the static '==' function for Equatable
     static func ==(lhs: FetchedInterviewModel, rhs: FetchedInterviewModel) -> Bool {
@@ -31,13 +33,23 @@ struct FetchedInterviewModel: Identifiable, Equatable {
     init?(document: DocumentSnapshot) {
         guard let data = document.data() else { return nil }
         self.id = document.documentID
-        self.company = data["company"] as? String ?? ""
+        if let companyInfo = data["company"] as? [String: String] {
+            self.company = Company(
+                name: companyInfo["name"] ?? "unknown",
+                logo: companyInfo["logo"] ?? ""
+            )
+        } else {
+            self.company = Company(name: "unknown")
+        }
+        
         self.jobTitle = data["title"] as? String ?? ""
         self.startDate = (data["startDate"] as? Timestamp)?.dateValue() ?? Date()
-        self.status = data["status"] as? String ?? ApplicationStatus.pending.rawValue
+        self.status = data["status"] as? String ?? ApplicationStatus.ongoing.rawValue
         self.visaRequired = data["visa_required"] as? String
         self.locationPreference = data["work_location"] as? String ?? "onsite"
         self.relocationRequired = data["is_relocation"] as? Bool ?? false
+        self.favorite = data["favorite"] as? Bool ?? false
+        
         if let salaryData = data["salary"] as? [String: Double] {
             self.salary = SalaryInfo(
                 base: salaryData["base"] ?? 0,
@@ -65,9 +77,15 @@ struct FetchedInterviewModel: Identifiable, Equatable {
 }
 
 class InterviewsViewModel: ObservableObject {
-    @Published var interviews = [FetchedInterviewModel]()
+    @Published var interviews = [FetchedInterviewModel]() {
+        didSet {
+            interviewsDidChange.send()
+        }
+    }
     @Published var isLoading = false
     @Published var error: String?
+    
+    var interviewsDidChange = PassthroughSubject<Void, Never>()
     
     //TODO: Cache the fetchInterviews results if no data change instead of just interviews.removeAll()
     func fetchInterviewsData() async throws {
@@ -136,11 +154,40 @@ class InterviewsViewModel: ObservableObject {
                 self.error = "Failed to Delete the Interview! \(error.localizedDescription)"
             }
         }
+    } // Delete func ends
+    
+    func toggleFavorite(interviewId: String) async throws {
+        // Find the index of the interview
+        guard let index = interviews.firstIndex(where: { $0.id == interviewId }) else { return }
+        
+        // Toggle the favorite status
+        let newFavoriteStatus = !interviews[index].favorite
+        
+        // Update the interview in Firestore
+        try await AddInterviewManager.shared.updateInterviewField(
+            on: "favorite", newData: newFavoriteStatus, interviewId: interviewId
+        )
+        
+        DispatchQueue.main.async {
+            var updatedInterview = self.interviews[index]
+            updatedInterview.favorite = newFavoriteStatus
+            self.interviews[index] = updatedInterview
+            self.interviews = Array(self.interviews)
+            // Notify subscribers that interviews have been updated
+            self.interviewsDidChange.send()
+           
+        }
     }
 }
 
+//extension InterviewsViewModel {
+//    var interviewsByCompany: [String: [FetchedInterviewModel]] {
+//        Dictionary(grouping: interviews, by: { $0.company.name })
+//    }
+//}
+
 extension FetchedInterviewModel {
-    init(id: String, company: String, jobTitle: String, startDate: Date, status: String, visaRequired: String?, locationPreference: String, relocationRequired: Bool, salary: SalaryInfo, pastRounds: [RoundModel], futureRounds: [RoundModel]) {
+    init(id: String, company: Company, jobTitle: String, startDate: Date, status: String, visaRequired: String?, locationPreference: String, relocationRequired: Bool, salary: SalaryInfo, pastRounds: [RoundModel], futureRounds: [RoundModel], favorite: Bool) {
         self.id = id
         self.company = company
         self.jobTitle = jobTitle
@@ -152,22 +199,47 @@ extension FetchedInterviewModel {
         self.salary = salary
         self.pastRounds = pastRounds
         self.futureRounds = futureRounds
+        self.favorite = favorite
     }
     
-    static var sampleData: FetchedInterviewModel {
-        return FetchedInterviewModel(
-            id: "1",
-            company: "Sample Company",
-            jobTitle: "Senior Software Engineer with long title",
-            startDate: Date(),
-            status: "pending",
-            visaRequired: "H1B",
-            locationPreference: "Remote",
-            relocationRequired: true,
-            salary: SalaryInfo(base: 120000, bonus: 0.2, equity: 5000, signon: 5000),
-            pastRounds: [],
-            futureRounds: []
-        )
+    static func createSampleData(count: Int) -> [FetchedInterviewModel] {
+        var samples = [FetchedInterviewModel]()
+        
+        for index in 1...count {
+            let interview = FetchedInterviewModel(
+                id: "\(index)",
+                company: Company(name: "Company \(index)", logo: "https://logo.clearbit.com/microsoftcasualgames.com"),
+                jobTitle: "Position Title \(index)",
+                startDate: Date(),
+                status: ["ongoing", "offer", "rejected"].randomElement() ?? "ongoing",
+                visaRequired: index % 2 == 0 ? "Yes" : "No",
+                locationPreference: index % 3 == 0 ? "Remote" : "Onsite",
+                relocationRequired: index % 4 == 0,
+                salary: SalaryInfo(base: Double.random(in: 70000...150000), bonus: Double.random(in: 0...0.3), equity: Double.random(in: 0...10000), signon: Double.random(in: 0...10000)),
+                pastRounds: [], // You would add actual RoundModel data here if needed
+                futureRounds: [], // Same as above,
+                favorite: true
+            )
+            samples.append(interview)
+            samples.append(interview)
+        }
+        
+        return samples
     }
 }
+
+extension InterviewsViewModel {
+    static func mockViewModel() -> InterviewsViewModel {
+        let viewModel = InterviewsViewModel()
+        viewModel.loadMockData()
+        return viewModel
+    }
+
+    func loadMockData() {
+        // Your mock data here
+        self.interviews = FetchedInterviewModel.createSampleData(count: 5)
+        self.isLoading = false
+    }
+}
+
 

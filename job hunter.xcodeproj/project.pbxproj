@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB2C96332B584232008090E8 /* CompaniesListScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2C96322B584232008090E8 /* CompaniesListScreenView.swift */; };
 		EB36C7CD2AE5BFC20090A2D0 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB36C7CC2AE5BFC20090A2D0 /* SignInView.swift */; };
 		EB36C7CF2AE5BFF60090A2D0 /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB36C7CE2AE5BFF60090A2D0 /* AuthenticationModel.swift */; };
 		EB36C7D42AE5C0F80090A2D0 /* ProfileScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB36C7D32AE5C0F80090A2D0 /* ProfileScreenView.swift */; };
@@ -78,6 +79,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EB2C96322B584232008090E8 /* CompaniesListScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesListScreenView.swift; sourceTree = "<group>"; };
 		EB36C7CC2AE5BFC20090A2D0 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		EB36C7CE2AE5BFF60090A2D0 /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
 		EB36C7D32AE5C0F80090A2D0 /* ProfileScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenView.swift; sourceTree = "<group>"; };
@@ -169,6 +171,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EB2C96312B584201008090E8 /* Companies */ = {
+			isa = PBXGroup;
+			children = (
+				EB2C96322B584232008090E8 /* CompaniesListScreenView.swift */,
+			);
+			path = Companies;
+			sourceTree = "<group>";
+		};
 		EB36C7D22AE5C0DF0090A2D0 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +255,7 @@
 		EB4679AA2AC0DCF00026ACC3 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				EB2C96312B584201008090E8 /* Companies */,
 				EB4679E72ACCB5AF0026ACC3 /* MainScreenView.swift */,
 				EBF149502B44F4E300F97F4F /* SettingsView.swift */,
 				EB4679AE2AC0E2EE0026ACC3 /* HomeScreenView.swift */,
@@ -474,6 +485,7 @@
 				EBED85A72ADB05B300F25636 /* DropdownMenuList.swift in Sources */,
 				EBD35D472AD7583D0076BE33 /* CoreModel.swift in Sources */,
 				EB5D062C2AE1D43700C7A94B /* BottomNavigationView.swift in Sources */,
+				EB2C96332B584232008090E8 /* CompaniesListScreenView.swift in Sources */,
 				EB4679FA2ACF1E7E0026ACC3 /* AddingScreenView.swift in Sources */,
 				EB8F91852B0011820081F398 /* FutureRounds.swift in Sources */,
 				EB4679E62AC9F63E0026ACC3 /* BasicFields.swift in Sources */,

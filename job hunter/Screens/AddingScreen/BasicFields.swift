@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum ApplicationStatus: String, CaseIterable, Identifiable {
-    case pending = "pending"
+    case ongoing = "ongoing"
     case rejected = "rejected"
     case offer = "offer"
     
@@ -18,7 +18,7 @@ enum ApplicationStatus: String, CaseIterable, Identifiable {
     
     var statusColor: Color {
         switch self {
-            case .pending:
+            case .ongoing:
                 .yellow
             case .rejected:
                 .red
@@ -71,7 +71,7 @@ struct BasicFields: View {
                 }
             }
             
-            DatePicker("Start Date", selection: $addInterviewModel.startDate, displayedComponents: [.date])
+            DatePicker("Applied On", selection: $addInterviewModel.startDate, displayedComponents: [.date])
                 .fontWeight(.bold)
         
             HStack {
