@@ -27,7 +27,7 @@ class AddInterviewModel: ObservableObject {
     @Published var company: Company = Company(name: "")
     @Published var jobTitle = ""
     @Published var startDate: Date = Date()
-    @Published var status: ApplicationStatus = .pending
+    @Published var status: ApplicationStatus = .ongoing
     
     @Published var needVisaSponsor: Bool = false
     @Published var requiredVisa: String? = nil
@@ -40,6 +40,8 @@ class AddInterviewModel: ObservableObject {
     
     @Published var errorAddInterview: String? = nil
     @Published var existingInterviewId: String? = nil
+    
+    @Published var favorite: Bool = false
     
     func validateFields() {
         companyMissing = company.name.isEmpty
@@ -59,27 +61,35 @@ class AddInterviewModel: ObservableObject {
             }
         }()
         
-        // Convert to dictionary
+        // Convert to salary struct object to dictionary
         let salaryInfoDict: [String: Double] = [
             "base": salary.base,
             "bonus": salary.bonus,
             "equity": salary.equity,
             "signon": salary.signon
         ]
-
+        
+        // Convert to company struct object to dictionary
+        
+        let companyDict: [String: String] = [
+            "name": company.name,
+            "logo": company.logo ?? ""
+        ]
         
         let data: [String: Any]  = [
-            "company": company.name,
+            "company": companyDict,
             "title": jobTitle,
             "startDate": startDate,
             "is_relocation": is_relocation,
             "work_location": locationPreference,
             "status": status.rawValue,
             "salary": salaryInfoDict,
-            "visa_required": requiredVisa ?? ""
+            "visa_required": requiredVisa ?? "",
+            "favorite": favorite,
         ]
         return data
     }
+    
     
     func manageInterviewInFirestore(user: DBUser, salary: SalaryInfo, pastRounds: [RoundModel], futureRounds: [RoundModel], isUpdate: Bool = false) async throws {
         var data: [String: Any] = encodeInterviewData(salary: salary)

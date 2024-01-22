@@ -14,4 +14,14 @@ class CoreModel: ObservableObject {
     @Published var editInterview: FetchedInterviewModel?
     
     @Published var addButtonStatus: String = "enabled"
+    
+    var interviewsViewModel: InterviewsViewModel?
+    func setInterviewsViewModel(_ viewModel: InterviewsViewModel) {
+        self.interviewsViewModel = viewModel
+    }
+    
+    func triggerInterviewsUpdate() async throws {
+        // After adding the interview, refresh the interview list
+        try await interviewsViewModel?.fetchInterviewsData()
+    }
 }

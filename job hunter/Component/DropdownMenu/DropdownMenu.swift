@@ -41,11 +41,11 @@ extension DropdownMenuCompanyOption {
 
 struct DropdownMenu: View {
     
-    var options: [DropdownMenuCompanyOption]?
+    //var options: [DropdownMenuCompanyOption]?
     var dropDownLabel: String
    
     @EnvironmentObject var addInterviewModel: AddInterviewModel
-    
+    @EnvironmentObject var clearbitModel: ClearbitViewModel
     
     @State private var isOptionsPresented: Bool = false
     @State private var selectedOption: DropdownMenuCompanyOption? = nil
@@ -67,9 +67,7 @@ struct DropdownMenu: View {
                 .foregroundColor(selectedOption == nil ? .gray : .black)
                 .frame(maxWidth: .infinity)
                 .onChange(of: addInterviewModel.company.name) { newValue in
-                    if (addInterviewModel.companyMissing) {
-                        addInterviewModel.companyMissing = false
-                    }
+                    addInterviewModel.companyMissing = false
                     //optionSelected: without this check, whenever we tap a option, the addInterviewModel.company.name will change, then cause isOptionsPresented = true. So the dropdown wont be closed
                     if !optionSelected {
                         onLoadDataWhenChange(newValue)
@@ -87,7 +85,7 @@ struct DropdownMenu: View {
                             if let logoURL = addInterviewModel.company.logo {
                                 AsyncImageView(url: logoURL, geometry: geometry) {
                                     ProgressView()
-                                        .frame(width: 100, height: 100)
+                                
                                 }
                             }
                         }
@@ -102,7 +100,6 @@ struct DropdownMenu: View {
             // This modifier available for Image since iOS 16.0
                 .fontWeight(.medium)
                 .foregroundColor(.gray)
-            
                 .onTapGesture {
                     withAnimation {
                         isOptionsPresented.toggle()
@@ -116,9 +113,8 @@ struct DropdownMenu: View {
         }
         .overlay() {
             VStack {
-                if isOptionsPresented, let options = options {
+                if isOptionsPresented, let _ = clearbitModel.companyList {
                     DropdownMenuList(
-                        options: options,
                         isOptionsPresented: $isOptionsPresented,
                         optionSelected: $optionSelected
                     )
@@ -131,11 +127,18 @@ struct DropdownMenu: View {
 }
 
 struct DropdownMenu_Previews: PreviewProvider {
+    
     static var previews: some View {
-        DropdownMenu(
-            dropDownLabel: "Company *") { query in
-                
+        let clearbitModel = ClearbitViewModel()
+        DropdownMenu(dropDownLabel: "Company *") { value in
+                Debouncer(delay: 1).debounce {
+                    Task {
+                        await clearbitModel.fetchCompaniesData(startwith: value)
+                    }
+                }
             }
+            //.zIndex(1)
             .environmentObject(AddInterviewModel())
+            .environmentObject(ClearbitViewModel())
     }
 }

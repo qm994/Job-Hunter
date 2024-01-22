@@ -46,7 +46,7 @@ struct ProfileScreenView: View {
                 ProfileTabsView()
                     
             } // Vstack ends
-            .frame(height: geometry.size.height)
+            //.frame(height: geometry.size.height)
         }
     }
 }

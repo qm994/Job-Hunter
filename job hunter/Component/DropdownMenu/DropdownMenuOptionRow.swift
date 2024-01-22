@@ -13,31 +13,20 @@ struct DropdownMenuOptionRow: View {
     
     @Binding var isOptionsPresented: Bool
     @Binding var optionSelected: Bool
+    
 
     var body: some View {
-        
         GeometryReader { geometry in
-            HStack(alignment: .center, spacing: 15) {
-                Group {
-                    if let icon = option.logo {
-                        //DebugView("url is \(icon)")
-                        AsyncImageView(url: icon, geometry: geometry) {
-                            ProgressView()
-                                .frame(width: 100, height: 100)
-                        }
-
-                    } else {
-                        Image(systemName: "building.columns")
-                            .symbolRenderingMode(.multicolor)
-                    }
-                }
-                .frame(width: geometry.size.width * 0.08, height:  geometry.size.height * 0.08)
-                
-                
-                
+            HStack(alignment: .center, spacing: 16) {
+                iconView(geometry: geometry)
                 Text(option.name)
-                    .fontWeight(.semibold)
+                    .fontWeight(.bold)
+                    .font(.headline) // Increase the font size here
+                    .padding(.leading, 8) // Add some padding if needed
+                Spacer()
             }
+            //.frame(width: geometry.size.width, height: geometry.size.height)
+            .padding(.vertical) // Add vertical padding to increase the height of each row
             .onTapGesture {
                 withAnimation {
                     isOptionsPresented = false
@@ -46,7 +35,26 @@ struct DropdownMenuOptionRow: View {
                     addInterviewModel.company = selectedCompany
                 }
             }
+            .frame(maxWidth: .infinity) 
+            
         } // GeometryReader ends
+    }
+    
+    @ViewBuilder
+    private func iconView (geometry: GeometryProxy) -> some View {
+        Group {
+            if let icon = option.logo {
+                //DebugView("url is \(icon)")
+                AsyncImageView(url: icon) {
+                    ProgressView()
+                }
+            } else {
+                Image(systemName: "building.columns")
+                    .symbolRenderingMode(.multicolor)
+                    .aspectRatio(contentMode: .fit)
+            }
+        }
+        .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.6)
     }
 }
 

@@ -36,6 +36,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             print("AppDelegate running on simulator")
             let providerFactory = AppCheckDebugProviderFactory()
             AppCheck.setAppCheckProviderFactory(providerFactory)
+            return true
             #else
             print("AppDelegate running on production")
             let providerFactory = MyAppCheckProviderFactory()

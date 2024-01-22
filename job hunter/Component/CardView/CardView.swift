@@ -17,7 +17,7 @@ struct CardView: View {
         VStack(spacing: 20) {
             //MARK: FIRST ROW
             HStack {
-                Text(interview.company)
+                Text(interview.company.name)
                     .font(.headline)
                 Spacer()
                 HStack {
@@ -225,7 +225,7 @@ struct CardView_Previews: PreviewProvider {
         List{
             CardView(
                 interviewsViewModel: InterviewsViewModel(),
-                interview: FetchedInterviewModel.sampleData
+                interview: FetchedInterviewModel.createSampleData(count: 1)[0]
             )
             .environmentObject(CoreModel())
         }

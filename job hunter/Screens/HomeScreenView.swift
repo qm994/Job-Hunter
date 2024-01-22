@@ -66,7 +66,6 @@ struct HomeScreenView: View {
                 }
             )
         }
-        
         .toolbar {
             ToolbarItemGroup(placement: .topBarLeading) {
                 VStack(alignment: .leading, spacing: 5) {

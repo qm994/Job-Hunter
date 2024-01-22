@@ -139,7 +139,7 @@ struct AddingScreenView: View {
                 salaryModel.signon = interview.salary.signon
                 salaryModel.bonus = interview.salary.bonus
                 
-                addInterviewModel.company = Company(name: interview.company)
+                addInterviewModel.company = interview.company
                 addInterviewModel.jobTitle = interview.jobTitle
                 addInterviewModel.startDate = interview.startDate
                 if let status = ApplicationStatus(rawValue: interview.status) {
